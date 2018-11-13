@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://snjl.github.io/"/>
-  <updated>2018-11-13T14:15:04.212Z</updated>
+  <updated>2018-11-13T15:03:47.102Z</updated>
   <id>https://snjl.github.io/</id>
   
   <author>
@@ -21,16 +21,18 @@
     <link href="https://snjl.github.io/2018/11/13/%E8%8C%83%E6%95%B0/"/>
     <id>https://snjl.github.io/2018/11/13/范数/</id>
     <published>2018-11-13T14:04:05.000Z</published>
-    <updated>2018-11-13T14:15:04.212Z</updated>
+    <updated>2018-11-13T15:03:47.102Z</updated>
     
-    <content type="html"><![CDATA[<p>p-范数:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + ... + |x_n|^p)^&#123;1/p&#125; =\sqrt[p]&#123; \sum_&#123;i=1&#125;^n|x_i|^p&#125;</span><br></pre></td></tr></table></figure><p>2-范数(欧式范数):</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + ... + |x_n|^2)^&#123;1/2&#125; = \sqrt&#123; \sum_&#123;i=1&#125;^n x_i^2&#125;</span><br></pre></td></tr></table></figure><p>∞-范数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">||x||_∞ = max(x_1,x_2,x_3,...,x_n) = \max_i|x_i|</span><br></pre></td></tr></table></figure></p><p>1-范数即向量元素绝对值之和；</p><p>2-范数为Euclid范数（欧几里得范数，常用计算向量长度），即向量元素绝对值的平方和再开方；</p><p>∞-范数即所有向量元素绝对值中的最大值；</p><p>-∞-范数即所有向量元素绝对值中的最小值；</p><p>p-范数即向量元素绝对值的p次方和的1/p次幂。</p><p>可以参考：<br><a href="https://blog.csdn.net/susanzhang1231/article/details/52127011" target="_blank" rel="noopener">https://blog.csdn.net/susanzhang1231/article/details/52127011</a></p><p><a href="https://www.jianshu.com/p/bf860ad177dd" target="_blank" rel="noopener">https://www.jianshu.com/p/bf860ad177dd</a></p><p><a href="https://blog.csdn.net/bitcarmanlee/article/details/51945271" target="_blank" rel="noopener">https://blog.csdn.net/bitcarmanlee/article/details/51945271</a></p>]]></content>
+    <content type="html"><![CDATA[<p>p-范数:</p><p>$||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + … + |x_n|^p)^{1/p} =\sqrt[p]{ \sum_{i=1}^n|x_i|^p}$</p><p>2-范数(欧式范数):</p><p>$||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + … + |x_n|^2)^{1/2} = \sqrt{ \sum_{i=1}^n x_i^2}$</p><p>∞-范数:</p><p>$||x||_∞ = max(x_1,x_2,x_3,…,x_n) = max_i|x_i|$</p><p>1-范数即向量元素绝对值之和；</p><p>2-范数为Euclid范数（欧几里得范数，常用计算向量长度），即向量元素绝对值的平方和再开方；</p><p>∞-范数即所有向量元素绝对值中的最大值；</p><p>-∞-范数即所有向量元素绝对值中的最小值；</p><p>p-范数即向量元素绝对值的p次方和的1/p次幂。</p><p>可以参考：<br><a href="https://blog.csdn.net/susanzhang1231/article/details/52127011" target="_blank" rel="noopener">https://blog.csdn.net/susanzhang1231/article/details/52127011</a></p><p><a href="https://www.jianshu.com/p/bf860ad177dd" target="_blank" rel="noopener">https://www.jianshu.com/p/bf860ad177dd</a></p><p><a href="https://blog.csdn.net/bitcarmanlee/article/details/51945271" target="_blank" rel="noopener">https://blog.csdn.net/bitcarmanlee/article/details/51945271</a></p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;p-范数:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;
+&lt;p&gt;$||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + … + |x_n|^p)^{1/p} =\sqrt[p]{ \sum_{i=1}^n|x_i|^p}$&lt;/p&gt;
+&lt;p&gt;2-范数(欧式范数):&lt;/p&gt;
+&lt;p&gt;$||x
       
     
     </summary>
