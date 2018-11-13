@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习,深度学习,范数,机器学习基础,">
+  <meta name="keywords" content="Mybatis,SSM,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="p-范数: $||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + … + |x_n|^p)^{1/p} =\sqrt[p]{ \sum_{i=1}^n|x_i|^p}$ 2-范数(欧式范数): $||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + … + |x_n|^2)^{1/2} = \sqrt{ \sum_{i=1}^n x_i^2">
-<meta name="keywords" content="机器学习,深度学习,范数,机器学习基础">
+<meta name="description" content="1.普通增删改查使用表：User">
+<meta name="keywords" content="Mybatis,SSM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="范数">
-<meta property="og:url" content="https://snjl.github.io/2018/11/13/范数/index.html">
+<meta property="og:title" content="Mybatis注解写法">
+<meta property="og:url" content="https://snjl.github.io/2018/11/13/Mybatis注解写法/index.html">
 <meta property="og:site_name" content="Snjl">
-<meta property="og:description" content="p-范数: $||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + … + |x_n|^p)^{1/p} =\sqrt[p]{ \sum_{i=1}^n|x_i|^p}$ 2-范数(欧式范数): $||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + … + |x_n|^2)^{1/2} = \sqrt{ \sum_{i=1}^n x_i^2">
+<meta property="og:description" content="1.普通增删改查使用表：User">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-13T15:03:47.102Z">
+<meta property="og:updated_time" content="2018-11-13T15:40:27.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="范数">
-<meta name="twitter:description" content="p-范数: $||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + … + |x_n|^p)^{1/p} =\sqrt[p]{ \sum_{i=1}^n|x_i|^p}$ 2-范数(欧式范数): $||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + … + |x_n|^2)^{1/2} = \sqrt{ \sum_{i=1}^n x_i^2">
+<meta name="twitter:title" content="Mybatis注解写法">
+<meta name="twitter:description" content="1.普通增删改查使用表：User">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://snjl.github.io/2018/11/13/范数/">
+  <link rel="canonical" href="https://snjl.github.io/2018/11/13/Mybatis注解写法/">
 
 
 
 
 
-  <title>范数 | Snjl</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Mybatis注解写法 | Snjl</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -290,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/13/范数/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/13/Mybatis注解写法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -307,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">范数</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis注解写法</h1>
         
 
         <div class="post-meta">
@@ -319,7 +319,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T22:04:05+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T23:45:05+08:00">
                 2018-11-13
               </time>
             
@@ -342,8 +342,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/SSM框架/" itemprop="url" rel="index">
+                    <span itemprop="name">SSM框架</span>
                   </a>
                 </span>
 
@@ -373,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  189 字
+                  650 字
                 </span>
               
 
@@ -389,7 +400,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -410,20 +421,9 @@
       
 
       
-        <p>p-范数:</p>
-<p>$||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + … + |x_n|^p)^{1/p} =\sqrt[p]{ \sum_{i=1}^n|x_i|^p}$</p>
-<p>2-范数(欧式范数):</p>
-<p>$||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + … + |x_n|^2)^{1/2} = \sqrt{ \sum_{i=1}^n x_i^2}$</p>
-<p>∞-范数:</p>
-<p>$||x||_∞ = max(x_1,x_2,x_3,…,x_n) = max_i|x_i|$</p>
-<p>1-范数即向量元素绝对值之和；</p>
-<p>2-范数为Euclid范数（欧几里得范数，常用计算向量长度），即向量元素绝对值的平方和再开方；</p>
-<p>∞-范数即所有向量元素绝对值中的最大值；</p>
-<p>-∞-范数即所有向量元素绝对值中的最小值；</p>
-<p>p-范数即向量元素绝对值的p次方和的1/p次幂。</p>
-<p>可以参考：<br><a href="https://blog.csdn.net/susanzhang1231/article/details/52127011" target="_blank" rel="noopener">https://blog.csdn.net/susanzhang1231/article/details/52127011</a></p>
-<p><a href="https://www.jianshu.com/p/bf860ad177dd" target="_blank" rel="noopener">https://www.jianshu.com/p/bf860ad177dd</a></p>
-<p><a href="https://blog.csdn.net/bitcarmanlee/article/details/51945271" target="_blank" rel="noopener">https://blog.csdn.net/bitcarmanlee/article/details/51945271</a></p>
+        <h1 id="1-普通增删改查"><a href="#1-普通增删改查" class="headerlink" title="1.普通增删改查"></a>1.普通增删改查</h1><p>使用表：User<br><a id="more"></a><br>在mybatis-config.xml里配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"org.fkit.mapper.UserMapper"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注释掉原来的xml配置路径。<br>注解java类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//UserMapper.java</span></span><br><span class="line"><span class="keyword">package</span> org.fkit.mapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.*;</span><br><span class="line"><span class="keyword">import</span> org.fkit.domain.Clazz;</span><br><span class="line"><span class="keyword">import</span> org.fkit.domain.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Insert</span>(<span class="string">"insert into tb_user(name,sex,age) values(#&#123;name&#125;,#&#123;sex&#125;,#&#123;age&#125;)"</span>)</span><br><span class="line">    <span class="meta">@Options</span>(useGeneratedKeys = <span class="keyword">true</span>, keyProperty = <span class="string">"id"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">saveUser</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete</span>(<span class="string">"delete from tb_user where id = #&#123;id&#125; or name = #&#123;cctv&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeUser</span><span class="params">(@Param(<span class="string">"id"</span>)</span> Integer id, @<span class="title">Param</span><span class="params">(<span class="string">"cctv"</span>)</span> String n)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Update</span>(<span class="string">"update tb_user set name = #&#123;name&#125;,sex  = #&#123;sex&#125;, age = #&#123;age&#125; where id = #&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">modifyUser</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from tb_user where id = #&#123;id&#125;"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(&#123;</span><br><span class="line">            <span class="meta">@Result</span>(id = <span class="keyword">true</span>, column = <span class="string">"id"</span>, property = <span class="string">"id"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(column = <span class="string">"name"</span>, property = <span class="string">"name"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(column = <span class="string">"sex"</span>, property = <span class="string">"sex"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(column = <span class="string">"age"</span>, property = <span class="string">"age"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function">User <span class="title">selectUserById</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from tb_user"</span>)</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">selectAllUser</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//InsertTest.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        SqlSession sqlSession = FKSqlSessionFactory.getSqlSession();</span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"1111jack"</span>, <span class="string">"男"</span>, <span class="number">22</span>);</span><br><span class="line">        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">        userMapper.saveUser(user);</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: <span class="function">insert into <span class="title">tb_user</span><span class="params">(name,sex,age)</span> <span class="title">values</span><span class="params">(?,?,?)</span> </span></span><br><span class="line"><span class="function">DEBUG [main] - </span>==&gt; Parameters: <span class="number">1111</span>jack(String), 男(String), <span class="number">22</span>(Integer)</span><br><span class="line">DEBUG [main] - &lt;==    Updates: <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//DeleteTest.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeleteTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        SqlSession sqlSession = FKSqlSessionFactory.getSqlSession();</span><br><span class="line">        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">        userMapper.removeUser(<span class="number">16</span>,<span class="string">"jack"</span>);</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: delete from tb_user where id = ? or name = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: <span class="number">16</span>(Integer), jack(String)</span><br><span class="line">DEBUG [main] - &lt;==    Updates: <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//UpdateTest.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UpdateTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        SqlSession sqlSession = FKSqlSessionFactory.getSqlSession();</span><br><span class="line">        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">        User user = userMapper.selectUserById(<span class="number">12</span>);</span><br><span class="line"></span><br><span class="line">        user.setName(<span class="string">"hello?"</span>);</span><br><span class="line">        userMapper.modifyUser(user);</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: select * from tb_user where id = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: <span class="number">12</span>(Integer)</span><br><span class="line">DEBUG [main] - &lt;==      Total: <span class="number">1</span></span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: update tb_user set name = ?,sex = ?, age = ? where id = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: hello?(String), 男(String), <span class="number">26</span>(Integer), <span class="number">12</span>(Integer)</span><br><span class="line">DEBUG [main] - &lt;==    Updates: <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//SelectTest.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        SqlSession sqlSession = FKSqlSessionFactory.getSqlSession();</span><br><span class="line">        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">        User user = userMapper.selectUserById(<span class="number">12</span>);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: select * from tb_user where id = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: <span class="number">12</span>(Integer)</span><br><span class="line">DEBUG [main] - &lt;==      Total: <span class="number">1</span></span><br><span class="line">User&#123;id=<span class="number">12</span>, name=<span class="string">'hello?'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//SelectMapTest.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        SqlSession sqlSession = FKSqlSessionFactory.getSqlSession();</span><br><span class="line"><span class="comment">//        获取user对象集</span></span><br><span class="line">        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; users = userMapper.selectAllUser();</span><br><span class="line">        <span class="keyword">for</span> (User user : users) &#123;</span><br><span class="line">            System.out.println(user);</span><br><span class="line">        &#125;</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: select * from tb_user </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: </span><br><span class="line">DEBUG [main] - &lt;==      Total: <span class="number">10</span></span><br><span class="line">User&#123;id=<span class="number">1</span>, name=<span class="string">'hello?'</span>, sex=<span class="string">'g'</span>, age=<span class="number">11</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">4</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">5</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">6</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">7</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">8</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">9</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">10</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">11</span>, name=<span class="string">'gg'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br><span class="line">User&#123;id=<span class="number">12</span>, name=<span class="string">'hello?'</span>, sex=<span class="string">'男'</span>, age=<span class="number">26</span>&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -451,13 +451,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+            <a href="/tags/Mybatis/" rel="tag"><i class="fa fa-tag"></i> Mybatis</a>
           
-            <a href="/tags/深度学习/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
-          
-            <a href="/tags/范数/" rel="tag"><i class="fa fa-tag"></i> 范数</a>
-          
-            <a href="/tags/机器学习基础/" rel="tag"><i class="fa fa-tag"></i> 机器学习基础</a>
+            <a href="/tags/SSM/" rel="tag"><i class="fa fa-tag"></i> SSM</a>
           
         </div>
       
@@ -470,15 +466,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/11/13/mabatis逆向工程/" rel="next" title="mabatis逆向工程">
+                <i class="fa fa-chevron-left"></i> mabatis逆向工程
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/13/Mybatis的动态sql/" rel="prev" title="Mybatis的动态sql">
-                Mybatis的动态sql <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -530,8 +526,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -622,6 +627,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-普通增删改查"><span class="nav-number">1.</span> <span class="nav-text">1.普通增删改查</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
