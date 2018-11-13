@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[范数]]></title>
+    <url>%2F2018%2F11%2F13%2F%E8%8C%83%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[p-范数: 1||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + ... + |x_n|^p)^&#123;1/p&#125; =\sqrt[p]&#123; \sum_&#123;i=1&#125;^n|x_i|^p&#125; 2-范数(欧式范数): 1||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + ... + |x_n|^2)^&#123;1/2&#125; = \sqrt&#123; \sum_&#123;i=1&#125;^n x_i^2&#125; ∞-范数1||x||_∞ = max(x_1,x_2,x_3,...,x_n) = \max_i|x_i| 1-范数即向量元素绝对值之和； 2-范数为Euclid范数（欧几里得范数，常用计算向量长度），即向量元素绝对值的平方和再开方； ∞-范数即所有向量元素绝对值中的最大值； -∞-范数即所有向量元素绝对值中的最小值； p-范数即向量元素绝对值的p次方和的1/p次幂。 可以参考：https://blog.csdn.net/susanzhang1231/article/details/52127011 https://www.jianshu.com/p/bf860ad177dd https://blog.csdn.net/bitcarmanlee/article/details/51945271]]></content>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2018%2F11%2F13%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
