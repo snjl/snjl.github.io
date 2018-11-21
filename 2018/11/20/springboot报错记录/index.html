@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured12345678910Failed to configure a DataSource: &amp;apos;url&amp;apos; attribute is not specifie">
+<meta name="description" content="1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured12345678910Failed to configure a DataSource: &amp;apos;url&amp;apos; attribute is not specif">
 <meta name="keywords" content="springboot,报错">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springboot报错记录">
 <meta property="og:url" content="https://snjl.github.io/2018/11/20/springboot报错记录/index.html">
 <meta property="og:site_name" content="snjl">
-<meta property="og:description" content="Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured12345678910Failed to configure a DataSource: &amp;apos;url&amp;apos; attribute is not specifie">
+<meta property="og:description" content="1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured12345678910Failed to configure a DataSource: &amp;apos;url&amp;apos; attribute is not specif">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-20T15:19:22.289Z">
+<meta property="og:updated_time" content="2018-11-21T15:44:30.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot报错记录">
-<meta name="twitter:description" content="Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured12345678910Failed to configure a DataSource: &amp;apos;url&amp;apos; attribute is not specifie">
+<meta name="twitter:description" content="1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured12345678910Failed to configure a DataSource: &amp;apos;url&amp;apos; attribute is not specif">
 
 
 
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  306 字
+                  393 字
                 </span>
               
 
@@ -410,11 +410,10 @@
       
 
       
-        <ol>
-<li>Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Failed to configure a DataSource: &apos;url&apos; attribute is not specified and no embedded datasource could be configured.</span><br><span class="line"></span><br><span class="line">Reason: Failed to determine a suitable driver class</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider the following:</span><br><span class="line">	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.</span><br><span class="line">	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>原因：引入mybatis的jar包时：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <h1 id="1-Failed-to-configure-a-DataSource-‘url’-attribute-is-not-specified-and-no-embedded-datasource-could-be-configured"><a href="#1-Failed-to-configure-a-DataSource-‘url’-attribute-is-not-specified-and-no-embedded-datasource-could-be-configured" class="headerlink" title="1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured"></a>1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Failed to configure a DataSource: &apos;url&apos; attribute is not specified and no embedded datasource could be configured.</span><br><span class="line"></span><br><span class="line">Reason: Failed to determine a suitable driver class</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider the following:</span><br><span class="line">	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.</span><br><span class="line">	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>原因：引入mybatis的jar包时：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>springboot会默认加载org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration这个类，而DataSourceAutoConfiguration类使用了@Configuration注解向spring注入了dataSource bean，又因为项目中并没有关于dataSource相关的配置信息，所以当spring创建dataSource bean时因缺少相关的信息就会报错。</p>
 <p>解决办法：</p>
 <ol>
@@ -424,6 +423,9 @@
 <ol start="2">
 <li>在parent项目的pom.xml文件中保存所有子模块的共有jar依赖，非共有的依赖则在各模块自身的pom.xml文件中进行申明。建议采用此方法，好处在于各模块的依赖不会相互产生干扰。</li>
 </ol>
+<h1 id="2-maven配置时，测试出现“’mvn’-不是内部或外部命令-也不是可运行的程序”错误"><a href="#2-maven配置时，测试出现“’mvn’-不是内部或外部命令-也不是可运行的程序”错误" class="headerlink" title="2.maven配置时，测试出现“’mvn’ 不是内部或外部命令,也不是可运行的程序”错误"></a>2.maven配置时，测试出现“’mvn’ 不是内部或外部命令,也不是可运行的程序”错误</h1><p>配置maven。</p>
+<p>在环境变量的PATH中配置maven的bin目录。</p>
+<p>使用mvn package打包成功后显示日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-----------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 46.791 s</span><br><span class="line">[INFO] Finished at: 2018-11-21T16:12:36+08:00</span><br><span class="line">[INFO] Final Memory: 35M/275M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -530,8 +532,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -548,7 +559,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -570,7 +581,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -622,6 +633,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Failed-to-configure-a-DataSource-‘url’-attribute-is-not-specified-and-no-embedded-datasource-could-be-configured"><span class="nav-number">1.</span> <span class="nav-text">1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-maven配置时，测试出现“’mvn’-不是内部或外部命令-也不是可运行的程序”错误"><span class="nav-number">2.</span> <span class="nav-text">2.maven配置时，测试出现“’mvn’ 不是内部或外部命令,也不是可运行的程序”错误</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

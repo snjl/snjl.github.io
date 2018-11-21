@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="在pom.xml中的dependencies中添加： 12345&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-devtools&amp;lt;/artifactId&amp;gt;       &amp;lt;optional&amp;gt;t">
+<meta name="description" content="在pom.xml中的dependencies中添加：12345&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-devtools&amp;lt;/artifactId&amp;gt;       &amp;lt;optional&amp;gt;tr">
 <meta name="keywords" content="springboot,热启动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springboot热启动">
 <meta property="og:url" content="https://snjl.github.io/2018/11/20/springboot热启动/index.html">
 <meta property="og:site_name" content="snjl">
-<meta property="og:description" content="在pom.xml中的dependencies中添加： 12345&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-devtools&amp;lt;/artifactId&amp;gt;       &amp;lt;optional&amp;gt;t">
+<meta property="og:description" content="在pom.xml中的dependencies中添加：12345&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-devtools&amp;lt;/artifactId&amp;gt;       &amp;lt;optional&amp;gt;tr">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-20T15:18:04.995Z">
+<meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/auto%20build.png">
+<meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/auto%20build%20config.png">
+<meta property="og:updated_time" content="2018-11-21T15:44:35.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot热启动">
-<meta name="twitter:description" content="在pom.xml中的dependencies中添加： 12345&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-devtools&amp;lt;/artifactId&amp;gt;       &amp;lt;optional&amp;gt;t">
+<meta name="twitter:description" content="在pom.xml中的dependencies中添加：12345&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-devtools&amp;lt;/artifactId&amp;gt;       &amp;lt;optional&amp;gt;tr">
+<meta name="twitter:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/auto%20build.png">
 
 
 
@@ -373,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  93 字
+                  193 字
                 </span>
               
 
@@ -410,9 +413,15 @@
       
 
       
-        <p>在pom.xml中的dependencies中添加：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>改build：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">fork</span>&gt;</span>true<span class="tag">&lt;/<span class="name">fork</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <p>在pom.xml中的dependencies中添加：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>改build：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">fork</span>&gt;</span>true<span class="tag">&lt;/<span class="name">fork</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>之后reimport，成功之后进行如下设置：</p>
+<p>打开idea ，File-&gt;Settings-&gt; Build-Execution-Deployment -&gt; Compiler勾选 Build Project Automatically.<br><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/auto%20build.png" alt="image"></p>
+<p>之后按 Shift+Ctrl+A 将看到弹窗 Enter Action or option name，输入”registry”，双击第一项”Registry…” ，会弹出另一个窗口，寻找compiler.automake.allow.when.app.running并且勾选：</p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/auto%20build%20config.png" alt="image"></p>
+<p>之后重启项目，在修改resources文件和java文件时会自动加载或者重启。</p>
 
       
     </div>
@@ -537,7 +546,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -559,7 +568,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
