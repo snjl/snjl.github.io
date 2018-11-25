@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[react：页面中存在多个input设置value属性]]></title>
+    <url>%2F2018%2F11%2F25%2Freact%EF%BC%9A%E9%A1%B5%E9%9D%A2%E4%B8%AD%E5%AD%98%E5%9C%A8%E5%A4%9A%E4%B8%AAinput%E8%AE%BE%E7%BD%AEvalue%E5%B1%9E%E6%80%A7%2F</url>
+    <content type="text"><![CDATA[首先要为这些所有的input框绑定上onChange的方法，然后还需要在this.state中去设置不同的input对应不同的值，最后还需要在changeValue的方法中去一一监听input输入时去修改对应的input的值。 也可以写一个changeValue方法，但是input的属性的name要和state里的名字要一样，如下所示：12345678910constructor() &#123; super(); this.state = &#123; login:&#123; username:'', password:'' &#125;, user:&#123;&#125; &#125;&#125; 1234567用户名：&lt;input type=&#123;'text'&#125; name=&#123;'username'&#125; value=&#123;this.state.login.username&#125; className=&#123;'username'&#125; onChange=&#123;this.changeValue.bind(this)&#125;/&gt;&lt;br/&gt;密码：&lt;input type=&#123;'password'&#125; name=&#123;'password'&#125; value=&#123;this.state.login.password&#125; className=&#123;'password'&#125; onChange=&#123;this.changeValue.bind(this)&#125;/&gt; 12345changeValue(event) &#123; let newLogin = this.state.login; newLogin[event.target.name] = event.target.value; this.setState(&#123;login: newLogin&#125;) &#125; 使用event.target.name获取input的name属性，使用evnet.target.value获取input的value，令newLogin为this.state.login，然后将newLogin中名为event.target.name的属性的值设为event.target.value，之后再setState，从而可以改变state.login的值。]]></content>
+      <categories>
+        <category>react</category>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[react：存储session]]></title>
+    <url>%2F2018%2F11%2F25%2Freact%EF%BC%9A%E5%AD%98%E5%82%A8session-1%2F</url>
+    <content type="text"><![CDATA[react框架中使用session，如果是单个字符串：1sessionStorage.setItem("key",value); 取出时：1var result = sessionStorage.getItem("key") 如果是json，在存储时需要将json对象通过stringify()方法转为字符串，存入sessionStorage：1sessionStorage.setItem("jsonKey",JSON.stringify(jsonData)); 取出时需要再转回json：1var result = JSON.parse(sessionStorage.getItem("jsonKey")); 移除session：1sessionStorage.removeItem("data");]]></content>
+      <categories>
+        <category>react</category>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[jQuery禁止回车提交]]></title>
+    <url>%2F2018%2F11%2F25%2FjQuery%E7%A6%81%E6%AD%A2%E5%9B%9E%E8%BD%A6%E6%8F%90%E4%BA%A4%2F</url>
+    <content type="text"><![CDATA[在有input框进行输入提交时，如果有input的type为submit，则默认按回车会提交，可以用jQuery的方法进行阻拦：1234567891011$(function()&#123; $("input").each( function()&#123; $(this).keypress( function(e) &#123; var key = window.event ? e.keyCode : e.which; if(key.toString() === "13")&#123; return false; &#125; &#125;); &#125;);&#125;)]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[react：form表单提交]]></title>
+    <url>%2F2018%2F11%2F25%2Freact%EF%BC%9Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%2F</url>
+    <content type="text"><![CDATA[由于React在浏览器显示的是虚拟的DOM，我们在表单输入值后直接提交，是无法获取到这个值的。对此，官方给出的解决办法是：先把输入的值存放在组件的状态（state）中，之后通过状态的改变更新页面内容，从而显示出正确的值，用户提交的也是从state里获取的表单的value。 1234567891011constructor() &#123; super(); this.state = &#123; item:&#123; name:'', organization:'', school:'', &#125;, &#125;&#125; 设置提交方法和改变state的状态的方法：1234567891011121314151617181920212223handleSubmit(event) &#123; //阻止表单默认提交 event.preventDefault(); let item = this.state.item; axios.post(host + 'xxx/insert', item).then( response =&gt; &#123; let message = response.data; if (message === 'success') &#123; alert("插入成功"); window.location.href = '/xxx/list'; &#125; else &#123; alert("插入失败，请重试"); &#125; &#125; ); this.setState(&#123;item:item&#125;)&#125;changeValue(event) &#123; let newItem = this.state.item; newItem[event.target.name] = event.target.value; this.setState(&#123;item: newItem&#125;)&#125; 123456789101112131415161718192021&lt;form method=&#123;'post'&#125; onSubmit=&#123;this.handleSubmit.bind(this)&#125;&gt; &lt;label&gt;申请数据集名称： &lt;input type="text" name=&#123;'name'&#125; onChange=&#123;this.changeValue.bind(this)&#125;/&gt; &lt;/label&gt; &lt;br/&gt; &lt;label&gt;学校： &lt;input type="text" name=&#123;'organization'&#125; value=&#123;this.state.item.organization&#125; onChange=&#123;this.changeValue.bind(this)&#125;/&gt; &lt;/label&gt; &lt;br/&gt; &lt;label&gt;学院： &lt;input type="text" name=&#123;'school'&#125; value=&#123;this.state.item.school&#125; onChange=&#123;this.changeValue.bind(this)&#125;/&gt; &lt;/label&gt; &lt;br/&gt; &lt;input type=&#123;'submit'&#125; value=&#123;'提交'&#125;/&gt; &lt;input value=&#123;'重置'&#125; type=&#123;'reset'&#125;/&gt;&lt;/form&gt; 注：form中用onSubmit替代action，其中每个input的name需要对应定义state时的状态，在使用axios调接口传值时，如果是java的springmvc的后端，需要将传输的属性与对应的实体类对接好。]]></content>
+      <categories>
+        <category>react</category>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[springboot报错记录]]></title>
     <url>%2F2018%2F11%2F24%2Fspringboot%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95%2F</url>
     <content type="text"><![CDATA[Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured. Reason: Failed to determine a suitable driver class Action: Consider the following:​ If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.​ If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active). 原因：引入mybatis的jar包时： ​ org.mybatis.spring.boot​ mybatis-spring-boot-starter​ 1.3.1springboot会默认加载org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration这个类，而DataSourceAutoConfiguration类使用了@Configuration注解向spring注入了dataSource bean，又因为项目中并没有关于dataSource相关的配置信息，所以当spring创建dataSource bean时因缺少相关的信息就会报错。 解决办法： 在@SpringBootApplication注解上加上exclude，解除自动加载DataSourceAutoConfiguration。@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } }在parent项目的pom.xml文件中保存所有子模块的共有jar依赖，非共有的依赖则在各模块自身的pom.xml文件中进行申明。建议采用此方法，好处在于各模块的依赖不会相互产生干扰。2.maven配置时，测试出现“’mvn’ 不是内部或外部命令,也不是可运行的程序”错误 配置maven。 在环境变量的PATH中配置maven的bin目录。 使用mvn package打包成功后显示日志： [INFO] BUILD SUCCESS[INFO] ————————————————————————[INFO] Total time: 46.791 s[INFO] Finished at: 2018-11-21T16:12:36+08:00[INFO] Final Memory: 35M/275M[INFO] ————————————————————————3.java.sql.SQLException: The server time zone value ‘???ú±ê×??±??’ is unrecognized or represents…….. 具体错误： Loading class com.mysql.jdbc.Driver&#39;. This is deprecated. The new driver class iscom.mysql.cj.jdbc.Driver’. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.Tue May 15 21:38:04 CST 2018 WARN: Establishing SSL connection without server’s identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn’t set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to ‘false’. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.java.sql.SQLException: The server time zone value ‘???ú±ê×??±??’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.​ at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:127)​ at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)​ at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:87)​ at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:61)​ at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:71)​ at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:76) at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:862) at com.mysql.cj.jdbc.ConnectionImpl.&lt;init&gt;(ConnectionImpl.java:444) at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:230) at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:226) at java.sql.DriverManager.getConnection(Unknown Source) at java.sql.DriverManager.getConnection(Unknown Source) at zhu.jdbc.unit.UnitMysql.getConnection(UnitMysql.java:34) at zhu.jdbc.dao.imp.ITb_UserImpI.insertData(ITb_UserImpI.java:55) at zhu.jdbc.dao.imp.ITb_UserImpI.insertData(ITb_UserImpI.java:1) at zhu.jdbc.service.imp.ITb_UserServiceImpI.insertData(ITb_UserServiceImpI.java:35) at zhu.jdbc.service.imp.ITb_UserServiceImpI.insertData(ITb_UserServiceImpI.java:1) at zhu.jdbc.servlet.Servlet_TbUser.Insert(Servlet_TbUser.java:87) at zhu.jdbc.servlet.Servlet_TbUser.doPost(Servlet_TbUser.java:41) at javax.servlet.http.HttpServlet.service(HttpServlet.java:661) at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496) at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:650) at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803) at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459) at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) at java.lang.Thread.run(Unknown Source) Caused by: com.mysql.cj.exceptions.InvalidConnectionAttributeException: The server time zone value ‘???ú±ê×??±??’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.​ at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)​ at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)​ at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)​ at java.lang.reflect.Constructor.newInstance(Unknown Source)​ at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:59)​ at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:83)​ at com.mysql.cj.util.TimeUtil.getCanonicalTimezone(TimeUtil.java:128)​ at com.mysql.cj.protocol.a.NativeProtocol.configureTimezone(NativeProtocol.java:2201)​ at com.mysql.cj.protocol.a.NativeProtocol.initServerSession(NativeProtocol.java:2225)​ at com.mysql.cj.jdbc.ConnectionImpl.initializePropsFromServer(ConnectionImpl.java:1391)​ at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:993)​ at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:852)​ … 36 more五月 15, 2018 9:38:04 下午 org.apache.catalina.core.StandardWrapperValve invoke严重: Servlet.service() for servlet [Servlet_TbUser] in context with path [/myweb2] threw exceptionjava.lang.NullPointerException​ at zhu.jdbc.dao.imp.ITb_UserImpI.insertData(ITb_UserImpI.java:59)​ at zhu.jdbc.dao.imp.ITb_UserImpI.insertData(ITb_UserImpI.java:1)​ at zhu.jdbc.service.imp.ITb_UserServiceImpI.insertData(ITb_UserServiceImpI.java:35)​ at zhu.jdbc.service.imp.ITb_UserServiceImpI.insertData(ITb_UserServiceImpI.java:1)​ at zhu.jdbc.servlet.Servlet_TbUser.Insert(Servlet_TbUser.java:87)​ at zhu.jdbc.servlet.Servlet_TbUser.doPost(Servlet_TbUser.java:41)​ at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)​ at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)​ at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)​ at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)​ at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)​ at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)​ at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)​ at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)​ at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)​ at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)​ at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)​ at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)​ at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:650)​ at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)​ at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)​ at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)​ at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)​ at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)​ at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)​ at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)​ at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)​ at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)​ at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) at java.lang.Thread.run(Unknown Source) 出现这个的原因是因为 mysql返回的时间总是有问题，比实际时间要早8小时。 解决办法： 在jdbc连接的url后面加上serverTimezone=GMT即可解决问题，如果需要使用gmt+8时区，需要写成GMT%2B8。 为了防止因为日期为null报错，可以直接加上： ?serverTimezone=UTC&amp;zeroDateTimeBehavior=convertToNull 例如链接数据库，可以写为： jdbc.url=jdbc:mysql://xxx.xxx.xxx.xxx/xxxxx?serverTimezone=UTC&amp;zeroDateTimeBehavior=convertToNull 4.Loading class com.mysql.jdbc.Driver. This is deprecated. The new driver class is com.mysql.cj.jdbc.Driver. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary. 这个问题是 使用了新的mysql驱动包，但驱动声明不是最新的： DriverClassName 从 “com.mysql.jdbc.Driver” 换成 “com.mysql.cj.jdbc.Driver” 即可。 5.spring Failed to convert property value of type ‘java.lang.String’ to required type ‘int’ for property 原错误是不能将long的null属性转化出来，但是没找到原来的错误。采取的方式是，把pojo类中的long全改为Integer。 如果是date出错，参考问题3，在数据库连接时加上zeroDateTimeBehavior=convertToNull。]]></content>
@@ -58,9 +109,9 @@
         <category>前端</category>
       </categories>
       <tags>
+        <tag>前端</tag>
         <tag>react</tag>
         <tag>router</tag>
-        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -244,9 +295,9 @@
         <category>前端</category>
       </categories>
       <tags>
+        <tag>前端</tag>
         <tag>react</tag>
         <tag>router</tag>
-        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -285,8 +336,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>Maven</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
