@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[requests包的异常处理]]></title>
+    <url>%2F2018%2F11%2F26%2Frequests%E5%8C%85%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[可以使用raise_for_status()来获取所有错误，并且在except语句中使用 requests.RequestException来得到错误原因： def get_bs_obj(link): try: response = requests.get(link, headers=headers, timeout=10) response.raise_for_status() bs_obj = bs(response.text) return bs_obj except requests.RequestException as e: print(e) return None 例如会产生报错： HTTPConnectionPool(host=&apos;synthezise.christuniversity.in&apos;, port=80): Max retries exceeded with url: / (Caused by NewConnectionError(&apos;&lt;urllib3.connection.HTTPConnection object at 0x0000021B9CB8A0F0&gt;: Failed to establish a new connection: [Errno 11001] getaddrinfo failed&apos;,)) HTTPConnectionPool(host=&apos;icu2018cls.umk.edu.my&apos;, port=80): Max retries exceeded with url: / (Caused by NewConnectionError(&apos;&lt;urllib3.connection.HTTPConnection object at 0x0000021B9CB8ACF8&gt;: Failed to establish a new connection: [Errno 11001] getaddrinfo failed&apos;,)) HTTPSConnectionPool(host=&apos;icsah.eu&apos;, port=443): Max retries exceeded with url: /events (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(-1, &apos;Unexpected EOF&apos;)&quot;,),)) HTTPSConnectionPool(host=&apos;icsah.eu&apos;, port=443): Max retries exceeded with url: /events (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(-1, &apos;Unexpected EOF&apos;)&quot;,),))]]></content>
+      <categories>
+        <category>python</category>
+        <category>爬虫</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>requests</tag>
+        <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[numpy常用函数]]></title>
+    <url>%2F2018%2F11%2F26%2Fnumpy%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)12345678910111213141516171819202122start标量 序列的起始值。stop标量 除非`endpoint`设置为False，否则序列的结束值。 在这种情况下，序列由除``num + 1``的最后一个组成 均匀间隔的样本，以便排除`stop`。注意这一步 当`endpoint`为False时，大小会改变。num：int，可选 要生成的样本数。默认值为50.必须为非负数。endpoint：bool，可选 如果为True，则`stop`是最后一个样本。否则，它不包括在内。 默认为True。 retstep：bool，可选 如果为True，则返回（`samples`，`step`），其中`step`是间距 样本之间。 dtype：dtype，可选 输出数组的类型。如果没有给出`dtype`，推断数据 从其他输入参数中键入。 1234567891011121314x = np.linspace(-1, 1, 5)out:array([-1. , -0.5, 0. , 0.5, 1. ])x = np.linspace(-1, 1, 5,endpoint=False)out:array([-1. , -0.6, -0.2, 0.2, 0.6])x = np.linspace(-1,1,5,endpoint=False,retstep=True)out:(array([-1. , -0.6, -0.2, 0.2, 0.6]), 0.4) np.random.normal(loc=0.0, scale=1.0, size=None)1234567loc：float或array_like浮点数 分布的平均值（“中心”）。scale：float或array_like浮点数 分布的标准偏差（展宽或“宽度”）。size：int或int的元组，可选 输出形状。如果给定的形状是例如“（m，n，k）”，那么 绘制了`m * n * k`样本 输出一个均值为0，标准差为0.05的(4,3)矩阵12345678n = np.random.normal(0,0.05,[4,3])out:array([[ 0.00875909, 0.04187258, 0.03422398], [ 0.04415144, 0.00083901, 0.06574384], [ 0.13169391, 0.09001974, -0.0384982 ], [ 0.00414203, 0.03999768, -0.09010478]]) np.newaxis作用为增加维度。 1x_data=np.linspace(-1,1,300)[:,np.newaxis] 意思为，从-1到1均匀取出300个间隔数字（包括-1,1），得到shape为(300,)的array，增加一个维度，变为(300,1)。 实际上可以使用reshape做到。等价于1x_data=np.linspace(-1,1,300).reshape(300,-1)]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>numpy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[matplotlib画图]]></title>
     <url>%2F2018%2F11%2F26%2Fmatplotlib%E7%94%BB%E5%9B%BE%2F</url>
     <content type="text"><![CDATA[123456789import matplotlib.pyplot as pltimport numpy as npdata = np.arange(100, 201)plt.plot(data)plt.show() 1.通过np.arange(100, 201)生成一个[100, 200]之间的整数数组，它的值是：[100, 101, 102, … , 200] 2.通过matplotlib.pyplot将其绘制出来。很显然，绘制出来的值对应了图中的纵坐标（y轴）。而matplotlib本身为我们设置了图形的横坐标（x轴）：[0, 100]，因为我们刚好有100个数值 3.通过plt.show()将这个图形显示出来 修改代码：123456789import matplotlib.pyplot as pltimport numpy as npdata = np.arange(1, 200, 20)plt.plot(data, &apos;ro&apos;)plt.show() 加入点也可以用1plt.plot([1,2],[3,4]) 加入的2个点为(1,3),(2,4)]]></content>
