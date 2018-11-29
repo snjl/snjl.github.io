@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="项目地址：https://github.com/snjl/springboot.thymeleaf_demo.git Spring Web MVCSpring Web MVC框架（通常简称为”Spring MVC”）是一个富”模型，视图，控制器”的web框架。 Spring MVC允许你创建特定的@Controller或@RestController beans来处理传入的HTTP请求。 示例：1">
+<meta name="description" content="项目地址：https://github.com/snjl/springboot.thymeleaf_demo.git Spring Web MVCSpring Web MVC框架（通常简称为”Spring MVC”）是一个富”模型，视图，控制器”的web框架。 Spring MVC允许你创建特定的@Controller或@RestController beans来处理传入的HTTP请求。">
 <meta name="keywords" content="springboot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springboot使用thymeleaf开发web应用">
 <meta property="og:url" content="https://snjl.github.io/2018/11/29/springboot使用thymeleaf开发web应用/index.html">
 <meta property="og:site_name" content="snjl">
-<meta property="og:description" content="项目地址：https://github.com/snjl/springboot.thymeleaf_demo.git Spring Web MVCSpring Web MVC框架（通常简称为”Spring MVC”）是一个富”模型，视图，控制器”的web框架。 Spring MVC允许你创建特定的@Controller或@RestController beans来处理传入的HTTP请求。 示例：1">
+<meta property="og:description" content="项目地址：https://github.com/snjl/springboot.thymeleaf_demo.git Spring Web MVCSpring Web MVC框架（通常简称为”Spring MVC”）是一个富”模型，视图，控制器”的web框架。 Spring MVC允许你创建特定的@Controller或@RestController beans来处理传入的HTTP请求。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/thymeleaf%20html.png">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/thymeleaf%20real.png">
-<meta property="og:updated_time" content="2018-11-29T15:48:00.698Z">
+<meta property="og:updated_time" content="2018-11-29T15:51:35.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot使用thymeleaf开发web应用">
-<meta name="twitter:description" content="项目地址：https://github.com/snjl/springboot.thymeleaf_demo.git Spring Web MVCSpring Web MVC框架（通常简称为”Spring MVC”）是一个富”模型，视图，控制器”的web框架。 Spring MVC允许你创建特定的@Controller或@RestController beans来处理传入的HTTP请求。 示例：1">
+<meta name="twitter:description" content="项目地址：https://github.com/snjl/springboot.thymeleaf_demo.git Spring Web MVCSpring Web MVC框架（通常简称为”Spring MVC”）是一个富”模型，视图，控制器”的web框架。 Spring MVC允许你创建特定的@Controller或@RestController beans来处理传入的HTTP请求。">
 <meta name="twitter:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/thymeleaf%20html.png">
 
 
@@ -416,6 +416,7 @@
         <p>项目地址：<a href="https://github.com/snjl/springboot.thymeleaf_demo.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.thymeleaf_demo.git</a></p>
 <h1 id="Spring-Web-MVC"><a href="#Spring-Web-MVC" class="headerlink" title="Spring Web MVC"></a>Spring Web MVC</h1><p>Spring Web MVC框架（通常简称为”Spring MVC”）是一个富”模型，视图，控制器”的web框架。</p>
 <p>Spring MVC允许你创建特定的@Controller或@RestController beans来处理传入的HTTP请求。</p>
+<a id="more"></a>
 <p>示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/users"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRestController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value=<span class="string">"/&#123;user&#125;"</span>, method=RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(@PathVariable Long user)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value=<span class="string">"/&#123;user&#125;/customers"</span>, method=RequestMethod.GET)</span><br><span class="line">    <span class="function">List&lt;Customer&gt; <span class="title">getUserCustomers</span><span class="params">(@PathVariable Long user)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value=<span class="string">"/&#123;user&#125;"</span>, method=RequestMethod.DELETE)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">deleteUser</span><span class="params">(@PathVariable Long user)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="Spring-MVC自动配置"><a href="#Spring-MVC自动配置" class="headerlink" title="Spring MVC自动配置"></a>Spring MVC自动配置</h1><p>Spring Boot为Spring MVC提供适用于多数应用的自动配置功能。在Spring默认基础上，自动配置添加了以下特性：</p>
 <ol>
