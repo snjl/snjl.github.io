@@ -289,6 +289,567 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/react：页面中存在多个input设置value属性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/25/react：页面中存在多个input设置value属性/" itemprop="url">react：页面中存在多个input设置value属性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:26:25+08:00">
+                2018-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/react/" itemprop="url" rel="index">
+                    <span itemprop="name">react</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/react/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  254 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先要为这些所有的input框绑定上onChange的方法，然后还需要在this.state中去设置不同的input对应不同的值，最后还需要在changeValue的方法中去一一监听input输入时去修改对应的input的值。</p>
+<p>也可以写一个changeValue方法，但是input的属性的name要和state里的名字要一样，如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">        login:&#123;</span><br><span class="line">            username:<span class="string">''</span>,</span><br><span class="line">            password:<span class="string">''</span></span><br><span class="line">        &#125;,</span><br><span class="line">        user:&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用户名：</span><br><span class="line">&lt;input type=&#123;<span class="string">'text'</span>&#125; name=&#123;<span class="string">'username'</span>&#125; value=&#123;<span class="keyword">this</span>.state.login.username&#125; </span><br><span class="line">className=&#123;<span class="string">'username'</span>&#125; onChange=&#123;<span class="keyword">this</span>.changeValue.bind(<span class="keyword">this</span>)&#125;/&gt;</span><br><span class="line">&lt;br/&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=&#123;<span class="string">'password'</span>&#125; name=&#123;<span class="string">'password'</span>&#125; value=&#123;<span class="keyword">this</span>.state.login.password&#125; </span><br><span class="line">className=&#123;<span class="string">'password'</span>&#125; onChange=&#123;<span class="keyword">this</span>.changeValue.bind(<span class="keyword">this</span>)&#125;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">changeValue(event) &#123;</span><br><span class="line">    <span class="keyword">let</span> newLogin = <span class="keyword">this</span>.state.login;</span><br><span class="line">    newLogin[event.target.name] = event.target.value;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">login</span>: newLogin&#125;)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>使用event.target.name获取input的name属性，使用evnet.target.value获取input的value，令newLogin为this.state.login，然后将newLogin中名为event.target.name的属性的值设为event.target.value，之后再setState，从而可以改变state.login的值。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/react：存储session-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/25/react：存储session-1/" itemprop="url">react：存储session</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:25:33+08:00">
+                2018-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/react/" itemprop="url" rel="index">
+                    <span itemprop="name">react</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/react/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  80 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>react框架中使用session，如果是单个字符串：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(<span class="string">"key"</span>,value);</span><br></pre></td></tr></table></figure></p>
+<p>取出时：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = sessionStorage.getItem(<span class="string">"key"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果是json，在存储时需要将json对象通过stringify()方法转为字符串，存入sessionStorage：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(<span class="string">"jsonKey"</span>,<span class="built_in">JSON</span>.stringify(jsonData));</span><br></pre></td></tr></table></figure></p>
+<p>取出时需要再转回json：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">JSON</span>.parse(sessionStorage.getItem(<span class="string">"jsonKey"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>移除session：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.removeItem(<span class="string">"data"</span>);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/jQuery禁止回车提交/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/25/jQuery禁止回车提交/" itemprop="url">jQuery禁止回车提交</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:23:44+08:00">
+                2018-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  68 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在有input框进行输入提交时，如果有input的type为submit，则默认按回车会提交，可以用jQuery的方法进行阻拦：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">"input"</span>).each(</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                $(<span class="keyword">this</span>).keypress( <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> key = <span class="built_in">window</span>.event ? e.keyCode : e.which;</span><br><span class="line">                    <span class="keyword">if</span>(key.toString() === <span class="string">"13"</span>)&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/react：form表单提交/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -666,7 +1227,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/24/springboot使用JdbcTemplate/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/24/springboot使用JdbcTemplate（一）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -685,7 +1246,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/24/springboot使用JdbcTemplate/" itemprop="url">springboot使用JdbcTemplate</a></h1>
+                <a class="post-title-link" href="/2018/11/24/springboot使用JdbcTemplate（一）/" itemprop="url">springboot使用JdbcTemplate（一）</a></h1>
         
 
         <div class="post-meta">
@@ -751,7 +1312,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k 字
+                  1.4k 字
                 </span>
               
 
@@ -767,7 +1328,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -789,15 +1350,257 @@
 
       
         
-          <p>项目地址：<a href="https://github.com/snjl/springboot.mysql.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.mysql.git</a></p>
+          
+            <p>项目地址：<a href="https://github.com/snjl/springboot.mysql.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.mysql.git</a></p>
 <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>修改 POM 文件，添加spring-boot-starter-jdbc依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/24/springboot使用JdbcTemplate/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>添加mysql依赖（spring-boot-starter-jdbc 默认使用tomcat-jdbc数据源，如果要使用其他数据源，需要添加额外的依赖，这里使用了阿里巴巴的数据池管理）：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h1><p>在src/main/resources/application.properties中配置数据源信息:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/sss?serverTimezone=UTC&amp;zeroDateTimeBehavior=convertToNull</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=123456</span><br></pre></td></tr></table></figure></p>
+<p>在Application.java中配置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyprojectApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MyprojectApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Environment environment;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span>(destroyMethod = <span class="string">"close"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        dataSource.setUrl(environment.getProperty(<span class="string">"spring.datasource.url"</span>));</span><br><span class="line">        dataSource.setUsername(environment.getProperty(<span class="string">"spring.datasource.username"</span>));</span><br><span class="line">        <span class="comment">//用户名</span></span><br><span class="line">        dataSource.setPassword(environment.getProperty(<span class="string">"spring.datasource.password"</span>));</span><br><span class="line">        <span class="comment">//密码</span></span><br><span class="line">        dataSource.setDriverClassName(environment.getProperty(<span class="string">"spring.datasource.driver-class-name"</span>));</span><br><span class="line">        dataSource.setInitialSize(<span class="number">2</span>);</span><br><span class="line">        <span class="comment">//初始化时建立物理连接的个数</span></span><br><span class="line">        dataSource.setMaxActive(<span class="number">20</span>);</span><br><span class="line">        <span class="comment">//最大连接池数量</span></span><br><span class="line">        dataSource.setMinIdle(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//最小连接池数量</span></span><br><span class="line">        dataSource.setMaxWait(<span class="number">60000</span>);</span><br><span class="line">        <span class="comment">//获取连接时最大等待时间，单位毫秒。</span></span><br><span class="line">        dataSource.setValidationQuery(<span class="string">"SELECT 1"</span>);</span><br><span class="line">        <span class="comment">//用来检测连接是否有效的sql</span></span><br><span class="line">        dataSource.setTestOnBorrow(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">//申请连接时执行validationQuery检测连接是否有效</span></span><br><span class="line">        dataSource.setTestWhileIdle(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//建议配置为true，不影响性能，并且保证安全性。</span></span><br><span class="line">        dataSource.setPoolPreparedStatements(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">//是否缓存preparedStatement，也就是PSCache</span></span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- auto-generated definition</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_student</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span>       <span class="built_in">INT</span> AUTO_INCREMENT</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  <span class="keyword">NAME</span>     <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  sex      <span class="built_in">CHAR</span>(<span class="number">3</span>)     <span class="literal">NULL</span>,</span><br><span class="line">  age      <span class="built_in">INT</span>         <span class="literal">NULL</span>,</span><br><span class="line">  clazz_id <span class="built_in">INT</span>         <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> TB_STUDENT_id_uindex</span><br><span class="line">  <span class="keyword">UNIQUE</span> (<span class="keyword">id</span>)</span><br><span class="line">)</span><br><span class="line">  <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="实体类："><a href="#实体类：" class="headerlink" title="实体类："></a>实体类：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.domain;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Integer id;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> String sex;</span><br><span class="line">  <span class="keyword">private</span> Integer age;</span><br><span class="line">  <span class="keyword">private</span> Integer clazzId;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getter,setter</span></span><br></pre></td></tr></table></figure>
+<p>可以用idea自动生成，将long类型的全改为Integer，为了以后不报错。</p>
+<h2 id="DAO层"><a href="#DAO层" class="headerlink" title="DAO层"></a>DAO层</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TbStudentDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.dao.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.dao.TbStudentDao;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.core.BeanPropertyRowMapper;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.core.JdbcTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentDaoImpl</span> <span class="keyword">implements</span> <span class="title">TbStudentDao</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"insert into tb_student(NAME) VALUES (?)"</span>,tbStudent.getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"update tb_student set NAME=? where id=?"</span>,tbStudent.getName(),tbStudent.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"delete from tb_student where id=?"</span>, id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        List&lt;TbStudent&gt; list = jdbcTemplate.query(<span class="string">"SELECT * FROM tb_student WHERE id=?"</span>,</span><br><span class="line">                <span class="keyword">new</span> Object[]&#123;id&#125;, <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(TbStudent.class));</span><br><span class="line">        <span class="keyword">if</span>(list != <span class="keyword">null</span> &amp;&amp; list.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            TbStudent tbStudent = list.get(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span> tbStudent;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;TbStudent&gt; list = jdbcTemplate.query(<span class="string">"SELECT * FROM tb_student"</span>,</span><br><span class="line">                <span class="keyword">new</span> Object[]&#123;&#125;, <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(TbStudent.class));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：使用jdbcTemplate.query时，需要注意这个写法：new Object[]{id}, new BeanPropertyRowMapper&lt;&gt;(TbStudent.class)。并且如果只需要一个，需要进行null和size判定，之后取出一个，不然会报错。</strong></p>
+<h2 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a>Service层</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TbStudentService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.dao.TbStudentDao;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.service.TbStudentService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentServiceImpl</span> <span class="keyword">implements</span> <span class="title">TbStudentService</span></span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span>(name = <span class="string">"tbStudentDaoImpl"</span>)</span><br><span class="line">    <span class="keyword">private</span> TbStudentDao tbStudentDao;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.insert(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.update(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.findTbStudent(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.findAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.service.TbStudentService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 34924</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/tbStudent"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span>(name = <span class="string">"tbStudentServiceImpl"</span>)</span><br><span class="line">    <span class="keyword">private</span> TbStudentService tbStudentService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/findAll"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.findAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/delete/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(@PathVariable <span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/insert"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(@RequestBody TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.insert(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/update"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(@RequestParam Integer id,@RequestParam String name)</span> </span>&#123;</span><br><span class="line">        TbStudent tbStudent = tbStudentService.findTbStudent(id);</span><br><span class="line">        tbStudent.setName(name);</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.update(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/findOne"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TbStudent <span class="title">findOne</span><span class="params">(@RequestBody TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.findTbStudent(tbStudent.getId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：此处全写的是接口</strong></p>
+<ul>
+<li>findAll用的是普通的get请求;</li>
+<li>delete用的restful的形式；</li>
+<li>insert用的post请求；</li>
+<li>update用的get请求，使用@RequestParam，注意post请求使用@RequestBody，而get请求只能使用@RequestParam或者是使用@ModelAttribute（此处未使用）；</li>
+<li>findOne用的post请求。</li>
+</ul>
+<p>如果将update改为使用@ModelAttribute，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/update"</span>,method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(@ModelAttribute TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> tbStudentService.update(tbStudent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="测试效果"><a href="#测试效果" class="headerlink" title="测试效果"></a>测试效果</h1><h2 id="findAll："><a href="#findAll：" class="headerlink" title="findAll："></a>findAll：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/findAll.png" alt="image"></p>
+<h2 id="delete："><a href="#delete：" class="headerlink" title="delete："></a>delete：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/delete.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/delete_findAll.png" alt="image"></p>
+<h2 id="insert："><a href="#insert：" class="headerlink" title="insert："></a>insert：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/insert.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/insert_findAll.png" alt="image"></p>
+<h2 id="update："><a href="#update：" class="headerlink" title="update："></a>update：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update_findAll.png" alt="image"></p>
+<p>使用@ModelAttribute的注解：<br><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update2.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update2_findAll.png" alt="image"></p>
+<h2 id="findOne："><a href="#findOne：" class="headerlink" title="findOne："></a>findOne：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/findOne.png" alt="image"></p>
+<h1 id="使用thymeleaf"><a href="#使用thymeleaf" class="headerlink" title="使用thymeleaf"></a>使用thymeleaf</h1><p>添加文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.service.TbStudentService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.ModelMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 34924</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/tbStudent/html"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentControllerForHtml</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span>(name = <span class="string">"tbStudentServiceImpl"</span>)</span><br><span class="line">    <span class="keyword">private</span> TbStudentService tbStudentService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/findAll"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findAll</span><span class="params">(ModelMap model)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        model.addAttribute(<span class="string">"items"</span>, tbStudentService.findAll());</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"student"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>student.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>student<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>student<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">this is student.</span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:each</span>=<span class="string">"item : $&#123;items&#125;"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:text</span>=<span class="string">"$&#123;item.id&#125;"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&amp;nbsp;&amp;nbsp;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:text</span>=<span class="string">"$&#123;item.name&#125;"</span>&gt;</span>name<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&amp;nbsp;&amp;nbsp;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:text</span>=<span class="string">"$&#123;item.clazzId&#125;"</span>&gt;</span>name<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&amp;nbsp;&amp;nbsp;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:if</span>=<span class="string">"$&#123;item.clazzId &#125;"</span>&gt;</span>123132<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>即可显示。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/24/springboot使用JdbcTemplate/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/24/springboot使用JdbcTemplate/" itemprop="url">springboot使用JdbcTemplate（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T23:45:47+08:00">
+                2018-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>项目地址：<a href="https://github.com/snjl/springboot.mysql.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.mysql.git</a></p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>修改 POM 文件，添加spring-boot-starter-jdbc依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>添加mysql依赖（spring-boot-starter-jdbc 默认使用tomcat-jdbc数据源，如果要使用其他数据源，需要添加额外的依赖，这里使用了阿里巴巴的数据池管理）：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h1><p>在src/main/resources/application.properties中配置数据源信息:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/sss?serverTimezone=UTC&amp;zeroDateTimeBehavior=convertToNull</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=123456</span><br></pre></td></tr></table></figure></p>
+<p>在Application.java中配置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyprojectApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MyprojectApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Environment environment;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span>(destroyMethod = <span class="string">"close"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        dataSource.setUrl(environment.getProperty(<span class="string">"spring.datasource.url"</span>));</span><br><span class="line">        dataSource.setUsername(environment.getProperty(<span class="string">"spring.datasource.username"</span>));</span><br><span class="line">        <span class="comment">//用户名</span></span><br><span class="line">        dataSource.setPassword(environment.getProperty(<span class="string">"spring.datasource.password"</span>));</span><br><span class="line">        <span class="comment">//密码</span></span><br><span class="line">        dataSource.setDriverClassName(environment.getProperty(<span class="string">"spring.datasource.driver-class-name"</span>));</span><br><span class="line">        dataSource.setInitialSize(<span class="number">2</span>);</span><br><span class="line">        <span class="comment">//初始化时建立物理连接的个数</span></span><br><span class="line">        dataSource.setMaxActive(<span class="number">20</span>);</span><br><span class="line">        <span class="comment">//最大连接池数量</span></span><br><span class="line">        dataSource.setMinIdle(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//最小连接池数量</span></span><br><span class="line">        dataSource.setMaxWait(<span class="number">60000</span>);</span><br><span class="line">        <span class="comment">//获取连接时最大等待时间，单位毫秒。</span></span><br><span class="line">        dataSource.setValidationQuery(<span class="string">"SELECT 1"</span>);</span><br><span class="line">        <span class="comment">//用来检测连接是否有效的sql</span></span><br><span class="line">        dataSource.setTestOnBorrow(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">//申请连接时执行validationQuery检测连接是否有效</span></span><br><span class="line">        dataSource.setTestWhileIdle(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//建议配置为true，不影响性能，并且保证安全性。</span></span><br><span class="line">        dataSource.setPoolPreparedStatements(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">//是否缓存preparedStatement，也就是PSCache</span></span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- auto-generated definition</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_student</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span>       <span class="built_in">INT</span> AUTO_INCREMENT</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  <span class="keyword">NAME</span>     <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  sex      <span class="built_in">CHAR</span>(<span class="number">3</span>)     <span class="literal">NULL</span>,</span><br><span class="line">  age      <span class="built_in">INT</span>         <span class="literal">NULL</span>,</span><br><span class="line">  clazz_id <span class="built_in">INT</span>         <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> TB_STUDENT_id_uindex</span><br><span class="line">  <span class="keyword">UNIQUE</span> (<span class="keyword">id</span>)</span><br><span class="line">)</span><br><span class="line">  <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="实体类："><a href="#实体类：" class="headerlink" title="实体类："></a>实体类：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.domain;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Integer id;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> String sex;</span><br><span class="line">  <span class="keyword">private</span> Integer age;</span><br><span class="line">  <span class="keyword">private</span> Integer clazzId;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getter,setter</span></span><br></pre></td></tr></table></figure>
+<p>可以用idea自动生成，将long类型的全改为Integer，为了以后不报错。</p>
+<h2 id="DAO层"><a href="#DAO层" class="headerlink" title="DAO层"></a>DAO层</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TbStudentDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.dao.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.dao.TbStudentDao;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.core.BeanPropertyRowMapper;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.core.JdbcTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentDaoImpl</span> <span class="keyword">implements</span> <span class="title">TbStudentDao</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"insert into tb_student(NAME) VALUES (?)"</span>,tbStudent.getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"update tb_student set NAME=? where id=?"</span>,tbStudent.getName(),tbStudent.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"delete from tb_student where id=?"</span>, id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        List&lt;TbStudent&gt; list = jdbcTemplate.query(<span class="string">"SELECT * FROM tb_student WHERE id=?"</span>,</span><br><span class="line">                <span class="keyword">new</span> Object[]&#123;id&#125;, <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(TbStudent.class));</span><br><span class="line">        <span class="keyword">if</span>(list != <span class="keyword">null</span> &amp;&amp; list.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            TbStudent tbStudent = list.get(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span> tbStudent;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;TbStudent&gt; list = jdbcTemplate.query(<span class="string">"SELECT * FROM tb_student"</span>,</span><br><span class="line">                <span class="keyword">new</span> Object[]&#123;&#125;, <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(TbStudent.class));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：使用jdbcTemplate.query时，需要注意这个写法：new Object[]{id}, new BeanPropertyRowMapper&lt;&gt;(TbStudent.class)。并且如果只需要一个，需要进行null和size判定，之后取出一个，不然会报错。</strong></p>
+<h2 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a>Service层</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TbStudentService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.dao.TbStudentDao;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.service.TbStudentService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentServiceImpl</span> <span class="keyword">implements</span> <span class="title">TbStudentService</span></span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span>(name = <span class="string">"tbStudentDaoImpl"</span>)</span><br><span class="line">    <span class="keyword">private</span> TbStudentDao tbStudentDao;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.insert(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.update(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TbStudent <span class="title">findTbStudent</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.findTbStudent(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentDao.findAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.domain.TbStudent;</span><br><span class="line"><span class="keyword">import</span> com.example.myproject.service.TbStudentService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 34924</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/tbStudent"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span>(name = <span class="string">"tbStudentServiceImpl"</span>)</span><br><span class="line">    <span class="keyword">private</span> TbStudentService tbStudentService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/findAll"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TbStudent&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.findAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/delete/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(@PathVariable <span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/insert"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(@RequestBody TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.insert(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/update"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(@RequestParam Integer id,@RequestParam String name)</span> </span>&#123;</span><br><span class="line">        TbStudent tbStudent = tbStudentService.findTbStudent(id);</span><br><span class="line">        tbStudent.setName(name);</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.update(tbStudent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/findOne"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TbStudent <span class="title">findOne</span><span class="params">(@RequestBody TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tbStudentService.findTbStudent(tbStudent.getId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：此处全写的是接口</strong></p>
+<ul>
+<li>findAll用的是普通的get请求;</li>
+<li>delete用的restful的形式；</li>
+<li>insert用的post请求；</li>
+<li>update用的get请求，使用@RequestParam，注意post请求使用@RequestBody，而get请求只能使用@RequestParam或者是使用@ModelAttribute（此处未使用）；</li>
+<li>findOne用的post请求。</li>
+</ul>
+<p>如果将update改为使用@ModelAttribute，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/update"</span>,method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(@ModelAttribute TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> tbStudentService.update(tbStudent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="测试效果"><a href="#测试效果" class="headerlink" title="测试效果"></a>测试效果</h1><h2 id="findAll："><a href="#findAll：" class="headerlink" title="findAll："></a>findAll：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/findAll.png" alt="image"></p>
+<h2 id="delete："><a href="#delete：" class="headerlink" title="delete："></a>delete：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/delete.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/delete_findAll.png" alt="image"></p>
+<h2 id="insert："><a href="#insert：" class="headerlink" title="insert："></a>insert：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/insert.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/insert_findAll.png" alt="image"></p>
+<h2 id="update："><a href="#update：" class="headerlink" title="update："></a>update：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update_findAll.png" alt="image"></p>
+<p>使用@ModelAttribute的注解：<br><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update2.png" alt="image"></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/update2_findAll.png" alt="image"></p>
+<h2 id="findOne："><a href="#findOne：" class="headerlink" title="findOne："></a>findOne：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/findOne.png" alt="image"></p>
+<h1 id="使用thymeleaf"><a href="#使用thymeleaf" class="headerlink" title="使用thymeleaf"></a>使用thymeleaf</h1><p>添加文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myproject.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.myproject.service.TbStudentService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.ModelMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 34924</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/tbStudent/html"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TbStudentControllerForHtml</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span>(name = <span class="string">"tbStudentServiceImpl"</span>)</span><br><span class="line">    <span class="keyword">private</span> TbStudentService tbStudentService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/findAll"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findAll</span><span class="params">(ModelMap model)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        model.addAttribute(<span class="string">"items"</span>, tbStudentService.findAll());</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"student"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>student.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>student<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>student<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">this is student.</span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:each</span>=<span class="string">"item : $&#123;items&#125;"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:text</span>=<span class="string">"$&#123;item.id&#125;"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&amp;nbsp;&amp;nbsp;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:text</span>=<span class="string">"$&#123;item.name&#125;"</span>&gt;</span>name<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&amp;nbsp;&amp;nbsp;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:text</span>=<span class="string">"$&#123;item.clazzId&#125;"</span>&gt;</span>name<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&amp;nbsp;&amp;nbsp;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">th:if</span>=<span class="string">"$&#123;item.clazzId &#125;"</span>&gt;</span>123132<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>即可显示。</p>
+
+          
         
       
     </div>
@@ -1387,746 +2190,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/21/springboot配置文件/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/21/springboot配置文件/" itemprop="url">springboot配置文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-21T23:43:21+08:00">
-                2018-11-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.1k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目地址：<a href="https://github.com/snjl/springboot.config_test.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.config_test.git</a></p>
-<p>Spring Boot使用了一个全局的配置文件application.properties，放在src/main/resources目录下或者类路径的/config下。Sping Boot的全局配置文件的作用是对一些默认配置的配置值进行修改。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/21/springboot配置文件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/21/springboot常用属性汇总/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/21/springboot常用属性汇总/" itemprop="url">springboot常用属性汇总</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-21T23:40:54+08:00">
-                2018-11-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  13.1k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  81 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>可以在application.properties/application.yml文件中或作为命令行开关指定各种属性。本节提供了常用的Spring Boot属性列表，以及对使用它们的底层类的引用。</p>
-<p>属性贡献可以来自您的类路径上的其他jar文件，因此您不应该考虑这是一个详尽的列表。定义您自己的属性也是完全合法的。<br>此示例文件仅作为指南。不要将整个内容复制/粘贴到您的应用程序中;而只是选择你需要的属性。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/21/springboot常用属性汇总/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/20/springboot工程结构推荐/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/20/springboot工程结构推荐/" itemprop="url">springboot工程结构推荐</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-20T23:41:01+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  629 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目地址：<a href="https://github.com/snjl/springboot.myproject.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.myproject.git</a></p>
-<p>Spring Boot框架本身并没有对工程结构有特别的要求，但是按照最佳实践的工程结构可以帮助我们减少可能会遇见的坑，尤其是Spring包扫描机制的存在，如果您使用最佳实践的工程结构，可以免去不少特殊的配置工作。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/20/springboot工程结构推荐/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/20/springboot开发web应用/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/20/springboot开发web应用/" itemprop="url">springboot开发web应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-20T22:11:01+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.1k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目地址：<a href="https://github.com/snjl/springboot_thymeleaf_demo" target="_blank" rel="noopener">https://github.com/snjl/springboot_thymeleaf_demo</a></p>
-<h1 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h1><p>js,css,图片等文件，放在main/resources/static里。</p>
-<p>页面放在main/resources/templates里。</p>
-<p>配置文件内容可以添加在main/resources、application.properties里。</p>
-<p>举例：我们可以在src/main/resources/目录下创建static，在该位置放置一个图片文件。启动程序后，尝试访问<a href="http://localhost:8080/D.jpg。如能显示图片，配置成功。" target="_blank" rel="noopener">http://localhost:8080/D.jpg。如能显示图片，配置成功。</a></p>
-<p>springboot提供默认配置的一些模版：</p>
-<ul>
-<li>Thymeleaf</li>
-<li>FreeMarker</li>
-<li>Velocity</li>
-<li>Groovy</li>
-<li>Mustache</li>
-</ul>
-<p>使用上述模板引擎中的任何一个，它们默认的模板配置路径为：src/main/resources/templates。当然也可以修改这个路径，具体如何修改，可在后续各模板引擎的配置属性中查询并修改。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/20/springboot开发web应用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2179,7 +2242,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2190,7 +2253,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2201,7 +2264,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
