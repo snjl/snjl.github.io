@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/update2.png">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/update2_findAll.png">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/findOne.png">
-<meta property="og:updated_time" content="2018-11-29T15:52:15.350Z">
+<meta property="og:updated_time" content="2018-11-30T15:29:19.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot使用JdbcTemplate（一）">
 <meta name="twitter:description" content="项目地址：https://github.com/snjl/springboot.mysql.git 环境配置修改 POM 文件，添加spring-boot-starter-jdbc依赖：1234&amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;spring-b">
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k 字
+                  1.5k 字
                 </span>
               
 
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -445,6 +445,9 @@
 <li>findOne用的post请求。</li>
 </ul>
 <p>如果将update改为使用@ModelAttribute，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/update"</span>,method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(@ModelAttribute TbStudent tbStudent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> tbStudentService.update(tbStudent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用JSONObject"><a href="#使用JSONObject" class="headerlink" title="使用JSONObject"></a>使用JSONObject</h1><p>改insert为JSONObject接受参数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/insert2"</span>,method = RequestMethod.POST)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert2</span><span class="params">(@RequestBody JSONObject tbStudent)</span> </span>&#123;</span><br><span class="line">    TbStudent tbStudent1 = <span class="keyword">new</span> TbStudent();</span><br><span class="line">    tbStudent1.setName((String)tbStudent.get(<span class="string">"name"</span>));</span><br><span class="line">    <span class="keyword">return</span> tbStudentService.insert(tbStudent1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>引入的包为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> net.minidev.json.JSONObject;</span><br></pre></td></tr></table></figure></p>
+<p>在pom.xml中加入：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.minidev<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>json-smart<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="测试效果"><a href="#测试效果" class="headerlink" title="测试效果"></a>测试效果</h1><h2 id="findAll："><a href="#findAll：" class="headerlink" title="findAll："></a>findAll：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/findAll.png" alt="image"></p>
 <h2 id="delete："><a href="#delete：" class="headerlink" title="delete："></a>delete：</h2><p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/delete.png" alt="image"></p>
 <p><img src="http://pi6jpxhir.bkt.clouddn.com/springboot/delete_findAll.png" alt="image"></p>
@@ -502,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/24/chmod命令/" rel="next" title="chmod命令">
-                <i class="fa fa-chevron-left"></i> chmod命令
+              <a href="/2018/11/24/springboot使用JdbcTemplate/" rel="next" title="springboot使用JdbcTemplate（一）">
+                <i class="fa fa-chevron-left"></i> springboot使用JdbcTemplate（一）
               </a>
             
           </div>
@@ -512,8 +515,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/24/springboot使用JdbcTemplate/" rel="prev" title="springboot使用JdbcTemplate（一）">
-                springboot使用JdbcTemplate（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/24/springboot报错记录/" rel="prev" title="springboot报错记录">
+                springboot报错记录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -593,7 +596,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -604,7 +607,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -615,7 +618,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -677,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境配置"><span class="nav-number">1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据源配置"><span class="nav-number">2.</span> <span class="nav-text">数据源配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据"><span class="nav-number">3.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实体类："><span class="nav-number">4.1.</span> <span class="nav-text">实体类：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAO层"><span class="nav-number">4.2.</span> <span class="nav-text">DAO层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service层"><span class="nav-number">4.3.</span> <span class="nav-text">Service层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Controller"><span class="nav-number">4.4.</span> <span class="nav-text">Controller</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试效果"><span class="nav-number">5.</span> <span class="nav-text">测试效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#findAll："><span class="nav-number">5.1.</span> <span class="nav-text">findAll：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete："><span class="nav-number">5.2.</span> <span class="nav-text">delete：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert："><span class="nav-number">5.3.</span> <span class="nav-text">insert：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update："><span class="nav-number">5.4.</span> <span class="nav-text">update：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#findOne："><span class="nav-number">5.5.</span> <span class="nav-text">findOne：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用thymeleaf"><span class="nav-number">6.</span> <span class="nav-text">使用thymeleaf</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境配置"><span class="nav-number">1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据源配置"><span class="nav-number">2.</span> <span class="nav-text">数据源配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据"><span class="nav-number">3.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实体类："><span class="nav-number">4.1.</span> <span class="nav-text">实体类：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAO层"><span class="nav-number">4.2.</span> <span class="nav-text">DAO层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service层"><span class="nav-number">4.3.</span> <span class="nav-text">Service层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Controller"><span class="nav-number">4.4.</span> <span class="nav-text">Controller</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用JSONObject"><span class="nav-number">5.</span> <span class="nav-text">使用JSONObject</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试效果"><span class="nav-number">6.</span> <span class="nav-text">测试效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#findAll："><span class="nav-number">6.1.</span> <span class="nav-text">findAll：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete："><span class="nav-number">6.2.</span> <span class="nav-text">delete：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert："><span class="nav-number">6.3.</span> <span class="nav-text">insert：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update："><span class="nav-number">6.4.</span> <span class="nav-text">update：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#findOne："><span class="nav-number">6.5.</span> <span class="nav-text">findOne：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用thymeleaf"><span class="nav-number">7.</span> <span class="nav-text">使用thymeleaf</span></a></li></ol></div>
             
 
           </div>
