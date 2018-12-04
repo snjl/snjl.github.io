@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://snjl.github.io/"/>
-  <updated>2018-12-03T15:52:04.115Z</updated>
+  <updated>2018-12-04T14:41:44.777Z</updated>
   <id>https://snjl.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>react：form的textarea</title>
+    <link href="https://snjl.github.io/2018/12/04/react%EF%BC%9Aform%E7%9A%84textarea/"/>
+    <id>https://snjl.github.io/2018/12/04/react：form的textarea/</id>
+    <published>2018-12-04T14:41:28.000Z</published>
+    <updated>2018-12-04T14:41:44.777Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用react框架的form表单，input标签填入this.state的值的时候，要用defaultValue，使用value属性会报错；</p><p>但是使用textarea，要使用value属性，使用defaultValue属性不能显示this.state的值。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用react框架的form表单，input标签填入this.state的值的时候，要用defaultValue，使用value属性会报错；&lt;/p&gt;
+&lt;p&gt;但是使用textarea，要使用value属性，使用defaultValue属性不能显示this.state的值。&lt;/
+      
+    
+    </summary>
+    
+      <category term="前端" scheme="https://snjl.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="https://snjl.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="react" scheme="https://snjl.github.io/tags/react/"/>
+    
+  </entry>
   
   <entry>
     <title>springboot：测试，打包，部署</title>
@@ -537,40 +565,6 @@
     
     
       <category term="springboot" scheme="https://snjl.github.io/tags/springboot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>requests包的异常处理</title>
-    <link href="https://snjl.github.io/2018/11/26/requests%E5%8C%85%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
-    <id>https://snjl.github.io/2018/11/26/requests包的异常处理/</id>
-    <published>2018-11-26T15:40:08.000Z</published>
-    <updated>2018-11-26T15:40:50.335Z</updated>
-    
-    <content type="html"><![CDATA[<p>可以使用raise_for_status()来获取所有错误，并且在except语句中使用 requests.RequestException来得到错误原因：</p><pre><code>def get_bs_obj(link):    try:        response = requests.get(link, headers=headers, timeout=10)        response.raise_for_status()        bs_obj = bs(response.text)        return bs_obj    except requests.RequestException as e:        print(e)        return None</code></pre><p>例如会产生报错：</p><pre><code>HTTPConnectionPool(host=&apos;synthezise.christuniversity.in&apos;, port=80): Max retries exceeded with url: / (Caused by NewConnectionError(&apos;&lt;urllib3.connection.HTTPConnection object at 0x0000021B9CB8A0F0&gt;: Failed to establish a new connection: [Errno 11001] getaddrinfo failed&apos;,))HTTPConnectionPool(host=&apos;icu2018cls.umk.edu.my&apos;, port=80): Max retries exceeded with url: / (Caused by NewConnectionError(&apos;&lt;urllib3.connection.HTTPConnection object at 0x0000021B9CB8ACF8&gt;: Failed to establish a new connection: [Errno 11001] getaddrinfo failed&apos;,))HTTPSConnectionPool(host=&apos;icsah.eu&apos;, port=443): Max retries exceeded with url: /events (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(-1, &apos;Unexpected EOF&apos;)&quot;,),))HTTPSConnectionPool(host=&apos;icsah.eu&apos;, port=443): Max retries exceeded with url: /events (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(-1, &apos;Unexpected EOF&apos;)&quot;,),))</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;可以使用raise_for_status()来获取所有错误，并且在except语句中使用 requests.RequestException来得到错误原因：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def get_bs_obj(link):
-    try:
-        resp
-      
-    
-    </summary>
-    
-      <category term="python" scheme="https://snjl.github.io/categories/python/"/>
-    
-      <category term="爬虫" scheme="https://snjl.github.io/categories/python/%E7%88%AC%E8%99%AB/"/>
-    
-    
-      <category term="python" scheme="https://snjl.github.io/tags/python/"/>
-    
-      <category term="requests" scheme="https://snjl.github.io/tags/requests/"/>
-    
-      <category term="爬虫" scheme="https://snjl.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
