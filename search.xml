@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[docker：简介]]></title>
+    <url>%2F2018%2F12%2F07%2Fdocker%EF%BC%9A%E7%AE%80%E4%BB%8B%2F</url>
+    <content type="text"><![CDATA[参考： https://mp.weixin.qq.com/s?src=11&amp;timestamp=1543970179&amp;ver=1283&amp;signature=dn5DgnKs2J2yUd7VvmKjsb-uL5RJgnl1VKGsyxX4COsRSx*igc9g42iAU5pEXQ2FLaVT1QnYRn5HsReBmIGIMdJuxOyv9y0h*cpyQXzy5rlto*QwRgGJ7vm6dmFDuhc-&amp;new=1 http://dockone.io/article/126 维基百科： Docker is an open-source project that automates the deployment of applications inside software containers, by providing an additional layer of abstraction and automation of operating-system-level virtualization on Linux. Docker uses the resource isolation features of the Linux kernel such as cgroups and kernel namespaces, and a union-capable filesystem such as aufs and others to allow independent “containers” to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines. Docker是一个开放源代码软件项目，让应用程序布署在软件容器下的工作可以自动化进行，借此在Linux操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。Docker利用Linux核心中的资源分离机制，例如cgroups，以及Linux核心命名空间（name space），来建立独立的软件容器（containers）。这可以在单一Linux实体下运作，避免启动一个虚拟机器造成的额外负担。——摘自维基百科 现在服务器部署问题1. 合作开发的时候，在本机可以跑，别人的电脑跑不起来。这里我们拿java Web应用程序举例，我们一个java Web应用程序涉及很多东西，比如jdk、tomcat、spring等等。当这些其中某一项版本不一致的时候，可能就会导致应用程序跑不起来这种情况。Docker则将程序直接打包成镜像，直接运行在容器中即可。 2. 服务器自己的程序挂了，结果发现是别人程序出了问题把内存吃完了，自己程序因为内存不够就挂了。这种也是一种比较常见的情况，如果你的程序重要性不是特别高的话，公司基本上不可能让你的程序独享一台服务器的，这时候你的服务器就会跟公司其他人的程序共享一台服务器，所以不可避免地就会受到其他程序的干扰，导致自己的程序出现问题。Docker就很好解决了环境隔离的问题，别人程序不会影响到自己的程序。 3. 公司要弄一个活动，可能会有大量的流量进来，公司需要再多部署几十台服务器。在没有Docker的情况下，要在几天内部署几十台服务器，这对运维来说是一件非常折磨人的事，而且每台服务器的环境还不一定一样，就会出现各种问题，最后部署地头皮发麻。用Docker的话，我只需要将程序打包到镜像，你要多少台服务，我就给力跑多少容器，极大地提高了部署效率。 Docker与虚拟机的区别 比较上面两张图，我们发现虚拟机是携带操作系统，本身很小的应用程序却因为携带了操作系统而变得非常大，很笨重。Docker是不携带操作系统的，所以Docker的应用就非常的轻巧。另外在调用宿主机的CPU、磁盘等等这些资源的时候，拿内存举例，虚拟机是利用Hypervisor去虚拟化内存，整个调用过程是虚拟内存-&gt;虚拟物理内存-&gt;真正物理内存，但是Docker是利用Docker Engine去调用宿主的的资源，这时候过程是虚拟内存-&gt;真正物理内存。 1. 简化配置这是Docker公司宣传的Docker的主要使用场景。虚拟机的最大好处是能在你的硬件设施上运行各种配置不一样的平台（软件、系统），Docker在降低额外开销的情况下提供了同样的功能。它能让你将运行环境和配置放在代码中然后部署，同一个Docker的配置可以在不同的环境中使用，这样就降低了硬件要求和应用环境之间耦合度。 2. 代码流水线（Code Pipeline）管理前一个场景对于管理代码的流水线起到了很大的帮助。代码从开发者的机器到最终在生产环境上的部署，需要经过很多的中间环境。而每一个中间环境都有自己微小的差别，Docker给应用提供了一个从开发到上线均一致的环境，让代码的流水线变得简单不少。 3. 提高开发效率这就带来了一些额外的好处：Docker能提升开发者的开发效率。如果你想看一个详细一点的例子，可以参考Aater在DevOpsDays Austin 2014 大会或者是DockerCon上的演讲。不同的开发环境中，我们都想把两件事做好。一是我们想让开发环境尽量贴近生产环境，二是我们想快速搭建开发环境。理想状态中，要达到第一个目标，我们需要将每一个服务都跑在独立的虚拟机中以便监控生产环境中服务的运行状态。然而，我们却不想每次都需要网络连接，每次重新编译的时候远程连接上去特别麻烦。这就是Docker做的特别好的地方，开发环境的机器通常内存比较小，之前使用虚拟的时候，我们经常需要为开发环境的机器加内存，而现在Docker可以轻易的让几十个服务在Docker中跑起来。 4. 隔离应用有很多种原因会让你选择在一个机器上运行不同的应用，比如之前提到的提高开发效率的场景等。我们经常需要考虑两点，一是因为要降低成本而进行服务器整合，二是将一个整体式的应用拆分成松耦合的单个服务（译者注：微服务架构）。如果你想了解为什么松耦合的应用这么重要，请参考Steve Yege的这篇论文，文中将Google和亚马逊做了比较。 5. 整合服务器正如通过虚拟机来整合多个应用，Docker隔离应用的能力使得Docker可以整合多个服务器以降低成本。由于没有多个操作系统的内存占用，以及能在多个实例之间共享没有使用的内存，Docker可以比虚拟机提供更好的服务器整合解决方案。 6. 调试能力Docker提供了很多的工具，这些工具不一定只是针对容器，但是却适用于容器。它们提供了很多的功能，包括可以为容器设置检查点、设置版本和查看两个容器之间的差别，这些特性可以帮助调试Bug。你可以在《Docker拯救世界》的文章中找到这一点的例证。 7. 多租户环境另外一个Docker有意思的使用场景是在多租户的应用中，它可以避免关键应用的重写。我们一个特别的关于这个场景的例子是为IoT（译者注：物联网）的应用开发一个快速、易用的多租户环境。这种多租户的基本代码非常复杂，很难处理，重新规划这样一个应用不但消耗时间，也浪费金钱。使用Docker，可以为每一个租户的应用层的多个实例创建隔离的环境，这不仅简单而且成本低廉，当然这一切得益于Docker环境的启动速度和其高效的diff命令。你可以在这里了解关于此场景的更多信息。 8. 快速部署在虚拟机之前，引入新的硬件资源需要消耗几天的时间。Docker的虚拟化技术将这个时间降到了几分钟，Docker只是创建一个容器进程而无需启动操作系统，这个过程只需要秒级的时间。这正是Google和Facebook都看重的特性。你可以在数据中心创建销毁资源而无需担心重新启动带来的开销。通常数据中心的资源利用率只有30%，通过使用Docker并进行有效的资源分配可以提高资源的利用率。]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>服务器</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[matplotlib画3D图]]></title>
+    <url>%2F2018%2F12%2F07%2Fmatplotlib%E7%94%BB3D%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516from matplotlib import pyplot as pltimport numpy as npfrom mpl_toolkits.mplot3d import Axes3Dfig = plt.figure()ax = Axes3D(fig)X = np.arange(-4, 4, 0.25)Y = np.arange(-4, 4, 0.25)X, Y = np.meshgrid(X, Y)R = np.sqrt(X**2 + Y**2)Z = np.sin(R)# 具体函数方法可用 help(function) 查看，如：help(ax.plot_surface)ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='rainbow')plt.show()]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>画图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[模式识别作业]]></title>
+    <url>%2F2018%2F12%2F07%2F%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%BD%9C%E4%B8%9A%2F</url>
+    <content type="text"><![CDATA[以下述两类模式为样本，用感知器算法求判别函数：ω1:{(0 0 0)t,(1 0 0)t,(1 0 1)t,(1 1 0)t}; ω2:{(0 0 1)t,(0 1 1)t,(0 1 0)t,(1 1 1)t}.且令W(1)=(-1 –2 –2 0)t， C=1. 画出上题所给的二类样本，及所求的判决界面。 用LMSE算法对题1所给的两样本求判别函数 (可取C=1或C=2) 。 用势函数算法对题1所给的两样本求判别函数。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189import numpy as npfrom matplotlib import pyplot as pltfrom mpl_toolkits.mplot3d import Axes3Dnp1 = np.array([[0, 0, 0], [1, 0, 0], [1, 0, 1], [1, 1, 0]])np2 = np.array([[0, 0, 1], [0, 1, 1], [0, 1, 0], [1, 1, 1]])new_np1 = np.c_[np1, np.array([1, 1, 1, 1])]new_np2 = np.c_[np2, np.array([1, 1, 1, 1])]# print(new_np1)# print(new_np2)C = 1args = [[0, 0, 0, 1]]def question1(): w = dict() w[1] = np.array([-1, -2, -2, 0]) change_w = list() i = 1 error = 1 while error != 0: error = 0 for row in new_np1: # 在new_np1中的计算结果必须&gt;0，惩罚为+C*row # if (w[i] * row).sum() &gt; 0: if w[i].dot(row) &gt; 0: w[i + 1] = w[i] else: w[i + 1] = w[i] + C * row error += 1 print("the new w[%s] is :%s" % (i + 1, str(w[i + 1]))) change_w.append(w[i + 1]) i += 1 for row in new_np2: # 在new_np1中的计算结果必须&lt;0，惩罚为-C*row # if (w[i] * row).sum() &lt; 0: if w[i].dot(row) &lt; 0: w[i + 1] = w[i] else: w[i + 1] = w[i] - C * row error += 1 print("the new w[%s] is :%s" % (i + 1, str(w[i + 1]))) change_w.append(w[i + 1]) i += 1 print(w) return change_wdef question2(w): for np_w in w[-1:]: fig = plt.figure() ax = Axes3D(fig) ax.scatter(np.array([0, 1, 1, 1]), np.array([0, 0, 0, 1]), np.array([0, 0, 1, 0]), c='red', marker='o') ax.scatter(np.array([0, 0, 0, 1]), np.array([0, 1, 1, 1]), np.array([1, 1, 0, 1]), c='blue', marker='^') print(np_w) # 生成[0，2] 间隔0.5的数列，间隔越小，曲面越平滑 X = np.arange(0, 2, 0.5) Y = np.arange(0, 2, 0.5) # 原为F(x)= ax1+bx2+cx3+d,x3作为z放到左边,右边全为负且需要除以参数c X_arg = np_w[0] / np_w[2] Y_arg = np_w[1] / np_w[2] H = np_w[3] / np_w[2] # 格点矩阵 X, Y = np.meshgrid(X, Y) Z = - X * X_arg - Y * Y_arg - H ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='rainbow') ax.set_xlabel('X Label') ax.set_ylabel('Y Label') ax.set_zlabel('Z Label') plt.show()def question3(): C = 2 lmse_np = np.concatenate((new_np1, -new_np2), axis=0) lmse_pinv_np = np.linalg.pinv(lmse_np) b = dict() print(lmse_pinv_np) b[1] = np.array([1, 1, 1, 1, 1, 1, 1, 1]) w = dict() w[1] = lmse_pinv_np @ b[1] e = dict() e[1] = lmse_np @ w[1] - b[1] print(e[1]) error = 1 i = 1 # 向量的模 np.sum(vector**2)**0.5 while error != 0: if all(e[i] &lt;= 0.01): error = 0 else: b[i + 1] = b[i] + C * (e[i] + abs(e[i])) w[i + 1] = lmse_pinv_np @ b[i + 1] e[i + 1] = lmse_np @ w[i + 1] - b[i + 1] # print(e[i]) print("b[%s]:%s" % (i, b[i])) print("w[%s]:%s" % (i, w[i])) print("e[%s]:%s" % (i, e[i])) i += 1 # np.around()四舍五入取近似值 print("判别函数为：" + str(np.around(w[i])))def f(x, y, z, args=args): sum = 0 for l in args: sum += l[3] * np.exp(-((x - l[0]) ** 2 + (y - l[1]) ** 2 + (z - l[2]) ** 2)) return sumdef plot_implicit(fn, bbox=(-1, 1)): fig = plt.figure() ax = fig.add_subplot(111, projection='3d') ''' create a plot of an implicit function fn ...implicit function (plot where fn==0) bbox ..the x,y,and z limits of plotted interval''' xmin, xmax, ymin, ymax, zmin, zmax = bbox * 3 A = np.linspace(xmin, xmax, 100) # resolution of the contour B = np.linspace(xmin, xmax, 15) # number of slices A1, A2 = np.meshgrid(A, A) # grid on which the contour is plotted ax.scatter(np.array([0, 1, 1, 1]), np.array([0, 0, 0, 1]), np.array([0, 0, 1, 0]), c='red', marker='o') ax.scatter(np.array([0, 0, 0, 1]), np.array([0, 1, 1, 1]), np.array([1, 1, 0, 1]), c='blue', marker='^') for z in B: # plot contours in the XY plane X, Y = A1, A2 Z = fn(X, Y, z) cset = ax.contour(X, Y, Z + z, [z], zdir='z') # [z] defines the only level to plot for this contour for this value of z for y in B: # plot contours in the XZ plane X, Z = A1, A2 Y = fn(X, y, Z) cset = ax.contour(X, Y + y, Z, [y], zdir='y') for x in B: # plot contours in the YZ plane Y, Z = A1, A2 X = fn(x, Y, Z) cset = ax.contour(X + x, Y, Z, [x], zdir='x') # must set plot limits because the contour will likely extend # way beyond the displayed level. Otherwise matplotlib extends the plot limits # to encompass all values in the contour. ax.set_zlim3d(zmin, zmax) ax.set_xlim3d(xmin, xmax) ax.set_ylim3d(ymin, ymax) plt.show()def question4(): error = 1 while error != 0: error = 0 for f_arg in np1: if f(f_arg[0], f_arg[1], f_arg[2]) &gt; 0: continue else: args.append([f_arg[0], f_arg[1], f_arg[2], 1]) print("修正：" + str(args)) error = 1 for f_arg in np2: if f(f_arg[0], f_arg[1], f_arg[2]) &lt; 0: continue else: args.append([f_arg[0], f_arg[1], f_arg[2], -1]) print("修正：" + str(args)) error = 1 plot_implicit(f, bbox=(-1, 1))if __name__ == '__main__': list_for_q2 = question1() question2(list_for_q2) question3() question4()]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>感知器算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[react：设置global变量]]></title>
+    <url>%2F2018%2F12%2F07%2Freact%EF%BC%9A%E8%AE%BE%E7%BD%AEglobal%E5%8F%98%E9%87%8F%2F</url>
+    <content type="text"><![CDATA[创建一个config.js，在其他react的js文件中引入：123456789global.serverConfig = &#123; domainName:'http://localhost', port:'2222', project:'project',&#125;;global.server = &#123; host:global.serverConfig.domainName + ':' + global.serverConfig.port + '/' + global.serverConfig.project + '/',&#125;; 即1global.server.host = 'httpL//localhost:2222/project/' 其他react的js文件中引入并可以直接调用：123import '/config'alert(global.server.host)]]></content>
+      <categories>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[react：搜索中设置回车搜索和点击搜索]]></title>
+    <url>%2F2018%2F12%2F07%2Freact%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%B8%AD%E8%AE%BE%E7%BD%AE%E5%9B%9E%E8%BD%A6%E6%90%9C%E7%B4%A2%E5%92%8C%E7%82%B9%E5%87%BB%E6%90%9C%E7%B4%A2%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839class Com_search extends Component &#123; constructor () &#123; super(); this.state = &#123; code: '', &#125; &#125; handleUsernameChange (event) &#123; this.setState(&#123; code: event.target.value &#125;); &#125; triggerSearch()&#123; console.log(this.state.code.trim()); &#125; keyDownSearch()&#123; if(window.event.keyCode === 13) &#123; console.log(this.state.code.trim()); &#125; &#125; render() &#123; return ( &lt;div className="search-panel"&gt; &lt;div className="content"&gt; &lt;a href='/index'&gt;&lt;div className="logo"/&gt;&lt;/a&gt; &lt;div className="search-wrap"&gt; &lt;input placeholder="请输入关键词" onKeyDown=&#123;this.keyDownSearch.bind(this)&#125; defaultValue=&#123;this.state.code&#125; onChange=&#123;this.handleUsernameChange.bind(this)&#125; /&gt; &lt;div className="butn" onClick=&#123;this.triggerSearch.bind(this)&#125; &gt;搜索&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; ); &#125;&#125;export default Com_search; 搜索框使用onKeyDown方法，在keyDownSearch中判断按键是否为回车，回车即调用； 点击div的搜索，即调用onClick方法，直接进行搜索。]]></content>
+      <categories>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[react：form的textarea]]></title>
     <url>%2F2018%2F12%2F04%2Freact%EF%BC%9Aform%E7%9A%84textarea%2F</url>
     <content type="text"><![CDATA[使用react框架的form表单，input标签填入this.state的值的时候，要用defaultValue，使用value属性会报错； 但是使用textarea，要使用value属性，使用defaultValue属性不能显示this.state的值。]]></content>
