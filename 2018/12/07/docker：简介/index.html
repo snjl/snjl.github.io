@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="服务器,docker,">
+  <meta name="keywords" content="docker,服务器,">
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="参考： https://mp.weixin.qq.com/s?src=11&amp;amp;timestamp=1543970179&amp;amp;ver=1283&amp;amp;signature=dn5DgnKs2J2yUd7VvmKjsb-uL5RJgnl1VKGsyxX4COsRSx*igc9g42iAU5pEXQ2FLaVT1QnYRn5HsReBmIGIMdJuxOyv9y0h*cpyQXzy5rlto*">
-<meta name="keywords" content="服务器,docker">
+<meta name="keywords" content="docker,服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker：简介">
 <meta property="og:url" content="https://snjl.github.io/2018/12/07/docker：简介/index.html">
@@ -90,7 +90,7 @@
 <meta property="og:description" content="参考： https://mp.weixin.qq.com/s?src=11&amp;amp;timestamp=1543970179&amp;amp;ver=1283&amp;amp;signature=dn5DgnKs2J2yUd7VvmKjsb-uL5RJgnl1VKGsyxX4COsRSx*igc9g42iAU5pEXQ2FLaVT1QnYRn5HsReBmIGIMdJuxOyv9y0h*cpyQXzy5rlto*">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/docker/docker_introduction.png">
-<meta property="og:updated_time" content="2018-12-07T15:30:06.294Z">
+<meta property="og:updated_time" content="2018-12-08T11:23:00.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker：简介">
 <meta name="twitter:description" content="参考： https://mp.weixin.qq.com/s?src=11&amp;amp;timestamp=1543970179&amp;amp;ver=1283&amp;amp;signature=dn5DgnKs2J2yUd7VvmKjsb-uL5RJgnl1VKGsyxX4COsRSx*igc9g42iAU5pEXQ2FLaVT1QnYRn5HsReBmIGIMdJuxOyv9y0h*cpyQXzy5rlto*">
@@ -417,6 +417,7 @@
 <p>维基百科：</p>
 <p>Docker is an open-source project that automates the deployment of applications inside software containers, by providing an additional layer of abstraction and automation of operating-system-level virtualization on Linux. Docker uses the resource isolation features of the Linux kernel such as cgroups and kernel namespaces, and a union-capable filesystem such as aufs and others to allow independent “containers” to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines.</p>
 <p>Docker是一个开放源代码软件项目，让应用程序布署在软件容器下的工作可以自动化进行，借此在Linux操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。Docker利用Linux核心中的资源分离机制，例如cgroups，以及Linux核心命名空间（name space），来建立独立的软件容器（containers）。这可以在单一Linux实体下运作，避免启动一个虚拟机器造成的额外负担。——摘自维基百科</p>
+<a id="more"></a>
 <h1 id="现在服务器部署问题"><a href="#现在服务器部署问题" class="headerlink" title="现在服务器部署问题"></a>现在服务器部署问题</h1><h3 id="1-合作开发的时候，在本机可以跑，别人的电脑跑不起来。"><a href="#1-合作开发的时候，在本机可以跑，别人的电脑跑不起来。" class="headerlink" title="1. 合作开发的时候，在本机可以跑，别人的电脑跑不起来。"></a>1. 合作开发的时候，在本机可以跑，别人的电脑跑不起来。</h3><p>这里我们拿java Web应用程序举例，我们一个java Web应用程序涉及很多东西，比如jdk、tomcat、spring等等。当这些其中某一项版本不一致的时候，可能就会导致应用程序跑不起来这种情况。Docker则将程序直接打包成镜像，直接运行在容器中即可。</p>
 <h3 id="2-服务器自己的程序挂了，结果发现是别人程序出了问题把内存吃完了，自己程序因为内存不够就挂了。"><a href="#2-服务器自己的程序挂了，结果发现是别人程序出了问题把内存吃完了，自己程序因为内存不够就挂了。" class="headerlink" title="2. 服务器自己的程序挂了，结果发现是别人程序出了问题把内存吃完了，自己程序因为内存不够就挂了。"></a>2. 服务器自己的程序挂了，结果发现是别人程序出了问题把内存吃完了，自己程序因为内存不够就挂了。</h3><p>这种也是一种比较常见的情况，如果你的程序重要性不是特别高的话，公司基本上不可能让你的程序独享一台服务器的，这时候你的服务器就会跟公司其他人的程序共享一台服务器，所以不可避免地就会受到其他程序的干扰，导致自己的程序出现问题。Docker就很好解决了环境隔离的问题，别人程序不会影响到自己的程序。</p>
 <h3 id="3-公司要弄一个活动，可能会有大量的流量进来，公司需要再多部署几十台服务器。"><a href="#3-公司要弄一个活动，可能会有大量的流量进来，公司需要再多部署几十台服务器。" class="headerlink" title="3. 公司要弄一个活动，可能会有大量的流量进来，公司需要再多部署几十台服务器。"></a>3. 公司要弄一个活动，可能会有大量的流量进来，公司需要再多部署几十台服务器。</h3><p>在没有Docker的情况下，要在几天内部署几十台服务器，这对运维来说是一件非常折磨人的事，而且每台服务器的环境还不一定一样，就会出现各种问题，最后部署地头皮发麻。用Docker的话，我只需要将程序打包到镜像，你要多少台服务，我就给力跑多少容器，极大地提高了部署效率。</p>
@@ -457,9 +458,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/服务器/" rel="tag"><i class="fa fa-tag"></i> 服务器</a>
-          
             <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+          
+            <a href="/tags/服务器/" rel="tag"><i class="fa fa-tag"></i> 服务器</a>
           
         </div>
       
@@ -481,6 +482,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/09/springboot：全局异常处理整理/" rel="prev" title="springboot：全局异常处理整理">
+                springboot：全局异常处理整理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -559,7 +564,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -581,7 +586,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

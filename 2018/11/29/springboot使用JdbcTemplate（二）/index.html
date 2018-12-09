@@ -81,21 +81,21 @@
 
 
 
-<meta name="description" content="参考博客 http://tengj.top/2017/04/13/springboot8/项目地址：https://github.com/snjl/jdbcTemplete.dudu.example 添加依赖123456789在pom.xml里添加spring-boot-starter-jdbc依赖跟mysql依赖：&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.">
+<meta name="description" content="参考博客 http://tengj.top/2017/04/13/springboot8/ 项目地址：https://github.com/snjl/springboot.jdbcTemplete.git 添加依赖123456789在pom.xml里添加spring-boot-starter-jdbc依赖跟mysql依赖：&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;o">
 <meta name="keywords" content="springboot,JdbcTemplate,mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springboot使用JdbcTemplate（二）">
 <meta property="og:url" content="https://snjl.github.io/2018/11/29/springboot使用JdbcTemplate（二）/index.html">
 <meta property="og:site_name" content="snjl">
-<meta property="og:description" content="参考博客 http://tengj.top/2017/04/13/springboot8/项目地址：https://github.com/snjl/jdbcTemplete.dudu.example 添加依赖123456789在pom.xml里添加spring-boot-starter-jdbc依赖跟mysql依赖：&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.">
+<meta property="og:description" content="参考博客 http://tengj.top/2017/04/13/springboot8/ 项目地址：https://github.com/snjl/springboot.jdbcTemplete.git 添加依赖123456789在pom.xml里添加spring-boot-starter-jdbc依赖跟mysql依赖：&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;o">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/jdbc_login.png">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/jdbc_show.png">
 <meta property="og:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/jdbc_show.png">
-<meta property="og:updated_time" content="2018-11-29T15:51:43.801Z">
+<meta property="og:updated_time" content="2018-12-09T15:34:47.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot使用JdbcTemplate（二）">
-<meta name="twitter:description" content="参考博客 http://tengj.top/2017/04/13/springboot8/项目地址：https://github.com/snjl/jdbcTemplete.dudu.example 添加依赖123456789在pom.xml里添加spring-boot-starter-jdbc依赖跟mysql依赖：&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.">
+<meta name="twitter:description" content="参考博客 http://tengj.top/2017/04/13/springboot8/ 项目地址：https://github.com/snjl/springboot.jdbcTemplete.git 添加依赖123456789在pom.xml里添加spring-boot-starter-jdbc依赖跟mysql依赖：&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;o">
 <meta name="twitter:image" content="http://pi6jpxhir.bkt.clouddn.com/springboot/jdbc_login.png">
 
 
@@ -414,7 +414,8 @@
       
 
       
-        <p>参考博客 <a href="http://tengj.top/2017/04/13/springboot8/" target="_blank" rel="noopener">http://tengj.top/2017/04/13/springboot8/</a><br>项目地址：<a href="https://github.com/snjl/jdbcTemplete.dudu.example" target="_blank" rel="noopener">https://github.com/snjl/jdbcTemplete.dudu.example</a></p>
+        <p>参考博客 <a href="http://tengj.top/2017/04/13/springboot8/" target="_blank" rel="noopener">http://tengj.top/2017/04/13/springboot8/</a></p>
+<p>项目地址：<a href="https://github.com/snjl/springboot.jdbcTemplete.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.jdbcTemplete.git</a></p>
 <h1 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在pom.xml里添加spring-boot-starter-jdbc依赖跟mysql依赖：</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h1 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h1><p>在src/main/resources/application.properties中配置数据源信息：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url = jdbc:mysql://localhost:3306/spring?useUnicode=true&amp;characterEncoding=utf-8</span><br><span class="line">spring.datasource.username = root</span><br><span class="line">spring.datasource.password = root</span><br><span class="line">spring.datasource.driver-class-name = com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure></p>
@@ -573,7 +574,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -595,7 +596,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
