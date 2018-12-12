@@ -1,6 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Ubuntu：使用nohup和&进行后台运行，进程查看和终止]]></title>
+    <url>%2F2018%2F12%2F12%2FUbuntu%EF%BC%9A%E4%BD%BF%E7%94%A8nohup%E5%92%8C-%E8%BF%9B%E8%A1%8C%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%9F%A5%E7%9C%8B%E5%92%8C%E7%BB%88%E6%AD%A2%2F</url>
+    <content type="text"><![CDATA[nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ][ &amp; ] 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。 退出状态：该命令返回下列出口值： 126 可以查找但不能调用 Command 参数指定的命令。 127 nohup 命令发生错误或不能查找由 Command 参数指定的命令。 否则，nohup 命令的退出状态是 Command 参数指定命令的退出状态。 &amp;用途：在后台运行 一般两个一起用 1nohup command &amp; 例如 1nohup command &gt; myout.file 2&gt;&amp;1 在上面的例子中，输出被重定向到myout.file文件中。 nohup与&amp;的区别：nohup只是让命令忽略SIGHUP命令而已；&amp;则让命令在后台运行，至于该命令是否能在脱离终端后继续执行则要看进程是否是守护进程，如果不是，则需要nohup来帮忙。 查看某个端口的进程1lsof -i:80 结果： 123COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAMEnode 27295 root 19u IPv4 527052 0t0 TCP *:http (LISTEN)node 27295 root 24u IPv4 528732 0t0 TCP ubuntu:http-&gt;xxx.xxx.xxx.xxx:50367 (ESTABLISHED) 终止后台运行的进程1kill -9 PID pid为进程号。 nohup不产生日志1nohup java -jar item-2.0.1-SNAPSHOT.jar 2 &gt;error.log &amp; 0、1和2分别表示标准输入、标准输出和标准错误信息输出，可以用来指定需要重定向的标准输入或输出。 在一般使用时，默认的是标准输出，既1.当我们需要特殊用途时，可以使用其他标号。例如，将program.sh的错误信息输出到log文件中： 1./program.sh 2&gt;log 这样标准输出还是在屏幕上，但是错误信息会输出到log文件中。另外，也可以实现0，1，2之间的重定向。 2&gt;&amp;1：将错误信息重定向到标准输出。 Linux下还有一个特殊的文件/dev/null，它就像一个无底洞，所有重定向到它的信息都会消失得无影无踪。这一点非常有用，当我们不需要回显程序的所有信息时，就可以将输出重定向到/dev/null。如果想要正常输出和错误信息都不显示，则要把标准输出和标准错误都重定向到/dev/null， 例如： 1ls 1&gt;/dev/null 2&gt;/dev/null 这样不会有任何输出。 1lsss 1&gt;/dev/null 因为lsss不是一条合法命令，但是使用的是1（标准输入），所以还是会报错； 1lsss 2&gt;/dev/null 使用2（标准错误信息输出），输出的错误会被吞掉，所以不会有任何输出； 1ls 1&gt;/dev/null ls是标准命令，但是使用1吞掉了标准输出，所以不会有任何输出。 还有一种做法是将错误重定向到标准输出，然后再重定向到 /dev/null，例如： 1ls &gt;/dev/null 2&gt;&amp;1 注意：此处的顺序不能更改，否则达不到想要的效果，此时先将标准输出重定向到 /dev/null，然后将标准错误重定向到标准输出，由于标准输出已经重定向到了/dev/null，因此标准错误也会重定向到/dev/null，于是一切静悄悄:-) 由于使用nohup时，会自动将输出写入nohup.out文件中，如果文件很大的话，nohup.out就会不停的增大，这是我们不希望看到的，因此，可以利用/dev/null来解决这个问题。 1nohup ./program.sh &gt;/dev/null 2&gt;log &amp; 这样在跑程序的时候，只将错误信息输出到log文件中。 如果什么信息都不要，使用 1nohup ./program.sh &gt;/dev/null 2&gt;&amp;1 &amp; (好像没用？)]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>nohup</tag>
+        <tag>安全守护</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu：安装npm和node]]></title>
+    <url>%2F2018%2F12%2F12%2FUbuntu%EF%BC%9A%E5%AE%89%E8%A3%85npm%E5%92%8Cnode%2F</url>
+    <content type="text"><![CDATA[安装安装nodejs： 1sudo apt-get install nodejs-legacy 安装npm： 1sudo apt-get install npm nodejs和npm更新npm更新： 1npm update -g 更新Nodejs自身： 12npm install -g n n latest 使用npm -v和node -v查看版本号。]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu：修改root密码]]></title>
+    <url>%2F2018%2F12%2F12%2FUbuntu%EF%BC%9A%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[安装完系统后可以设置root密码，输入 1sudo root 可以创建root的密码。 修改root密码： 1sudo passwd root]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu：安装java]]></title>
+    <url>%2F2018%2F12%2F12%2FUbuntu%EF%BC%9A%E5%AE%89%E8%A3%85java%2F</url>
+    <content type="text"><![CDATA[通过apt-get 的方式安装jdk1sudo apt-get update //sudo表示超级用户，如果是在root用户下可以不写 1sudo apt-get install openjdk-8-jdk 安装完后的目录在：/usr/lib/jvm/java-8-openjdk-amd64echo $JAVA_HOME，没有结果；javac -version可以显示版本。 然后配置JAVA_HOME,JRE_HOME,PATH，配置文件的位置：/etc/profile在内容中加入下面的： 1234export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64export JRE_HOME=$&#123;JAVA_HOME&#125;/jreexport CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/libexport PATH=$&#123;JAVA_HOME&#125;/bin:$PATH 执行完之后，source /etc/profile ，使变动生效，不需用重启 用echo $JAVA_HOME检查是否配置成功javac不成功显示 123456789The program &apos;javac&apos; can be found in the following packages: * default-jdk * ecj * gcj-5-jdk * openjdk-8-jdk-headless * gcj-4.8-jdk * gcj-4.9-jdk * openjdk-9-jdk-headlessTry: apt install &lt;selected package&gt; 使用命令apt install default-jdk即可。]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>mysql</tag>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[springboot：项目启动时初始化资源]]></title>
+    <url>%2F2018%2F12%2F12%2Fspringboot%EF%BC%9A%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8%E6%97%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B5%84%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[项目地址：https://github.com/snjl/springboot.CommandLineRunner.git 在我们实际工作中，总会遇到这样需求，在项目启动的时候需要做一些初始化的操作，比如初始化线程池，提前加载好加密证书等。今天就给大家介绍一个 Spring Boot 神器，专门帮助大家解决项目启动初始化资源操作。 这个神器就是 CommandLineRunner，CommandLineRunner 接口的 Component 会在所有 Spring Beans 都初始化之后，SpringApplication.run() 之前执行，非常适合在应用程序启动之初进行一些数据初始化的工作。 接下来我们就运用案例测试它如何使用，在测试之前在启动类加两行打印提示，方便我们识别 CommandLineRunner 的执行时机。 12345678@SpringBootApplicationpublic class CommandLineRunnerApplication &#123; public static void main(String[] args) &#123; System.out.println("The service to start."); SpringApplication.run(CommandLineRunnerApplication.class, args); System.out.println("The service has started."); &#125;&#125; 接下来我们直接创建一个类继承 CommandLineRunner ，并实现它的 run() 方法。 1234567@Componentpublic class Runner implements CommandLineRunner &#123; @Override public void run(String... args) throws Exception &#123; System.out.println("The Runner start to initialize ..."); &#125;&#125; 我们在 run() 方法中打印了一些参数来看出它的执行时机。完成之后启动项目进行测试： 123456789101112131415...The service to start. . ____ _ __ _ _ /\\ / ___&apos;_ __ _ _(_)_ __ __ _ \ \ \ \( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` | \ \ \ \ \\/ ___)| |_)| | | | | || (_| | ) ) ) ) &apos; |____| .__|_| |_|_| |_\__, | / / / / =========|_|==============|___/=/_/_/_/ :: Spring Boot :: (v2.0.0.RELEASE)...2018-04-21 22:21:34.706 INFO 27016 --- [ main] o.s.b.w.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path &apos;&apos;2018-04-21 22:21:34.710 INFO 27016 --- [ main] com.neo.CommandLineRunnerApplication : Started CommandLineRunnerApplication in 3.796 seconds (JVM running for 5.128)The Runner start to initialize ...The service has started. 根据控制台的打印信息我们可以看出 CommandLineRunner 中的方法会在 Spring Boot 容器加载之后执行，执行完成后项目启动完成。 如果我们在启动容器的时候需要初始化很多资源，并且初始化资源相互之间有序，那如何保证不同的 CommandLineRunner 的执行顺序呢？Spring Boot 也给出了解决方案。那就是使用 @Order 注解。 我们创建两个 CommandLineRunner 的实现类来进行测试： 第一个实现类： 12345678@Component@Order(1)public class OrderRunner1 implements CommandLineRunner &#123; @Override public void run(String... args) throws Exception &#123; System.out.println("The OrderRunner1 start to initialize ..."); &#125;&#125; 第二个实现类： 12345678@Component@Order(2)public class OrderRunner2 implements CommandLineRunner &#123; @Override public void run(String... args) throws Exception &#123; System.out.println("The OrderRunner2 start to initialize ..."); &#125;&#125; 添加完成之后重新启动，观察执行顺序： 1234567891011121314151617...The service to start. . ____ _ __ _ _ /\\ / ___&apos;_ __ _ _(_)_ __ __ _ \ \ \ \( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` | \ \ \ \ \\/ ___)| |_)| | | | | || (_| | ) ) ) ) &apos; |____| .__|_| |_|_| |_\__, | / / / / =========|_|==============|___/=/_/_/_/ :: Spring Boot :: (v2.0.0.RELEASE)...2018-04-21 22:21:34.706 INFO 27016 --- [ main] o.s.b.w.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path &apos;&apos;2018-04-21 22:21:34.710 INFO 27016 --- [ main] com.neo.CommandLineRunnerApplication : Started CommandLineRunnerApplication in 3.796 seconds (JVM running for 5.128)The OrderRunner1 start to initialize ...The OrderRunner2 start to initialize ...The Runner start to initialize ...The service has started. 通过控制台的输出我们发现，添加 @Order 注解的实现类最先执行，并且@Order()里面的值越小启动越早。 在实践中，使用ApplicationRunner也可以达到相同的目的，两着差别不大。看来使用 Spring Boot 解决初始化资源的问题非常简单。]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+        <tag>初始化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[springboot：单元测试]]></title>
+    <url>%2F2018%2F12%2F12%2Fspringboot%EF%BC%9A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[项目地址：https://github.com/snjl/springboot.exception.git 这次来介绍下Spring Boot中对单元测试的整合使用，本篇会通过以下4点来介绍，基本满足日常需求 Service层单元测试 Controller层单元测试 新断言assertThat使用 单元测试的回滚 Spring Boot中引入单元测试很简单，依赖如下：12345&lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt;&lt;/dependency&gt; 本篇实例Spring Boot版本为1.5.9.RELEASE，引入spring-boot-starter-test后，有如下几个库： JUnit — The de-facto standard for unit testing Java applications. Spring Test &amp; Spring Boot Test — Utilities and integration test support for Spring Boot applications. AssertJ — A fluent assertion library. Hamcrest — A library of matcher objects (also known as constraints or predicates). Mockito — A Java mocking framework. JSONassert — An assertion library for JSON. JsonPath — XPath for JSON. Service单元测试Spring Boot中单元测试类写在在src/test/java目录下，你可以手动创建具体测试类，如果是IDEA，则可以通过IDEA自动创建测试类，如下图，也可以通过快捷键⇧⌘T(MAC)或者Ctrl+Shift+T(Window)来创建，如下： 自动生成测试类如下： 然后再编写创建好的测试类，具体代码如下： 1234567891011121314151617181920212223package com.dudu.service;import com.dudu.domain.LearnResource;import org.junit.Assert;import org.junit.Test;import org.junit.runner.RunWith;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.test.context.SpringBootTest;import org.springframework.test.context.junit4.SpringRunner;import static org.hamcrest.CoreMatchers.*;@RunWith(SpringRunner.class)@SpringBootTestpublic class LearnServiceTest &#123; @Autowired private LearnService learnService; @Test public void getLearn()&#123; LearnResource learnResource=learnService.selectByKey(1001L); Assert.assertThat(learnResource.getAuthor(),is("嘟嘟MD独立博客")); &#125;&#125; 上面就是最简单的单元测试写法，顶部只要@RunWith(SpringRunner.class)和SpringBootTest即可，想要执行的时候，鼠标放在对应的方法，右键选择run该方法即可。 测试用例中我使用了assertThat断言，下文中会介绍，也推荐大家使用该断言。 Controller单元测试上面只是针对Service层做测试，但是有时候需要对Controller层（API）做测试，这时候就得用到MockMvc了，你可以不必启动工程就能测试这些接口。 MockMvc实现了对Http请求的模拟，能够直接使用网络的形式，转换到Controller的调用，这样可以使得测试速度快、不依赖网络环境，而且提供了一套验证的工具，这样可以使得请求的验证统一而且很方便。 Controller类：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475package com.dudu.controller;/** 教程页面 * Created by tengj on 2017/3/13. */@Controller@RequestMapping("/learn")public class LearnController extends AbstractController&#123; @Autowired private LearnService learnService; private Logger logger = LoggerFactory.getLogger(this.getClass()); @RequestMapping("") public String learn(Model model)&#123; model.addAttribute("ctx", getContextPath()+"/"); return "learn-resource"; &#125; /** * 查询教程列表 * @param page * @return */ @RequestMapping(value = "/queryLeanList",method = RequestMethod.POST) @ResponseBody public AjaxObject queryLearnList(Page&lt;LeanQueryLeanListReq&gt; page)&#123; List&lt;LearnResource&gt; learnList=learnService.queryLearnResouceList(page); PageInfo&lt;LearnResource&gt; pageInfo =new PageInfo&lt;LearnResource&gt;(learnList); return AjaxObject.ok().put("page", pageInfo); &#125; /** * 新添教程 * @param learn */ @RequestMapping(value = "/add",method = RequestMethod.POST) @ResponseBody public AjaxObject addLearn(@RequestBody LearnResource learn)&#123; learnService.save(learn); return AjaxObject.ok(); &#125; /** * 修改教程 * @param learn */ @RequestMapping(value = "/update",method = RequestMethod.POST) @ResponseBody public AjaxObject updateLearn(@RequestBody LearnResource learn)&#123; learnService.updateNotNull(learn); return AjaxObject.ok(); &#125; /** * 删除教程 * @param ids */ @RequestMapping(value="/delete",method = RequestMethod.POST) @ResponseBody public AjaxObject deleteLearn(@RequestBody Long[] ids)&#123; learnService.deleteBatch(ids); return AjaxObject.ok(); &#125; /** * 获取教程 * @param id */ @RequestMapping(value="/resource/&#123;id&#125;",method = RequestMethod.GET) @ResponseBody public LearnResource qryLearn(@PathVariable(value = "id") Long id)&#123; LearnResource lean= learnService.selectByKey(id); return lean; &#125;&#125; 这里我们也自动创建一个Controller的测试类，具体代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103package com.dudu.controller;import com.dudu.domain.User;import org.junit.Before;import org.junit.Test;import org.junit.runner.RunWith;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.test.context.SpringBootTest;import org.springframework.http.MediaType;import org.springframework.mock.web.MockHttpSession;import org.springframework.test.context.junit4.SpringRunner;import org.springframework.test.web.servlet.MockMvc;import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;import org.springframework.test.web.servlet.result.MockMvcResultHandlers;import org.springframework.test.web.servlet.result.MockMvcResultMatchers;import org.springframework.test.web.servlet.setup.MockMvcBuilders;import org.springframework.web.context.WebApplicationContext;@RunWith(SpringRunner.class)@SpringBootTestpublic class LearnControllerTest &#123; @Autowired private WebApplicationContext wac; private MockMvc mvc; private MockHttpSession session; @Before public void setupMockMvc()&#123; mvc = MockMvcBuilders.webAppContextSetup(wac).build(); //初始化MockMvc对象 session = new MockHttpSession(); User user =new User("root","root"); session.setAttribute("user",user); //拦截器那边会判断用户是否登录，所以这里注入一个用户 &#125; /** * 新增教程测试用例 * @throws Exception */ @Test public void addLearn() throws Exception&#123; String json="&#123;\"author\":\"HAHAHAA\",\"title\":\"Spring\",\"url\":\"http://tengj.top/\"&#125;"; mvc.perform(MockMvcRequestBuilders.post("/learn/add") .accept(MediaType.APPLICATION_JSON_UTF8) .content(json.getBytes()) //传json参数 .session(session) ) .andExpect(MockMvcResultMatchers.status().isOk()) .andDo(MockMvcResultHandlers.print()); &#125; /** * 获取教程测试用例 * @throws Exception */ @Test public void qryLearn() throws Exception &#123; mvc.perform(MockMvcRequestBuilders.get("/learn/resource/1001") .contentType(MediaType.APPLICATION_JSON_UTF8) .accept(MediaType.APPLICATION_JSON_UTF8) .session(session) ) .andExpect(MockMvcResultMatchers.status().isOk()) .andExpect(MockMvcResultMatchers.jsonPath("$.author").value("嘟嘟MD独立博客")) .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Spring Boot干货系列")) .andDo(MockMvcResultHandlers.print()); &#125; /** * 修改教程测试用例 * @throws Exception */ @Test public void updateLearn() throws Exception&#123; String json="&#123;\"author\":\"测试修改\",\"id\":1031,\"title\":\"Spring Boot干货系列\",\"url\":\"http://tengj.top/\"&#125;"; mvc.perform(MockMvcRequestBuilders.post("/learn/update") .accept(MediaType.APPLICATION_JSON_UTF8) .content(json.getBytes())//传json参数 .session(session) ) .andExpect(MockMvcResultMatchers.status().isOk()) .andDo(MockMvcResultHandlers.print()); &#125; /** * 删除教程测试用例 * @throws Exception */ @Test public void deleteLearn() throws Exception&#123; String json="[1031]"; mvc.perform(MockMvcRequestBuilders.post("/learn/delete") .accept(MediaType.APPLICATION_JSON_UTF8) .content(json.getBytes())//传json参数 .session(session) ) .andExpect(MockMvcResultMatchers.status().isOk()) .andDo(MockMvcResultHandlers.print()); &#125;&#125; 上面实现了基本的增删改查的测试用例，使用MockMvc的时候需要先用MockMvcBuilders使用构建MockMvc对象，如下 1234567@Beforepublic void setupMockMvc()&#123; mvc = MockMvcBuilders.webAppContextSetup(wac).build(); //初始化MockMvc对象 session = new MockHttpSession(); User user =new User("root","root"); session.setAttribute("user",user); //拦截器那边会判断用户是否登录，所以这里注入一个用户&#125; 因为拦截器那边会判断是否登录，所以这里我注入了一个用户，你也可以直接修改拦截器取消验证用户登录，先测试完再开启。 这里拿一个例子来介绍一下MockMvc简单的方法12345678910111213141516/** * 获取教程测试用例 * @throws Exception */@Testpublic void qryLearn() throws Exception &#123; mvc.perform(MockMvcRequestBuilders.get("/learn/resource/1001") .contentType(MediaType.APPLICATION_JSON_UTF8) .accept(MediaType.APPLICATION_JSON_UTF8) .session(session) ) .andExpect(MockMvcResultMatchers.status().isOk()) .andExpect(MockMvcResultMatchers.jsonPath("$.author").value("嘟嘟MD独立博客")) .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Spring Boot干货系列")) .andDo(MockMvcResultHandlers.print());&#125; mockMvc.perform执行一个请求 MockMvcRequestBuilders.get(“/user/1”)构造一个请求，Post请求就用.post方法 contentType(MediaType.APPLICATION_JSON_UTF8)代表发送端发送的数据格式是application/json;charset=UTF-8 accept(MediaType.APPLICATION_JSON_UTF8)代表客户端希望接受的数据类型为application/json;charset=UTF-8 session(session)注入一个session，这样拦截器才可以通过 ResultActions.andExpect添加执行完成后的断言 ResultActions.andExpect(MockMvcResultMatchers.status().isOk())方法看请求的状态响应码是否为200如果不是则抛异常，测试不通过 andExpect(MockMvcResultMatchers.jsonPath(“$.author”).value(“嘟嘟MD独立博客”))这里jsonPath用来获取author字段比对是否为嘟嘟MD独立博客,不是就测试不通过 ResultActions.andDo添加一个结果处理器，表示要对结果做点什么事情，比如此处使用MockMvcResultHandlers.print()输出整个响应结果信息 本例子测试如下： mockMvc 更多例子可以本篇下方参考查看 新断言assertThat使用JUnit 4.4 结合 Hamcrest 提供了一个全新的断言语法——assertThat。程序员可以只使用 assertThat 一个断言语句，结合 Hamcrest 提供的匹配符，就可以表达全部的测试思想，我们引入的版本是Junit4.12所以支持assertThat。 assertThat 的基本语法如下：清单 1 assertThat 基本语法1assertThat( [value], [matcher statement] ); value 是接下来想要测试的变量值； matcher statement 是使用 Hamcrest 匹配符来表达的对前面变量所期望的值的声明，如果 value 值与 matcher statement 所表达的期望值相符，则测试成功，否则测试失败。 assertThat 的优点 优点 1：以前 JUnit 提供了很多的 assertion 语句，如：assertEquals，assertNotSame，assertFalse，assertTrue，assertNotNull，assertNull 等，现在有了 JUnit 4.4，一条 assertThat 即可以替代所有的 assertion 语句，这样可以在所有的单元测试中只使用一个断言方法，使得编写测试用例变得简单，代码风格变得统一，测试代码也更容易维护。 优点 2：assertThat 使用了 Hamcrest 的 Matcher 匹配符，用户可以使用匹配符规定的匹配准则精确的指定一些想设定满足的条件，具有很强的易读性，而且使用起来更加灵活。如清单 2 所示： 清单 2 使用匹配符 Matcher 和不使用之间的比较123456// 想判断某个字符串 s 是否含有子字符串 "developer" 或 "Works" 中间的一个// JUnit 4.4 以前的版本：assertTrue(s.indexOf("developer")&gt;-1||s.indexOf("Works")&gt;-1 );// JUnit 4.4：assertThat(s, anyOf(containsString("developer"), containsString("Works"))); // 匹配符 anyOf 表示任何一个条件满足则成立，类似于逻辑或 "||"， 匹配符 containsString 表示是否含有参数子 // 字符串，文章接下来会对匹配符进行具体介绍 优点 3：assertThat 不再像 assertEquals 那样，使用比较难懂的“谓宾主”语法模式（如：assertEquals(3, x);），相反，assertThat 使用了类似于“主谓宾”的易读语法模式（如：assertThat(x,is(3));），使得代码更加直观、易读。 优点 4：可以将这些 Matcher 匹配符联合起来灵活使用，达到更多目的。如清单 3 所示： 清单 3 Matcher 匹配符联合使用123456// 联合匹配符not和equalTo表示“不等于”assertThat( something, not( equalTo( "developer" ) ) ); // 联合匹配符not和containsString表示“不包含子字符串”assertThat( something, not( containsString( "Works" ) ) ); // 联合匹配符anyOf和containsString表示“包含任何一个子字符串”assertThat(something, anyOf(containsString("developer"), containsString("Works"))); 优点 5：错误信息更加易懂、可读且具有描述性（descriptive）JUnit 4.4 以前的版本默认出错后不会抛出额外提示信息，如：1assertTrue( s.indexOf("developer") &gt; -1 || s.indexOf("Works") &gt; -1 ); 如果该断言出错，只会抛出无用的错误信息，如：junit.framework.AssertionFailedError：null。如果想在出错时想打印出一些有用的提示信息，必须得程序员另外手动写，如：12assertTrue( "Expected a string containing 'developer' or 'Works'", s.indexOf("developer") &gt; -1 || s.indexOf("Works") &gt; -1 ); 非常的不方便，而且需要额外代码。 JUnit 4.4 会默认自动提供一些可读的描述信息，如清单 4 所示： 清单 4 JUnit 4.4 默认提供一些可读的描述性错误信息 123456String s = "hello world!"; assertThat( s, anyOf( containsString("developer"), containsString("Works") ) ); // 如果出错后，系统会自动抛出以下提示信息：java.lang.AssertionError: Expected: (a string containing "developer" or a string containing "Works") got: "hello world!" 如何使用 assertThatJUnit 4.4 自带了一些 Hamcrest 的匹配符 Matcher，但是只有有限的几个，在类 org.hamcrest.CoreMatchers 中定义，要想使用他们，必须导入包 org.hamcrest.CoreMatchers.*。 清单 5 列举了大部分 assertThat 的使用例子： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859字符相关匹配符/**equalTo匹配符断言被测的testedValue等于expectedValue，* equalTo可以断言数值之间，字符串之间和对象之间是否相等，相当于Object的equals方法*/assertThat(testedValue, equalTo(expectedValue));/**equalToIgnoringCase匹配符断言被测的字符串testedString*在忽略大小写的情况下等于expectedString*/assertThat(testedString, equalToIgnoringCase(expectedString));/**equalToIgnoringWhiteSpace匹配符断言被测的字符串testedString*在忽略头尾的任意个空格的情况下等于expectedString，*注意：字符串中的空格不能被忽略*/assertThat(testedString, equalToIgnoringWhiteSpace(expectedString);/**containsString匹配符断言被测的字符串testedString包含子字符串subString**/assertThat(testedString, containsString(subString) );/**endsWith匹配符断言被测的字符串testedString以子字符串suffix结尾*/assertThat(testedString, endsWith(suffix));/**startsWith匹配符断言被测的字符串testedString以子字符串prefix开始*/assertThat(testedString, startsWith(prefix));一般匹配符/**nullValue()匹配符断言被测object的值为null*/assertThat(object,nullValue());/**notNullValue()匹配符断言被测object的值不为null*/assertThat(object,notNullValue());/**is匹配符断言被测的object等于后面给出匹配表达式*/assertThat(testedString, is(equalTo(expectedValue)));/**is匹配符简写应用之一，is(equalTo(x))的简写，断言testedValue等于expectedValue*/assertThat(testedValue, is(expectedValue));/**is匹配符简写应用之二，is(instanceOf(SomeClass.class))的简写，*断言testedObject为Cheddar的实例*/assertThat(testedObject, is(Cheddar.class));/**not匹配符和is匹配符正好相反，断言被测的object不等于后面给出的object*/assertThat(testedString, not(expectedString));/**allOf匹配符断言符合所有条件，相当于“与”（&amp;&amp;）*/assertThat(testedNumber, allOf( greaterThan(8), lessThan(16) ) );/**anyOf匹配符断言符合条件之一，相当于“或”（||）*/assertThat(testedNumber, anyOf( greaterThan(16), lessThan(8) ) );数值相关匹配符/**closeTo匹配符断言被测的浮点型数testedDouble在20.0¡À0.5范围之内*/assertThat(testedDouble, closeTo( 20.0, 0.5 ));/**greaterThan匹配符断言被测的数值testedNumber大于16.0*/assertThat(testedNumber, greaterThan(16.0));/** lessThan匹配符断言被测的数值testedNumber小于16.0*/assertThat(testedNumber, lessThan (16.0));/** greaterThanOrEqualTo匹配符断言被测的数值testedNumber大于等于16.0*/assertThat(testedNumber, greaterThanOrEqualTo (16.0));/** lessThanOrEqualTo匹配符断言被测的testedNumber小于等于16.0*/assertThat(testedNumber, lessThanOrEqualTo (16.0));集合相关匹配符/**hasEntry匹配符断言被测的Map对象mapObject含有一个键值为"key"对应元素值为"value"的Entry项*/assertThat(mapObject, hasEntry("key", "value" ) );/**hasItem匹配符表明被测的迭代对象iterableObject含有元素element项则测试通过*/assertThat(iterableObject, hasItem (element));/** hasKey匹配符断言被测的Map对象mapObject含有键值“key”*/assertThat(mapObject, hasKey ("key"));/** hasValue匹配符断言被测的Map对象mapObject含有元素值value*/assertThat(mapObject, hasValue(value)); 单元测试回滚单元个测试的时候如果不想造成垃圾数据，可以开启事物功能，记在方法或者类头部添加@Transactional注解即可,如下： 123456789@Test@Transactionalpublic void add()&#123; LearnResource bean = new LearnResource(); bean.setAuthor("测试回滚"); bean.setTitle("回滚用例"); bean.setUrl("http://tengj.top"); learnService.save(bean);&#125; 这样测试完数据就会回滚了，不会造成垃圾数据。如果你想关闭回滚，只要加上@Rollback(false)注解即可。@Rollback表示事务执行完回滚，支持传入一个参数value，默认true即回滚，false不回滚。 如果你使用的数据库是Mysql，有时候会发现加了注解@Transactional 也不会回滚，那么你就要查看一下你的默认引擎是不是InnoDB，如果不是就要改成InnoDB。 MyISAM与InnoDB是mysql目前比较常用的两个数据库存储引擎，MyISAM与InnoDB的主要的不同点在于性能和事务控制上。这里简单的介绍一下两者间的区别和转换方法： MyISAM：MyISAM是MySQL5.5之前版本默认的数据库存储引擎。MYISAM提供高速存储和检索，以及全文搜索能力，适合数据仓库等查询频繁的应用。但不支持事务、也不支持外键。MyISAM格式的一个重要缺陷就是不能在表损坏后恢复数据。 InnoDB：InnoDB是MySQL5.5版本的默认数据库存储引擎，不过InnoDB已被Oracle收购，MySQL自行开发的新存储引擎Falcon将在MySQL6.0版本引进。InnoDB具有提交、回滚和崩溃恢复能力的事务安全。但是比起MyISAM存储引擎，InnoDB写的处理效率差一些并且会占用更多的磁盘空间以保留数据和索引。尽管如此，但是InnoDB包括了对事务处理和外来键的支持，这两点都是MyISAM引擎所没有的。 MyISAM适合：(1)做很多count 的计算；(2)插入不频繁，查询非常频繁；(3)没有事务。 InnoDB适合：(1)可靠性要求比较高，或者要求事务；(2)表更新和查询都相当的频繁，并且表锁定的机会比较大的情况。(4)性能较好的服务器，比如单独的数据库服务器，像阿里云的关系型数据库RDS就推荐使用InnoDB引擎。 修改默认引擎的步骤查看MySQL当前默认的存储引擎: 1mysql&gt; show variables like &apos;%storage_engine%&apos;; 你要看user表用了什么引擎(在显示结果里参数engine后面的就表示该表当前用的存储引擎):1mysql&gt; show create table user; 将user表修为InnoDB存储引擎(也可以此命令将InnoDB换为MyISAM)：1mysql&gt; ALTER TABLE user ENGINE=INNODB; 如果要更改整个数据库表的存储引擎，一般要一个表一个表的修改，比较繁琐，可以采用先把数据库导出，得到SQL，把MyISAM全部替换为INNODB，再导入数据库的方式。转换完毕后重启mysql1service mysqld restart]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+        <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[react：修改项目默认端口的方式]]></title>
+    <url>%2F2018%2F12%2F12%2Freact%EF%BC%9A%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3%E7%9A%84%E6%96%B9%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[Linux 下修改方法修改 package.json 文件下 scripts 节点下的 start 的值，如下所示 123456&quot;scripts&quot;: &#123; &quot;start&quot;: &quot;PORT=9000 react-scripts start&quot;, &quot;build&quot;: &quot;react-scripts build&quot;, &quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;, &quot;eject&quot;: &quot;react-scripts eject&quot; &#125; Windows 下修改方法修改 package.json 文件下 scripts 节点下的 start 的值，如下所示 123456&quot;scripts&quot;: &#123; &quot;start&quot;: &quot;set PORT=9000 &amp;&amp; react-scripts start&quot;, &quot;build&quot;: &quot;react-scripts build&quot;, &quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;, &quot;eject&quot;: &quot;react-scripts eject&quot; &#125;]]></content>
+      <categories>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[react：部署上线]]></title>
+    <url>%2F2018%2F12%2F12%2Freact%EF%BC%9A%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF%2F</url>
+    <content type="text"><![CDATA[react创建项目react安装： 1npm install -g create-react-app 创建： 1create-react-app my-app 进入，打开： 12cd my-appnpm start react打包发布安装服务： 1npm install -g serve 打包（在my-app文件夹中）： 1npm run build 打包后会出现一个build文件夹，不需要进入，直接在my-app文件夹中运行： 1serve -s build 即会运行在5000默认端口。 改变默认端口运行时加入port： 1export PORT=8080 &amp;&amp; serve -s build]]></content>
+      <categories>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu：mysql安装和操作]]></title>
+    <url>%2F2018%2F12%2F12%2FUbuntu%EF%BC%9Amysql%E5%AE%89%E8%A3%85%E5%92%8C%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[流程：更新软件包索引，安装mysql-server软件包，然后运行附带的安全脚本 123sudo apt-get updatesudo apt-get install mysql-server sudo mysql_secure_installation sudo apt-get update：更新apt软件包索引； sudo apt-get install mysql-server：系统会提醒安装过程中创建root密码； sudo mysql_secure_installation：运行安全检查，这将提示输入在步骤1中创建的 root 密码。可以按 Y，然后 ENTER 接受所有后续问题的默认值，但是要询问是否要更改 root 密码。只需在步骤 1 中进行设置即可，因此无需现在更改； systemctl status mysql.service：测试mysql状态，可以看到如下输出： 1234567root@ubuntu:~# systemctl status mysql.service● mysql.service - MySQL Community Server Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: en Active: active (running) since Tue 2018-12-11 20:53:41 CST; 2min 44s ago Main PID: 7326 (mysqld) CGroup: /system.slice/mysql.service └─7326 /usr/sbin/mysqld mysql登录1mysql -u root -p 输入密码即可登录。 可以使用以下命令查看mysql数据库的user表： 12use mysqlselect * from user; 使用navicat连接数据库报错10038问题是远程3306端口未对外开放。 配置mysql远程服务端口打开mysql配置文件sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf，找到bind-address = 127.0.0.1，改为0.0.0.0 之后执行service mysql restart重启mysql即可。 现在使用命令netstat -an|grep 3306可以看到： 1tcp 0 0 0.0.0.0:3306 0.0.0.0:* LISTEN 原来是127.0.0.1:3306，即只可以本地访问，这样的话可以远程访问。 配置用户权限授权root用户可以进行远程连接，注意替换以下代码中的“password”为 root 用户真正的密码： 123grant all privileges on *.* to root@&quot;%&quot; identified by &quot;password&quot; with grant option;flush privileges; 第二行是使命令生效，可以马上连接。 运行sql文件使用mysql -u root -p并输入密码登录后，创建数据库 1create database blog; 使用创建的数据库 1use blog; 如果文件在home/sql中，名字为blog.sql，导入文件 1source /home/sql/blog.sql; 数据传输或导入是报错：Invalid default value for ‘date’错误分析第一个TIMESTAMP列（如果未声明为NULL或显示DEFAULT或ON UPDATE子句）将自动分配DEFAULT CURRENT_TIMESTAMP和ON UPDATE CURRENT_TIMESTAMP属性， 第一个之后的TIMESTAMP列（如果未声明为NULL或显示DEFAULT子句）将自动分配DEFAULT ‘0000-00-00 00:00:00’（零时间戳），这不满足sql_mode中的NO_ZERO_DATE而报错。 注：sql_mode有两种，一种是空值，一种是严格模式，会给出很多默认设置。在MySQL5.7之后默认使用严格模式。 NO_ZERO_DATE：若设置该值，MySQL数据库不允许插入零日期，插入零日期会抛出错误而不是警告。 解决方法先执行select @@sql_mode,查出来类似如下： 1ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 复制查询出来的值并将其中的NO_ZERO_DATE删除，然后执行set sql_mode = ‘修改后的值’。 此方法只在当前会话中生效。 然后可以进行数据插入。 删表，删数据库删表 1drop table blog; 删数据库 1drop database blogDatabase;]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>mysql</tag>
+        <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[springboot：使用spring-boot-admin对spring-boot服务进行监控]]></title>
     <url>%2F2018%2F12%2F09%2Fspringboot%EF%BC%9A%E4%BD%BF%E7%94%A8spring-boot-admin%E5%AF%B9spring-boot%E6%9C%8D%E5%8A%A1%E8%BF%9B%E8%A1%8C%E7%9B%91%E6%8E%A7%2F</url>
     <content type="text"><![CDATA[项目地址： 简单版本：https://github.com/snjl/springboot.admin-simple.git 复杂版本：https://github.com/snjl/springboot.admin.git Spring Boot Actuator提供了对单个Spring Boot的监控，信息包含：应用状态、内存、线程、堆栈等等，比较全面的监控了Spring Boot应用的整个生命周期。 但是这样监控也有一些问题：第一，所有的监控都需要调用固定的接口来查看，如果全面查看应用状态需要调用很多接口，并且接口返回的Json信息不方便运营人员理解；第二，如果Spring Boot应用集群非常大，每个应用都需要调用不同的接口来查看监控信息，操作非常繁琐低效。在这样的背景下，就诞生了另外一个开源软件：Spring Boot Admin。 Spring Boot Admin 是一个管理和监控Spring Boot 应用程序的开源软件。每个应用都认为是一个客户端，通过HTTP或者使用 Eureka注册到admin server中进行展示，Spring Boot Admin UI部分使用AngularJs将数据展示在前端。 Spring Boot Admin 是一个针对spring-boot的actuator接口进行UI美化封装的监控工具。他可以：在列表中浏览所有被监控spring-boot项目的基本信息，详细的Health信息、内存信息、JVM信息、垃圾回收信息、各种配置信息（比如数据源、缓存列表和命中率）等，还可以直接修改logger的level。 这篇文章给大家介绍如何使用Spring Boot Admin对Spring Boot应用进行监控。 监控单体应用这节给大家展示如何使用Spring Boot Admin监控单个Spring Boot应用。 Admin Server端项目依赖123456789101112&lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;de.codecentric&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-admin-server&lt;/artifactId&gt; &lt;version&gt;1.5.6&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;de.codecentric&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-admin-server-ui&lt;/artifactId&gt; &lt;version&gt;1.5.6&lt;/version&gt; &lt;/dependency&gt;&lt;/dependencies&gt; 配置文件1server.port=8000 启动类123456789@Configuration@EnableAutoConfiguration@EnableAdminServerpublic class AdminServerApplication &#123; public static void main(String[] args) &#123; SpringApplication.run(AdminServerApplication.class, args); &#125;&#125; 完成上面三步之后，启动服务端，浏览器访问http://localhost:8000可以看到以下界面： Admin Client端项目依赖1234567&lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;de.codecentric&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-admin-starter-client&lt;/artifactId&gt; &lt;version&gt;1.5.6&lt;/version&gt; &lt;/dependency&gt;&lt;/dependencies&gt; 配置文件1234server.port=8001spring.boot.admin.url=http://localhost:8000 management.security.enabled=false spring.boot.admin.url 配置Admin Server的地址 management.security.enabled=false 关闭安全验证 启动类123456@SpringBootApplicationpublic class AdminClientApplication &#123; public static void main(String[] args) &#123; SpringApplication.run(AdminClientApplication.class, args); &#125;&#125; 配置完成之后，启动Client端服务，再次访问服务：http://localhost:8000可以看到客户端的相关信息。 首页会展示被监控的各个服务，点击详情可以查看某个服务的具体监控信息 通过上图可以看出，Spring Boot Admin以图形化的形式展示了应用的各项信息，这些信息大多都来自于Spring Boot Actuator提供的接口。 监控微服务如果我们使用的是单个Spring Boot应用，就需要在每一个被监控的应用中配置Admin Server的地址信息；如果应用都注册在Eureka中就不需要再对每个应用进行配置，Spring Boot Admin会自动从注册中心抓取应用的相关信息。 这里使用四个示例项目来演示： spring-boot-admin-server Admin Server端 spring-cloud-eureka 注册中心 spring-cloud-producer 应用一，Admin Client端 spring-cloud-producer-2 应用二，Admin Client端 首先启动注册中心spring-cloud-eureka。 Server端示例项目：spring-boot-admin-server 项目依赖12345678910111213141516&lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;de.codecentric&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-admin-server&lt;/artifactId&gt; &lt;version&gt;1.5.6&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;de.codecentric&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-admin-server-ui&lt;/artifactId&gt; &lt;version&gt;1.5.6&lt;/version&gt; &lt;/dependency&gt;&lt;/dependencies&gt; 增加了对eureka的支持 配置文件1234567891011121314server: port: 8000spring: application: name: admin-servereureka: instance: leaseRenewalIntervalInSeconds: 10 client: registryFetchIntervalSeconds: 5 serviceUrl: defaultZone: $&#123;EUREKA_SERVICE_URL:http://localhost:8761&#125;/eureka/management.security.enabled: false 配置文件中添加了eureka的相关配置 启动类12345678910@Configuration@EnableAutoConfiguration@EnableDiscoveryClient@EnableAdminServerpublic class AdminServerApplication &#123; public static void main(String[] args) &#123; SpringApplication.run(AdminServerApplication.class, args); &#125;&#125; 上述步骤完成之后，启动Server端。 Client端示例项目：spring-cloud-producer和spring-cloud-producer-2 项目依赖1234567891011&lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;de.codecentric&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-admin-starter-client&lt;/artifactId&gt; &lt;version&gt;1.5.6&lt;/version&gt; &lt;/dependency&gt;&lt;/dependencies&gt; 配置文件123456789101112server: port: 9000spring: application: name: producereureka: client: serviceUrl: defaultZone: http://localhost:8761/eureka/management: security: enabled: false 我们发现配置文件中并没有添加Admin Server的相关配置 启动类12345678@SpringBootApplication@EnableDiscoveryClientpublic class ProducerApplication &#123; public static void main(String[] args) &#123; SpringApplication.run(ProducerApplication.class, args); &#125;&#125; Web层12345@RequestMapping("/hello") public String index(@RequestParam String name) &#123; logger.info("request one/two name is "+name); return "hello "+name+"，this is first messge"; &#125; web层添加了/hello的请求方法，方法中使用one/two区别是哪个应用。spring-cloud-producer-2和spring-cloud-producer代码类似，具体大家可以查看示例代码。 完成上面配置之后，分别启动项目：spring-cloud-producer和spring-cloud-producer-2，浏览器访问http://localhost:8000 可以看到以下界面： 从上图可以看出Admin Server监控了四个实例，包括Server自己，注册中心、两个PRODUCER。说明Admin Server自动从服务中心抓取了所有的实例信息并进行了监控。点击Detail可以具体查看某一个示例的监控信息。 邮件告警Spring Boot Admin将微服务中所有应用信息在后台进行了展示，非常方便我们对微服务整体的监控和治理。但是我们的运营人员也不可能一天24小时盯着监控后台，因此如果服务有异常的时候，有对应的邮件告警就太好了，其实Spring Boot Admin也给出了支持。 我们对上面的示例项目spring-boot-admin-server进行改造。 添加依赖1234&lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-mail&lt;/artifactId&gt;&lt;/dependency&gt; 增加了邮件发送的starter包 配置文件12345678910111213141516171819spring: mail: host: smtp.qq.com username: xxxxx@qq.com password: xxxx properties: mail: smtp: auth: true starttls: enable: true required: true boot: admin: notify: mail: from: xxxx@qq.com to: xxxx@qq.com# http://codecentric.github.io/spring-boot-admin/1.5.6/#mail-notifications 在配置文件中添加邮件发送相关信息：邮件的发送者、接受者、协议、移动授权码等。 配置完成后，重新启动项目spring-boot-admin-server，这样Admin Server就具备了邮件告警的功能，默认情况下Admin Server对Eureka中的服务上下线都进行了监控，当服务上下线的时候我们就会收到如下邮件： 当然这只是最基本的邮件监控，在实际的使用过程中，需要根据我们的情况对邮件告警内容进行自定义，比如监控堆内存的使用情况，当到达一定比例的时候进行告警等。]]></content>
@@ -58,8 +168,8 @@
       </categories>
       <tags>
         <tag>springboot</tag>
-        <tag>mysql</tag>
         <tag>mybatis</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -82,8 +192,8 @@
         <category>服务器</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>服务器</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -167,9 +277,9 @@
         <category>springboot</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>springboot</tag>
         <tag>mybatis</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -295,9 +405,9 @@
         <category>springboot</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>springboot</tag>
         <tag>mybatis</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -331,8 +441,8 @@
         <category>springboot</category>
       </categories>
       <tags>
-        <tag>定时</tag>
         <tag>springboot</tag>
+        <tag>定时</tag>
       </tags>
   </entry>
   <entry>
@@ -368,8 +478,8 @@
       </categories>
       <tags>
         <tag>springboot</tag>
-        <tag>JdbcTemplate</tag>
         <tag>mysql</tag>
+        <tag>JdbcTemplate</tag>
       </tags>
   </entry>
   <entry>
@@ -541,8 +651,8 @@
       </categories>
       <tags>
         <tag>springboot</tag>
-        <tag>JdbcTemplate</tag>
         <tag>mysql</tag>
+        <tag>JdbcTemplate</tag>
       </tags>
   </entry>
   <entry>
@@ -805,8 +915,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>Maven</tag>
         <tag>java</tag>
+        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
