@@ -73,6 +73,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="snjl" type="application/atom+xml">
 
@@ -81,18 +83,18 @@
 
 
 
-<meta name="description" content="nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ][ &amp;amp; ]  无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。">
+<meta name="description" content="nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ] [　&amp;amp; ]  无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用">
 <meta name="keywords" content="ubuntu,nohup,安全守护">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu：使用nohup和&amp;进行后台运行，进程查看和终止">
 <meta property="og:url" content="https://snjl.github.io/2018/12/12/Ubuntu：使用nohup和-进行后台运行，进程查看和终止/index.html">
 <meta property="og:site_name" content="snjl">
-<meta property="og:description" content="nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ][ &amp;amp; ]  无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。">
+<meta property="og:description" content="nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ] [　&amp;amp; ]  无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-12T12:39:22.526Z">
+<meta property="og:updated_time" content="2018-12-14T15:03:46.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu：使用nohup和&amp;进行后台运行，进程查看和终止">
-<meta name="twitter:description" content="nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ][ &amp;amp; ]  无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。">
+<meta name="twitter:description" content="nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ] [　&amp;amp; ]  无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用">
 
 
 
@@ -373,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k 字
+                  1.1k 字
                 </span>
               
 
@@ -389,7 +391,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -411,7 +413,7 @@
 
       
         <h1 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h1><p>用途：不挂断地运行命令。</p>
-<p>语法：nohup Command [ Arg … ][ &amp; ]</p>
+<p>语法：nohup Command [ Arg … ] [　&amp; ]</p>
 <ul>
 <li>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。</li>
 <li>如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。</li>
@@ -425,41 +427,37 @@
 <p>否则，nohup 命令的退出状态是 Command 参数指定命令的退出状态。</p>
 <a id="more"></a>
 <h1 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h1><p>用途：在后台运行</p>
-<p>一般两个一起用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &amp;</span><br></pre></td></tr></table></figure>
-<p>例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; myout.file 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>一般两个一起用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &amp;</span><br></pre></td></tr></table></figure></p>
+<p>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; myout.file 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
 <p>在上面的例子中，输出被重定向到myout.file文件中。 </p>
 <h1 id="nohup与-amp-的区别："><a href="#nohup与-amp-的区别：" class="headerlink" title="nohup与&amp;的区别："></a>nohup与&amp;的区别：</h1><p><strong>nohup只是让命令忽略SIGHUP命令而已；&amp;则让命令在后台运行，至于该命令是否能在脱离终端后继续执行则要看进程是否是守护进程，如果不是，则需要nohup来帮忙。</strong></p>
 <h1 id="查看某个端口的进程"><a href="#查看某个端口的进程" class="headerlink" title="查看某个端口的进程"></a>查看某个端口的进程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure>
-<p>结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">node    27295 root   19u  IPv4 527052      0t0  TCP *:http (LISTEN)</span><br><span class="line">node    27295 root   24u  IPv4 528732      0t0  TCP ubuntu:http-&gt;xxx.xxx.xxx.xxx:50367 (ESTABLISHED)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">node    27295 root   19u  IPv4 527052      0t0  TCP *:http (LISTEN)</span><br><span class="line">node    27295 root   24u  IPv4 528732      0t0  TCP ubuntu:http-&gt;xxx.xxx.xxx.xxx:50367 (ESTABLISHED)</span><br></pre></td></tr></table></figure></p>
 <h1 id="终止后台运行的进程"><a href="#终止后台运行的进程" class="headerlink" title="终止后台运行的进程"></a>终止后台运行的进程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 PID</span><br></pre></td></tr></table></figure>
 <p>pid为进程号。</p>
 <h1 id="nohup不产生日志"><a href="#nohup不产生日志" class="headerlink" title="nohup不产生日志"></a>nohup不产生日志</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar item-2.0.1-SNAPSHOT.jar 2 &gt;error.log &amp;</span><br></pre></td></tr></table></figure>
 <p>0、1和2分别表示标准输入、标准输出和标准错误信息输出，可以用来指定需要重定向的标准输入或输出。</p>
-<p>在一般使用时，默认的是标准输出，既1.当我们需要特殊用途时，可以使用其他标号。例如，将program.sh的错误信息输出到log文件中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./program.sh 2&gt;log</span><br></pre></td></tr></table></figure>
+<p>在一般使用时，默认的是标准输出，既1.当我们需要特殊用途时，可以使用其他标号。例如，将program.sh的错误信息输出到log文件中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./program.sh 2&gt;log</span><br></pre></td></tr></table></figure></p>
 <p>这样标准输出还是在屏幕上，但是错误信息会输出到log文件中。<br>另外，也可以实现0，1，2之间的重定向。</p>
 <p>2&gt;&amp;1：将错误信息重定向到标准输出。</p>
-<p>Linux下还有一个特殊的文件<strong>/dev/null</strong>，它就像一个无底洞，所有重定向到它的信息都会消失得无影无踪。这一点非常有用，当我们不需要回显程序的所有信息时，就可以将输出重定向到/dev/null。<br>如果想要正常输出和错误信息都不显示，则要把标准输出和标准错误都重定向到/dev/null， 例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls 1&gt;/dev/null 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
-<p>这样不会有任何输出。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsss 1&gt;/dev/null</span><br></pre></td></tr></table></figure>
-<p>因为lsss不是一条合法命令，但是使用的是1（标准输入），所以还是会报错；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsss 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
-<p>使用2（标准错误信息输出），输出的错误会被吞掉，所以不会有任何输出；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls 1&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<p>Linux下还有一个特殊的文件<strong>/dev/null</strong>，它就像一个无底洞，所有重定向到它的信息都会消失得无影无踪。这一点非常有用，当我们不需要回显程序的所有信息时，就可以将输出重定向到/dev/null。<br>如果想要正常输出和错误信息都不显示，则要把标准输出和标准错误都重定向到/dev/null， 例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls 1&gt;/dev/null 2&gt;/dev/null</span><br></pre></td></tr></table></figure></p>
+<p>这样不会有任何输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsss 1&gt;/dev/null</span><br></pre></td></tr></table></figure></p>
+<p>因为lsss不是一条合法命令，但是使用的是1（标准输入），所以还是会报错；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsss 2&gt;/dev/null</span><br></pre></td></tr></table></figure></p>
+<p>使用2（标准错误信息输出），输出的错误会被吞掉，所以不会有任何输出；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls 1&gt;/dev/null</span><br></pre></td></tr></table></figure></p>
 <p>ls是标准命令，但是使用1吞掉了标准输出，所以不会有任何输出。</p>
-<p>还有一种做法是将错误重定向到标准输出，然后再重定向到 /dev/null，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>还有一种做法是将错误重定向到标准输出，然后再重定向到 /dev/null，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
 <p>注意：此处的顺序不能更改，否则达不到想要的效果，此时先将标准输出重定向到 /dev/null，然后将标准错误重定向到标准输出，由于标准输出已经重定向到了/dev/null，因此标准错误也会重定向到/dev/null，于是一切静悄悄:-)</p>
 <p>由于使用nohup时，会自动将输出写入nohup.out文件中，如果文件很大的话，nohup.out就会不停的增大，这是我们不希望看到的，因此，可以利用/dev/null来解决这个问题。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./program.sh &gt;/dev/null 2&gt;log &amp;</span><br></pre></td></tr></table></figure>
 <p>这样在跑程序的时候，只将错误信息输出到log文件中。</p>
-<p>如果什么信息都不要，使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./program.sh &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>如果什么信息都不要，使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./program.sh &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
 <p>(好像没用？)</p>
+<h1 id="使用nohup失效原因"><a href="#使用nohup失效原因" class="headerlink" title="使用nohup失效原因"></a>使用nohup失效原因</h1><p>用putty连接ubuntu，要执行一个后台命令</p>
+<p>正常用nohup直接运行命令，就可以在后台运行</p>
+<p>nohup ./1.sh &amp;</p>
+<p>但关闭putty后，发现命令也停止了</p>
+<p>问题出在，直接点putty的右上角X关闭按钮，nohup也会停止</p>
+<p><strong>解决：直接在putty中输入exit退出即可</strong></p>
 
       
     </div>
@@ -513,6 +511,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/14/使用单点登录的原因/" rel="prev" title="使用单点登录的原因">
+                使用单点登录的原因 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -591,7 +593,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +615,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -675,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nohup"><span class="nav-number">1.</span> <span class="nav-text">nohup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#amp"><span class="nav-number">2.</span> <span class="nav-text">&amp;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nohup与-amp-的区别："><span class="nav-number">3.</span> <span class="nav-text">nohup与&amp;的区别：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看某个端口的进程"><span class="nav-number">4.</span> <span class="nav-text">查看某个端口的进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终止后台运行的进程"><span class="nav-number">5.</span> <span class="nav-text">终止后台运行的进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nohup不产生日志"><span class="nav-number">6.</span> <span class="nav-text">nohup不产生日志</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nohup"><span class="nav-number">1.</span> <span class="nav-text">nohup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#amp"><span class="nav-number">2.</span> <span class="nav-text">&amp;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nohup与-amp-的区别："><span class="nav-number">3.</span> <span class="nav-text">nohup与&amp;的区别：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看某个端口的进程"><span class="nav-number">4.</span> <span class="nav-text">查看某个端口的进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终止后台运行的进程"><span class="nav-number">5.</span> <span class="nav-text">终止后台运行的进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nohup不产生日志"><span class="nav-number">6.</span> <span class="nav-text">nohup不产生日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用nohup失效原因"><span class="nav-number">7.</span> <span class="nav-text">使用nohup失效原因</span></a></li></ol></div>
             
 
           </div>

@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mysql：设置sql_mode]]></title>
+    <url>%2F2018%2F12%2F14%2Fmysql%EF%BC%9A%E8%AE%BE%E7%BD%AEsql-mode%2F</url>
+    <content type="text"><![CDATA[查看sql_mode1select @@sql_mode; 查询出来的值为：1ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 去掉需要去掉的后，例如去掉NO_ZERO_DATE，set回去：1set sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'; 这是对于已存在的数据库，改变其sql_mode，但是对于以后新建的数据库，sql_mode的默认值还是一开始查出来的值。 设置新数据库的sql_mode使用1set @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' 改变了全局sql_mode，对于新建的数据库有效，但是仅仅对于这次连接有效。 修改配置文件安装了mysql后，网上说在etc目录中有my.cnf，但是5.7版本好像没有，但是在etc/mysql中有，在该文件夹末尾加上：12[mysqld]set sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 即没有NO_ZERO_DATE，然后输入service mysql restart重启mysql服务，进入mysql后，输入select @@sql_mode，会发现就是配置文件中设置好的sql_mode。]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mysql：配置免密码登录]]></title>
+    <url>%2F2018%2F12%2F14%2Fmysql%EF%BC%9A%E9%85%8D%E7%BD%AE%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[配置/etc/mysql/my.cnf，在后面加入：123[client]user=userpassword=password user和password分别填入相应的用户名和密码，然后service mysql restart重启服务，命令行输入mysql即可登录。 如果想要输入密码登录，使用1mysql -u root -p 即可。]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mysql：表名、字段大小写问题]]></title>
+    <url>%2F2018%2F12%2F14%2Fmysql%EF%BC%9A%E8%A1%A8%E5%90%8D%E3%80%81%E5%AD%97%E6%AE%B5%E5%A4%A7%E5%B0%8F%E5%86%99%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[在MySQL中，数据库和表都是对应目录下的一个或多个文件。因此，操作系统的大小写是否敏感决定了数据库大小写是否敏感。而在Windows中是对大小写不敏感的（Linux是对大小写敏感的）。 在linux的mysql中，输入1show variables like "lower%"; 可以看到123456+------------------------+-------+| Variable_name | Value |+------------------------+-------+| lower_case_file_system | OFF || lower_case_table_names | 0 |+------------------------+-------+ lower_case_table_names参数说明当值为0时使用CREATE TABLE或CREATE DATABASE语句制定的大小写字母在硬盘上保存表名和数据库名。名称比较对大小写敏感。在大小写不敏感的操作系统如windows 或Max OS x上我们不能将参数设为0，如果再大小写不敏感的文件系统上将“lower_case_table_names”强制设置为0，并使用不同的大小写访问MyISAM表名，可能会导 致索引破坏。 当值为1时表名在硬盘上以小写保存，名称比较对大小写不敏感。MySQL将所有表名转换为小写存储和查找表上。该行为也适合数据库名和表的别名，该值为Windows的默认值。 当值为2时表名和数据库名在硬盘上使用CREATETABLE或CREATE DATABASE语句指定的大小写字母进行保存，但MySQL将它们转换为小写在查找表上。名称比较对大小写不敏感，即按照大小写来保存，按照小写来比较。注意：只在对大小写不敏感的文件系统上适用！innodb表名用小写保存。 在MySql上为了避免大小写问题引来的不必要的麻烦，建议都将“lower_case_tables_name”设置值为1。我们可以用其他的方式来命名。 修改配置修改/etc/mysql/my.cnf，在[mysqld]下面加入1lower_case_table_names=1 使用service mysql restart重启服务。 这时候进入mysql，输入1show variables like "lower%"; 可以看到123456+------------------------+-------+| Variable_name | Value |+------------------------+-------+| lower_case_file_system | OFF || lower_case_table_names | 1 |+------------------------+-------+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mysql：sql_mode配置解析]]></title>
+    <url>%2F2018%2F12%2F14%2Fmysql%EF%BC%9Asql-mode%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90%2F</url>
+    <content type="text"><![CDATA[ONLY_FULL_GROUP_BY对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中。简而言之，就是SELECT后面接的列必须被GROUP BY后面接的列所包含。如：12select a,b from table group by a,b,c; # 正确select a,b,c from table group by a,b; # 错误 这个配置会使得GROUP BY语句环境变得十分狭窄，所以一般都不加这个配置 NO_AUTO_VALUE_ON_ZERO该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。（不信的可以试试，默认的sql_mode你在自增主键列设置为0，该字段会自动变为最新的自增值，效果和null一样），如果用户希望插入的值为0（不改变），该列又是自增长的，那么这个选项就有用了。 STRICT_TRANS_TABLES在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制。（InnoDB默认事务表，MyISAM默认非事务表；MySQL事务表支持将批处理当做一个完整的任务统一提交或回滚，即对包含在事务中的多条语句要么全执行，要么全部不执行。非事务表则不支持此种操作，批处理中的语句如果遇到错误，在错误前的语句执行成功，之后的则不执行；MySQL事务表有表锁与行锁非事务表则只有表锁） NO_ZERO_IN_DATE在严格模式下，不允许日期和月份为零 NO_ZERO_DATE设置该值，mysql数据库不允许插入零日期，插入零日期会抛出错误而不是警告。 ERROR_FOR_DIVISION_BY_ZERO在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如 果未给出该模式，那么数据被零除时MySQL返回NULL NO_AUTO_CREATE_USER禁止GRANT创建密码为空的用户 NO_ENGINE_SUBSTITUTION如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常 PIPES_AS_CONCAT将”||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似 ANSI_QUOTES启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu：安装anaconda]]></title>
+    <url>%2F2018%2F12%2F14%2FUbuntu%EF%BC%9A%E5%AE%89%E8%A3%85anaconda%2F</url>
+    <content type="text"><![CDATA[下载1wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh 安装1bash Anaconda3-5.3.1-Linux-x86_64.sh 安装完后测试conda命令。 conda无效添加环境变量：1echo &apos;export PATH=&quot;~/anaconda3/bin:$PATH&quot;&apos; &gt;&gt; ~/.bashrc 添加后，执行1source ~/.bashrc 更新环境变量，这时候输入conda list能看到如下内容：1234567891011121314# packages in environment at /root/anaconda3:## Name Version Build Channel_ipyw_jlab_nb_ext_conf 0.1.0 py37_0alabaster 0.7.11 py37_0anaconda 5.3.1 py37_0anaconda-client 1.7.2 py37_0anaconda-navigator 1.9.2 py37_0anaconda-project 0.8.2 py37_0appdirs 1.4.3 py37h28b3542_0asn1crypto 0.24.0 py37_0astroid 2.0.4 py37_0··· anaconda指定版本安装例如安装python3.61conda intall python=3.6 conda常见命令12345678910conda install package//安装包 conda list//查看已安装的包 conda update package//更新包 conda remove package//移除包conda update --all //更新当前环境下安装的全部package到最新版本conda update python //更新当前环境下python版本到当前python版本的最新版本conda env list //查看现在有的环境 创建管理环境1conda create --name NAME 其中NAME是指定的名称。 可以在这里指定需要的环境，由于python也是conda的包，所以也可以指定1conda create --name NAME python=3.6 tensorflow 激活环境1source activate NAME 退出环境1source deactivate 删除环境1conda env remove -n NAME 拷贝环境1conda create --clone tensorflow --name tf 其中，前一个名字是被拷贝的，后一个名字是新的名字。]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>anaconda</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用单点登录的原因]]></title>
+    <url>%2F2018%2F12%2F14%2F%E4%BD%BF%E7%94%A8%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E5%9B%A0%2F</url>
+    <content type="text"><![CDATA[单点登录（SingleSignOn），简称为SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。通常情况下运维内控审计系统、4A系统或者都包含此项功能，目的是简化账号登录过程并保护账号和密码安全，对账号进行统一管理。 在此不考虑单点登录在多个应用下的登录问题，讨论其安全问题。 每个应用有一个域名，根据这个域名去申请apikey和apisecret，其中apikey我认为可以暴露，通过前端链接到authorize，带上apikey和redirect_uri，登录成功后就可以获得一个code并且返回到该uri，后端再通过这个code和apikey，apisecret去authorize获取这个用户的信息，并且拿到一个token，然后把这个用户存入session即可。 这样做可以保证使用apisecret的时候是在后端，不会被暴露，而且整个登录流程除了开始的链接到认证，和后面通过获得code再去链接到认证获取用户的token，其中所有的用户登录，用户认证都是在authorize完成的，这可以保证某一个应用获取不到用户的账号密码，只能获取到用户的基本信息，而且是可以暴露的一些基本信息，所以可以说是比较安全的。]]></content>
+      <categories>
+        <category>理论</category>
+      </categories>
+      <tags>
+        <tag>单点登录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Ubuntu：使用nohup和&进行后台运行，进程查看和终止]]></title>
     <url>%2F2018%2F12%2F12%2FUbuntu%EF%BC%9A%E4%BD%BF%E7%94%A8nohup%E5%92%8C-%E8%BF%9B%E8%A1%8C%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%9F%A5%E7%9C%8B%E5%92%8C%E7%BB%88%E6%AD%A2%2F</url>
-    <content type="text"><![CDATA[nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ][ &amp; ] 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。 退出状态：该命令返回下列出口值： 126 可以查找但不能调用 Command 参数指定的命令。 127 nohup 命令发生错误或不能查找由 Command 参数指定的命令。 否则，nohup 命令的退出状态是 Command 参数指定命令的退出状态。 &amp;用途：在后台运行 一般两个一起用 1nohup command &amp; 例如 1nohup command &gt; myout.file 2&gt;&amp;1 在上面的例子中，输出被重定向到myout.file文件中。 nohup与&amp;的区别：nohup只是让命令忽略SIGHUP命令而已；&amp;则让命令在后台运行，至于该命令是否能在脱离终端后继续执行则要看进程是否是守护进程，如果不是，则需要nohup来帮忙。 查看某个端口的进程1lsof -i:80 结果： 123COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAMEnode 27295 root 19u IPv4 527052 0t0 TCP *:http (LISTEN)node 27295 root 24u IPv4 528732 0t0 TCP ubuntu:http-&gt;xxx.xxx.xxx.xxx:50367 (ESTABLISHED) 终止后台运行的进程1kill -9 PID pid为进程号。 nohup不产生日志1nohup java -jar item-2.0.1-SNAPSHOT.jar 2 &gt;error.log &amp; 0、1和2分别表示标准输入、标准输出和标准错误信息输出，可以用来指定需要重定向的标准输入或输出。 在一般使用时，默认的是标准输出，既1.当我们需要特殊用途时，可以使用其他标号。例如，将program.sh的错误信息输出到log文件中： 1./program.sh 2&gt;log 这样标准输出还是在屏幕上，但是错误信息会输出到log文件中。另外，也可以实现0，1，2之间的重定向。 2&gt;&amp;1：将错误信息重定向到标准输出。 Linux下还有一个特殊的文件/dev/null，它就像一个无底洞，所有重定向到它的信息都会消失得无影无踪。这一点非常有用，当我们不需要回显程序的所有信息时，就可以将输出重定向到/dev/null。如果想要正常输出和错误信息都不显示，则要把标准输出和标准错误都重定向到/dev/null， 例如： 1ls 1&gt;/dev/null 2&gt;/dev/null 这样不会有任何输出。 1lsss 1&gt;/dev/null 因为lsss不是一条合法命令，但是使用的是1（标准输入），所以还是会报错； 1lsss 2&gt;/dev/null 使用2（标准错误信息输出），输出的错误会被吞掉，所以不会有任何输出； 1ls 1&gt;/dev/null ls是标准命令，但是使用1吞掉了标准输出，所以不会有任何输出。 还有一种做法是将错误重定向到标准输出，然后再重定向到 /dev/null，例如： 1ls &gt;/dev/null 2&gt;&amp;1 注意：此处的顺序不能更改，否则达不到想要的效果，此时先将标准输出重定向到 /dev/null，然后将标准错误重定向到标准输出，由于标准输出已经重定向到了/dev/null，因此标准错误也会重定向到/dev/null，于是一切静悄悄:-) 由于使用nohup时，会自动将输出写入nohup.out文件中，如果文件很大的话，nohup.out就会不停的增大，这是我们不希望看到的，因此，可以利用/dev/null来解决这个问题。 1nohup ./program.sh &gt;/dev/null 2&gt;log &amp; 这样在跑程序的时候，只将错误信息输出到log文件中。 如果什么信息都不要，使用 1nohup ./program.sh &gt;/dev/null 2&gt;&amp;1 &amp; (好像没用？)]]></content>
+    <content type="text"><![CDATA[nohup用途：不挂断地运行命令。 语法：nohup Command [ Arg … ] [ &amp; ] 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。 退出状态：该命令返回下列出口值： 126 可以查找但不能调用 Command 参数指定的命令。 127 nohup 命令发生错误或不能查找由 Command 参数指定的命令。 否则，nohup 命令的退出状态是 Command 参数指定命令的退出状态。 &amp;用途：在后台运行 一般两个一起用1nohup command &amp; 例如1nohup command &gt; myout.file 2&gt;&amp;1 在上面的例子中，输出被重定向到myout.file文件中。 nohup与&amp;的区别：nohup只是让命令忽略SIGHUP命令而已；&amp;则让命令在后台运行，至于该命令是否能在脱离终端后继续执行则要看进程是否是守护进程，如果不是，则需要nohup来帮忙。 查看某个端口的进程1lsof -i:80 结果：123COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAMEnode 27295 root 19u IPv4 527052 0t0 TCP *:http (LISTEN)node 27295 root 24u IPv4 528732 0t0 TCP ubuntu:http-&gt;xxx.xxx.xxx.xxx:50367 (ESTABLISHED) 终止后台运行的进程1kill -9 PID pid为进程号。 nohup不产生日志1nohup java -jar item-2.0.1-SNAPSHOT.jar 2 &gt;error.log &amp; 0、1和2分别表示标准输入、标准输出和标准错误信息输出，可以用来指定需要重定向的标准输入或输出。 在一般使用时，默认的是标准输出，既1.当我们需要特殊用途时，可以使用其他标号。例如，将program.sh的错误信息输出到log文件中：1./program.sh 2&gt;log 这样标准输出还是在屏幕上，但是错误信息会输出到log文件中。另外，也可以实现0，1，2之间的重定向。 2&gt;&amp;1：将错误信息重定向到标准输出。 Linux下还有一个特殊的文件/dev/null，它就像一个无底洞，所有重定向到它的信息都会消失得无影无踪。这一点非常有用，当我们不需要回显程序的所有信息时，就可以将输出重定向到/dev/null。如果想要正常输出和错误信息都不显示，则要把标准输出和标准错误都重定向到/dev/null， 例如：1ls 1&gt;/dev/null 2&gt;/dev/null 这样不会有任何输出。1lsss 1&gt;/dev/null 因为lsss不是一条合法命令，但是使用的是1（标准输入），所以还是会报错；1lsss 2&gt;/dev/null 使用2（标准错误信息输出），输出的错误会被吞掉，所以不会有任何输出；1ls 1&gt;/dev/null ls是标准命令，但是使用1吞掉了标准输出，所以不会有任何输出。 还有一种做法是将错误重定向到标准输出，然后再重定向到 /dev/null，例如：1ls &gt;/dev/null 2&gt;&amp;1 注意：此处的顺序不能更改，否则达不到想要的效果，此时先将标准输出重定向到 /dev/null，然后将标准错误重定向到标准输出，由于标准输出已经重定向到了/dev/null，因此标准错误也会重定向到/dev/null，于是一切静悄悄:-) 由于使用nohup时，会自动将输出写入nohup.out文件中，如果文件很大的话，nohup.out就会不停的增大，这是我们不希望看到的，因此，可以利用/dev/null来解决这个问题。 1nohup ./program.sh &gt;/dev/null 2&gt;log &amp; 这样在跑程序的时候，只将错误信息输出到log文件中。 如果什么信息都不要，使用1nohup ./program.sh &gt;/dev/null 2&gt;&amp;1 &amp; (好像没用？) 使用nohup失效原因用putty连接ubuntu，要执行一个后台命令 正常用nohup直接运行命令，就可以在后台运行 nohup ./1.sh &amp; 但关闭putty后，发现命令也停止了 问题出在，直接点putty的右上角X关闭按钮，nohup也会停止 解决：直接在putty中输入exit退出即可]]></content>
       <categories>
         <category>服务器</category>
       </categories>
@@ -767,7 +838,7 @@
   <entry>
     <title><![CDATA[数据库处理tips]]></title>
     <url>%2F2018%2F11%2F14%2F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%84%E7%90%86tips%2F</url>
-    <content type="text"><![CDATA[1.mysql 开放，关闭 远程授权默认安装mysql是关闭远程连接的 这样也有助于系统的安全 但是有时候需要开启下远程连接方便操作 开启连接 mysql -uroot -p 进入mysql 输入密码1GRANT ALL PRIVILEGES ON * . * TO ‘root’@&apos;%’ IDENTIFIED BY ‘你的mysql密码’ 1WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 1MAX_UPDATES_PER_HOUR 0 ; 1flush privileges; 输入这两个命令即可开启mysql远程连接 关闭授权1234REVOKE ALL PRIVILEGES ON *.* FROM root@”%”;USE mysql;DELETE FROM user WHERE User=”root” and Host=”%”;FLUSH PRIVILEGES; 1234567891011121314151617mysql&gt; DELETE FROM `user` WHERE Host='10.155.123.55' AND User='kaka';Query OK, 1 row affected (0.00 sec) mysql&gt; flush privileges;Query OK, 0 rows affected (0.00 sec) mysql&gt; SELECT Host,User,Password FROM `user`;+----------------+------+-------------------------------------------+| Host | User | Password |+----------------+------+-------------------------------------------+| localhost | root | *71ABCA8B06D46066CEF8062A75256E66243D0FC8 || tony\_ts\_tian | root | *71ABCA8B06D46066CEF8062A75256E66243D0FC8 || 127.0.0.1 | root | *71ABCA8B06D46066CEF8062A75256E66243D0FC8 || ::1 | root | *71ABCA8B06D46066CEF8062A75256E66243D0FC8 || % | root | *71ABCA8B06D46066CEF8062A75256E66243D0FC8 |+----------------+------+-------------------------------------------+5 rows in set (0.00 sec) 2.删除重复数据，只留下唯一不重复1.先多建立一列 temp，用来合并meetingId和speakerId,用“-”连接，之后就判断这一列是否相同。1234567891011121314151617ALTER TABLE cekasp_meeting_speaker ADD temp VARCHAR(20) NULL;update cekasp_meeting_speaker set temp = concat(meetingId, '-', speakerId);delete from cekasp_meeting_speaker where temp in (SELECT * from (SELECT b.temp from cekasp_meeting_speaker b GROUP BY b.temp HAVING count(*) &gt; 1)ggg)and id not in (select * from( (select min(c.id) from cekasp_meeting_speaker c GROUP BY c.meetingId,c.speakerId HAVING count(*) &gt; 1) ) ggggggg);ALTER TABLE cekasp_meeting_speaker DROP temp;``` 2.或者直接以meetingId和speakerId作为查询```sqldelete from cekasp_meeting_speaker where (meetingId,speakerId) in (SELECT * from (SELECT b.meetingId,b.speakerId from cekasp_meeting_speaker b GROUP BY b.meetingId,b.speakerId HAVING count(*) &gt; 1)ggg)and id not in (select * from( (select min(c.id) from cekasp_meeting_speaker c GROUP BY c.meetingId,c.speakerId HAVING count(*) &gt; 1) ) ggggggg); 问题：delete/update里，有in的查询语句时，要使用临时表才能进行删除： 原本的1SELECT b.meetingId,b.speakerId from cekasp_meeting_speaker b GROUP BY b.meetingId,b.speakerId HAVING count(*) &gt; 1 应该要使用1select * from ... as NAME 包起来，作为一个临时表。 3.两张表表结构一样，将一张表中数据插入另一张表1insert into table1 (SELECT * from table2 WHERE id not in (SELECT id from table1)) 4.查询某张表的信息1select * from information_schema.COLUMNS where TABLE_SCHEMA = (select database()) and TABLE_NAME="paper";]]></content>
+    <content type="text"><![CDATA[1.mysql 开放，关闭 远程授权默认安装mysql是关闭远程连接的 这样也有助于系统的安全 但是有时候需要开启下远程连接方便操作 开启连接 mysql -uroot -p 进入mysql 输入密码1GRANT ALL PRIVILEGES ON * . * TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;password&apos; WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 ; 1flush privileges; 输入这两个命令即可开启mysql远程连接 关闭授权1234REVOKE ALL PRIVILEGES ON *.* FROM root@”%”;USE mysql;DELETE FROM user WHERE User=”root” and Host=”%”;FLUSH PRIVILEGES; 使用下面的命令可以查询用户：1select host,user from user where user=&quot;root&quot;; 结果：1234567+-----------+------+| host | user |+-----------+------+| % | root || localhost | root |+-----------+------+ 2.删除重复数据，只留下唯一不重复1.先多建立一列 temp，用来合并meetingId和speakerId,用“-”连接，之后就判断这一列是否相同。123456789ALTER TABLE cekasp_meeting_speaker ADD temp VARCHAR(20) NULL;update cekasp_meeting_speaker set temp = concat(meetingId, '-', speakerId);delete from cekasp_meeting_speaker where temp in (SELECT * from (SELECT b.temp from cekasp_meeting_speaker b GROUP BY b.temp HAVING count(*) &gt; 1)ggg)and id not in (select * from( (select min(c.id) from cekasp_meeting_speaker c GROUP BY c.meetingId,c.speakerId HAVING count(*) &gt; 1) ) ggggggg);ALTER TABLE cekasp_meeting_speaker DROP temp; 2.或者直接以meetingId和speakerId作为查询123delete from cekasp_meeting_speaker where (meetingId,speakerId) in (SELECT * from (SELECT b.meetingId,b.speakerId from cekasp_meeting_speaker b GROUP BY b.meetingId,b.speakerId HAVING count(*) &gt; 1)ggg)and id not in (select * from( (select min(c.id) from cekasp_meeting_speaker c GROUP BY c.meetingId,c.speakerId HAVING count(*) &gt; 1) ) ggggggg); 问题：delete/update里，有in的查询语句时，要使用临时表才能进行删除： 原本的1SELECT b.meetingId,b.speakerId from cekasp_meeting_speaker b GROUP BY b.meetingId,b.speakerId HAVING count(*) &gt; 1 应该要使用1select * from ... as NAME 包起来，作为一个临时表。 3.两张表表结构一样，将一张表中数据插入另一张表1insert into table1 (SELECT * from table2 WHERE id not in (SELECT id from table1)) 4.查询某张表的信息1select * from information_schema.COLUMNS where TABLE_SCHEMA = (select database()) and TABLE_NAME="paper";]]></content>
       <categories>
         <category>数据库</category>
       </categories>
