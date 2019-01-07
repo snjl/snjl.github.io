@@ -1,6 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[docker安装]]></title>
+    <url>%2F2019%2F01%2F07%2Fdocker%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[Ubuntu安装 添加GPG key： 1$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 添加源 新建文件：/etc/apt/sources.list.d/docker.list，在里面添加内容： 1deb https://apt.dockerproject.org/repo ubuntu-xenial main 更新源 1$ sudo apt update 安装与测试 安装 1$ sudo apt install docker-engine 测试12$ sudo service docker start $ sudo docker run hello-world Centos安装 确保 yum 包更新到最新 1sudo yum update 安装 1yum install docker docker启动 1service docker start 测试 1docker run hello-world]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[留言板系统]]></title>
+    <url>%2F2019%2F01%2F07%2F%E7%95%99%E8%A8%80%E6%9D%BF%E7%B3%BB%E7%BB%9F%2F</url>
+    <content type="text"><![CDATA[需要登录的留言板系统。 项目地址：https://github.com/snjl/springboot.happyNewYear.git]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>项目</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mkdir命令]]></title>
+    <url>%2F2019%2F01%2F07%2Fmkdir%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[linux mkdir 命令用来创建指定的名称的目录，要求创建目录的用户在当前目录中具有写权限，并且指定的目录名不能是当前目录中已有的目录。 命令格式1mkdir [选项] 目录... 命令功能通过 mkdir 命令可以实现在指定位置创建以 DirName(指定的文件名)命名的文件夹或目录。要创建文件夹或目录的用户必须对所创建的文件夹的父文件夹具有写权限。并且，所创建的文件夹(目录)不能与其父目录(即父文件夹)中的文件名重名，即同一个目录下不能有同名的(区分大小写)。 参数123456789-m, --mode=模式，设定权限&lt;模式&gt; (类似 chmod)，而不是 rwxrwxrwx 减 umask -p, --parents 可以是一个路径名称。此时若路径中的某些目录尚不存在,加上此选项后,系统将自动建立好那些尚不存在的目录,即一次可以建立多个目录; -v, --verbose 每次创建新目录都显示信息 --help 显示此帮助信息并退出 --version 输出版本信息并退出 示例1mkdir -p test2/test22 创建一个文件夹test2，里面有一个子文件夹test22。]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vi命令]]></title>
+    <url>%2F2019%2F01%2F07%2Fvi%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[1. 常用删除：1234567x 删除当前光标下的字符dw 删除光标之后的单词剩余部分。d$ 删除光标之后的该行剩余部分。dd 删除当前行。c 功能和d相同，区别在于完成删除操作后进入INSERT MODEcc 也是删除当前行，然后进入INSERT MODE 移动：1234gg 到页首G 到页末0 到行首$ 到行尾 2. 在Vi中移动光标123456789101112131415161718192021222324252627282930313233343536373839 k 上h l 左 右 j 下^ 移动到该行第一个非空格的字符处w 向前移动一个单词，将符号或标点当作单词处理W 向前移动一个单词，不把符号或标点当作单词处理b 向后移动一个单词，把符号或标点当作单词处理B 向后移动一个单词，不把符号或标点当作单词处理( 光标移至句首) 光标移至句尾&#123; 光标移至段落开头&#125; 光标移至段落结尾H 光标移至屏幕顶行M 光标移至屏幕中间行L 光标移至屏幕最后行 0 到行首$ 到行尾gg 到页首G 到页末行号+G 跳转到指定行n+ 光标下移n行n- 光标上移n行 Ctrl+g 查询当前行信息和当前文件信息fx 向右跳到本行字符x处（x可以是任何字符）Fx 向左跳到本行字符x处（x可以是任何字符）tx 和fx相同，区别是跳到字符x前Tx 和Fx相同，区别是跳到字符x后C-b 向上滚动一屏C-f 向下滚动一屏C-u 向上滚动半屏C-d 向下滚动半屏C-y 向上滚动一行C-e 向下滚动一行nz 将第n行滚至屏幕顶部，不指定n时将当前行滚至屏幕顶部。 3. 进入和退出Vi命令12345678910vi filename 打开或新建文件，并将光标置于第一行首vi +n filename 打开文件，并将光标置于第n行首vi + filename 打开文件，并将光标置于最后一行首vi +/pattern filename 打开文件，并将光标置于第一个与pattern匹配的串处vi -r filename 在上次正用vi编辑时发生系统崩溃，恢复filenamevi filename ... filename 打开多个文件，依次进行编辑 ZZ 退出vi并保存:q! 退出vi，不保存:wq 退出vi并保存 4. 重复操作1. 重复上一次操作 5. 自动补齐12C-n 匹配下一个关键字C-p 匹配上一个关键字 6. 插入123456789o 在光标下方新开一行并将光标置于新行行首，进入插入模式。O 同上，在光标上方。a 在光标之后进入插入模式。A 同上，在光标之前。R 进入替换模式，直到按下Escset xxx 设置XXX选项。 7. 行合并1J 把下面一行合并到本行后面 8. Vi中查找及替换命令12345678910/pattern 从光标开始处向文件尾搜索pattern?pattern 从光标开始处向文件首搜索patternn 在同一方向重复上一次搜索命令N 在反方向上重复上一次搜索命令% 查找配对的括号:s/p1/p2/g 将当前行中所有p1均用p2替代，若要每个替换都向用户询问则应该用gc选项:n1,n2s/p1/p2/g 将第n1至n2行中所有p1均用p2替代:g/p1/s//p2/g 将文件中所有p1均用p2替换.*[]^%~$ 在Vi中具有特殊含义，若需要查找则应该加上转义字符&quot;\&quot; 9. 查找的一些选项1. 设置高亮123:set hlsearch 设置高亮:set nohlsearch 关闭高亮:nohlsearch 关闭当前已经设置的高亮 2. 增量查找12:set incsearch 设置增量查找:set noincsearch 关闭增量查找 10. 在Vi中删除1234567x 删除当前光标下的字符dw 删除光标之后的单词剩余部分。d$ 删除光标之后的该行剩余部分。dd 删除当前行。c 功能和d相同，区别在于完成删除操作后进入INSERT MODEcc 也是删除当前行，然后进入INSERT MODE 11. 更改字符12rx 将当前光标下的字符更改为x（x为任意字符） ~ 更改当前光标下的字符的大小写 12. 键盘宏操作123qcharacter 开始录制宏，character为a到z的任意字符q 终止录制宏@character 调用先前录制的宏 13. 恢复误操作123u 撤销最后执行的命令U 修正之前对该行的操作Ctrl+R Redo 14. 在Vi中操作Frame1234c-w c-n 增加framec-w c-c 减少framec-w c-w 切换framec-w c-r 交换两个frame 15. VIM中的块操作Vim支持多达26个剪贴板 12345678910111213选块 先用v，C-v，V选择一块，然后用y复制，再用p粘贴。yy 复制当前整行nyy 复制当前行开始的n行内容?nyy 将光标当前行及其下n行的内容保存到寄存器?中，其中?为一个字母，n为一个数字?nyw 将光标当前行及其下n个词保存到寄存器?中，其中?为一个字母，n为一个数字?nyl 将光标当前行及其下n个字符保存到寄存器?中，其中?为一个字母，n为一个数字?p 将寄存器?中的内容粘贴到光标位置之后。如果?是用yy复制的完整行， 则粘贴在光标所在行下面。这里?可以是一个字母，也可以是一个数字 ?P 将寄存器a中的内容粘贴到光标位置之前。如果?是用yy复制的完整行， 则粘贴在光标所在行上面。这里?可以是一个字母，也可以是一个数字 ay[motion] ay$ 复制光标位置到行末并保存在寄存器a中 ayft 复制光标位置到当前行第一个字母t并保存在寄存器a中 以上指令皆可去掉a工作，则y,p对未命名寄存器工作（所有d,c,x,y的对象都被保存在这里）。 1. 剪切/复制/粘贴所有删除的内容自动被保存，可以用p键粘贴 16. Vi的选项设置1234567891011all 列出所有选项设置情况term 设置终端类型ignorance 在搜索中忽略大小写list 显示制表位(Ctrl+I)和行尾标志($)number 显示行号report 显示由面向行的命令修改过的数目terse 显示简短的警告信息warn 在转到别的文件时若没保存当前文件则显示NO write信息nomagic 允许在搜索模式中，使用前面不带“\”的特殊字符nowrapscan 禁止vi在搜索到达文件两端时，又从另一端开始mesg 允许vi显示其他用户用write写到自己终端上的信息 17. tips对代码自动格式化 gg=G]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker： 安装 python]]></title>
+    <url>%2F2019%2F01%2F07%2Fdocker%EF%BC%9A-%E5%AE%89%E8%A3%85-python%2F</url>
+    <content type="text"><![CDATA[方法一、docker pull python:3.6查找Docker Hub上的python镜像123456789101112131415runoob@runoob:~/python$ docker search pythonNAME DESCRIPTION STARS OFFICIAL AUTOMATEDpython Python is an interpreted,... 982 [OK] kaggle/python Docker image for Python... 33 [OK]azukiapp/python Docker image to run Python ... 3 [OK]vimagick/python mini python 2 [OK]tsuru/python Image for the Python ... 2 [OK]pandada8/alpine-python An alpine based python image 1 [OK]1science/python Python Docker images based on ... 1 [OK]lucidfrontier45/python-uwsgi Python with uWSGI 1 [OK]orbweb/python Python image 1 [OK]pathwar/python Python template for Pathwar levels 1 [OK]rounds/10m-python Python, setuptools and pip. 0 [OK]ruimashita/python ubuntu 14.04 python 0 [OK]tnanba/python Python on CentOS-7 image. 0 [OK] 这里我们拉取官方的镜像,标签为3.6 1runoob@runoob:~/python$ docker pull python:3.6 等待下载完成后，我们就可以在本地镜像列表里查到REPOSITORY为python,标签为3.6的镜像。123runoob@runoob:~/python$ docker images python:3.5 REPOSITORY TAG IMAGE ID CREATED SIZEpython 3.5 045767ddf24a 9 days ago 684.1 MB 方法二、通过 Dockerfile 构建首先，创建目录python,用于存放后面的相关东西。 1runoob@runoob:~$ mkdir -p ~/python ~/python/myapp myapp目录将映射为python容器配置的应用目录 进入创建的python目录，创建Dockerfile123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051FROM buildpack-deps:jessie# remove several traces of debian pythonRUN apt-get purge -y python.*# http://bugs.python.org/issue19846# &gt; At the moment, setting &quot;LANG=C&quot; on a Linux system *fundamentally breaks Python 3*, and that&apos;s not OK.ENV LANG C.UTF-8# gpg: key F73C700D: public key &quot;Larry Hastings &lt;larry@hastings.org&gt;&quot; importedENV GPG_KEY 97FC712E4C024BBEA48A61ED3A5CA953F73C700DENV PYTHON_VERSION 3.6# if this is called &quot;PIP_VERSION&quot;, pip explodes with &quot;ValueError: invalid truth value &apos;&lt;VERSION&gt;&apos;&quot;ENV PYTHON_PIP_VERSION 8.1.2RUN set -ex \ &amp;&amp; curl -fSL &quot;https://www.python.org/ftp/python/$&#123;PYTHON_VERSION%%[a-z]*&#125;/Python-$PYTHON_VERSION.tar.xz&quot; -o python.tar.xz \ &amp;&amp; curl -fSL &quot;https://www.python.org/ftp/python/$&#123;PYTHON_VERSION%%[a-z]*&#125;/Python-$PYTHON_VERSION.tar.xz.asc&quot; -o python.tar.xz.asc \ &amp;&amp; export GNUPGHOME=&quot;$(mktemp -d)&quot; \ &amp;&amp; gpg --keyserver ha.pool.sks-keyservers.net --recv-keys &quot;$GPG_KEY&quot; \ &amp;&amp; gpg --batch --verify python.tar.xz.asc python.tar.xz \ &amp;&amp; rm -r &quot;$GNUPGHOME&quot; python.tar.xz.asc \ &amp;&amp; mkdir -p /usr/src/python \ &amp;&amp; tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \ &amp;&amp; rm python.tar.xz \ \ &amp;&amp; cd /usr/src/python \ &amp;&amp; ./configure --enable-shared --enable-unicode=ucs4 \ &amp;&amp; make -j$(nproc) \ &amp;&amp; make install \ &amp;&amp; ldconfig \ &amp;&amp; pip3 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \ &amp;&amp; find /usr/local -depth \ \( \ \( -type d -a -name test -o -name tests \) \ -o \ \( -type f -a -name &apos;*.pyc&apos; -o -name &apos;*.pyo&apos; \) \ \) -exec rm -rf &apos;&#123;&#125;&apos; + \ &amp;&amp; rm -rf /usr/src/python ~/.cache# make some useful symlinks that are expected to existRUN cd /usr/local/bin \ &amp;&amp; ln -s easy_install-3.6 easy_install \ &amp;&amp; ln -s idle3 idle \ &amp;&amp; ln -s pydoc3 pydoc \ &amp;&amp; ln -s python3 python \ &amp;&amp; ln -s python3-config python-configCMD [&quot;python3&quot;] 通过Dockerfile创建一个镜像，替换成你自己的名字 1runoob@runoob:~/python$ docker build -t python:3.6 . 注意：命令最后有个’.’，要记得加上。 创建完成后，我们可以在本地的镜像列表里查找到刚刚创建的镜像123runoob@runoob:~/python$ docker images python:3.5 REPOSITORY TAG IMAGE ID CREATED SIZEpython 3.5 045767ddf24a 9 days ago 684.1 MB 使用python镜像在~/python/myapp目录下创建一个 helloworld.py 文件，代码如下： 123#!/usr/bin/pythonprint(&quot;Hello, World!&quot;); 运行容器1runoob@runoob:~/python$ docker run -v $PWD/myapp:/usr/src/myapp -w /usr/src/myapp python:3.5 python helloworld.py 命令说明： 12345-v $PWD/myapp:/usr/src/myapp :将主机中当前目录下的myapp挂载到容器的/usr/src/myapp-w /usr/src/myapp :指定容器的/usr/src/myapp目录为工作目录python helloworld.py :使用容器的python命令来执行工作目录中的helloworld.py文件 输出结果： 1Hello, World!]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker：常用删除命令]]></title>
+    <url>%2F2019%2F01%2F07%2Fdocker%EF%BC%9A%E5%B8%B8%E7%94%A8%E5%88%A0%E9%99%A4%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[删除一个或多个container删除一个container查看container ID：1docker ps -a 删除：1docker rm container_name/ID 使用name或者id删除。 删除多个container同时运行了hello-world两次，若要一次性删除hello-world的container，使用命令查看：123docker ps –a –f ancestor=hello-world或docker ps –s –filter=”ancestor=hello-world” 删除这两个：1docker rm $( docker ps -a -f ancestor=hello-world ) 所以，删除所有的container,命令格式1docker rm $( docker ps -a -q ) 删除一个或多个image删除image前需要stop 所有的container1docker stop $(docker ps -a -q) 查看所有的image1docker images 删除一个 hello-world image ,命令格式：1docker rmi image_name/ID 例如：1docker rmi c54a2cc56 若要删除所有的image, 使用命令：1docker rmi $(docker images -q) 有时image删不掉，可以强制删除：123docker rmi imagename 或docker rmi -f imagename]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>删除</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu：显卡驱动安装]]></title>
+    <url>%2F2019%2F01%2F07%2FUbuntu%EF%BC%9A%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[Ubuntu18.04安装显卡驱动命令：1ubuntu-drivers autoinstall 16.04及以下（ppa源安装驱动）：12345sudo add-apt-repository ppa:graphics-drivers/ppa sudo apt-get update sudo apt-get install nvidia-410 #此处要根据上面查询到的版本适当更改sudo apt-get install mesa-common-dev sudo apt-get install freeglut3-dev 如果报错：1sudo: add-apt-repository: command not found 实际上add-apt-repository是由python-software-properties这个工具包提供的，所以安装一下python-software-properties：1sudo apt-get install python-software-properties 有可能解决完这一步就OK了，但是也不一定，这个不一定让我也遇上了，执行sudo add-apt-repository ppa:jonathonf/vim，发现还是提示sudo: add-apt-repository: command not found，那么再安装一下software-properties-common：1sudo apt-get install software-properties-common 这下应该就可以了，执行sudo add-apt-repository ppa:jonathonf/vim就没问题了。 重启之后在终端内输入： 1nvidia-smi #若出现电脑GPU列表，即安装成功 如下所示：1234567891011121314151617Mon Jan 7 18:14:59 2019+-----------------------------------------------------------------------------+| NVIDIA-SMI 410.78 Driver Version: 410.78 CUDA Version: 10.0 ||-------------------------------+----------------------+----------------------+| GPU Name Persistence-M| Bus-Id Disp.A | Volatile Uncorr. ECC || Fan Temp Perf Pwr:Usage/Cap| Memory-Usage | GPU-Util Compute M. ||===============================+======================+======================|| 0 GeForce GTX 105... Off | 00000000:01:00.0 Off | N/A || 24% 23C P8 N/A / 75W | 43MiB / 4040MiB | 0% Default |+-------------------------------+----------------------+----------------------++-----------------------------------------------------------------------------+| Processes: GPU Memory || GPU PID Type Process name Usage ||=============================================================================|| 0 1332 G /usr/lib/xorg/Xorg 41MiB |+-----------------------------------------------------------------------------+ 显卡卸载1sudo apt-get purge nvidia*]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>gpu</tag>
+        <tag>显卡驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[服务器查看GPU等信息]]></title>
+    <url>%2F2019%2F01%2F07%2F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9F%A5%E7%9C%8BGPU%E7%AD%89%E4%BF%A1%E6%81%AF%2F</url>
+    <content type="text"><![CDATA[lspci，顾名思义，就是显示所有的pci设备信息。pci是一种总线，而通过pci总线连接的设备就是pci设备了。如今，我们常用的设备很多都是采用pci总线了，如：网卡、存储。 如果没有lspci命令，安装：1apt-get install pciutils 查看gpu：1lspci | grep -i vga 这样就可以显示机器上的显卡信息，比如 1234[root@localhost conf]# lspci | grep -i vga01:00.0 VGA compatible controller: nVidia Corporation Device 1081 (rev a1)02:00.0 VGA compatible controller: nVidia Corporation GT215 [GeForce GT 240] (rev a2)08:05.0 VGA compatible controller: ASPEED Technology, Inc. ASPEED Graphics Family (rev 10) 1234567891011121314151617181920如果想看详细的信息，比如 GeForce GT 240，即 02:00.0[root@localhost conf]# lspci -v -s 02:00.002:00.0 VGA compatible controller: nVidia Corporation GT215 [GeForce GT 240] (rev a2) (prog-if 00 [VGA controller])Subsystem: ASUSTeK Computer Inc. Device 8351Flags: bus master, fast devsel, latency 0, IRQ 169Memory at f9000000 (32-bit, non-prefetchable) [size=16M]Memory at d0000000 (64-bit, prefetchable) [size=256M]Memory at ce000000 (64-bit, prefetchable) [size=32M]I/O ports at bc00 [size=128][virtual] Expansion ROM at f8f80000 [disabled] [size=512K]Capabilities: [60] Power Management version 3Capabilities: [68] MSI: Enable- Count=1/1 Maskable- 64bit+Capabilities: [78] Express Endpoint, MSI 00Capabilities: [b4] Vendor Specific Information: Len=14 &lt;?&gt;Capabilities: [100] Virtual ChannelCapabilities: [128] Power Budgeting &lt;?&gt;Capabilities: [600] Vendor Specific Information: ID=0001 Rev=1 Len=024 &lt;?&gt;Kernel driver in use: nvidiaKernel modules: nvidiafb, nvidia 可以看到GT240的显存是 256M 如果没有安装显卡驱动，显示可能如下：1234567891011121314151617root@0765afb5370d:/# lspci | grep -i vga00:02.0 VGA compatible controller: Intel Corporation Device 3e9201:00.0 VGA compatible controller: NVIDIA Corporation Device 1c82 (rev a1)root@0765afb5370d:/# lspci | grep -i 01:00.001:00.0 VGA compatible controller: NVIDIA Corporation Device 1c82 (rev a1)root@0765afb5370d:/# lspci -v -s 01:00.001:00.0 VGA compatible controller: NVIDIA Corporation Device 1c82 (rev a1) (prog-if 00 [VGA controller]) Subsystem: ASUSTeK Computer Inc. Device 8609 Flags: bus master, fast devsel, latency 0, IRQ 125 Memory at f6000000 (32-bit, non-prefetchable) [size=16M] Memory at e0000000 (64-bit, prefetchable) [size=256M] Memory at f0000000 (64-bit, prefetchable) [size=32M] I/O ports at e000 [size=128] Expansion ROM at f7000000 [disabled] [size=512K] Capabilities: &lt;access denied&gt; Kernel driver in use: nouveaulspci: Unable to load libkmod resources: error -12 查看nvidia的gpu信息1nvidia-smi 配合watch命令, 让一秒刷新一次 1watch -n 1 nvidia-smi 查看内存及cpu使用情况的命令1top htop工具，更直观1apt-get install htop 安装完后，直接输入命令1htop 就可以看到内存或cpu的使用情况了。]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>gpu</tag>
+        <tag>服务器信息</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ubuntu和centos安装python3.6]]></title>
+    <url>%2F2019%2F01%2F07%2Fubuntu%E5%92%8Ccentos%E5%AE%89%E8%A3%85python3-6%2F</url>
+    <content type="text"><![CDATA[centos配置好epel源和ius源 123456# Centos 6yum install https://centos6.iuscommunity.org/ius-release.rpm -ywget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo# Centos 7yum install https://centos7.iuscommunity.org/ius-release.rpm -y 安装Python3.61234yum install python36u -y# 创建软链接ln -s /usr/bin/python3.6 /bin/python3 安装pip31234567yum install python36u-pip -y# 创建软链接ln -s /usr/bin/pip3.6 /bin/pip3# 升级pippip3 install --upgrade pip Ubuntu配置软件仓库，因为python 3.6 新版没有发布到ubuntu的正式仓库中，咱们通过第3方仓库来做。在命令行中输入： 1sudo add-apt-repository ppa:jonathonf/python-3.6 检查系统软件包并安装 python 3.612sudo apt-get updatesudo apt-get install python3.6 创建软链接1ln -s /usr/bin/pip3.6 /bin/pip3 安装pip31apt-get install python3-pip 使用apt-get install pip装的是pip2。 升级pip1pip3 install --upgrade pip]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>centos</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker：安装Ubuntu16.04原始镜像并调用gpu]]></title>
+    <url>%2F2019%2F01%2F07%2Fdocker%EF%BC%9A%E5%AE%89%E8%A3%85Ubuntu16-04%E5%8E%9F%E5%A7%8B%E9%95%9C%E5%83%8F%E5%B9%B6%E8%B0%83%E7%94%A8gpu%2F</url>
+    <content type="text"><![CDATA[安装Ubuntu16.04原始镜像：1docker pull ubuntu:16.04 Linux下无法使用add-apt-repository命令1234sudo apt-get install python-software-propertiessudo apt-get updatesudo apt install software-properties-common sudo apt-get update 镜像生成容器命令：1docker run -it --privileged=true ubuntu:16.04 privileged 参数功能，设置为true的时候，让docker的root拥有真正root的权限，可以调用宿主机硬件等，甚至可以让你在docker中使用docker，使用这个就可以使用显卡驱动等。 进入docker的container命令：1sudo docker exec -it 799 /bin/bash 其中799为containerID的前几个字符。 在宿主机上安装了nvidia驱动后，在docker上也安装，就可以在docker中使用命令1nvidia-smi 查看gpu情况了。]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>nvidia-docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu：账户相关]]></title>
+    <url>%2F2019%2F01%2F07%2FUbuntu%EF%BC%9A%E8%B4%A6%E6%88%B7%E7%9B%B8%E5%85%B3%2F</url>
+    <content type="text"><![CDATA[开启root账户，实际上就是给root用户设置一个密码的过程：1sudo passwd root 执行上面的命令后，输入当前用户的密码就可以设置root密码。 创建用户1sudo adduser xxx 这样的命令会在home目录下添加一个帐号 给指定用户增加sudo权限切换到root用户1su root 找到sudo文件/etc/sudoers，该文件默认是不可写的，添加可写权限1chmod u+w /etc/sudoers 修改sudoers文件，找到以下语句1root ALL=(ALL:ALL) ALL 在下面添加1yourUserName ALL=(ALL:ALL) ALL 保存退出。修改此文件风险比较大， 文件如果改坏， 导致所有用户的 sudo 权限都没了，所以修改时请注意 鉴于安全考虑修改完后应把sudoers写权限去掉1chmod u-w /etc/sudoers 如果发生问题：123sudo:sudo /etc/sudoers is world writablesudo:no valid sudoers sources found ,quittingsudo:unable to initialize policy plugin sudoers的权限被改了，改回来就好了。使用root用户输入：1pkexec chmod 0440 /etc/sudoers]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>账户</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[linux重命名文件和文件夹]]></title>
+    <url>%2F2019%2F01%2F07%2Flinux%E9%87%8D%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
+    <content type="text"><![CDATA[例如，before.txt是修改之前文件名，after.txt是准备修改的文件名 用mv指令就可以修改1mv before.txt after.txt 注意：如果当前目录下也有个after.txt的文件的话，我们的这个文件是会将它覆盖的 重命名文件夹同理。 mv命令也可以移动文件和文件夹 例如：将/a目录移动到/b下，并重命名为c1mv /a /b/c]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker：nvidia-docker安装]]></title>
+    <url>%2F2019%2F01%2F07%2Fdocker%EF%BC%9Anvidia-docker%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[先安装docker-ce：12345678910# step 1: 安装必要的一些系统工具sudo apt-get updatesudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common# step 2: 安装GPG证书curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -# Step 3: 写入软件源信息sudo add-apt-repository &quot;deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot;# Step 4: 更新并安装 Docker-CEsudo apt-get -y updatesudo apt-get -y install docker-ce nvidia-docker安装123456789101112131415161718# If you have nvidia-docker 1.0 installed: we need to remove it and all existing GPU containersdocker volume ls -q -f driver=nvidia-docker | xargs -r -I&#123;&#125; -n1 docker ps -q -a -f volume=&#123;&#125; | xargs -r docker rm -fsudo apt-get purge -y nvidia-docker# Add the package repositoriescurl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \ sudo apt-key add -distribution=$(. /etc/os-release;echo $ID$VERSION_ID)curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | \ sudo tee /etc/apt/sources.list.d/nvidia-docker.listsudo apt-get update# Install nvidia-docker2 and reload the Docker daemon configurationsudo apt-get install -y nvidia-docker2sudo pkill -SIGHUP dockerd# Test nvidia-smi with the latest official CUDA imagedocker run --runtime=nvidia --rm nvidia/cuda nvidia-smi]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>nvidia-docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[centos：centos U盘安装卡在 starting dracut initqueue hook]]></title>
     <url>%2F2018%2F12%2F31%2Fcentos%EF%BC%9Acentos-U%E7%9B%98%E5%AE%89%E8%A3%85%E5%8D%A1%E5%9C%A8-starting-dracut-initqueue-hook%2F</url>
     <content type="text"><![CDATA[https://blog.csdn.net/tangshiweibbs/article/details/80233828 出现123[ok] Reached target Basic System或者[ok] starting dracut initqueue hook 在启动后引导界面按 e 进行编辑,修改掉默认的信息：123setparams &apos;Install CentOS Linux 7&apos;linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=CentOS\x207\x20x86_64 xdriver=vesa nomodeset quietinitrdefi /images/pxeboot/initrd.img 改为：123setparams &apos;Install CentOS linux 7&apos;linuxefi /images/pxeboot/vmlinuz linux dd nomodeset quietinitrdefi /images/pxeboot/initrd.img 按Ctrl + X 执行上面的修改 然后启动后屏幕会列出当前机器的硬盘设备也包括你的U盘，一般一个硬盘的话，U盘都是sdb* 这样的【记住你的U盘设备路径】 我们看到了U盘的名称，前面的设备名称为/dev/sdb4 ，重启，U盘启动，修改引导， 1234【第二次修改后，注意U盘的设备路径】setparams &apos;Install CentOS Linux 7&apos;linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:/dev/sdb4 nomodeset quietinitrdefi /images/pxeboot/initrd.img 再次Ctrl + X 执行就可以了(好像上面不需要使用nomodeset quiet)]]></content>
@@ -20,8 +172,8 @@
         <category>centos</category>
       </categories>
       <tags>
-        <tag>centos</tag>
         <tag>java</tag>
+        <tag>centos</tag>
       </tags>
   </entry>
   <entry>
@@ -345,9 +497,9 @@
         <category>springboot</category>
       </categories>
       <tags>
+        <tag>mysql</tag>
         <tag>springboot</tag>
         <tag>mybatis</tag>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -655,8 +807,8 @@
         <category>springboot</category>
       </categories>
       <tags>
-        <tag>springboot</tag>
         <tag>mysql</tag>
+        <tag>springboot</tag>
         <tag>JdbcTemplate</tag>
       </tags>
   </entry>
@@ -681,8 +833,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>爬虫</tag>
         <tag>requests</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
@@ -828,8 +980,8 @@
         <category>springboot</category>
       </categories>
       <tags>
-        <tag>springboot</tag>
         <tag>mysql</tag>
+        <tag>springboot</tag>
         <tag>JdbcTemplate</tag>
       </tags>
   </entry>

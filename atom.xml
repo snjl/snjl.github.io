@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://snjl.github.io/"/>
-  <updated>2018-12-31T15:58:09.414Z</updated>
+  <updated>2019-01-07T15:43:28.360Z</updated>
   <id>https://snjl.github.io/</id>
   
   <author>
@@ -15,6 +15,350 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>docker安装</title>
+    <link href="https://snjl.github.io/2019/01/07/docker%E5%AE%89%E8%A3%85/"/>
+    <id>https://snjl.github.io/2019/01/07/docker安装/</id>
+    <published>2019-01-07T15:42:13.000Z</published>
+    <updated>2019-01-07T15:43:28.360Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Ubuntu安装"><a href="#Ubuntu安装" class="headerlink" title="Ubuntu安装"></a>Ubuntu安装</h1><ol><li><p>添加GPG key：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</span><br></pre></td></tr></table></figure></li><li><p>添加源<br> 新建文件：/etc/apt/sources.list.d/docker.list，在里面添加内容：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb https://apt.dockerproject.org/repo ubuntu-xenial main</span><br></pre></td></tr></table></figure></li><li><p>更新源</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br></pre></td></tr></table></figure></li><li><p>安装与测试<br> 安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install docker-engine</span><br></pre></td></tr></table></figure></li></ol><p>测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service docker start </span><br><span class="line">$ sudo docker run hello-world</span><br></pre></td></tr></table></figure></p><h1 id="Centos安装"><a href="#Centos安装" class="headerlink" title="Centos安装"></a>Centos安装</h1><ol><li><p>确保 yum 包更新到最新</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br></pre></td></tr></table></figure></li><li><p>安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure></li><li><p>docker启动</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker start</span><br></pre></td></tr></table></figure></li><li><p>测试</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Ubuntu安装&quot;&gt;&lt;a href=&quot;#Ubuntu安装&quot; class=&quot;headerlink&quot; title=&quot;Ubuntu安装&quot;&gt;&lt;/a&gt;Ubuntu安装&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;添加GPG key：&lt;/p&gt;
+&lt;figure class=&quot;highlig
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="docker" scheme="https://snjl.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>留言板系统</title>
+    <link href="https://snjl.github.io/2019/01/07/%E7%95%99%E8%A8%80%E6%9D%BF%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://snjl.github.io/2019/01/07/留言板系统/</id>
+    <published>2019-01-07T15:41:29.000Z</published>
+    <updated>2019-01-07T15:42:18.666Z</updated>
+    
+    <content type="html"><![CDATA[<p>需要登录的留言板系统。</p><p>项目地址：<a href="https://github.com/snjl/springboot.happyNewYear.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.happyNewYear.git</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;需要登录的留言板系统。&lt;/p&gt;
+&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/snjl/springboot.happyNewYear.git&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/s
+      
+    
+    </summary>
+    
+      <category term="项目" scheme="https://snjl.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="项目" scheme="https://snjl.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mkdir命令</title>
+    <link href="https://snjl.github.io/2019/01/07/mkdir%E5%91%BD%E4%BB%A4/"/>
+    <id>https://snjl.github.io/2019/01/07/mkdir命令/</id>
+    <published>2019-01-07T15:41:01.000Z</published>
+    <updated>2019-01-07T15:41:12.221Z</updated>
+    
+    <content type="html"><![CDATA[<p>linux mkdir 命令用来创建指定的名称的目录，要求创建目录的用户在当前目录中具有写权限，并且指定的目录名不能是当前目录中已有的目录。</p><h1 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir [选项] 目录...</span><br></pre></td></tr></table></figure><h1 id="命令功能"><a href="#命令功能" class="headerlink" title="命令功能"></a>命令功能</h1><p>通过 mkdir 命令可以实现在指定位置创建以 DirName(指定的文件名)命名的文件夹或目录。要创建文件夹或目录的用户必须对所创建的文件夹的父文件夹具有写权限。并且，所创建的文件夹(目录)不能与其父目录(即父文件夹)中的文件名重名，即同一个目录下不能有同名的(区分大小写)。 </p><h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-m, --mode=模式，设定权限&lt;模式&gt; (类似 chmod)，而不是 rwxrwxrwx 减 umask</span><br><span class="line"></span><br><span class="line"> -p, --parents  可以是一个路径名称。此时若路径中的某些目录尚不存在,加上此选项后,系统将自动建立好那些尚不存在的目录,即一次可以建立多个目录; </span><br><span class="line"></span><br><span class="line"> -v, --verbose  每次创建新目录都显示信息</span><br><span class="line"></span><br><span class="line">     --help   显示此帮助信息并退出</span><br><span class="line"></span><br><span class="line">     --version  输出版本信息并退出</span><br></pre></td></tr></table></figure><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p test2/test22</span><br></pre></td></tr></table></figure><p>创建一个文件夹test2，里面有一个子文件夹test22。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;linux mkdir 命令用来创建指定的名称的目录，要求创建目录的用户在当前目录中具有写权限，并且指定的目录名不能是当前目录中已有的目录。&lt;/p&gt;
+&lt;h1 id=&quot;命令格式&quot;&gt;&lt;a href=&quot;#命令格式&quot; class=&quot;headerlink&quot; title=&quot;命令格式&quot;&gt;
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="命令" scheme="https://snjl.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vi命令</title>
+    <link href="https://snjl.github.io/2019/01/07/vi%E5%91%BD%E4%BB%A4/"/>
+    <id>https://snjl.github.io/2019/01/07/vi命令/</id>
+    <published>2019-01-07T15:40:21.000Z</published>
+    <updated>2019-01-07T15:41:04.324Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-常用"><a href="#1-常用" class="headerlink" title="1. 常用"></a>1. 常用</h1><p>删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x        删除当前光标下的字符</span><br><span class="line">dw       删除光标之后的单词剩余部分。</span><br><span class="line">d$       删除光标之后的该行剩余部分。</span><br><span class="line">dd       删除当前行。</span><br><span class="line"></span><br><span class="line">c        功能和d相同，区别在于完成删除操作后进入INSERT MODE</span><br><span class="line">cc       也是删除当前行，然后进入INSERT MODE</span><br></pre></td></tr></table></figure></p><p>移动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gg       到页首</span><br><span class="line">G        到页末</span><br><span class="line">0        到行首</span><br><span class="line">$        到行尾</span><br></pre></td></tr></table></figure></p><a id="more"></a><h1 id="2-在Vi中移动光标"><a href="#2-在Vi中移动光标" class="headerlink" title="2. 在Vi中移动光标"></a>2. 在Vi中移动光标</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> k        上</span><br><span class="line">h   l    左  右</span><br><span class="line">  j        下</span><br><span class="line"></span><br><span class="line">^        移动到该行第一个非空格的字符处</span><br><span class="line">w        向前移动一个单词，将符号或标点当作单词处理</span><br><span class="line">W        向前移动一个单词，不把符号或标点当作单词处理</span><br><span class="line">b        向后移动一个单词，把符号或标点当作单词处理</span><br><span class="line">B        向后移动一个单词，不把符号或标点当作单词处理</span><br><span class="line">(        光标移至句首</span><br><span class="line">)        光标移至句尾</span><br><span class="line">&#123;        光标移至段落开头</span><br><span class="line">&#125;        光标移至段落结尾</span><br><span class="line">H        光标移至屏幕顶行</span><br><span class="line">M        光标移至屏幕中间行</span><br><span class="line">L        光标移至屏幕最后行 </span><br><span class="line">0        到行首</span><br><span class="line">$        到行尾</span><br><span class="line">gg       到页首</span><br><span class="line">G        到页末</span><br><span class="line">行号+G   跳转到指定行</span><br><span class="line">n+       光标下移n行</span><br><span class="line">n-       光标上移n行 </span><br><span class="line">Ctrl+g   查询当前行信息和当前文件信息</span><br><span class="line"></span><br><span class="line">fx       向右跳到本行字符x处（x可以是任何字符）</span><br><span class="line">Fx       向左跳到本行字符x处（x可以是任何字符）</span><br><span class="line"></span><br><span class="line">tx       和fx相同，区别是跳到字符x前</span><br><span class="line">Tx       和Fx相同，区别是跳到字符x后</span><br><span class="line"></span><br><span class="line">C-b      向上滚动一屏</span><br><span class="line">C-f      向下滚动一屏</span><br><span class="line">C-u      向上滚动半屏</span><br><span class="line">C-d      向下滚动半屏</span><br><span class="line">C-y      向上滚动一行</span><br><span class="line">C-e      向下滚动一行</span><br><span class="line"></span><br><span class="line">nz       将第n行滚至屏幕顶部，不指定n时将当前行滚至屏幕顶部。</span><br></pre></td></tr></table></figure><h1 id="3-进入和退出Vi命令"><a href="#3-进入和退出Vi命令" class="headerlink" title="3. 进入和退出Vi命令"></a>3. 进入和退出Vi命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vi filename               打开或新建文件，并将光标置于第一行首</span><br><span class="line">vi +n filename            打开文件，并将光标置于第n行首</span><br><span class="line">vi + filename             打开文件，并将光标置于最后一行首</span><br><span class="line">vi +/pattern filename     打开文件，并将光标置于第一个与pattern匹配的串处</span><br><span class="line">vi -r filename            在上次正用vi编辑时发生系统崩溃，恢复filename</span><br><span class="line">vi filename ... filename  打开多个文件，依次进行编辑 </span><br><span class="line"></span><br><span class="line">ZZ                        退出vi并保存</span><br><span class="line">:q!                       退出vi，不保存</span><br><span class="line">:wq                       退出vi并保存</span><br></pre></td></tr></table></figure><h1 id="4-重复操作"><a href="#4-重复操作" class="headerlink" title="4. 重复操作"></a>4. 重复操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.        重复上一次操作</span><br></pre></td></tr></table></figure><h1 id="5-自动补齐"><a href="#5-自动补齐" class="headerlink" title="5. 自动补齐"></a>5. 自动补齐</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C-n      匹配下一个关键字</span><br><span class="line">C-p      匹配上一个关键字</span><br></pre></td></tr></table></figure><h1 id="6-插入"><a href="#6-插入" class="headerlink" title="6. 插入"></a>6. 插入</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">o        在光标下方新开一行并将光标置于新行行首，进入插入模式。</span><br><span class="line">O        同上，在光标上方。</span><br><span class="line"></span><br><span class="line">a        在光标之后进入插入模式。</span><br><span class="line">A        同上，在光标之前。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">R        进入替换模式，直到按下Esc</span><br><span class="line">set xxx  设置XXX选项。</span><br></pre></td></tr></table></figure><h1 id="7-行合并"><a href="#7-行合并" class="headerlink" title="7. 行合并"></a>7. 行合并</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">J        把下面一行合并到本行后面</span><br></pre></td></tr></table></figure><h1 id="8-Vi中查找及替换命令"><a href="#8-Vi中查找及替换命令" class="headerlink" title="8. Vi中查找及替换命令"></a>8. Vi中查找及替换命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/pattern         从光标开始处向文件尾搜索pattern</span><br><span class="line">?pattern         从光标开始处向文件首搜索pattern</span><br><span class="line">n                在同一方向重复上一次搜索命令</span><br><span class="line">N                在反方向上重复上一次搜索命令</span><br><span class="line">%                查找配对的括号</span><br><span class="line">:s/p1/p2/g       将当前行中所有p1均用p2替代，若要每个替换都向用户询问则应该用gc选项</span><br><span class="line">:n1,n2s/p1/p2/g  将第n1至n2行中所有p1均用p2替代</span><br><span class="line">:g/p1/s//p2/g    将文件中所有p1均用p2替换</span><br><span class="line"></span><br><span class="line">.*[]^%~$ 在Vi中具有特殊含义，若需要查找则应该加上转义字符&quot;\&quot;</span><br></pre></td></tr></table></figure><h1 id="9-查找的一些选项"><a href="#9-查找的一些选项" class="headerlink" title="9. 查找的一些选项"></a>9. 查找的一些选项</h1><h2 id="1-设置高亮"><a href="#1-设置高亮" class="headerlink" title="1. 设置高亮"></a>1. 设置高亮</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set hlsearch    设置高亮</span><br><span class="line">:set nohlsearch  关闭高亮</span><br><span class="line">:nohlsearch      关闭当前已经设置的高亮</span><br></pre></td></tr></table></figure><h2 id="2-增量查找"><a href="#2-增量查找" class="headerlink" title="2. 增量查找"></a>2. 增量查找</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:set incsearch   设置增量查找</span><br><span class="line">:set noincsearch 关闭增量查找</span><br></pre></td></tr></table></figure><h1 id="10-在Vi中删除"><a href="#10-在Vi中删除" class="headerlink" title="10. 在Vi中删除"></a>10. 在Vi中删除</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x        删除当前光标下的字符</span><br><span class="line">dw       删除光标之后的单词剩余部分。</span><br><span class="line">d$       删除光标之后的该行剩余部分。</span><br><span class="line">dd       删除当前行。</span><br><span class="line"></span><br><span class="line">c        功能和d相同，区别在于完成删除操作后进入INSERT MODE</span><br><span class="line">cc       也是删除当前行，然后进入INSERT MODE</span><br></pre></td></tr></table></figure><h1 id="11-更改字符"><a href="#11-更改字符" class="headerlink" title="11. 更改字符"></a>11. 更改字符</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rx       将当前光标下的字符更改为x（x为任意字符） </span><br><span class="line">~        更改当前光标下的字符的大小写</span><br></pre></td></tr></table></figure><h1 id="12-键盘宏操作"><a href="#12-键盘宏操作" class="headerlink" title="12. 键盘宏操作"></a>12. 键盘宏操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qcharacter  开始录制宏，character为a到z的任意字符</span><br><span class="line">q           终止录制宏</span><br><span class="line">@character  调用先前录制的宏</span><br></pre></td></tr></table></figure><h1 id="13-恢复误操作"><a href="#13-恢复误操作" class="headerlink" title="13. 恢复误操作"></a>13. 恢复误操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u        撤销最后执行的命令</span><br><span class="line">U        修正之前对该行的操作</span><br><span class="line">Ctrl+R   Redo</span><br></pre></td></tr></table></figure><h1 id="14-在Vi中操作Frame"><a href="#14-在Vi中操作Frame" class="headerlink" title="14. 在Vi中操作Frame"></a>14. 在Vi中操作Frame</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c-w c-n  增加frame</span><br><span class="line">c-w c-c  减少frame</span><br><span class="line">c-w c-w  切换frame</span><br><span class="line">c-w c-r  交换两个frame</span><br></pre></td></tr></table></figure><h1 id="15-VIM中的块操作"><a href="#15-VIM中的块操作" class="headerlink" title="15. VIM中的块操作"></a>15. VIM中的块操作</h1><p>Vim支持多达26个剪贴板 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">选块   先用v，C-v，V选择一块，然后用y复制，再用p粘贴。</span><br><span class="line">yy     复制当前整行</span><br><span class="line">nyy    复制当前行开始的n行内容</span><br><span class="line">?nyy   将光标当前行及其下n行的内容保存到寄存器?中，其中?为一个字母，n为一个数字</span><br><span class="line">?nyw   将光标当前行及其下n个词保存到寄存器?中，其中?为一个字母，n为一个数字</span><br><span class="line">?nyl   将光标当前行及其下n个字符保存到寄存器?中，其中?为一个字母，n为一个数字</span><br><span class="line">?p     将寄存器?中的内容粘贴到光标位置之后。如果?是用yy复制的完整行，</span><br><span class="line">       则粘贴在光标所在行下面。这里?可以是一个字母，也可以是一个数字 </span><br><span class="line">?P     将寄存器a中的内容粘贴到光标位置之前。如果?是用yy复制的完整行，</span><br><span class="line">       则粘贴在光标所在行上面。这里?可以是一个字母，也可以是一个数字 </span><br><span class="line">ay[motion]</span><br><span class="line">          ay$    复制光标位置到行末并保存在寄存器a中</span><br><span class="line">          ayft   复制光标位置到当前行第一个字母t并保存在寄存器a中</span><br></pre></td></tr></table></figure><p>以上指令皆可去掉a工作，则y,p对未命名寄存器工作（所有d,c,x,y的对象都被保存在这里）。</p><h2 id="1-剪切-复制-粘贴"><a href="#1-剪切-复制-粘贴" class="headerlink" title="1. 剪切/复制/粘贴"></a>1. 剪切/复制/粘贴</h2><p>所有删除的内容自动被保存，可以用p键粘贴 </p><h1 id="16-Vi的选项设置"><a href="#16-Vi的选项设置" class="headerlink" title="16. Vi的选项设置"></a>16. Vi的选项设置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">all         列出所有选项设置情况</span><br><span class="line">term        设置终端类型</span><br><span class="line">ignorance   在搜索中忽略大小写</span><br><span class="line">list        显示制表位(Ctrl+I)和行尾标志($)</span><br><span class="line">number      显示行号</span><br><span class="line">report      显示由面向行的命令修改过的数目</span><br><span class="line">terse       显示简短的警告信息</span><br><span class="line">warn        在转到别的文件时若没保存当前文件则显示NO write信息</span><br><span class="line">nomagic     允许在搜索模式中，使用前面不带“\”的特殊字符</span><br><span class="line">nowrapscan  禁止vi在搜索到达文件两端时，又从另一端开始</span><br><span class="line">mesg        允许vi显示其他用户用write写到自己终端上的信息</span><br></pre></td></tr></table></figure><h1 id="17-tips"><a href="#17-tips" class="headerlink" title="17. tips"></a>17. tips</h1><p>对代码自动格式化 gg=G </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-常用&quot;&gt;&lt;a href=&quot;#1-常用&quot; class=&quot;headerlink&quot; title=&quot;1. 常用&quot;&gt;&lt;/a&gt;1. 常用&lt;/h1&gt;&lt;p&gt;删除：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;x        删除当前光标下的字符&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dw       删除光标之后的单词剩余部分。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;d$       删除光标之后的该行剩余部分。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dd       删除当前行。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;c        功能和d相同，区别在于完成删除操作后进入INSERT MODE&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cc       也是删除当前行，然后进入INSERT MODE&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;移动：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gg       到页首&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;G        到页末&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0        到行首&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$        到行尾&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="命令" scheme="https://snjl.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker： 安装 python</title>
+    <link href="https://snjl.github.io/2019/01/07/docker%EF%BC%9A-%E5%AE%89%E8%A3%85-python/"/>
+    <id>https://snjl.github.io/2019/01/07/docker：-安装-python/</id>
+    <published>2019-01-07T15:37:41.000Z</published>
+    <updated>2019-01-07T15:38:34.752Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="方法一、docker-pull-python-3-6"><a href="#方法一、docker-pull-python-3-6" class="headerlink" title="方法一、docker pull python:3.6"></a>方法一、docker pull python:3.6</h1><p>查找Docker Hub上的python镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~/python$ docker search python</span><br><span class="line">NAME                           DESCRIPTION                        STARS     OFFICIAL   AUTOMATED</span><br><span class="line">python                         Python is an interpreted,...       982       [OK]       </span><br><span class="line">kaggle/python                  Docker image for Python...         33                   [OK]</span><br><span class="line">azukiapp/python                Docker image to run Python ...     3                    [OK]</span><br><span class="line">vimagick/python                mini python                                  2          [OK]</span><br><span class="line">tsuru/python                   Image for the Python ...           2                    [OK]</span><br><span class="line">pandada8/alpine-python         An alpine based python image                 1          [OK]</span><br><span class="line">1science/python                Python Docker images based on ...  1                    [OK]</span><br><span class="line">lucidfrontier45/python-uwsgi   Python with uWSGI                  1                    [OK]</span><br><span class="line">orbweb/python                  Python image                       1                    [OK]</span><br><span class="line">pathwar/python                 Python template for Pathwar levels 1                    [OK]</span><br><span class="line">rounds/10m-python              Python, setuptools and pip.        0                    [OK]</span><br><span class="line">ruimashita/python              ubuntu 14.04 python                0                    [OK]</span><br><span class="line">tnanba/python                  Python on CentOS-7 image.          0                    [OK]</span><br></pre></td></tr></table></figure></p><p>这里我们拉取官方的镜像,标签为3.6<br><a id="more"></a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~/python$ docker pull python:3.6</span><br></pre></td></tr></table></figure><p>等待下载完成后，我们就可以在本地镜像列表里查到REPOSITORY为python,标签为3.6的镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~/python$ docker images python:3.5 </span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">python              3.5              045767ddf24a        9 days ago          684.1 MB</span><br></pre></td></tr></table></figure></p><h1 id="方法二、通过-Dockerfile-构建"><a href="#方法二、通过-Dockerfile-构建" class="headerlink" title="方法二、通过 Dockerfile 构建"></a>方法二、通过 Dockerfile 构建</h1><p>首先，创建目录python,用于存放后面的相关东西。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~$ mkdir -p ~/python ~/python/myapp</span><br></pre></td></tr></table></figure><p>myapp目录将映射为python容器配置的应用目录</p><p>进入创建的python目录，创建Dockerfile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">FROM buildpack-deps:jessie</span><br><span class="line"></span><br><span class="line"># remove several traces of debian python</span><br><span class="line">RUN apt-get purge -y python.*</span><br><span class="line"></span><br><span class="line"># http://bugs.python.org/issue19846</span><br><span class="line"># &gt; At the moment, setting &quot;LANG=C&quot; on a Linux system *fundamentally breaks Python 3*, and that&apos;s not OK.</span><br><span class="line">ENV LANG C.UTF-8</span><br><span class="line"></span><br><span class="line"># gpg: key F73C700D: public key &quot;Larry Hastings &lt;larry@hastings.org&gt;&quot; imported</span><br><span class="line">ENV GPG_KEY 97FC712E4C024BBEA48A61ED3A5CA953F73C700D</span><br><span class="line"></span><br><span class="line">ENV PYTHON_VERSION 3.6</span><br><span class="line"></span><br><span class="line"># if this is called &quot;PIP_VERSION&quot;, pip explodes with &quot;ValueError: invalid truth value &apos;&lt;VERSION&gt;&apos;&quot;</span><br><span class="line">ENV PYTHON_PIP_VERSION 8.1.2</span><br><span class="line"></span><br><span class="line">RUN set -ex \</span><br><span class="line">        &amp;&amp; curl -fSL &quot;https://www.python.org/ftp/python/$&#123;PYTHON_VERSION%%[a-z]*&#125;/Python-$PYTHON_VERSION.tar.xz&quot; -o python.tar.xz \</span><br><span class="line">        &amp;&amp; curl -fSL &quot;https://www.python.org/ftp/python/$&#123;PYTHON_VERSION%%[a-z]*&#125;/Python-$PYTHON_VERSION.tar.xz.asc&quot; -o python.tar.xz.asc \</span><br><span class="line">        &amp;&amp; export GNUPGHOME=&quot;$(mktemp -d)&quot; \</span><br><span class="line">        &amp;&amp; gpg --keyserver ha.pool.sks-keyservers.net --recv-keys &quot;$GPG_KEY&quot; \</span><br><span class="line">        &amp;&amp; gpg --batch --verify python.tar.xz.asc python.tar.xz \</span><br><span class="line">        &amp;&amp; rm -r &quot;$GNUPGHOME&quot; python.tar.xz.asc \</span><br><span class="line">        &amp;&amp; mkdir -p /usr/src/python \</span><br><span class="line">        &amp;&amp; tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \</span><br><span class="line">        &amp;&amp; rm python.tar.xz \</span><br><span class="line">        \</span><br><span class="line">        &amp;&amp; cd /usr/src/python \</span><br><span class="line">        &amp;&amp; ./configure --enable-shared --enable-unicode=ucs4 \</span><br><span class="line">        &amp;&amp; make -j$(nproc) \</span><br><span class="line">        &amp;&amp; make install \</span><br><span class="line">        &amp;&amp; ldconfig \</span><br><span class="line">        &amp;&amp; pip3 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \</span><br><span class="line">        &amp;&amp; find /usr/local -depth \</span><br><span class="line">                \( \</span><br><span class="line">                    \( -type d -a -name test -o -name tests \) \</span><br><span class="line">                    -o \</span><br><span class="line">                    \( -type f -a -name &apos;*.pyc&apos; -o -name &apos;*.pyo&apos; \) \</span><br><span class="line">                \) -exec rm -rf &apos;&#123;&#125;&apos; + \</span><br><span class="line">        &amp;&amp; rm -rf /usr/src/python ~/.cache</span><br><span class="line"></span><br><span class="line"># make some useful symlinks that are expected to exist</span><br><span class="line">RUN cd /usr/local/bin \</span><br><span class="line">        &amp;&amp; ln -s easy_install-3.6 easy_install \</span><br><span class="line">        &amp;&amp; ln -s idle3 idle \</span><br><span class="line">        &amp;&amp; ln -s pydoc3 pydoc \</span><br><span class="line">        &amp;&amp; ln -s python3 python \</span><br><span class="line">        &amp;&amp; ln -s python3-config python-config</span><br><span class="line"></span><br><span class="line">CMD [&quot;python3&quot;]</span><br></pre></td></tr></table></figure></p><p>通过Dockerfile创建一个镜像，替换成你自己的名字</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~/python$ docker build -t python:3.6 .</span><br></pre></td></tr></table></figure><p><strong>注意：命令最后有个’.’，要记得加上。</strong></p><p>创建完成后，我们可以在本地的镜像列表里查找到刚刚创建的镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~/python$ docker images python:3.5 </span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">python              3.5              045767ddf24a        9 days ago          684.1 MB</span><br></pre></td></tr></table></figure></p><h1 id="使用python镜像"><a href="#使用python镜像" class="headerlink" title="使用python镜像"></a>使用python镜像</h1><p>在~/python/myapp目录下创建一个 helloworld.py 文件，代码如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">print(&quot;Hello, World!&quot;);</span><br></pre></td></tr></table></figure><h2 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~/python$ docker run  -v $PWD/myapp:/usr/src/myapp  -w /usr/src/myapp python:3.5 python helloworld.py</span><br></pre></td></tr></table></figure><p>命令说明：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-v $PWD/myapp:/usr/src/myapp :将主机中当前目录下的myapp挂载到容器的/usr/src/myapp</span><br><span class="line"></span><br><span class="line">-w /usr/src/myapp :指定容器的/usr/src/myapp目录为工作目录</span><br><span class="line"></span><br><span class="line">python helloworld.py :使用容器的python命令来执行工作目录中的helloworld.py文件</span><br></pre></td></tr></table></figure><p>输出结果：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello, World!</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;方法一、docker-pull-python-3-6&quot;&gt;&lt;a href=&quot;#方法一、docker-pull-python-3-6&quot; class=&quot;headerlink&quot; title=&quot;方法一、docker pull python:3.6&quot;&gt;&lt;/a&gt;方法一、docker pull python:3.6&lt;/h1&gt;&lt;p&gt;查找Docker Hub上的python镜像&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;runoob@runoob:~/python$ docker search python&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NAME                           DESCRIPTION                        STARS     OFFICIAL   AUTOMATED&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;python                         Python is an interpreted,...       982       [OK]       &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;kaggle/python                  Docker image for Python...         33                   [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;azukiapp/python                Docker image to run Python ...     3                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;vimagick/python                mini python                                  2          [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tsuru/python                   Image for the Python ...           2                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;pandada8/alpine-python         An alpine based python image                 1          [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1science/python                Python Docker images based on ...  1                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;lucidfrontier45/python-uwsgi   Python with uWSGI                  1                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;orbweb/python                  Python image                       1                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;pathwar/python                 Python template for Pathwar levels 1                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rounds/10m-python              Python, setuptools and pip.        0                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ruimashita/python              ubuntu 14.04 python                0                    [OK]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tnanba/python                  Python on CentOS-7 image.          0                    [OK]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这里我们拉取官方的镜像,标签为3.6&lt;br&gt;
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="docker" scheme="https://snjl.github.io/tags/docker/"/>
+    
+      <category term="python" scheme="https://snjl.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker：常用删除命令</title>
+    <link href="https://snjl.github.io/2019/01/07/docker%EF%BC%9A%E5%B8%B8%E7%94%A8%E5%88%A0%E9%99%A4%E5%91%BD%E4%BB%A4/"/>
+    <id>https://snjl.github.io/2019/01/07/docker：常用删除命令/</id>
+    <published>2019-01-07T15:36:36.000Z</published>
+    <updated>2019-01-07T15:39:47.861Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="删除一个或多个container"><a href="#删除一个或多个container" class="headerlink" title="删除一个或多个container"></a>删除一个或多个container</h1><h2 id="删除一个container"><a href="#删除一个container" class="headerlink" title="删除一个container"></a>删除一个container</h2><p>查看container ID：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure></p><p>删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm container_name/ID</span><br></pre></td></tr></table></figure></p><p>使用name或者id删除。</p><h2 id="删除多个container"><a href="#删除多个container" class="headerlink" title="删除多个container"></a>删除多个container</h2><p>同时运行了hello-world两次，若要一次性删除hello-world的container，使用命令查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps –a –f ancestor=hello-world</span><br><span class="line">或</span><br><span class="line">docker ps –s –filter=”ancestor=hello-world”</span><br></pre></td></tr></table></figure></p><p>删除这两个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm $( docker ps -a -f  ancestor=hello-world )</span><br></pre></td></tr></table></figure></p><p>所以，删除所有的container,命令格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm  $( docker ps -a -q )</span><br></pre></td></tr></table></figure></p><h1 id="删除一个或多个image"><a href="#删除一个或多个image" class="headerlink" title="删除一个或多个image"></a>删除一个或多个image</h1><p>删除image前需要stop 所有的container<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop $(docker  ps  -a -q)</span><br></pre></td></tr></table></figure></p><p>查看所有的image<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure></p><p>删除一个 hello-world image ,命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi image_name/ID</span><br></pre></td></tr></table></figure></p><p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi c54a2cc56</span><br></pre></td></tr></table></figure></p><p>若要删除所有的image, 使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure></p><p>有时image删不掉，可以强制删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker rmi imagename </span><br><span class="line">或</span><br><span class="line">docker rmi -f imagename</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;删除一个或多个container&quot;&gt;&lt;a href=&quot;#删除一个或多个container&quot; class=&quot;headerlink&quot; title=&quot;删除一个或多个container&quot;&gt;&lt;/a&gt;删除一个或多个container&lt;/h1&gt;&lt;h2 id=&quot;删除一个conta
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="docker" scheme="https://snjl.github.io/tags/docker/"/>
+    
+      <category term="删除" scheme="https://snjl.github.io/tags/%E5%88%A0%E9%99%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu：显卡驱动安装</title>
+    <link href="https://snjl.github.io/2019/01/07/Ubuntu%EF%BC%9A%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85/"/>
+    <id>https://snjl.github.io/2019/01/07/Ubuntu：显卡驱动安装/</id>
+    <published>2019-01-07T15:36:04.000Z</published>
+    <updated>2019-01-07T15:36:24.723Z</updated>
+    
+    <content type="html"><![CDATA[<p>Ubuntu18.04安装显卡驱动命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure></p><p>16.04及以下（ppa源安装驱动）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers/ppa  </span><br><span class="line">sudo apt-get update  </span><br><span class="line">sudo apt-get install nvidia-410 #此处要根据上面查询到的版本适当更改</span><br><span class="line">sudo apt-get install mesa-common-dev  </span><br><span class="line">sudo apt-get install freeglut3-dev</span><br></pre></td></tr></table></figure></p><p>如果报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo: add-apt-repository: command not found</span><br></pre></td></tr></table></figure></p><p>实际上add-apt-repository是由python-software-properties这个工具包提供的，所以安装一下python-software-properties：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br></pre></td></tr></table></figure></p><p>有可能解决完这一步就OK了，但是也不一定，这个不一定让我也遇上了，执行sudo add-apt-repository ppa:jonathonf/vim，发现还是提示sudo: add-apt-repository: command not found，那么再安装一下software-properties-common：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br></pre></td></tr></table></figure></p><p>这下应该就可以了，执行sudo add-apt-repository ppa:jonathonf/vim就没问题了。</p><p>重启之后在终端内输入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi  #若出现电脑GPU列表，即安装成功</span><br></pre></td></tr></table></figure><p>如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Mon Jan  7 18:14:59 2019</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 410.78       Driver Version: 410.78       CUDA Version: 10.0     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce GTX 105...  Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| 24%   23C    P8    N/A /  75W |     43MiB /  4040MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|    0      1332      G   /usr/lib/xorg/Xorg                            41MiB |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure></p><p>显卡卸载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Ubuntu18.04安装显卡驱动命令：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td 
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="gpu" scheme="https://snjl.github.io/tags/gpu/"/>
+    
+      <category term="显卡驱动" scheme="https://snjl.github.io/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>服务器查看GPU等信息</title>
+    <link href="https://snjl.github.io/2019/01/07/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9F%A5%E7%9C%8BGPU%E7%AD%89%E4%BF%A1%E6%81%AF/"/>
+    <id>https://snjl.github.io/2019/01/07/服务器查看GPU等信息/</id>
+    <published>2019-01-07T15:35:18.000Z</published>
+    <updated>2019-01-07T15:36:08.783Z</updated>
+    
+    <content type="html"><![CDATA[<p>lspci，顾名思义，就是显示所有的pci设备信息。pci是一种总线，而通过pci总线连接的设备就是pci设备了。如今，我们常用的设备很多都是采用pci总线了，如：网卡、存储。</p><p>如果没有lspci命令，安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install pciutils</span><br></pre></td></tr></table></figure></p><p>查看gpu：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci  | grep -i vga</span><br></pre></td></tr></table></figure></p><a id="more"></a><p>这样就可以显示机器上的显卡信息，比如 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost conf]# lspci | grep -i vga</span><br><span class="line">01:00.0 VGA compatible controller: nVidia Corporation Device 1081 (rev a1)</span><br><span class="line">02:00.0 VGA compatible controller: nVidia Corporation GT215 [GeForce GT 240] (rev a2)</span><br><span class="line">08:05.0 VGA compatible controller: ASPEED Technology, Inc. ASPEED Graphics Family (rev 10)</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">如果想看详细的信息，比如 GeForce GT 240，即 02:00.0</span><br><span class="line"></span><br><span class="line">[root@localhost conf]# lspci -v -s 02:00.0</span><br><span class="line">02:00.0 VGA compatible controller: nVidia Corporation GT215 [GeForce GT 240] (rev a2) (prog-if 00 [VGA controller])</span><br><span class="line">Subsystem: ASUSTeK Computer Inc. Device 8351</span><br><span class="line">Flags: bus master, fast devsel, latency 0, IRQ 169</span><br><span class="line">Memory at f9000000 (32-bit, non-prefetchable) [size=16M]</span><br><span class="line">Memory at d0000000 (64-bit, prefetchable) [size=256M]</span><br><span class="line">Memory at ce000000 (64-bit, prefetchable) [size=32M]</span><br><span class="line">I/O ports at bc00 [size=128]</span><br><span class="line">[virtual] Expansion ROM at f8f80000 [disabled] [size=512K]</span><br><span class="line">Capabilities: [60] Power Management version 3</span><br><span class="line">Capabilities: [68] MSI: Enable- Count=1/1 Maskable- 64bit+</span><br><span class="line">Capabilities: [78] Express Endpoint, MSI 00</span><br><span class="line">Capabilities: [b4] Vendor Specific Information: Len=14 &lt;?&gt;</span><br><span class="line">Capabilities: [100] Virtual Channel</span><br><span class="line">Capabilities: [128] Power Budgeting &lt;?&gt;</span><br><span class="line">Capabilities: [600] Vendor Specific Information: ID=0001 Rev=1 Len=024 &lt;?&gt;</span><br><span class="line">Kernel driver in use: nvidia</span><br><span class="line">Kernel modules: nvidiafb, nvidia</span><br></pre></td></tr></table></figure><p>可以看到GT240的显存是 256M</p><p>如果没有安装显卡驱动，显示可能如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">root@0765afb5370d:/# lspci  | grep -i vga</span><br><span class="line">00:02.0 VGA compatible controller: Intel Corporation Device 3e92</span><br><span class="line">01:00.0 VGA compatible controller: NVIDIA Corporation Device 1c82 (rev a1)</span><br><span class="line">root@0765afb5370d:/# lspci  | grep -i 01:00.0</span><br><span class="line">01:00.0 VGA compatible controller: NVIDIA Corporation Device 1c82 (rev a1)</span><br><span class="line">root@0765afb5370d:/# lspci -v -s 01:00.0</span><br><span class="line">01:00.0 VGA compatible controller: NVIDIA Corporation Device 1c82 (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Subsystem: ASUSTeK Computer Inc. Device 8609</span><br><span class="line">        Flags: bus master, fast devsel, latency 0, IRQ 125</span><br><span class="line">        Memory at f6000000 (32-bit, non-prefetchable) [size=16M]</span><br><span class="line">        Memory at e0000000 (64-bit, prefetchable) [size=256M]</span><br><span class="line">        Memory at f0000000 (64-bit, prefetchable) [size=32M]</span><br><span class="line">        I/O ports at e000 [size=128]</span><br><span class="line">        Expansion ROM at f7000000 [disabled] [size=512K]</span><br><span class="line">        Capabilities: &lt;access denied&gt;</span><br><span class="line">        Kernel driver in use: nouveau</span><br><span class="line">lspci: Unable to load libkmod resources: error -12</span><br></pre></td></tr></table></figure></p><p>查看nvidia的gpu信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></p><p>配合watch命令, 让一秒刷新一次</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch -n 1 nvidia-smi</span><br></pre></td></tr></table></figure><p>查看内存及cpu使用情况的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure></p><p>htop工具，更直观<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install htop</span><br></pre></td></tr></table></figure></p><p>安装完后，直接输入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htop</span><br></pre></td></tr></table></figure></p><p>就可以看到内存或cpu的使用情况了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;lspci，顾名思义，就是显示所有的pci设备信息。pci是一种总线，而通过pci总线连接的设备就是pci设备了。如今，我们常用的设备很多都是采用pci总线了，如：网卡、存储。&lt;/p&gt;
+&lt;p&gt;如果没有lspci命令，安装：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;apt-get install pciutils&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;查看gpu：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;lspci  | grep -i vga&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="gpu" scheme="https://snjl.github.io/tags/gpu/"/>
+    
+      <category term="服务器信息" scheme="https://snjl.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu和centos安装python3.6</title>
+    <link href="https://snjl.github.io/2019/01/07/ubuntu%E5%92%8Ccentos%E5%AE%89%E8%A3%85python3-6/"/>
+    <id>https://snjl.github.io/2019/01/07/ubuntu和centos安装python3-6/</id>
+    <published>2019-01-07T15:34:25.000Z</published>
+    <updated>2019-01-07T15:35:22.339Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h1><p>配置好epel源和ius源</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Centos 6</span><br><span class="line">yum install https://centos6.iuscommunity.org/ius-release.rpm -y</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo</span><br><span class="line"></span><br><span class="line"># Centos 7</span><br><span class="line">yum install https://centos7.iuscommunity.org/ius-release.rpm -y</span><br></pre></td></tr></table></figure><p>安装Python3.6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install python36u -y</span><br><span class="line"></span><br><span class="line"># 创建软链接</span><br><span class="line">ln -s /usr/bin/python3.6 /bin/python3</span><br></pre></td></tr></table></figure></p><p>安装pip3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install python36u-pip -y</span><br><span class="line"></span><br><span class="line"># 创建软链接</span><br><span class="line">ln -s /usr/bin/pip3.6 /bin/pip3</span><br><span class="line"></span><br><span class="line"># 升级pip</span><br><span class="line">pip3 install --upgrade pip</span><br></pre></td></tr></table></figure></p><h1 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h1><p>配置软件仓库，因为python 3.6 新版没有发布到ubuntu的正式仓库中，咱们通过第3方仓库来做。在命令行中输入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:jonathonf/python-3.6</span><br></pre></td></tr></table></figure><p>检查系统软件包并安装 python 3.6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install python3.6</span><br></pre></td></tr></table></figure></p><p>创建软链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/bin/pip3.6 /bin/pip3</span><br></pre></td></tr></table></figure></p><p>安装pip3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python3-pip</span><br></pre></td></tr></table></figure></p><p>使用apt-get install pip装的是pip2。</p><p>升级pip<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install --upgrade pip</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;centos&quot;&gt;&lt;a href=&quot;#centos&quot; class=&quot;headerlink&quot; title=&quot;centos&quot;&gt;&lt;/a&gt;centos&lt;/h1&gt;&lt;p&gt;配置好epel源和ius源&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;tab
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="ubuntu" scheme="https://snjl.github.io/tags/ubuntu/"/>
+    
+      <category term="centos" scheme="https://snjl.github.io/tags/centos/"/>
+    
+      <category term="python" scheme="https://snjl.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker：安装Ubuntu16.04原始镜像并调用gpu</title>
+    <link href="https://snjl.github.io/2019/01/07/docker%EF%BC%9A%E5%AE%89%E8%A3%85Ubuntu16-04%E5%8E%9F%E5%A7%8B%E9%95%9C%E5%83%8F%E5%B9%B6%E8%B0%83%E7%94%A8gpu/"/>
+    <id>https://snjl.github.io/2019/01/07/docker：安装Ubuntu16-04原始镜像并调用gpu/</id>
+    <published>2019-01-07T15:33:49.000Z</published>
+    <updated>2019-01-07T15:34:04.583Z</updated>
+    
+    <content type="html"><![CDATA[<p>安装Ubuntu16.04原始镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull ubuntu:16.04</span><br></pre></td></tr></table></figure></p><p>Linux下无法使用add-apt-repository命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt install software-properties-common </span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p><p>镜像生成容器命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --privileged=true ubuntu:16.04</span><br></pre></td></tr></table></figure></p><p>privileged 参数功能，设置为true的时候，让docker的root拥有真正root的权限，可以调用宿主机硬件等，甚至可以让你在docker中使用docker，使用这个就可以使用显卡驱动等。</p><p>进入docker的container命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it 799 /bin/bash</span><br></pre></td></tr></table></figure></p><p>其中799为containerID的前几个字符。</p><p>在宿主机上安装了nvidia驱动后，在docker上也安装，就可以在docker中使用命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></p><p>查看gpu情况了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;安装Ubuntu16.04原始镜像：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td cl
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="docker" scheme="https://snjl.github.io/tags/docker/"/>
+    
+      <category term="nvidia-docker" scheme="https://snjl.github.io/tags/nvidia-docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu：账户相关</title>
+    <link href="https://snjl.github.io/2019/01/07/Ubuntu%EF%BC%9A%E8%B4%A6%E6%88%B7%E7%9B%B8%E5%85%B3/"/>
+    <id>https://snjl.github.io/2019/01/07/Ubuntu：账户相关/</id>
+    <published>2019-01-07T15:32:25.000Z</published>
+    <updated>2019-01-07T15:33:31.564Z</updated>
+    
+    <content type="html"><![CDATA[<p>开启root账户，实际上就是给root用户设置一个密码的过程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure></p><p>执行上面的命令后，输入当前用户的密码就可以设置root密码。</p><p>创建用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser xxx</span><br></pre></td></tr></table></figure></p><p>这样的命令会在home目录下添加一个帐号</p><h1 id="给指定用户增加sudo权限"><a href="#给指定用户增加sudo权限" class="headerlink" title="给指定用户增加sudo权限"></a>给指定用户增加sudo权限</h1><p>切换到root用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su root</span><br></pre></td></tr></table></figure></p><p>找到sudo文件/etc/sudoers，该文件默认是不可写的，添加可写权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod u+w /etc/sudoers</span><br></pre></td></tr></table></figure></p><p>修改sudoers文件，找到以下语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root    ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure></p><p>在下面添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yourUserName   ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure></p><p>保存退出。修改此文件风险比较大， 文件如果改坏， 导致所有用户的 sudo 权限都没了，所以修改时请注意</p><p>鉴于安全考虑修改完后应把sudoers写权限去掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod u-w /etc/sudoers</span><br></pre></td></tr></table></figure></p><p>如果发生问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo:sudo /etc/sudoers is world writable</span><br><span class="line">sudo:no valid sudoers sources found ,quitting</span><br><span class="line">sudo:unable to initialize policy plugin</span><br></pre></td></tr></table></figure></p><p>sudoers的权限被改了，改回来就好了。<br>使用root用户输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkexec chmod 0440 /etc/sudoers</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;开启root账户，实际上就是给root用户设置一个密码的过程：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pr
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="ubuntu" scheme="https://snjl.github.io/tags/ubuntu/"/>
+    
+      <category term="账户" scheme="https://snjl.github.io/tags/%E8%B4%A6%E6%88%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux重命名文件和文件夹</title>
+    <link href="https://snjl.github.io/2019/01/07/linux%E9%87%8D%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
+    <id>https://snjl.github.io/2019/01/07/linux重命名文件和文件夹/</id>
+    <published>2019-01-07T15:31:57.000Z</published>
+    <updated>2019-01-07T15:32:12.879Z</updated>
+    
+    <content type="html"><![CDATA[<p>例如，before.txt是修改之前文件名，after.txt是准备修改的文件名</p><p>用mv指令就可以修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv before.txt after.txt</span><br></pre></td></tr></table></figure></p><p>注意：如果当前目录下也有个after.txt的文件的话，我们的这个文件是会将它覆盖的</p><p>重命名文件夹同理。</p><p>mv命令也可以移动文件和文件夹</p><p>例如：将/a目录移动到/b下，并重命名为c<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /a /b/c</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;例如，before.txt是修改之前文件名，after.txt是准备修改的文件名&lt;/p&gt;
+&lt;p&gt;用mv指令就可以修改&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cl
+      
+    
+    </summary>
+    
+      <category term="linux" scheme="https://snjl.github.io/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https://snjl.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker：nvidia-docker安装</title>
+    <link href="https://snjl.github.io/2019/01/07/docker%EF%BC%9Anvidia-docker%E5%AE%89%E8%A3%85/"/>
+    <id>https://snjl.github.io/2019/01/07/docker：nvidia-docker安装/</id>
+    <published>2019-01-07T15:31:04.000Z</published>
+    <updated>2019-01-07T15:31:41.226Z</updated>
+    
+    <content type="html"><![CDATA[<p>先安装docker-ce：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># step 1: 安装必要的一些系统工具</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common</span><br><span class="line"># step 2: 安装GPG证书</span><br><span class="line">curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line"># Step 3: 写入软件源信息</span><br><span class="line">sudo add-apt-repository &quot;deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot;</span><br><span class="line"># Step 4: 更新并安装 Docker-CE</span><br><span class="line">sudo apt-get -y update</span><br><span class="line">sudo apt-get -y install docker-ce</span><br></pre></td></tr></table></figure></p><p>nvidia-docker安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># If you have nvidia-docker 1.0 installed: we need to remove it and all existing GPU containers</span><br><span class="line">docker volume ls -q -f driver=nvidia-docker | xargs -r -I&#123;&#125; -n1 docker ps -q -a -f volume=&#123;&#125; | xargs -r docker rm -f</span><br><span class="line">sudo apt-get purge -y nvidia-docker</span><br><span class="line"></span><br><span class="line"># Add the package repositories</span><br><span class="line">curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \</span><br><span class="line">  sudo apt-key add -</span><br><span class="line">distribution=$(. /etc/os-release;echo $ID$VERSION_ID)</span><br><span class="line">curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | \</span><br><span class="line">  sudo tee /etc/apt/sources.list.d/nvidia-docker.list</span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line"># Install nvidia-docker2 and reload the Docker daemon configuration</span><br><span class="line">sudo apt-get install -y nvidia-docker2</span><br><span class="line">sudo pkill -SIGHUP dockerd</span><br><span class="line"></span><br><span class="line"># Test nvidia-smi with the latest official CUDA image</span><br><span class="line">docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;先安装docker-ce：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="docker" scheme="https://snjl.github.io/tags/docker/"/>
+    
+      <category term="nvidia-docker" scheme="https://snjl.github.io/tags/nvidia-docker/"/>
+    
+  </entry>
   
   <entry>
     <title>centos：centos U盘安装卡在 starting dracut initqueue hook</title>
@@ -64,9 +408,9 @@
       <category term="centos" scheme="https://snjl.github.io/categories/centos/"/>
     
     
-      <category term="centos" scheme="https://snjl.github.io/tags/centos/"/>
-    
       <category term="java" scheme="https://snjl.github.io/tags/java/"/>
+    
+      <category term="centos" scheme="https://snjl.github.io/tags/centos/"/>
     
   </entry>
   
@@ -203,362 +547,6 @@
       <category term="npm" scheme="https://snjl.github.io/tags/npm/"/>
     
       <category term="install" scheme="https://snjl.github.io/tags/install/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>openVPN连不上，显示There are no TAP-Win32 adapters on this system</title>
-    <link href="https://snjl.github.io/2018/12/31/openVPN%E8%BF%9E%E4%B8%8D%E4%B8%8A%EF%BC%8C%E6%98%BE%E7%A4%BAThere-are-no-TAP-Win32-adapters-on-this-system/"/>
-    <id>https://snjl.github.io/2018/12/31/openVPN连不上，显示There-are-no-TAP-Win32-adapters-on-this-system/</id>
-    <published>2018-12-31T15:46:45.000Z</published>
-    <updated>2018-12-31T15:47:07.780Z</updated>
-    
-    <content type="html"><![CDATA[<p>安装TAP-win32即可。</p><p>下载TAP-Win32 </p><p><a href="https://www.updatestar.com/topic/win10" target="_blank" rel="noopener">https://www.updatestar.com/topic/win10</a> tap adapte 0901</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;安装TAP-win32即可。&lt;/p&gt;
-&lt;p&gt;下载TAP-Win32 &lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.updatestar.com/topic/win10&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.upd
-      
-    
-    </summary>
-    
-      <category term="vpn" scheme="https://snjl.github.io/categories/vpn/"/>
-    
-    
-      <category term="vpn" scheme="https://snjl.github.io/tags/vpn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>@Value无法注入static变量的值</title>
-    <link href="https://snjl.github.io/2018/12/31/Value%E6%97%A0%E6%B3%95%E6%B3%A8%E5%85%A5static%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC/"/>
-    <id>https://snjl.github.io/2018/12/31/Value无法注入static变量的值/</id>
-    <published>2018-12-31T15:45:51.000Z</published>
-    <updated>2018-12-31T15:46:12.953Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用@Value注解static类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyConfig &#123;</span><br><span class="line">    @Value(&quot;$&#123;env&#125;&quot;)</span><br><span class="line">    private static String env;</span><br><span class="line"> </span><br><span class="line">    public static String getEnv() &#123;</span><br><span class="line">        return env;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static void setEnv(String env) &#123;</span><br><span class="line">        MyConfig.env = env;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>使用上面这种方式，Config.getEnv()会返回null</p><p>正确写法</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyConfig &#123;</span><br><span class="line"> </span><br><span class="line">    private static String env;</span><br><span class="line"> </span><br><span class="line">    public static String getEnv() &#123;</span><br><span class="line">        return env;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Value(&quot;$&#123;env&#125;&quot;)</span><br><span class="line">    public void setEnv(String env) &#123;</span><br><span class="line">        MyConfig.env = env;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>要使用一个set函数注入。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;使用@Value注解static类型：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;lin
-      
-    
-    </summary>
-    
-      <category term="springboot" scheme="https://snjl.github.io/categories/springboot/"/>
-    
-    
-      <category term="springboot" scheme="https://snjl.github.io/tags/springboot/"/>
-    
-      <category term="注解" scheme="https://snjl.github.io/tags/%E6%B3%A8%E8%A7%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql：设置sql_mode</title>
-    <link href="https://snjl.github.io/2018/12/14/mysql%EF%BC%9A%E8%AE%BE%E7%BD%AEsql-mode/"/>
-    <id>https://snjl.github.io/2018/12/14/mysql：设置sql-mode/</id>
-    <published>2018-12-14T15:09:32.000Z</published>
-    <updated>2018-12-14T15:09:42.315Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="查看sql-mode"><a href="#查看sql-mode" class="headerlink" title="查看sql_mode"></a>查看sql_mode</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @@sql_mode;</span><br></pre></td></tr></table></figure><p>查询出来的值为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure></p><p>去掉需要去掉的后，例如去掉NO_ZERO_DATE，set回去：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> sql_mode=<span class="string">'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span>;</span><br></pre></td></tr></table></figure></p><p>这是对于已存在的数据库，改变其sql_mode，但是对于以后新建的数据库，sql_mode的默认值还是一开始查出来的值。</p><h1 id="设置新数据库的sql-mode"><a href="#设置新数据库的sql-mode" class="headerlink" title="设置新数据库的sql_mode"></a>设置新数据库的sql_mode</h1><p>使用<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> @@sql_mode=<span class="string">'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span></span><br></pre></td></tr></table></figure></p><p>改变了全局sql_mode，对于新建的数据库有效，但是仅仅对于这次连接有效。</p><h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>安装了mysql后，网上说在etc目录中有my.cnf，但是5.7版本好像没有，但是在etc/mysql中有，在该文件夹末尾加上：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">set sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure></p><p>即没有NO_ZERO_DATE，然后输入service mysql restart重启mysql服务，进入mysql后，输入select @@sql_mode，会发现就是配置文件中设置好的sql_mode。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;查看sql-mode&quot;&gt;&lt;a href=&quot;#查看sql-mode&quot; class=&quot;headerlink&quot; title=&quot;查看sql_mode&quot;&gt;&lt;/a&gt;查看sql_mode&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;t
-      
-    
-    </summary>
-    
-      <category term="数据库" scheme="https://snjl.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="mysql" scheme="https://snjl.github.io/tags/mysql/"/>
-    
-      <category term="配置" scheme="https://snjl.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql：配置免密码登录</title>
-    <link href="https://snjl.github.io/2018/12/14/mysql%EF%BC%9A%E9%85%8D%E7%BD%AE%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/"/>
-    <id>https://snjl.github.io/2018/12/14/mysql：配置免密码登录/</id>
-    <published>2018-12-14T15:08:46.000Z</published>
-    <updated>2018-12-14T15:09:11.437Z</updated>
-    
-    <content type="html"><![CDATA[<p>配置/etc/mysql/my.cnf，在后面加入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">user=user</span><br><span class="line">password=password</span><br></pre></td></tr></table></figure></p><p>user和password分别填入相应的用户名和密码，然后service mysql restart重启服务，命令行输入mysql即可登录。</p><p>如果想要输入密码登录，使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></p><p>即可。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;配置/etc/mysql/my.cnf，在后面加入：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span cla
-      
-    
-    </summary>
-    
-      <category term="数据库" scheme="https://snjl.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="mysql" scheme="https://snjl.github.io/tags/mysql/"/>
-    
-      <category term="配置" scheme="https://snjl.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql：表名、字段大小写问题</title>
-    <link href="https://snjl.github.io/2018/12/14/mysql%EF%BC%9A%E8%A1%A8%E5%90%8D%E3%80%81%E5%AD%97%E6%AE%B5%E5%A4%A7%E5%B0%8F%E5%86%99%E9%97%AE%E9%A2%98/"/>
-    <id>https://snjl.github.io/2018/12/14/mysql：表名、字段大小写问题/</id>
-    <published>2018-12-14T15:07:17.000Z</published>
-    <updated>2018-12-14T15:09:01.563Z</updated>
-    
-    <content type="html"><![CDATA[<p>在MySQL中，数据库和表都是对应目录下的一个或多个文件。因此，操作系统的大小写是否敏感决定了数据库大小写是否敏感。而在Windows中是对大小写不敏感的（Linux是对大小写敏感的）。</p><p>在linux的mysql中，输入<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">"lower%"</span>;</span><br></pre></td></tr></table></figure></p><p>可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+------------------------+-------+</span><br><span class="line">| Variable_name          | Value |</span><br><span class="line">+------------------------+-------+</span><br><span class="line">| lower_case_file_system | OFF   |</span><br><span class="line">| lower_case_table_names | 0     |</span><br><span class="line">+------------------------+-------+</span><br></pre></td></tr></table></figure></p><a id="more"></a><h1 id="lower-case-table-names参数说明"><a href="#lower-case-table-names参数说明" class="headerlink" title="lower_case_table_names参数说明"></a>lower_case_table_names参数说明</h1><h2 id="当值为0时"><a href="#当值为0时" class="headerlink" title="当值为0时"></a>当值为0时</h2><p>使用CREATE TABLE或CREATE DATABASE语句制定的大小写字母在硬盘上保存表名和数据库名。名称比较对大小写敏感。在大小写不敏感的操作系统如windows</p><p>或Max OS x上我们不能将参数设为0，如果再大小写不敏感的文件系统上将“lower_case_table_names”强制设置为0，并使用不同的大小写访问MyISAM表名，可能会导</p><p>致索引破坏。</p><h2 id="当值为1时"><a href="#当值为1时" class="headerlink" title="当值为1时"></a>当值为1时</h2><p>表名在硬盘上以小写保存，名称比较对大小写不敏感。MySQL将所有表名转换为小写存储和查找表上。该行为也适合数据库名和表的别名，该值为Windows的默认值。</p><h2 id="当值为2时"><a href="#当值为2时" class="headerlink" title="当值为2时"></a>当值为2时</h2><p>表名和数据库名在硬盘上使用CREATETABLE或CREATE DATABASE语句指定的大小写字母进行保存，但MySQL将它们转换为小写在查找表上。名称比较对大小写不敏感，即按照大小写来保存，按照小写来比较。注意：只在对大小写不敏感的文件系统上适用！innodb表名用小写保存。</p><p>在MySql上为了避免大小写问题引来的不必要的麻烦，建议都将“lower_case_tables_name”设置值为1。我们可以用其他的方式来命名。</p><h1 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h1><p>修改/etc/mysql/my.cnf，在[mysqld]下面加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lower_case_table_names=1</span><br></pre></td></tr></table></figure></p><p>使用service mysql restart重启服务。</p><p>这时候进入mysql，输入<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">"lower%"</span>;</span><br></pre></td></tr></table></figure></p><p>可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+------------------------+-------+</span><br><span class="line">| Variable_name          | Value |</span><br><span class="line">+------------------------+-------+</span><br><span class="line">| lower_case_file_system | OFF   |</span><br><span class="line">| lower_case_table_names | 1     |</span><br><span class="line">+------------------------+-------+</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在MySQL中，数据库和表都是对应目录下的一个或多个文件。因此，操作系统的大小写是否敏感决定了数据库大小写是否敏感。而在Windows中是对大小写不敏感的（Linux是对大小写敏感的）。&lt;/p&gt;
-&lt;p&gt;在linux的mysql中，输入&lt;br&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;show&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;variables&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;lower%&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;可以看到&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;+------------------------+-------+&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| Variable_name          | Value |&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+------------------------+-------+&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| lower_case_file_system | OFF   |&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| lower_case_table_names | 0     |&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+------------------------+-------+&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据库" scheme="https://snjl.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="mysql" scheme="https://snjl.github.io/tags/mysql/"/>
-    
-      <category term="配置" scheme="https://snjl.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql：sql_mode配置解析</title>
-    <link href="https://snjl.github.io/2018/12/14/mysql%EF%BC%9Asql-mode%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/"/>
-    <id>https://snjl.github.io/2018/12/14/mysql：sql-mode配置解析/</id>
-    <published>2018-12-14T15:05:11.000Z</published>
-    <updated>2018-12-14T15:07:30.652Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="ONLY-FULL-GROUP-BY"><a href="#ONLY-FULL-GROUP-BY" class="headerlink" title="ONLY_FULL_GROUP_BY"></a>ONLY_FULL_GROUP_BY</h1><p>对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中。简而言之，就是SELECT后面接的列必须被GROUP BY后面接的列所包含。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select a,b from table group by a,b,c;  # 正确</span><br><span class="line">select a,b,c from table group by a,b;  # 错误</span><br></pre></td></tr></table></figure></p><p>这个配置会使得GROUP BY语句环境变得十分狭窄，所以一般都不加这个配置</p><a id="more"></a><h1 id="NO-AUTO-VALUE-ON-ZERO"><a href="#NO-AUTO-VALUE-ON-ZERO" class="headerlink" title="NO_AUTO_VALUE_ON_ZERO"></a>NO_AUTO_VALUE_ON_ZERO</h1><p>该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。（不信的可以试试，默认的sql_mode你在自增主键列设置为0，该字段会自动变为最新的自增值，效果和null一样），如果用户希望插入的值为0（不改变），该列又是自增长的，那么这个选项就有用了。</p><h1 id="STRICT-TRANS-TABLES"><a href="#STRICT-TRANS-TABLES" class="headerlink" title="STRICT_TRANS_TABLES"></a>STRICT_TRANS_TABLES</h1><p>在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制。（InnoDB默认事务表，MyISAM默认非事务表；MySQL事务表支持将批处理当做一个完整的任务统一提交或回滚，即对包含在事务中的多条语句要么全执行，要么全部不执行。非事务表则不支持此种操作，批处理中的语句如果遇到错误，在错误前的语句执行成功，之后的则不执行；MySQL事务表有表锁与行锁非事务表则只有表锁）</p><h1 id="NO-ZERO-IN-DATE"><a href="#NO-ZERO-IN-DATE" class="headerlink" title="NO_ZERO_IN_DATE"></a>NO_ZERO_IN_DATE</h1><p>在严格模式下，不允许日期和月份为零</p><h1 id="NO-ZERO-DATE"><a href="#NO-ZERO-DATE" class="headerlink" title="NO_ZERO_DATE"></a>NO_ZERO_DATE</h1><p>设置该值，mysql数据库不允许插入零日期，插入零日期会抛出错误而不是警告。</p><h1 id="ERROR-FOR-DIVISION-BY-ZERO"><a href="#ERROR-FOR-DIVISION-BY-ZERO" class="headerlink" title="ERROR_FOR_DIVISION_BY_ZERO"></a>ERROR_FOR_DIVISION_BY_ZERO</h1><p>在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如 果未给出该模式，那么数据被零除时MySQL返回NULL</p><h1 id="NO-AUTO-CREATE-USER"><a href="#NO-AUTO-CREATE-USER" class="headerlink" title="NO_AUTO_CREATE_USER"></a>NO_AUTO_CREATE_USER</h1><p>禁止GRANT创建密码为空的用户</p><h1 id="NO-ENGINE-SUBSTITUTION"><a href="#NO-ENGINE-SUBSTITUTION" class="headerlink" title="NO_ENGINE_SUBSTITUTION"></a>NO_ENGINE_SUBSTITUTION</h1><p>如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常</p><h1 id="PIPES-AS-CONCAT"><a href="#PIPES-AS-CONCAT" class="headerlink" title="PIPES_AS_CONCAT"></a>PIPES_AS_CONCAT</h1><p>将”||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似</p><h1 id="ANSI-QUOTES"><a href="#ANSI-QUOTES" class="headerlink" title="ANSI_QUOTES"></a>ANSI_QUOTES</h1><p>启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;ONLY-FULL-GROUP-BY&quot;&gt;&lt;a href=&quot;#ONLY-FULL-GROUP-BY&quot; class=&quot;headerlink&quot; title=&quot;ONLY_FULL_GROUP_BY&quot;&gt;&lt;/a&gt;ONLY_FULL_GROUP_BY&lt;/h1&gt;&lt;p&gt;对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中。简而言之，就是SELECT后面接的列必须被GROUP BY后面接的列所包含。如：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;select a,b from table group by a,b,c;  # 正确&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;select a,b,c from table group by a,b;  # 错误&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这个配置会使得GROUP BY语句环境变得十分狭窄，所以一般都不加这个配置&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据库" scheme="https://snjl.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="mysql" scheme="https://snjl.github.io/tags/mysql/"/>
-    
-      <category term="配置" scheme="https://snjl.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu：安装anaconda</title>
-    <link href="https://snjl.github.io/2018/12/14/Ubuntu%EF%BC%9A%E5%AE%89%E8%A3%85anaconda/"/>
-    <id>https://snjl.github.io/2018/12/14/Ubuntu：安装anaconda/</id>
-    <published>2018-12-14T15:03:41.000Z</published>
-    <updated>2018-12-14T15:04:51.695Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh</span><br></pre></td></tr></table></figure><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Anaconda3-5.3.1-Linux-x86_64.sh</span><br></pre></td></tr></table></figure><p>安装完后测试conda命令。</p><a id="more"></a><h1 id="conda无效"><a href="#conda无效" class="headerlink" title="conda无效"></a>conda无效</h1><p>添加环境变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export PATH=&quot;~/anaconda3/bin:$PATH&quot;&apos; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure></p><p>添加后，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure></p><p>更新环境变量，这时候输入conda list能看到如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># packages in environment at /root/anaconda3:</span><br><span class="line">#</span><br><span class="line"># Name                    Version                   Build  Channel</span><br><span class="line">_ipyw_jlab_nb_ext_conf    0.1.0                    py37_0</span><br><span class="line">alabaster                 0.7.11                   py37_0</span><br><span class="line">anaconda                  5.3.1                    py37_0</span><br><span class="line">anaconda-client           1.7.2                    py37_0</span><br><span class="line">anaconda-navigator        1.9.2                    py37_0</span><br><span class="line">anaconda-project          0.8.2                    py37_0</span><br><span class="line">appdirs                   1.4.3            py37h28b3542_0</span><br><span class="line">asn1crypto                0.24.0                   py37_0</span><br><span class="line">astroid                   2.0.4                    py37_0</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p><h1 id="anaconda指定版本安装"><a href="#anaconda指定版本安装" class="headerlink" title="anaconda指定版本安装"></a>anaconda指定版本安装</h1><p>例如安装python3.6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda intall python=3.6</span><br></pre></td></tr></table></figure></p><h1 id="conda常见命令"><a href="#conda常见命令" class="headerlink" title="conda常见命令"></a>conda常见命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conda install package//安装包 </span><br><span class="line">conda list//查看已安装的包 </span><br><span class="line">conda update package//更新包 </span><br><span class="line">conda remove package//移除包</span><br><span class="line"></span><br><span class="line">conda update --all //更新当前环境下安装的全部package到最新版本</span><br><span class="line"></span><br><span class="line">conda update python //更新当前环境下python版本到当前python版本的最新版本</span><br><span class="line"></span><br><span class="line">conda env list //查看现在有的环境</span><br></pre></td></tr></table></figure><h1 id="创建管理环境"><a href="#创建管理环境" class="headerlink" title="创建管理环境"></a>创建管理环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name NAME</span><br></pre></td></tr></table></figure><p>其中NAME是指定的名称。</p><p>可以在这里指定需要的环境，由于python也是conda的包，所以也可以指定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name NAME python=3.6 tensorflow</span><br></pre></td></tr></table></figure></p><h1 id="激活环境"><a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate NAME</span><br></pre></td></tr></table></figure><h1 id="退出环境"><a href="#退出环境" class="headerlink" title="退出环境"></a>退出环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source deactivate</span><br></pre></td></tr></table></figure><h1 id="删除环境"><a href="#删除环境" class="headerlink" title="删除环境"></a>删除环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove -n NAME</span><br></pre></td></tr></table></figure><h1 id="拷贝环境"><a href="#拷贝环境" class="headerlink" title="拷贝环境"></a>拷贝环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --clone tensorflow --name tf</span><br></pre></td></tr></table></figure><p>其中，前一个名字是被拷贝的，后一个名字是新的名字。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;bash Anaconda3-5.3.1-Linux-x86_64.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;安装完后测试conda命令。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-    
-      <category term="ubuntu" scheme="https://snjl.github.io/tags/ubuntu/"/>
-    
-      <category term="anaconda" scheme="https://snjl.github.io/tags/anaconda/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用单点登录的原因</title>
-    <link href="https://snjl.github.io/2018/12/14/%E4%BD%BF%E7%94%A8%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E5%9B%A0/"/>
-    <id>https://snjl.github.io/2018/12/14/使用单点登录的原因/</id>
-    <published>2018-12-14T14:58:38.000Z</published>
-    <updated>2018-12-14T15:01:07.445Z</updated>
-    
-    <content type="html"><![CDATA[<p>单点登录（SingleSignOn），简称为SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。<br><strong>通常情况下运维内控审计系统、4A系统或者都包含此项功能，目的是简化账号登录过程并保护账号和密码安全，对账号进行统一管理。</strong></p><p>在此不考虑单点登录在多个应用下的登录问题，讨论其安全问题。</p><p>每个应用有一个域名，根据这个域名去申请apikey和apisecret，其中apikey我认为可以暴露，通过前端链接到authorize，带上apikey和redirect_uri，登录成功后就可以获得一个code并且返回到该uri，后端再通过这个code和apikey，apisecret去authorize获取这个用户的信息，并且拿到一个token，然后把这个用户存入session即可。</p><p>这样做可以保证使用apisecret的时候是在后端，不会被暴露，而且整个登录流程除了开始的链接到认证，和后面通过获得code再去链接到认证获取用户的token，其中所有的用户登录，用户认证都是在authorize完成的，这可以保证某一个应用获取不到用户的账号密码，只能获取到用户的基本信息，而且是可以暴露的一些基本信息，所以可以说是比较安全的。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;单点登录（SingleSignOn），简称为SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。&lt;br&gt;&lt;strong&gt;通常情况下运维内控审计系统、4A系统或者都包含此项功能，目的是简化账号
-      
-    
-    </summary>
-    
-      <category term="理论" scheme="https://snjl.github.io/categories/%E7%90%86%E8%AE%BA/"/>
-    
-    
-      <category term="单点登录" scheme="https://snjl.github.io/tags/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu：使用nohup和&amp;进行后台运行，进程查看和终止</title>
-    <link href="https://snjl.github.io/2018/12/12/Ubuntu%EF%BC%9A%E4%BD%BF%E7%94%A8nohup%E5%92%8C-%E8%BF%9B%E8%A1%8C%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%9F%A5%E7%9C%8B%E5%92%8C%E7%BB%88%E6%AD%A2/"/>
-    <id>https://snjl.github.io/2018/12/12/Ubuntu：使用nohup和-进行后台运行，进程查看和终止/</id>
-    <published>2018-12-12T12:38:22.000Z</published>
-    <updated>2018-12-14T15:03:46.180Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h1><p>用途：不挂断地运行命令。</p><p>语法：nohup Command [ Arg … ] [　&amp; ]</p><ul><li>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。</li><li>如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。</li><li>如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。</li></ul><p>退出状态：该命令返回下列出口值： 　　</p><ul><li>126 可以查找但不能调用 Command 参数指定的命令。 　　</li><li>127 nohup 命令发生错误或不能查找由 Command 参数指定的命令。 　　</li></ul><p>否则，nohup 命令的退出状态是 Command 参数指定命令的退出状态。</p><a id="more"></a><h1 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h1><p>用途：在后台运行</p><p>一般两个一起用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &amp;</span><br></pre></td></tr></table></figure></p><p>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; myout.file 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p><p>在上面的例子中，输出被重定向到myout.file文件中。 </p><h1 id="nohup与-amp-的区别："><a href="#nohup与-amp-的区别：" class="headerlink" title="nohup与&amp;的区别："></a>nohup与&amp;的区别：</h1><p><strong>nohup只是让命令忽略SIGHUP命令而已；&amp;则让命令在后台运行，至于该命令是否能在脱离终端后继续执行则要看进程是否是守护进程，如果不是，则需要nohup来帮忙。</strong></p><h1 id="查看某个端口的进程"><a href="#查看某个端口的进程" class="headerlink" title="查看某个端口的进程"></a>查看某个端口的进程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:80</span><br></pre></td></tr></table></figure><p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">node    27295 root   19u  IPv4 527052      0t0  TCP *:http (LISTEN)</span><br><span class="line">node    27295 root   24u  IPv4 528732      0t0  TCP ubuntu:http-&gt;xxx.xxx.xxx.xxx:50367 (ESTABLISHED)</span><br></pre></td></tr></table></figure></p><h1 id="终止后台运行的进程"><a href="#终止后台运行的进程" class="headerlink" title="终止后台运行的进程"></a>终止后台运行的进程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 PID</span><br></pre></td></tr></table></figure><p>pid为进程号。</p><h1 id="nohup不产生日志"><a href="#nohup不产生日志" class="headerlink" title="nohup不产生日志"></a>nohup不产生日志</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar item-2.0.1-SNAPSHOT.jar 2 &gt;error.log &amp;</span><br></pre></td></tr></table></figure><p>0、1和2分别表示标准输入、标准输出和标准错误信息输出，可以用来指定需要重定向的标准输入或输出。</p><p>在一般使用时，默认的是标准输出，既1.当我们需要特殊用途时，可以使用其他标号。例如，将program.sh的错误信息输出到log文件中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./program.sh 2&gt;log</span><br></pre></td></tr></table></figure></p><p>这样标准输出还是在屏幕上，但是错误信息会输出到log文件中。<br>另外，也可以实现0，1，2之间的重定向。</p><p>2&gt;&amp;1：将错误信息重定向到标准输出。</p><p>Linux下还有一个特殊的文件<strong>/dev/null</strong>，它就像一个无底洞，所有重定向到它的信息都会消失得无影无踪。这一点非常有用，当我们不需要回显程序的所有信息时，就可以将输出重定向到/dev/null。<br>如果想要正常输出和错误信息都不显示，则要把标准输出和标准错误都重定向到/dev/null， 例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls 1&gt;/dev/null 2&gt;/dev/null</span><br></pre></td></tr></table></figure></p><p>这样不会有任何输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsss 1&gt;/dev/null</span><br></pre></td></tr></table></figure></p><p>因为lsss不是一条合法命令，但是使用的是1（标准输入），所以还是会报错；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsss 2&gt;/dev/null</span><br></pre></td></tr></table></figure></p><p>使用2（标准错误信息输出），输出的错误会被吞掉，所以不会有任何输出；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls 1&gt;/dev/null</span><br></pre></td></tr></table></figure></p><p>ls是标准命令，但是使用1吞掉了标准输出，所以不会有任何输出。</p><p>还有一种做法是将错误重定向到标准输出，然后再重定向到 /dev/null，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p><p>注意：此处的顺序不能更改，否则达不到想要的效果，此时先将标准输出重定向到 /dev/null，然后将标准错误重定向到标准输出，由于标准输出已经重定向到了/dev/null，因此标准错误也会重定向到/dev/null，于是一切静悄悄:-)</p><p>由于使用nohup时，会自动将输出写入nohup.out文件中，如果文件很大的话，nohup.out就会不停的增大，这是我们不希望看到的，因此，可以利用/dev/null来解决这个问题。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./program.sh &gt;/dev/null 2&gt;log &amp;</span><br></pre></td></tr></table></figure><p>这样在跑程序的时候，只将错误信息输出到log文件中。</p><p>如果什么信息都不要，使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./program.sh &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p><p>(好像没用？)</p><h1 id="使用nohup失效原因"><a href="#使用nohup失效原因" class="headerlink" title="使用nohup失效原因"></a>使用nohup失效原因</h1><p>用putty连接ubuntu，要执行一个后台命令</p><p>正常用nohup直接运行命令，就可以在后台运行</p><p>nohup ./1.sh &amp;</p><p>但关闭putty后，发现命令也停止了</p><p>问题出在，直接点putty的右上角X关闭按钮，nohup也会停止</p><p><strong>解决：直接在putty中输入exit退出即可</strong></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;nohup&quot;&gt;&lt;a href=&quot;#nohup&quot; class=&quot;headerlink&quot; title=&quot;nohup&quot;&gt;&lt;/a&gt;nohup&lt;/h1&gt;&lt;p&gt;用途：不挂断地运行命令。&lt;/p&gt;
-&lt;p&gt;语法：nohup Command [ Arg … ] [　&amp;amp; ]&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。&lt;/li&gt;
-&lt;li&gt;如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。&lt;/li&gt;
-&lt;li&gt;如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;退出状态：该命令返回下列出口值： 　　&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;126 可以查找但不能调用 Command 参数指定的命令。 　　&lt;/li&gt;
-&lt;li&gt;127 nohup 命令发生错误或不能查找由 Command 参数指定的命令。 　　&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;否则，nohup 命令的退出状态是 Command 参数指定命令的退出状态。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-    
-      <category term="ubuntu" scheme="https://snjl.github.io/tags/ubuntu/"/>
-    
-      <category term="nohup" scheme="https://snjl.github.io/tags/nohup/"/>
-    
-      <category term="安全守护" scheme="https://snjl.github.io/tags/%E5%AE%89%E5%85%A8%E5%AE%88%E6%8A%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu：安装npm和node</title>
-    <link href="https://snjl.github.io/2018/12/12/Ubuntu%EF%BC%9A%E5%AE%89%E8%A3%85npm%E5%92%8Cnode/"/>
-    <id>https://snjl.github.io/2018/12/12/Ubuntu：安装npm和node/</id>
-    <published>2018-12-12T12:37:04.000Z</published>
-    <updated>2018-12-12T12:39:48.917Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装nodejs：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure><p>安装npm：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure><h1 id="nodejs和npm更新"><a href="#nodejs和npm更新" class="headerlink" title="nodejs和npm更新"></a>nodejs和npm更新</h1><p>npm更新：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g</span><br></pre></td></tr></table></figure><p>更新Nodejs自身：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g n </span><br><span class="line">n latest</span><br></pre></td></tr></table></figure><p>使用npm -v和node -v查看版本号。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;安装nodejs：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gu
-      
-    
-    </summary>
-    
-      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-    
-      <category term="ubuntu" scheme="https://snjl.github.io/tags/ubuntu/"/>
-    
-      <category term="npm" scheme="https://snjl.github.io/tags/npm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu：修改root密码</title>
-    <link href="https://snjl.github.io/2018/12/12/Ubuntu%EF%BC%9A%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81/"/>
-    <id>https://snjl.github.io/2018/12/12/Ubuntu：修改root密码/</id>
-    <published>2018-12-12T12:36:35.000Z</published>
-    <updated>2018-12-12T12:36:47.958Z</updated>
-    
-    <content type="html"><![CDATA[<p>安装完系统后可以设置root密码，输入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo root</span><br></pre></td></tr></table></figure><p>可以创建root的密码。</p><p>修改root密码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;安装完系统后可以设置root密码，输入&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td 
-      
-    
-    </summary>
-    
-      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-    
-      <category term="ubuntu" scheme="https://snjl.github.io/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu：安装java</title>
-    <link href="https://snjl.github.io/2018/12/12/Ubuntu%EF%BC%9A%E5%AE%89%E8%A3%85java/"/>
-    <id>https://snjl.github.io/2018/12/12/Ubuntu：安装java/</id>
-    <published>2018-12-12T12:35:38.000Z</published>
-    <updated>2018-12-12T12:35:56.679Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="通过apt-get-的方式安装jdk"><a href="#通过apt-get-的方式安装jdk" class="headerlink" title="通过apt-get 的方式安装jdk"></a>通过apt-get 的方式安装jdk</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update //sudo表示超级用户，如果是在root用户下可以不写</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openjdk-8-jdk</span><br></pre></td></tr></table></figure><p>安装完后的目录在：/usr/lib/jvm/java-8-openjdk-amd64<br>echo $JAVA_HOME，没有结果；javac -version可以显示版本。</p><h1 id="然后配置JAVA-HOME-JRE-HOME-PATH，配置文件的位置：-etc-profile"><a href="#然后配置JAVA-HOME-JRE-HOME-PATH，配置文件的位置：-etc-profile" class="headerlink" title="然后配置JAVA_HOME,JRE_HOME,PATH，配置文件的位置：/etc/profile"></a>然后配置JAVA_HOME,JRE_HOME,PATH，配置文件的位置：/etc/profile</h1><p>在内容中加入下面的：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure><p>执行完之后，source /etc/profile ，使变动生效，不需用重启</p><h1 id="用echo-JAVA-HOME检查是否配置成功"><a href="#用echo-JAVA-HOME检查是否配置成功" class="headerlink" title="用echo $JAVA_HOME检查是否配置成功"></a>用echo $JAVA_HOME检查是否配置成功</h1><h1 id="javac不成功"><a href="#javac不成功" class="headerlink" title="javac不成功"></a>javac不成功</h1><p>显示</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">The program &apos;javac&apos; can be found in the following packages:</span><br><span class="line"> * default-jdk</span><br><span class="line"> * ecj</span><br><span class="line"> * gcj-5-jdk</span><br><span class="line"> * openjdk-8-jdk-headless</span><br><span class="line"> * gcj-4.8-jdk</span><br><span class="line"> * gcj-4.9-jdk</span><br><span class="line"> * openjdk-9-jdk-headless</span><br><span class="line">Try: apt install &lt;selected package&gt;</span><br></pre></td></tr></table></figure><p>使用命令apt install default-jdk即可。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;通过apt-get-的方式安装jdk&quot;&gt;&lt;a href=&quot;#通过apt-get-的方式安装jdk&quot; class=&quot;headerlink&quot; title=&quot;通过apt-get 的方式安装jdk&quot;&gt;&lt;/a&gt;通过apt-get 的方式安装jdk&lt;/h1&gt;&lt;figure c
-      
-    
-    </summary>
-    
-      <category term="服务器" scheme="https://snjl.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-    
-      <category term="ubuntu" scheme="https://snjl.github.io/tags/ubuntu/"/>
-    
-      <category term="mysql" scheme="https://snjl.github.io/tags/mysql/"/>
-    
-      <category term="java" scheme="https://snjl.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springboot：项目启动时初始化资源</title>
-    <link href="https://snjl.github.io/2018/12/12/springboot%EF%BC%9A%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8%E6%97%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B5%84%E6%BA%90/"/>
-    <id>https://snjl.github.io/2018/12/12/springboot：项目启动时初始化资源/</id>
-    <published>2018-12-12T12:33:46.000Z</published>
-    <updated>2018-12-12T12:34:15.664Z</updated>
-    
-    <content type="html"><![CDATA[<p>项目地址：<a href="https://github.com/snjl/springboot.CommandLineRunner.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.CommandLineRunner.git</a></p><p>在我们实际工作中，总会遇到这样需求，在项目启动的时候需要做一些初始化的操作，比如初始化线程池，提前加载好加密证书等。今天就给大家介绍一个 Spring Boot 神器，专门帮助大家解决项目启动初始化资源操作。</p><a id="more"></a><p>这个神器就是 CommandLineRunner，CommandLineRunner 接口的 Component 会在所有 Spring Beans 都初始化之后，SpringApplication.run() 之前执行，非常适合在应用程序启动之初进行一些数据初始化的工作。</p><p>接下来我们就运用案例测试它如何使用，在测试之前在启动类加两行打印提示，方便我们识别 CommandLineRunner 的执行时机。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommandLineRunnerApplication</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">System.out.println(<span class="string">"The service to start."</span>);</span><br><span class="line">SpringApplication.run(CommandLineRunnerApplication.class, args);</span><br><span class="line">System.out.println(<span class="string">"The service has started."</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>接下来我们直接创建一个类继承 CommandLineRunner ，并实现它的 run() 方法。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"The Runner start to initialize ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们在 run() 方法中打印了一些参数来看出它的执行时机。完成之后启动项目进行测试：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">The service to start.</span><br><span class="line"></span><br><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___&apos;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  &apos;  |____| .__|_| |_|_| |_\__, | / / / /</span><br><span class="line"> =========|_|==============|___/=/_/_/_/</span><br><span class="line"> :: Spring Boot ::        (v2.0.0.RELEASE)</span><br><span class="line">...</span><br><span class="line">2018-04-21 22:21:34.706  INFO 27016 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &apos;&apos;</span><br><span class="line">2018-04-21 22:21:34.710  INFO 27016 --- [           main] com.neo.CommandLineRunnerApplication     : Started CommandLineRunnerApplication in 3.796 seconds (JVM running for 5.128)</span><br><span class="line">The Runner start to initialize ...</span><br><span class="line">The service has started.</span><br></pre></td></tr></table></figure><p>根据控制台的打印信息我们可以看出 CommandLineRunner 中的方法会在 Spring Boot 容器加载之后执行，执行完成后项目启动完成。</p><p>如果我们在启动容器的时候需要初始化很多资源，并且初始化资源相互之间有序，那如何保证不同的 CommandLineRunner 的执行顺序呢？Spring Boot 也给出了解决方案。那就是使用 @Order 注解。</p><p>我们创建两个 CommandLineRunner 的实现类来进行测试：</p><p>第一个实现类：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderRunner1</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"The OrderRunner1 start to initialize ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>第二个实现类：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderRunner2</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"The OrderRunner2 start to initialize ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>添加完成之后重新启动，观察执行顺序：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">The service to start.</span><br><span class="line"></span><br><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___&apos;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  &apos;  |____| .__|_| |_|_| |_\__, | / / / /</span><br><span class="line"> =========|_|==============|___/=/_/_/_/</span><br><span class="line"> :: Spring Boot ::        (v2.0.0.RELEASE)</span><br><span class="line">...</span><br><span class="line">2018-04-21 22:21:34.706  INFO 27016 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &apos;&apos;</span><br><span class="line">2018-04-21 22:21:34.710  INFO 27016 --- [           main] com.neo.CommandLineRunnerApplication     : Started CommandLineRunnerApplication in 3.796 seconds (JVM running for 5.128)</span><br><span class="line">The OrderRunner1 start to initialize ...</span><br><span class="line">The OrderRunner2 start to initialize ...</span><br><span class="line">The Runner start to initialize ...</span><br><span class="line">The service has started.</span><br></pre></td></tr></table></figure><p>通过控制台的输出我们发现，添加 @Order 注解的实现类最先执行，并且@Order()里面的值越小启动越早。</p><p>在实践中，使用ApplicationRunner也可以达到相同的目的，两着差别不大。看来使用 Spring Boot 解决初始化资源的问题非常简单。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/snjl/springboot.CommandLineRunner.git&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/snjl/springboot.CommandLineRunner.git&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;在我们实际工作中，总会遇到这样需求，在项目启动的时候需要做一些初始化的操作，比如初始化线程池，提前加载好加密证书等。今天就给大家介绍一个 Spring Boot 神器，专门帮助大家解决项目启动初始化资源操作。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="springboot" scheme="https://snjl.github.io/categories/springboot/"/>
-    
-    
-      <category term="springboot" scheme="https://snjl.github.io/tags/springboot/"/>
-    
-      <category term="初始化" scheme="https://snjl.github.io/tags/%E5%88%9D%E5%A7%8B%E5%8C%96/"/>
     
   </entry>
   
