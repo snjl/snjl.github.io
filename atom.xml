@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://snjl.github.io/"/>
-  <updated>2019-01-07T15:43:30.000Z</updated>
+  <updated>2019-01-23T08:21:56.254Z</updated>
   <id>https://snjl.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springboot报错记录（二）</title>
+    <link href="https://snjl.github.io/2019/01/23/springboot%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>https://snjl.github.io/2019/01/23/springboot报错记录（二）/</id>
+    <published>2019-01-23T08:21:25.000Z</published>
+    <updated>2019-01-23T08:21:56.254Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-org-thymeleaf-exceptions-TemplateInputException-Error-resolving-template-“index”-template-might-not-exist-or-might-not-be-accessible-by-any-of-the-configured-Template-Resolvers-at-org-thymeleaf-TemplateRepository-getTemplate-TemplateRepository-java-246-thymeleaf-2-1-6-RELEASE-jar-2-1-6-RELEASE"><a href="#1-org-thymeleaf-exceptions-TemplateInputException-Error-resolving-template-“index”-template-might-not-exist-or-might-not-be-accessible-by-any-of-the-configured-Template-Resolvers-at-org-thymeleaf-TemplateRepository-getTemplate-TemplateRepository-java-246-thymeleaf-2-1-6-RELEASE-jar-2-1-6-RELEASE" class="headerlink" title="1. org.thymeleaf.exceptions.TemplateInputException: Error resolving template “index”, template might not exist or might not be accessible by any of the configured Template Resolvers at org.thymeleaf.TemplateRepository.getTemplate(TemplateRepository.java:246) ~[thymeleaf-2.1.6.RELEASE.jar:2.1.6.RELEASE]"></a>1. org.thymeleaf.exceptions.TemplateInputException: Error resolving template “index”, template might not exist or might not be accessible by any of the configured Template Resolvers at org.thymeleaf.TemplateRepository.getTemplate(TemplateRepository.java:246) ~[thymeleaf-2.1.6.RELEASE.jar:2.1.6.RELEASE]</h1><p>在你的controller层对应的方法返回html路径及名称时，在前面多加了一个/ 。</p><p>例如return “/index”，正式这个/导致报错的，解决：去掉返回前面的/即可，例如return “/index”，改为”index”。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-org-thymeleaf-exceptions-TemplateInputException-Error-resolving-template-“index”-template-might-not-exist-or-might-not-be-accessib
+      
+    
+    </summary>
+    
+      <category term="springboot" scheme="https://snjl.github.io/categories/springboot/"/>
+    
+    
+      <category term="springboot" scheme="https://snjl.github.io/tags/springboot/"/>
+    
+      <category term="报错" scheme="https://snjl.github.io/tags/%E6%8A%A5%E9%94%99/"/>
+    
+  </entry>
   
   <entry>
     <title>docker安装</title>
@@ -408,9 +435,9 @@
       <category term="centos" scheme="https://snjl.github.io/categories/centos/"/>
     
     
-      <category term="centos" scheme="https://snjl.github.io/tags/centos/"/>
-    
       <category term="java" scheme="https://snjl.github.io/tags/java/"/>
+    
+      <category term="centos" scheme="https://snjl.github.io/tags/centos/"/>
     
   </entry>
   
@@ -518,33 +545,6 @@
     
     
       <category term="centos" scheme="https://snjl.github.io/tags/centos/"/>
-    
-      <category term="install" scheme="https://snjl.github.io/tags/install/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>npm：npm install全局安装和当前目录安装</title>
-    <link href="https://snjl.github.io/2018/12/31/npm%EF%BC%9Anpm-install%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%E5%92%8C%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E5%AE%89%E8%A3%85/"/>
-    <id>https://snjl.github.io/2018/12/31/npm：npm-install全局安装和当前目录安装/</id>
-    <published>2018-12-31T15:47:43.000Z</published>
-    <updated>2018-12-31T15:48:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-npm-install-xxx-g"><a href="#1-npm-install-xxx-g" class="headerlink" title="1. npm install xxx -g"></a>1. npm install xxx -g</h1><p>使用该命令时， 模块将被下载安装到【全局目录】中。</p><p>【全局目录】通过 npm config set prefix “目录路径” 来设置。</p><p>比如说，当我们使用了npm install -g express安装了express框架后， 我们就可以在电脑里的某一个文件夹下，打开控制台，直接使用express mvc创建项目，否则会遇到 “’express’ 不是内部或外部命令，也不是可运行的程序”错误。</p><h1 id="2-npm-install-xxx"><a href="#2-npm-install-xxx" class="headerlink" title="2. npm install xxx"></a>2. npm install xxx</h1><p>使用该命令，则是将模块下载到当前命令行所在目录。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:\123&gt;npm install xxx</span><br></pre></td></tr></table></figure></p><p>将会安装到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:\123\node_modules\xxx</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-npm-install-xxx-g&quot;&gt;&lt;a href=&quot;#1-npm-install-xxx-g&quot; class=&quot;headerlink&quot; title=&quot;1. npm install xxx -g&quot;&gt;&lt;/a&gt;1. npm install xxx -g&lt;/h1&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="npm" scheme="https://snjl.github.io/categories/npm/"/>
-    
-    
-      <category term="npm" scheme="https://snjl.github.io/tags/npm/"/>
     
       <category term="install" scheme="https://snjl.github.io/tags/install/"/>
     
