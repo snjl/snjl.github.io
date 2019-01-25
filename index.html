@@ -289,6 +289,188 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/linux查询正在运行的进程ps命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/linux查询正在运行的进程ps命令/" itemprop="url">ps命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ps命令用于报告当前系统的进程状态。可以搭配kill指令随时中断、删除不必要的程序。ps命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。</p>
+<h1 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps</span><br><span class="line">ps -ef | grep NAME</span><br></pre></td></tr></table></figure>
+<p>显示同一终端下的所有程序 ps –a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">10427 pts/0    00:00:00 bash</span><br><span class="line">17880 pts/0    00:00:00 ps</span><br></pre></td></tr></table></figure></p>
+<p>ps可以与grep组合一起查询，例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java</span><br></pre></td></tr></table></figure></p>
+<p>表示查看所有进程里 CMD 是 java 的进程信息等等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:/home/docker# ps -ef | grep python</span><br><span class="line">root     11011 31568  0 Jan03 ?        00:00:51 /root/anaconda3/envs/py3/bin/python -m ipykernel_launcher -f /run/user/0/jupyter/kernel-dd69b2b9-f097-43e3-92f2-71f8ee1dce1b.json</span><br><span class="line">root     25557 24830  0 11:01 pts/0    00:00:00 grep --color=auto python</span><br><span class="line">root     31568     1  0  2018 ?        00:02:50 /root/anaconda3/envs/py3/bin/python /root/anaconda3/envs/py3/bin/jupyter-notebook --allow-root</span><br><span class="line">root     31700     1  0  2018 ?        00:02:47 python -m http.server 8088</span><br></pre></td></tr></table></figure></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>ps(选项)</p>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">-a：显示所有终端机下执行的程序，除了阶段作业领导者之外。</span><br><span class="line">a：显示现行终端机下的所有程序，包括其他用户的程序。</span><br><span class="line">-A：显示所有程序。</span><br><span class="line">-c：显示CLS和PRI栏位。</span><br><span class="line">c：列出程序时，显示每个程序真正的指令名称，而不包含路径，选项或常驻服务的标示。</span><br><span class="line">-C&lt;指令名称&gt;：指定执行指令的名称，并列出该指令的程序的状况。</span><br><span class="line">-d：显示所有程序，但不包括阶段作业领导者的程序。</span><br><span class="line">-e：此选项的效果和指定&quot;A&quot;选项相同。</span><br><span class="line">e：列出程序时，显示每个程序所使用的环境变量。</span><br><span class="line">-f：显示UID,PPIP,C与STIME栏位。</span><br><span class="line">f：用ASCII字符显示树状结构，表达程序间的相互关系。</span><br><span class="line">-g&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同，当亦能使用阶段作业领导者的名称来指定。</span><br><span class="line">g：显示现行终端机下的所有程序，包括群组领导者的程序。</span><br><span class="line">-G&lt;群组识别码&gt;：列出属于该群组的程序的状况，也可使用群组名称来指定。</span><br><span class="line">h：不显示标题列。</span><br><span class="line">-H：显示树状结构，表示程序间的相互关系。</span><br><span class="line">-j或j：采用工作控制的格式显示程序状况。</span><br><span class="line">-l或l：采用详细的格式来显示程序状况。</span><br><span class="line">L：列出栏位的相关信息。</span><br><span class="line">-m或m：显示所有的执行绪。</span><br><span class="line">n：以数字来表示USER和WCHAN栏位。</span><br><span class="line">-N：显示所有的程序，除了执行ps指令终端机下的程序之外。</span><br><span class="line">-p&lt;程序识别码&gt;：指定程序识别码，并列出该程序的状况。</span><br><span class="line">p&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">r：只列出现行终端机正在执行中的程序。</span><br><span class="line">-s&lt;阶段作业&gt;：指定阶段作业的程序识别码，并列出隶属该阶段作业的程序的状况。</span><br><span class="line">s：采用程序信号的格式显示程序状况。</span><br><span class="line">S：列出程序时，包括已中断的子程序资料。</span><br><span class="line">-t&lt;终端机编号&gt;：指定终端机编号，并列出属于该终端机的程序的状况。</span><br><span class="line">t&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">-T：显示现行终端机下的所有程序。</span><br><span class="line">-u&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">u：以用户为主的格式来显示程序状况。</span><br><span class="line">-U&lt;用户识别码&gt;：列出属于该用户的程序的状况，也可使用用户名称来指定。</span><br><span class="line">U&lt;用户名称&gt;：列出属于该用户的程序的状况。</span><br><span class="line">v：采用虚拟内存的格式显示程序状况。</span><br><span class="line">-V或V：显示版本信息。</span><br><span class="line">-w或w：采用宽阔的格式来显示程序状况。　</span><br><span class="line">x：显示所有程序，不以终端机来区分。</span><br><span class="line">X：采用旧式的Linux i386登陆格式显示程序状况。</span><br><span class="line">-y：配合选项&quot;-l&quot;使用时，不显示F(flag)栏位，并以RSS栏位取代ADDR栏位　。</span><br><span class="line">-&lt;程序识别码&gt;：此选项的效果和指定&quot;p&quot;选项相同。</span><br><span class="line">--cols&lt;每列字符数&gt;：设置每列的最大字符数。</span><br><span class="line">--columns&lt;每列字符数&gt;：此选项的效果和指定&quot;--cols&quot;选项相同。</span><br><span class="line">--cumulative：此选项的效果和指定&quot;S&quot;选项相同。</span><br><span class="line">--deselect：此选项的效果和指定&quot;-N&quot;选项相同。</span><br><span class="line">--forest：此选项的效果和指定&quot;f&quot;选项相同。</span><br><span class="line">--headers：重复显示标题列。</span><br><span class="line">--help：在线帮助。</span><br><span class="line">--info：显示排错信息。</span><br><span class="line">--lines&lt;显示列数&gt;：设置显示画面的列数。</span><br><span class="line">--no-headers：此选项的效果和指定&quot;h&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">--group&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--Group&lt;群组识别码&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--pid&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同。</span><br><span class="line">--rows&lt;显示列数&gt;：此选项的效果和指定&quot;--lines&quot;选项相同。</span><br><span class="line">--sid&lt;阶段作业&gt;：此选项的效果和指定&quot;-s&quot;选项相同。</span><br><span class="line">--tty&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同。</span><br><span class="line">--user&lt;用户名称&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--User&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--version：此选项的效果和指定&quot;-V&quot;选项相同。</span><br><span class="line">--widty&lt;每列字符数&gt;：此选项的效果和指定&quot;-cols&quot;选项相同。</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/tail命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -421,737 +603,6 @@
 <h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tail file （显示文件file的最后10行）</span><br><span class="line">tail +20 file （显示文件file的内容，从第20行至文件末尾）</span><br><span class="line">tail -c 10 file （显示文件file的最后10个字符）</span><br></pre></td></tr></table></figure>
 <h1 id="一般用法"><a href="#一般用法" class="headerlink" title="一般用法"></a>一般用法</h1><p>一般用来查看实施日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f LOGFILE</span><br></pre></td></tr></table></figure></p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/cat命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/cat命令/" itemprop="url">cat命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  318 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>cat命令连接文件并打印到标准输出设备上，cat经常用来显示文件的内容，类似于下的type命令。</p>
-<p>注意：当文件较大时，文本在屏幕上迅速闪过（滚屏），用户往往看不清所显示的内容。因此，一般用more等命令分屏显示。为了控制滚屏，可以按Ctrl+S键，停止滚屏；按Ctrl+Q键可以恢复滚屏。按Ctrl+C（中断）键可以终止该命令的执行，并且返回Shell提示符状态。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>cat(选项)(参数)</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-n或-number：有1开始对所有输出的行数编号；</span><br><span class="line">-b或--number-nonblank：和-n相似，只不过对于空白行不编号；</span><br><span class="line">-s或--squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行；</span><br><span class="line">-A：显示不可打印字符，行尾显示“$”；</span><br><span class="line">-e：等价于&quot;-vE&quot;选项；</span><br><span class="line">-t：等价于&quot;-vT&quot;选项；</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件列表：指定要连接的文件列表。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>设ml和m2是当前目录下的两个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat m1 （在屏幕上显示文件ml的内容）</span><br><span class="line">cat m1 m2 （同时显示文件ml和m2的内容）</span><br><span class="line">cat m1 m2 &gt; file （将文件ml和m2合并后放入文件file中）</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/history命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/history命令/" itemprop="url">history命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  324 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>history命令用于显示指定数目的指令命令，读取历史命令文件中的目录到历史命令缓冲区和将历史命令缓冲区中的目录写入命令文件。</p>
-<p>该命令单独使用时，仅显示历史命令，在命令行中，可以使用符号!执行指定序号的历史命令。例如，要执行第2个历史命令，则输入!2。</p>
-<p>历史命令是被保存在内存中的，当退出或者登录shell时，会自动保存或读取。在内存中，历史命令仅能够存储1000条历史命令，该数量是由环境变量HISTSIZE进行控制。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>history(选项)(参数)</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c：清空当前历史命令；</span><br><span class="line">-a：将历史命令缓冲区中命令写入历史命令文件中；</span><br><span class="line">-r：将历史命令文件中的命令读入当前历史命令缓冲区；</span><br><span class="line">-w：将当前历史命令缓冲区命令写入历史命令文件中。</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>n：打印最近的n条历史命令。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>使用history命令显示最近使用的10条历史命令，输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# history 10</span><br><span class="line">   92  ls</span><br><span class="line">   93  cd ..</span><br><span class="line">   94  ls</span><br><span class="line">   95  exit</span><br><span class="line">   96  ls -a</span><br><span class="line">   97  cd .ssh/</span><br><span class="line">   98  ls</span><br><span class="line">   99  cat known_hosts</span><br><span class="line">  100  exit</span><br><span class="line">  101  history 10</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/df命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/df命令/" itemprop="url">df命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  805 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df(选项)(参数)</span><br></pre></td></tr></table></figure>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：包含全部的文件系统；</span><br><span class="line">--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</span><br><span class="line">-h或--human-readable：以可读性较高的方式来显示信息；</span><br><span class="line">-H或--si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</span><br><span class="line">-i或--inodes：显示inode的信息；</span><br><span class="line">-k或--kilobytes：指定区块大小为1024字节；</span><br><span class="line">-l或--local：仅显示本地端的文件系统；</span><br><span class="line">-m或--megabytes：指定区块大小为1048576字节；</span><br><span class="line">--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</span><br><span class="line">-P或--portability：使用POSIX的输出格式；</span><br><span class="line">--sync：在取得磁盘使用信息前，先执行sync指令；</span><br><span class="line">-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</span><br><span class="line">-T或--print-type：显示文件系统的类型；</span><br><span class="line">-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</span><br><span class="line">--help：显示帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件：指定文件系统上的文件。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>查看系统磁盘设备，默认是KB为单位：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df</span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">udev              938580        0    938580   0% /dev</span><br><span class="line">tmpfs             191716    19944    171772  11% /run</span><br><span class="line">/dev/vda1       51474044 12273468  36562808  26% /</span><br><span class="line">tmpfs             958576       24    958552   1% /dev/shm</span><br><span class="line">tmpfs               5120        0      5120   0% /run/lock</span><br><span class="line">tmpfs             958576        0    958576   0% /sys/fs/cgroup</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/500</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-<p>以MB为单位：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -m</span><br><span class="line">Filesystem     1M-blocks  Used Available Use% Mounted on</span><br><span class="line">udev                 917     0       917   0% /dev</span><br><span class="line">tmpfs                188    20       168  11% /run</span><br><span class="line">/dev/vda1          50268 11986     35706  26% /</span><br><span class="line">tmpfs                937     1       937   1% /dev/shm</span><br><span class="line">tmpfs                  5     0         5   0% /run/lock</span><br><span class="line">tmpfs                937     0       937   0% /sys/fs/cgroup</span><br><span class="line">tmpfs                188     0       188   0% /run/user/500</span><br><span class="line">tmpfs                188     0       188   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-<p>使用-h选项以KB以上的单位来显示，可读性高：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">udev            917M     0  917M   0% /dev</span><br><span class="line">tmpfs           188M   20M  168M  11% /run</span><br><span class="line">/dev/vda1        50G   12G   35G  26% /</span><br><span class="line">tmpfs           937M   24K  937M   1% /dev/shm</span><br><span class="line">tmpfs           5.0M     0  5.0M   0% /run/lock</span><br><span class="line">tmpfs           937M     0  937M   0% /sys/fs/cgroup</span><br><span class="line">tmpfs           188M     0  188M   0% /run/user/500</span><br><span class="line">tmpfs           188M     0  188M   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-<p>查看全部文件系统：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -a</span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">sysfs                  0        0         0    - /sys</span><br><span class="line">proc                   0        0         0    - /proc</span><br><span class="line">udev              938580        0    938580   0% /dev</span><br><span class="line">devpts                 0        0         0    - /dev/pts</span><br><span class="line">tmpfs             191716    19944    171772  11% /run</span><br><span class="line">/dev/vda1       51474044 12273496  36562780  26% /</span><br><span class="line">securityfs             0        0         0    - /sys/kernel/security</span><br><span class="line">tmpfs             958576       24    958552   1% /dev/shm</span><br><span class="line">tmpfs               5120        0      5120   0% /run/lock</span><br><span class="line">tmpfs             958576        0    958576   0% /sys/fs/cgroup</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/systemd</span><br><span class="line">pstore                 0        0         0    - /sys/fs/pstore</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/perf_event</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/hugetlb</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/freezer</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/memory</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/devices</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/net_cls,net_prio</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/cpu,cpuacct</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/pids</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/cpuset</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/blkio</span><br><span class="line">systemd-1              -        -         -    - /proc/sys/fs/binfmt_misc</span><br><span class="line">mqueue                 0        0         0    - /dev/mqueue</span><br><span class="line">debugfs                0        0         0    - /sys/kernel/debug</span><br><span class="line">hugetlbfs              0        0         0    - /dev/hugepages</span><br><span class="line">fusectl                0        0         0    - /sys/fs/fuse/connections</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/500</span><br><span class="line">binfmt_misc            0        0         0    - /proc/sys/fs/binfmt_misc</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/linux查询正在运行的进程ps命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/linux查询正在运行的进程ps命令/" itemprop="url">ps命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.5k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ps命令用于报告当前系统的进程状态。可以搭配kill指令随时中断、删除不必要的程序。ps命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。</p>
-<h1 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps</span><br><span class="line">ps -ef | grep NAME</span><br></pre></td></tr></table></figure>
-<p>显示同一终端下的所有程序 ps –a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">10427 pts/0    00:00:00 bash</span><br><span class="line">17880 pts/0    00:00:00 ps</span><br></pre></td></tr></table></figure></p>
-<p>ps可以与grep组合一起查询，例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java</span><br></pre></td></tr></table></figure></p>
-<p>表示查看所有进程里 CMD 是 java 的进程信息等等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:/home/docker# ps -ef | grep python</span><br><span class="line">root     11011 31568  0 Jan03 ?        00:00:51 /root/anaconda3/envs/py3/bin/python -m ipykernel_launcher -f /run/user/0/jupyter/kernel-dd69b2b9-f097-43e3-92f2-71f8ee1dce1b.json</span><br><span class="line">root     25557 24830  0 11:01 pts/0    00:00:00 grep --color=auto python</span><br><span class="line">root     31568     1  0  2018 ?        00:02:50 /root/anaconda3/envs/py3/bin/python /root/anaconda3/envs/py3/bin/jupyter-notebook --allow-root</span><br><span class="line">root     31700     1  0  2018 ?        00:02:47 python -m http.server 8088</span><br></pre></td></tr></table></figure></p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>ps(选项)</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">-a：显示所有终端机下执行的程序，除了阶段作业领导者之外。</span><br><span class="line">a：显示现行终端机下的所有程序，包括其他用户的程序。</span><br><span class="line">-A：显示所有程序。</span><br><span class="line">-c：显示CLS和PRI栏位。</span><br><span class="line">c：列出程序时，显示每个程序真正的指令名称，而不包含路径，选项或常驻服务的标示。</span><br><span class="line">-C&lt;指令名称&gt;：指定执行指令的名称，并列出该指令的程序的状况。</span><br><span class="line">-d：显示所有程序，但不包括阶段作业领导者的程序。</span><br><span class="line">-e：此选项的效果和指定&quot;A&quot;选项相同。</span><br><span class="line">e：列出程序时，显示每个程序所使用的环境变量。</span><br><span class="line">-f：显示UID,PPIP,C与STIME栏位。</span><br><span class="line">f：用ASCII字符显示树状结构，表达程序间的相互关系。</span><br><span class="line">-g&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同，当亦能使用阶段作业领导者的名称来指定。</span><br><span class="line">g：显示现行终端机下的所有程序，包括群组领导者的程序。</span><br><span class="line">-G&lt;群组识别码&gt;：列出属于该群组的程序的状况，也可使用群组名称来指定。</span><br><span class="line">h：不显示标题列。</span><br><span class="line">-H：显示树状结构，表示程序间的相互关系。</span><br><span class="line">-j或j：采用工作控制的格式显示程序状况。</span><br><span class="line">-l或l：采用详细的格式来显示程序状况。</span><br><span class="line">L：列出栏位的相关信息。</span><br><span class="line">-m或m：显示所有的执行绪。</span><br><span class="line">n：以数字来表示USER和WCHAN栏位。</span><br><span class="line">-N：显示所有的程序，除了执行ps指令终端机下的程序之外。</span><br><span class="line">-p&lt;程序识别码&gt;：指定程序识别码，并列出该程序的状况。</span><br><span class="line">p&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">r：只列出现行终端机正在执行中的程序。</span><br><span class="line">-s&lt;阶段作业&gt;：指定阶段作业的程序识别码，并列出隶属该阶段作业的程序的状况。</span><br><span class="line">s：采用程序信号的格式显示程序状况。</span><br><span class="line">S：列出程序时，包括已中断的子程序资料。</span><br><span class="line">-t&lt;终端机编号&gt;：指定终端机编号，并列出属于该终端机的程序的状况。</span><br><span class="line">t&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">-T：显示现行终端机下的所有程序。</span><br><span class="line">-u&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">u：以用户为主的格式来显示程序状况。</span><br><span class="line">-U&lt;用户识别码&gt;：列出属于该用户的程序的状况，也可使用用户名称来指定。</span><br><span class="line">U&lt;用户名称&gt;：列出属于该用户的程序的状况。</span><br><span class="line">v：采用虚拟内存的格式显示程序状况。</span><br><span class="line">-V或V：显示版本信息。</span><br><span class="line">-w或w：采用宽阔的格式来显示程序状况。　</span><br><span class="line">x：显示所有程序，不以终端机来区分。</span><br><span class="line">X：采用旧式的Linux i386登陆格式显示程序状况。</span><br><span class="line">-y：配合选项&quot;-l&quot;使用时，不显示F(flag)栏位，并以RSS栏位取代ADDR栏位　。</span><br><span class="line">-&lt;程序识别码&gt;：此选项的效果和指定&quot;p&quot;选项相同。</span><br><span class="line">--cols&lt;每列字符数&gt;：设置每列的最大字符数。</span><br><span class="line">--columns&lt;每列字符数&gt;：此选项的效果和指定&quot;--cols&quot;选项相同。</span><br><span class="line">--cumulative：此选项的效果和指定&quot;S&quot;选项相同。</span><br><span class="line">--deselect：此选项的效果和指定&quot;-N&quot;选项相同。</span><br><span class="line">--forest：此选项的效果和指定&quot;f&quot;选项相同。</span><br><span class="line">--headers：重复显示标题列。</span><br><span class="line">--help：在线帮助。</span><br><span class="line">--info：显示排错信息。</span><br><span class="line">--lines&lt;显示列数&gt;：设置显示画面的列数。</span><br><span class="line">--no-headers：此选项的效果和指定&quot;h&quot;选项相同，只在列表格式方面稍有差异。</span><br><span class="line">--group&lt;群组名称&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--Group&lt;群组识别码&gt;：此选项的效果和指定&quot;-G&quot;选项相同。</span><br><span class="line">--pid&lt;程序识别码&gt;：此选项的效果和指定&quot;-p&quot;选项相同。</span><br><span class="line">--rows&lt;显示列数&gt;：此选项的效果和指定&quot;--lines&quot;选项相同。</span><br><span class="line">--sid&lt;阶段作业&gt;：此选项的效果和指定&quot;-s&quot;选项相同。</span><br><span class="line">--tty&lt;终端机编号&gt;：此选项的效果和指定&quot;-t&quot;选项相同。</span><br><span class="line">--user&lt;用户名称&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--User&lt;用户识别码&gt;：此选项的效果和指定&quot;-U&quot;选项相同。</span><br><span class="line">--version：此选项的效果和指定&quot;-V&quot;选项相同。</span><br><span class="line">--widty&lt;每列字符数&gt;：此选项的效果和指定&quot;-cols&quot;选项相同。</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1399,7 +850,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/获取对象信息/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/history命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1418,7 +869,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/获取对象信息/" itemprop="url">获取对象信息</a></h1>
+                <a class="post-title-link" href="/2019/01/25/history命令/" itemprop="url">history命令</a></h1>
         
 
         <div class="post-meta">
@@ -1430,7 +881,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
                 2019-01-25
               </time>
             
@@ -1453,8 +904,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
                   </a>
                 </span>
 
@@ -1484,7 +935,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k 字
+                  324 字
                 </span>
               
 
@@ -1500,7 +951,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -1523,39 +974,13 @@
       
         
           
-            <p>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？</p>
-<h1 id="使用type"><a href="#使用type" class="headerlink" title="使用type()"></a>使用type()</h1><p>首先，我们来判断对象类型，使用type()函数：</p>
-<p>基本类型都可以用type()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(123)</span><br><span class="line">&lt;class &apos;int&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(&apos;str&apos;)</span><br><span class="line">&lt;class &apos;str&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(None)</span><br><span class="line">&lt;type(None) &apos;NoneType&apos;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>如果一个变量指向函数或者类，也可以用type()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(abs)</span><br><span class="line">&lt;class &apos;builtin_function_or_method&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(a)</span><br><span class="line">&lt;class &apos;__main__.Animal&apos;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>但是type()函数返回的是什么类型呢？它返回对应的Class类型。如果我们要在if语句中判断，就需要比较两个变量的type类型是否相同：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(123)==type(456)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(123)==int</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==type(&apos;123&apos;)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==str</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==type(123)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
-<p>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import types</span><br><span class="line">&gt;&gt;&gt; def fn():</span><br><span class="line">...     pass</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; type(fn)==types.FunctionType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(abs)==types.BuiltinFunctionType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(lambda x: x)==types.LambdaType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type((x for x in range(10)))==types.GeneratorType</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<h1 id="使用isinstance"><a href="#使用isinstance" class="headerlink" title="使用isinstance()"></a>使用isinstance()</h1><p>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。</p>
-<p>我们回顾上次的例子，如果继承关系是：</p>
-<p>object -&gt; Animal -&gt; Dog -&gt; Husky<br>那么，isinstance()就可以告诉我们，一个对象是否是某种类型。先创建3种类型的对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = Animal()</span><br><span class="line">&gt;&gt;&gt; d = Dog()</span><br><span class="line">&gt;&gt;&gt; h = Husky()</span><br></pre></td></tr></table></figure></p>
-<p>然后，判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Husky)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>没有问题，因为h变量指向的就是Husky对象。</p>
-<p>再判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Dog)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>h虽然自身是Husky类型，但由于Husky是从Dog继承下来的，所以，h也还是Dog类型。换句话说，isinstance()判断的是一个对象是否是该类型本身，或者位于该类型的父继承链上。</p>
-<p>因此，我们可以确信，h还是Animal类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>同理，实际类型是Dog的d也是Animal类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(d, Dog) and isinstance(d, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>但是，d不是Husky类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(d, Husky)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
-<p>能用type()判断的基本类型也可以用isinstance()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(&apos;a&apos;, str)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(123, int)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(b&apos;a&apos;, bytes)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>并且还可以判断一个变量是否是某些类型中的一种，比如下面的代码就可以判断是否是list或者tuple：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance([1, 2, 3], (list, tuple))</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance((1, 2, 3), (list, tuple))</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：总是优先使用isinstance()判断类型，可以将指定类型及其子类“一网打尽”。</strong></p>
-<h1 id="使用dir"><a href="#使用dir" class="headerlink" title="使用dir()"></a>使用dir()</h1><p>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list，比如，获得一个str对象的所有属性和方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dir(&apos;ABC&apos;)</span><br><span class="line">[&apos;__add__&apos;, &apos;__class__&apos;,..., &apos;__subclasshook__&apos;, &apos;capitalize&apos;, &apos;casefold&apos;,..., &apos;zfill&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>类似<strong>xxx</strong>的属性和方法在Python中都是有特殊用途的，比如<strong>len</strong>方法返回长度。在Python中，如果你调用len()函数试图获取一个对象的长度，实际上，在len()函数内部，它自动去调用该对象的<strong>len</strong>()方法，所以，下面的代码是等价的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; len(&apos;ABC&apos;)</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; &apos;ABC&apos;.__len__()</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
-<p>我们自己写的类，如果也想用len(myObj)的话，就自己写一个<strong>len</strong>()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class MyDog(object):</span><br><span class="line">...     def __len__(self):</span><br><span class="line">...         return 100</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; dog = MyDog()</span><br><span class="line">&gt;&gt;&gt; len(dog)</span><br><span class="line">100</span><br></pre></td></tr></table></figure></p>
-<p>剩下的都是普通属性或方法，比如lower()返回小写的字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;ABC&apos;.lower()</span><br><span class="line">&apos;abc&apos;</span><br></pre></td></tr></table></figure></p>
-<p>仅仅把属性和方法列出来是不够的，配合getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class MyObject(object):</span><br><span class="line">...     def __init__(self):</span><br><span class="line">...         self.x = 9</span><br><span class="line">...     def power(self):</span><br><span class="line">...         return self.x * self.x</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; obj = MyObject()</span><br></pre></td></tr></table></figure></p>
-<p>紧接着，可以测试该对象的属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;x&apos;) # 有属性&apos;x&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; obj.x</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;y&apos;) # 有属性&apos;y&apos;吗？</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; setattr(obj, &apos;y&apos;, 19) # 设置一个属性&apos;y&apos;</span><br><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;y&apos;) # 有属性&apos;y&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; getattr(obj, &apos;y&apos;) # 获取属性&apos;y&apos;</span><br><span class="line">19</span><br><span class="line">&gt;&gt;&gt; obj.y # 获取属性&apos;y&apos;</span><br><span class="line">19</span><br></pre></td></tr></table></figure></p>
-<p>如果试图获取不存在的属性，会抛出AttributeError的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(obj, &apos;z&apos;) # 获取属性&apos;z&apos;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">AttributeError: &apos;MyObject&apos; object has no attribute &apos;z&apos;</span><br></pre></td></tr></table></figure></p>
-<p>可以传入一个default参数，如果属性不存在，就返回默认值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(obj, &apos;z&apos;, 404) # 获取属性&apos;z&apos;，如果不存在，返回默认值404</span><br><span class="line">404</span><br></pre></td></tr></table></figure></p>
-<p>也可以获得对象的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;power&apos;) # 有属性&apos;power&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; getattr(obj, &apos;power&apos;) # 获取属性&apos;power&apos;</span><br><span class="line">&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; fn = getattr(obj, &apos;power&apos;) # 获取属性&apos;power&apos;并赋值到变量fn</span><br><span class="line">&gt;&gt;&gt; fn # fn指向obj.power</span><br><span class="line">&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; fn() # 调用fn()与调用obj.power()是一样的</span><br><span class="line">81</span><br></pre></td></tr></table></figure></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>通过内置的一系列函数，我们可以对任意一个Python对象进行剖析，拿到其内部的数据。要注意的是，只有在不知道对象信息的时候，我们才会去获取对象信息。如果可以直接写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum = obj.x + obj.y</span><br></pre></td></tr></table></figure></p>
-<p>就不要写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum = getattr(obj, &apos;x&apos;) + getattr(obj, &apos;y&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>一个正确的用法的例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def readImage(fp):</span><br><span class="line">    if hasattr(fp, &apos;read&apos;):</span><br><span class="line">        return readData(fp)</span><br><span class="line">    return None</span><br></pre></td></tr></table></figure></p>
-<p>假设我们希望从文件流fp中读取图像，我们首先要判断该fp对象是否存在read方法，如果存在，则该对象是一个流，如果不存在，则无法读取。hasattr()就派上了用场。</p>
-<p>请注意，在Python这类动态语言中，根据鸭子类型，有read()方法，不代表该fp对象就是一个文件流，它也可能是网络流，也可能是内存中的一个字节流，但只要read()方法返回的是有效的图像数据，就不影响读取图像的功能。</p>
+            <p>history命令用于显示指定数目的指令命令，读取历史命令文件中的目录到历史命令缓冲区和将历史命令缓冲区中的目录写入命令文件。</p>
+<p>该命令单独使用时，仅显示历史命令，在命令行中，可以使用符号!执行指定序号的历史命令。例如，要执行第2个历史命令，则输入!2。</p>
+<p>历史命令是被保存在内存中的，当退出或者登录shell时，会自动保存或读取。在内存中，历史命令仅能够存储1000条历史命令，该数量是由环境变量HISTSIZE进行控制。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>history(选项)(参数)</p>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c：清空当前历史命令；</span><br><span class="line">-a：将历史命令缓冲区中命令写入历史命令文件中；</span><br><span class="line">-r：将历史命令文件中的命令读入当前历史命令缓冲区；</span><br><span class="line">-w：将当前历史命令缓冲区命令写入历史命令文件中。</span><br></pre></td></tr></table></figure>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>n：打印最近的n条历史命令。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>使用history命令显示最近使用的10条历史命令，输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# history 10</span><br><span class="line">   92  ls</span><br><span class="line">   93  cd ..</span><br><span class="line">   94  ls</span><br><span class="line">   95  exit</span><br><span class="line">   96  ls -a</span><br><span class="line">   97  cd .ssh/</span><br><span class="line">   98  ls</span><br><span class="line">   99  cat known_hosts</span><br><span class="line">  100  exit</span><br><span class="line">  101  history 10</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1608,7 +1033,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/使用@property/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/cat命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1627,7 +1052,373 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/使用@property/" itemprop="url">使用@property</a></h1>
+                <a class="post-title-link" href="/2019/01/25/cat命令/" itemprop="url">cat命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  318 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>cat命令连接文件并打印到标准输出设备上，cat经常用来显示文件的内容，类似于下的type命令。</p>
+<p>注意：当文件较大时，文本在屏幕上迅速闪过（滚屏），用户往往看不清所显示的内容。因此，一般用more等命令分屏显示。为了控制滚屏，可以按Ctrl+S键，停止滚屏；按Ctrl+Q键可以恢复滚屏。按Ctrl+C（中断）键可以终止该命令的执行，并且返回Shell提示符状态。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>cat(选项)(参数)</p>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-n或-number：有1开始对所有输出的行数编号；</span><br><span class="line">-b或--number-nonblank：和-n相似，只不过对于空白行不编号；</span><br><span class="line">-s或--squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行；</span><br><span class="line">-A：显示不可打印字符，行尾显示“$”；</span><br><span class="line">-e：等价于&quot;-vE&quot;选项；</span><br><span class="line">-t：等价于&quot;-vT&quot;选项；</span><br></pre></td></tr></table></figure>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件列表：指定要连接的文件列表。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>设ml和m2是当前目录下的两个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat m1 （在屏幕上显示文件ml的内容）</span><br><span class="line">cat m1 m2 （同时显示文件ml和m2的内容）</span><br><span class="line">cat m1 m2 &gt; file （将文件ml和m2合并后放入文件file中）</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/df命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/df命令/" itemprop="url">df命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  805 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df(选项)(参数)</span><br></pre></td></tr></table></figure>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：包含全部的文件系统；</span><br><span class="line">--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</span><br><span class="line">-h或--human-readable：以可读性较高的方式来显示信息；</span><br><span class="line">-H或--si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</span><br><span class="line">-i或--inodes：显示inode的信息；</span><br><span class="line">-k或--kilobytes：指定区块大小为1024字节；</span><br><span class="line">-l或--local：仅显示本地端的文件系统；</span><br><span class="line">-m或--megabytes：指定区块大小为1048576字节；</span><br><span class="line">--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</span><br><span class="line">-P或--portability：使用POSIX的输出格式；</span><br><span class="line">--sync：在取得磁盘使用信息前，先执行sync指令；</span><br><span class="line">-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</span><br><span class="line">-T或--print-type：显示文件系统的类型；</span><br><span class="line">-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</span><br><span class="line">--help：显示帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件：指定文件系统上的文件。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>查看系统磁盘设备，默认是KB为单位：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df</span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">udev              938580        0    938580   0% /dev</span><br><span class="line">tmpfs             191716    19944    171772  11% /run</span><br><span class="line">/dev/vda1       51474044 12273468  36562808  26% /</span><br><span class="line">tmpfs             958576       24    958552   1% /dev/shm</span><br><span class="line">tmpfs               5120        0      5120   0% /run/lock</span><br><span class="line">tmpfs             958576        0    958576   0% /sys/fs/cgroup</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/500</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
+<p>以MB为单位：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -m</span><br><span class="line">Filesystem     1M-blocks  Used Available Use% Mounted on</span><br><span class="line">udev                 917     0       917   0% /dev</span><br><span class="line">tmpfs                188    20       168  11% /run</span><br><span class="line">/dev/vda1          50268 11986     35706  26% /</span><br><span class="line">tmpfs                937     1       937   1% /dev/shm</span><br><span class="line">tmpfs                  5     0         5   0% /run/lock</span><br><span class="line">tmpfs                937     0       937   0% /sys/fs/cgroup</span><br><span class="line">tmpfs                188     0       188   0% /run/user/500</span><br><span class="line">tmpfs                188     0       188   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
+<p>使用-h选项以KB以上的单位来显示，可读性高：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">udev            917M     0  917M   0% /dev</span><br><span class="line">tmpfs           188M   20M  168M  11% /run</span><br><span class="line">/dev/vda1        50G   12G   35G  26% /</span><br><span class="line">tmpfs           937M   24K  937M   1% /dev/shm</span><br><span class="line">tmpfs           5.0M     0  5.0M   0% /run/lock</span><br><span class="line">tmpfs           937M     0  937M   0% /sys/fs/cgroup</span><br><span class="line">tmpfs           188M     0  188M   0% /run/user/500</span><br><span class="line">tmpfs           188M     0  188M   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
+<p>查看全部文件系统：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -a</span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">sysfs                  0        0         0    - /sys</span><br><span class="line">proc                   0        0         0    - /proc</span><br><span class="line">udev              938580        0    938580   0% /dev</span><br><span class="line">devpts                 0        0         0    - /dev/pts</span><br><span class="line">tmpfs             191716    19944    171772  11% /run</span><br><span class="line">/dev/vda1       51474044 12273496  36562780  26% /</span><br><span class="line">securityfs             0        0         0    - /sys/kernel/security</span><br><span class="line">tmpfs             958576       24    958552   1% /dev/shm</span><br><span class="line">tmpfs               5120        0      5120   0% /run/lock</span><br><span class="line">tmpfs             958576        0    958576   0% /sys/fs/cgroup</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/systemd</span><br><span class="line">pstore                 0        0         0    - /sys/fs/pstore</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/perf_event</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/hugetlb</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/freezer</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/memory</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/devices</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/net_cls,net_prio</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/cpu,cpuacct</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/pids</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/cpuset</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/blkio</span><br><span class="line">systemd-1              -        -         -    - /proc/sys/fs/binfmt_misc</span><br><span class="line">mqueue                 0        0         0    - /dev/mqueue</span><br><span class="line">debugfs                0        0         0    - /sys/kernel/debug</span><br><span class="line">hugetlbfs              0        0         0    - /dev/hugepages</span><br><span class="line">fusectl                0        0         0    - /sys/fs/fuse/connections</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/500</span><br><span class="line">binfmt_misc            0        0         0    - /proc/sys/fs/binfmt_misc</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/使用枚举类/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/使用枚举类/" itemprop="url">使用枚举类</a></h1>
         
 
         <div class="post-meta">
@@ -1693,7 +1484,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  734 字
+                  507 字
                 </span>
               
 
@@ -1709,7 +1500,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -1732,17 +1523,212 @@
       
         
           
-            <p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = Student()</span><br><span class="line">s.score = 9999</span><br></pre></td></tr></table></figure></p>
-<p>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def get_score(self):</span><br><span class="line">         return self._score</span><br><span class="line"></span><br><span class="line">    def set_score(self, value):</span><br><span class="line">        if not isinstance(value, int):</span><br><span class="line">            raise ValueError(&apos;score must be an integer!&apos;)</span><br><span class="line">        if value &lt; 0 or value &gt; 100:</span><br><span class="line">            raise ValueError(&apos;score must between 0 ~ 100!&apos;)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
-<p>现在，对任意的Student实例进行操作，就不能随心所欲地设置score了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.set_score(60) # ok!</span><br><span class="line">&gt;&gt;&gt; s.get_score()</span><br><span class="line">60</span><br><span class="line">&gt;&gt;&gt; s.set_score(9999)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between 0 ~ 100!</span><br></pre></td></tr></table></figure></p>
-<p>但是，上面的调用方法又略显复杂，没有直接用属性这么直接简单。</p>
-<p>有没有既能检查参数，又可以用类似属性这样简单的方式来访问类的变量呢？对于追求完美的Python程序员来说，这是必须要做到的！</p>
-<p>还记得装饰器（decorator）可以给函数动态加上功能吗？对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def score(self):</span><br><span class="line">        return self._score</span><br><span class="line"></span><br><span class="line">    @score.setter</span><br><span class="line">    def score(self, value):</span><br><span class="line">        if not isinstance(value, int):</span><br><span class="line">            raise ValueError(&apos;score must be an integer!&apos;)</span><br><span class="line">        if value &lt; 0 or value &gt; 100:</span><br><span class="line">            raise ValueError(&apos;score must between 0 ~ 100!&apos;)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
-<p>@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.score = 60 # OK，实际转化为s.set_score(60)</span><br><span class="line">&gt;&gt;&gt; s.score # OK，实际转化为s.get_score()</span><br><span class="line">60</span><br><span class="line">&gt;&gt;&gt; s.score = 9999</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between 0 ~ 100!</span><br></pre></td></tr></table></figure></p>
-<p>注意到这个神奇的@property，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</p>
-<p>还可以定义只读属性，只定义getter方法，不定义setter方法就是一个只读属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def birth(self):</span><br><span class="line">        return self._birth</span><br><span class="line"></span><br><span class="line">    @birth.setter</span><br><span class="line">    def birth(self, value):</span><br><span class="line">        self._birth = value</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def age(self):</span><br><span class="line">        return 2015 - self._birth</span><br></pre></td></tr></table></figure></p>
-<p>上面的birth是可读写属性，而age就是一个只读属性，因为age可以根据birth和当前时间计算出来。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>@property广泛应用在类的定义中，可以让调用者写出简短的代码，同时保证对参数进行必要的检查，这样，程序运行时就减少了出错的可能性。</p>
+            <p>当我们需要定义常量时，一个办法是用大写变量通过整数来定义，例如月份：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JAN = 1</span><br><span class="line">FEB = 2</span><br><span class="line">MAR = 3</span><br><span class="line">...</span><br><span class="line">NOV = 11</span><br><span class="line">DEC = 12</span><br></pre></td></tr></table></figure></p>
+<p>好处是简单，缺点是类型是int，并且仍然是变量。</p>
+<p>更好的方法是为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Enum</span><br><span class="line"></span><br><span class="line">Month = Enum(&apos;Month&apos;, (&apos;Jan&apos;, &apos;Feb&apos;, &apos;Mar&apos;, &apos;Apr&apos;, &apos;May&apos;, &apos;Jun&apos;, &apos;Jul&apos;, &apos;Aug&apos;, &apos;Sep&apos;, &apos;Oct&apos;, &apos;Nov&apos;, &apos;Dec&apos;))</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就获得了Month类型的枚举类，可以直接使用Month.Jan来引用一个常量，或者枚举它的所有成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for name, member in Month.__members__.items():</span><br><span class="line">    print(name, &apos;=&gt;&apos;, member, &apos;,&apos;, member.value)</span><br></pre></td></tr></table></figure></p>
+<p>value属性则是自动赋给成员的int常量，默认从1开始计数。</p>
+<p>如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from enum import Enum, unique</span><br><span class="line"></span><br><span class="line">@unique</span><br><span class="line">class Weekday(Enum):</span><br><span class="line">    Sun = 0 # Sun的value被设定为0</span><br><span class="line">    Mon = 1</span><br><span class="line">    Tue = 2</span><br><span class="line">    Wed = 3</span><br><span class="line">    Thu = 4</span><br><span class="line">    Fri = 5</span><br><span class="line">    Sat = 6</span><br></pre></td></tr></table></figure></p>
+<p>@unique装饰器可以帮助我们检查保证没有重复值。</p>
+<p>访问这些枚举类型可以有若干种方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; day1 = Weekday.Mon</span><br><span class="line">&gt;&gt;&gt; print(day1)</span><br><span class="line">Weekday.Mon</span><br><span class="line">&gt;&gt;&gt; print(Weekday.Tue)</span><br><span class="line">Weekday.Tue</span><br><span class="line">&gt;&gt;&gt; print(Weekday[&apos;Tue&apos;])</span><br><span class="line">Weekday.Tue</span><br><span class="line">&gt;&gt;&gt; print(Weekday.Tue.value)</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; print(day1 == Weekday.Mon)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; print(day1 == Weekday.Tue)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; print(Weekday(1))</span><br><span class="line">Weekday.Mon</span><br><span class="line">&gt;&gt;&gt; print(day1 == Weekday(1))</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; Weekday(7)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: 7 is not a valid Weekday</span><br><span class="line">&gt;&gt;&gt; for name, member in Weekday.__members__.items():</span><br><span class="line">...     print(name, &apos;=&gt;&apos;, member)</span><br><span class="line">...</span><br><span class="line">Sun =&gt; Weekday.Sun</span><br><span class="line">Mon =&gt; Weekday.Mon</span><br><span class="line">Tue =&gt; Weekday.Tue</span><br><span class="line">Wed =&gt; Weekday.Wed</span><br><span class="line">Thu =&gt; Weekday.Thu</span><br><span class="line">Fri =&gt; Weekday.Fri</span><br><span class="line">Sat =&gt; Weekday.Sat</span><br></pre></td></tr></table></figure></p>
+<p>可见，既可以用成员名称引用枚举常量，又可以直接根据value的值获得枚举常量。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Enum可以把一组相关常量定义在一个class中，且class不可变，而且成员可以直接比较。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/psutil包 运维工作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/psutil包 运维工作/" itemprop="url">psutil包 运维工作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>用Python来编写脚本简化日常的运维工作是Python的一个重要用途。在Linux下，有许多系统命令可以让我们时刻监控系统运行的状态，如ps，top，free等等。要获取这些系统信息，Python可以通过subprocess模块调用并获取结果。但这样做显得很麻烦，尤其是要写很多解析代码。</p>
+<p>在Python中获取系统信息的另一个好办法是使用psutil这个第三方模块。顾名思义，psutil = process and system utilities，它不仅可以通过一两行代码实现系统监控，还可以跨平台使用，支持Linux／UNIX／OSX／Windows等，是系统管理员和运维小伙伴不可或缺的必备模块。</p>
+<h1 id="安装psutil"><a href="#安装psutil" class="headerlink" title="安装psutil"></a>安装psutil</h1><p>如果安装了Anaconda，psutil就已经可用了。否则，需要在命令行下通过pip安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install psutil</span><br></pre></td></tr></table></figure></p>
+<p>如果遇到Permission denied安装失败，请加上sudo重试。</p>
+<h1 id="获取CPU信息"><a href="#获取CPU信息" class="headerlink" title="获取CPU信息"></a>获取CPU信息</h1><p>我们先来获取CPU的信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import psutil</span><br><span class="line">&gt;&gt;&gt; psutil.cpu_count() # CPU逻辑数量</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; psutil.cpu_count(logical=False) # CPU物理核心</span><br><span class="line">2</span><br><span class="line"># 2说明是双核超线程, 4则是4核非超线程</span><br></pre></td></tr></table></figure></p>
+<h1 id="统计CPU的用户／系统／空闲时间："><a href="#统计CPU的用户／系统／空闲时间：" class="headerlink" title="统计CPU的用户／系统／空闲时间："></a>统计CPU的用户／系统／空闲时间：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.cpu_times()</span><br><span class="line">scputimes(user=10963.31, nice=0.0, system=5138.67, idle=356102.45)</span><br></pre></td></tr></table></figure>
+<p>再实现类似top命令的CPU使用率，每秒刷新一次，累计10次：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for x in range(10):</span><br><span class="line">...     psutil.cpu_percent(interval=1, percpu=True)</span><br><span class="line">... </span><br><span class="line">[14.0, 4.0, 4.0, 4.0]</span><br><span class="line">[12.0, 3.0, 4.0, 3.0]</span><br><span class="line">[8.0, 4.0, 3.0, 4.0]</span><br><span class="line">[12.0, 3.0, 3.0, 3.0]</span><br><span class="line">[18.8, 5.1, 5.9, 5.0]</span><br><span class="line">[10.9, 5.0, 4.0, 3.0]</span><br><span class="line">[12.0, 5.0, 4.0, 5.0]</span><br><span class="line">[15.0, 5.0, 4.0, 4.0]</span><br><span class="line">[19.0, 5.0, 5.0, 4.0]</span><br><span class="line">[9.0, 3.0, 2.0, 3.0]</span><br></pre></td></tr></table></figure></p>
+<h1 id="获取内存信息"><a href="#获取内存信息" class="headerlink" title="获取内存信息"></a>获取内存信息</h1><p>使用psutil获取物理内存和交换内存信息，分别使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.virtual_memory()</span><br><span class="line">svmem(total=8589934592, available=2866520064, percent=66.6, used=7201386496, free=216178688, active=3342192640, inactive=2650341376, wired=1208852480)</span><br><span class="line">&gt;&gt;&gt; psutil.swap_memory()</span><br><span class="line">sswap(total=1073741824, used=150732800, free=923009024, percent=14.0, sin=10705981440, sout=40353792)</span><br></pre></td></tr></table></figure></p>
+<p>返回的是字节为单位的整数，可以看到，总内存大小是8589934592 = 8 GB，已用7201386496 = 6.7 GB，使用了66.6%。</p>
+<p>而交换区大小是1073741824 = 1 GB。</p>
+<h1 id="获取磁盘信息"><a href="#获取磁盘信息" class="headerlink" title="获取磁盘信息"></a>获取磁盘信息</h1><p>可以通过psutil获取磁盘分区、磁盘使用率和磁盘IO信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.disk_partitions() # 磁盘分区信息</span><br><span class="line">[sdiskpart(device=&apos;/dev/disk1&apos;, mountpoint=&apos;/&apos;, fstype=&apos;hfs&apos;, opts=&apos;rw,local,rootfs,dovolfs,journaled,multilabel&apos;)]</span><br><span class="line">&gt;&gt;&gt; psutil.disk_usage(&apos;/&apos;) # 磁盘使用情况</span><br><span class="line">sdiskusage(total=998982549504, used=390880133120, free=607840272384, percent=39.1)</span><br><span class="line">&gt;&gt;&gt; psutil.disk_io_counters() # 磁盘IO</span><br><span class="line">sdiskio(read_count=988513, write_count=274457, read_bytes=14856830464, write_bytes=17509420032, read_time=2228966, write_time=1618405)</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，磁盘’/‘的总容量是998982549504 = 930 GB，使用了39.1%。文件格式是HFS，opts中包含rw表示可读写，journaled表示支持日志。</p>
+<h1 id="获取网络信息"><a href="#获取网络信息" class="headerlink" title="获取网络信息"></a>获取网络信息</h1><p>psutil可以获取网络接口和网络连接信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.net_io_counters() # 获取网络读写字节／包的个数</span><br><span class="line">snetio(bytes_sent=3885744870, bytes_recv=10357676702, packets_sent=10613069, packets_recv=10423357, errin=0, errout=0, dropin=0, dropout=0)</span><br><span class="line">&gt;&gt;&gt; psutil.net_if_addrs() # 获取网络接口信息</span><br><span class="line">&#123;</span><br><span class="line">  &apos;lo0&apos;: [snic(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&apos;127.0.0.1&apos;, netmask=&apos;255.0.0.0&apos;), ...],</span><br><span class="line">  &apos;en1&apos;: [snic(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&apos;10.0.1.80&apos;, netmask=&apos;255.255.255.0&apos;), ...],</span><br><span class="line">  &apos;en0&apos;: [...],</span><br><span class="line">  &apos;en2&apos;: [...],</span><br><span class="line">  &apos;bridge0&apos;: [...]</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt; psutil.net_if_stats() # 获取网络接口状态</span><br><span class="line">&#123;</span><br><span class="line">  &apos;lo0&apos;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: 0&gt;, speed=0, mtu=16384),</span><br><span class="line">  &apos;en0&apos;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: 0&gt;, speed=0, mtu=1500),</span><br><span class="line">  &apos;en1&apos;: snicstats(...),</span><br><span class="line">  &apos;en2&apos;: snicstats(...),</span><br><span class="line">  &apos;bridge0&apos;: snicstats(...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要获取当前网络连接信息，使用net_connections()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.net_connections()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">PermissionError: [Errno 1] Operation not permitted</span><br><span class="line"></span><br><span class="line">During handling of the above exception, another exception occurred:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">psutil.AccessDenied: psutil.AccessDenied (pid=3847)</span><br></pre></td></tr></table></figure></p>
+<p>你可能会得到一个AccessDenied错误，原因是psutil获取信息也是要走系统接口，而获取网络连接信息需要root权限，这种情况下，可以退出Python交互环境，用sudo重新启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python3</span><br><span class="line">Password: ******</span><br><span class="line">Python 3.6.3 ... on darwin</span><br><span class="line">Type &quot;help&quot;, ... for more information.</span><br><span class="line">&gt;&gt;&gt; import psutil</span><br><span class="line">&gt;&gt;&gt; psutil.net_connections()</span><br><span class="line">[</span><br><span class="line">    sconn(fd=83, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::127.0.0.1&apos;, port=62911), raddr=addr(ip=&apos;::127.0.0.1&apos;, port=3306), status=&apos;ESTABLISHED&apos;, pid=3725),</span><br><span class="line">    sconn(fd=84, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::127.0.0.1&apos;, port=62905), raddr=addr(ip=&apos;::127.0.0.1&apos;, port=3306), status=&apos;ESTABLISHED&apos;, pid=3725),</span><br><span class="line">    sconn(fd=93, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::&apos;, port=8080), raddr=(), status=&apos;LISTEN&apos;, pid=3725),</span><br><span class="line">    sconn(fd=103, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::127.0.0.1&apos;, port=62918), raddr=addr(ip=&apos;::127.0.0.1&apos;, port=3306), status=&apos;ESTABLISHED&apos;, pid=3725),</span><br><span class="line">    sconn(fd=105, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, ..., pid=3725),</span><br><span class="line">    sconn(fd=106, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, ..., pid=3725),</span><br><span class="line">    sconn(fd=107, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, ..., pid=3725),</span><br><span class="line">    ...</span><br><span class="line">    sconn(fd=27, family=&lt;AddressFamily.AF_INET: 2&gt;, type=2, ..., pid=1)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h1 id="获取进程信息"><a href="#获取进程信息" class="headerlink" title="获取进程信息"></a>获取进程信息</h1><p>通过psutil可以获取到所有进程的详细信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.pids() # 所有进程ID</span><br><span class="line">[3865, 3864, 3863, 3856, 3855, 3853, 3776, ..., 45, 44, 1, 0]</span><br><span class="line">&gt;&gt;&gt; p = psutil.Process(3776) # 获取指定进程ID=3776，其实就是当前Python交互环境</span><br><span class="line">&gt;&gt;&gt; p.name() # 进程名称</span><br><span class="line">&apos;python3.6&apos;</span><br><span class="line">&gt;&gt;&gt; p.exe() # 进程exe路径</span><br><span class="line">&apos;/Users/michael/anaconda3/bin/python3.6&apos;</span><br><span class="line">&gt;&gt;&gt; p.cwd() # 进程工作目录</span><br><span class="line">&apos;/Users/michael&apos;</span><br><span class="line">&gt;&gt;&gt; p.cmdline() # 进程启动的命令行</span><br><span class="line">[&apos;python3&apos;]</span><br><span class="line">&gt;&gt;&gt; p.ppid() # 父进程ID</span><br><span class="line">3765</span><br><span class="line">&gt;&gt;&gt; p.parent() # 父进程</span><br><span class="line">&lt;psutil.Process(pid=3765, name=&apos;bash&apos;) at 4503144040&gt;</span><br><span class="line">&gt;&gt;&gt; p.children() # 子进程列表</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt; p.status() # 进程状态</span><br><span class="line">&apos;running&apos;</span><br><span class="line">&gt;&gt;&gt; p.username() # 进程用户名</span><br><span class="line">&apos;michael&apos;</span><br><span class="line">&gt;&gt;&gt; p.create_time() # 进程创建时间</span><br><span class="line">1511052731.120333</span><br><span class="line">&gt;&gt;&gt; p.terminal() # 进程终端</span><br><span class="line">&apos;/dev/ttys002&apos;</span><br><span class="line">&gt;&gt;&gt; p.cpu_times() # 进程使用的CPU时间</span><br><span class="line">pcputimes(user=0.081150144, system=0.053269812, children_user=0.0, children_system=0.0)</span><br><span class="line">&gt;&gt;&gt; p.memory_info() # 进程使用的内存</span><br><span class="line">pmem(rss=8310784, vms=2481725440, pfaults=3207, pageins=18)</span><br><span class="line">&gt;&gt;&gt; p.open_files() # 进程打开的文件</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt; p.connections() # 进程相关网络连接</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt; p.num_threads() # 进程的线程数量</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; p.threads() # 所有线程信息</span><br><span class="line">[pthread(id=1, user_time=0.090318, system_time=0.062736)]</span><br><span class="line">&gt;&gt;&gt; p.environ() # 进程环境变量</span><br><span class="line">&#123;&apos;SHELL&apos;: &apos;/bin/bash&apos;, &apos;PATH&apos;: &apos;/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:...&apos;, &apos;PWD&apos;: &apos;/Users/michael&apos;, &apos;LANG&apos;: &apos;zh_CN.UTF-8&apos;, ...&#125;</span><br><span class="line">&gt;&gt;&gt; p.terminate() # 结束进程</span><br><span class="line">Terminated: 15 &lt;-- 自己把自己结束了</span><br></pre></td></tr></table></figure></p>
+<p>和获取网络连接类似，获取一个root用户的进程需要root权限，启动Python交互环境或者.py文件时，需要sudo权限。</p>
+<p>psutil还提供了一个test()函数，可以模拟出ps命令的效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python3</span><br><span class="line">Password: ******</span><br><span class="line">Python 3.6.3 ... on darwin</span><br><span class="line">Type &quot;help&quot;, ... for more information.</span><br><span class="line">&gt;&gt;&gt; import psutil</span><br><span class="line">&gt;&gt;&gt; psutil.test()</span><br><span class="line">USER         PID %MEM     VSZ     RSS TTY           START    TIME  COMMAND</span><br><span class="line">root           0 24.0 74270628 2016380 ?             Nov18   40:51  kernel_task</span><br><span class="line">root           1  0.1 2494140    9484 ?             Nov18   01:39  launchd</span><br><span class="line">root          44  0.4 2519872   36404 ?             Nov18   02:02  UserEventAgent</span><br><span class="line">root          45    ? 2474032    1516 ?             Nov18   00:14  syslogd</span><br><span class="line">root          47  0.1 2504768    8912 ?             Nov18   00:03  kextd</span><br><span class="line">root          48  0.1 2505544    4720 ?             Nov18   00:19  fseventsd</span><br><span class="line">_appleeven    52  0.1 2499748    5024 ?             Nov18   00:00  appleeventsd</span><br><span class="line">root          53  0.1 2500592    6132 ?             Nov18   00:02  configd</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>psutil使得Python程序获取系统信息变得易如反掌。</p>
+<p>psutil还可以获取用户信息、Windows服务等很多有用的系统信息，具体请参考psutil的官网：<a href="https://github.com/giampaolo/psutil" target="_blank" rel="noopener">https://github.com/giampaolo/psutil</a></p>
 
           
         
@@ -2003,7 +1989,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/实例属性和类属性/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/定制类/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -2022,7 +2008,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/实例属性和类属性/" itemprop="url">实例属性和类属性</a></h1>
+                <a class="post-title-link" href="/2019/01/25/定制类/" itemprop="url">定制类</a></h1>
         
 
         <div class="post-meta">
@@ -2088,7 +2074,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  492 字
+                  2.4k 字
                 </span>
               
 
@@ -2104,7 +2090,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -2127,14 +2113,62 @@
       
         
           
-            <p>由于Python是动态语言，根据类创建的实例可以任意绑定属性。</p>
-<p>给实例绑定属性的方法是通过实例变量，或者通过self变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">s = Student(&apos;Bob&apos;)</span><br><span class="line">s.score = 90</span><br></pre></td></tr></table></figure></p>
-<p>但是，如果Student类本身需要绑定一个属性呢？可以直接在class中定义属性，这种属性是类属性，归Student类所有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    name = &apos;Student&apos;</span><br></pre></td></tr></table></figure></p>
-<p>当我们定义了一个类属性后，这个属性虽然归类所有，但类的所有实例都可以访问到。来测试一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     name = &apos;Student&apos;</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; s = Student() # 创建实例s</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 打印name属性，因为实例并没有name属性，所以会继续查找class的name属性</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; print(Student.name) # 打印类的name属性</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; s.name = &apos;Michael&apos; # 给实例绑定name属性</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 由于实例属性优先级比类属性高，因此，它会屏蔽掉类的name属性</span><br><span class="line">Michael</span><br><span class="line">&gt;&gt;&gt; print(Student.name) # 但是类属性并未消失，用Student.name仍然可以访问</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; del s.name # 如果删除实例的name属性</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 再次调用s.name，由于实例的name属性没有找到，类的name属性就显示出来了</span><br><span class="line">Student</span><br></pre></td></tr></table></figure></p>
-<p>从上面的例子可以看出，在编写程序的时候，千万不要对实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>实例属性属于各个实例所有，互不干扰；</p>
-<p>类属性属于类所有，所有实例共享一个属性；</p>
-<p>不要对实例属性和类属性使用相同的名字，否则将产生难以发现的错误。</p>
+            <p>看到类似<strong>slots</strong>这种形如<strong>xxx</strong>的变量或者函数名就要注意，这些在Python中是有特殊用途的。</p>
+<p><strong>slots</strong>我们已经知道怎么用了，<strong>len</strong>()方法我们也知道是为了能让class作用于len()函数。</p>
+<p>除此之外，Python的class中还有许多这样有特殊用途的函数，可以帮助我们定制类。</p>
+<h1 id="str"><a href="#str" class="headerlink" title="str"></a><strong>str</strong></h1><p>我们先定义一个Student类，打印一个实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     def __init__(self, name):</span><br><span class="line">...         self.name = name</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; print(Student(&apos;Michael&apos;))</span><br><span class="line">&lt;__main__.Student object at 0x109afb190&gt;</span><br></pre></td></tr></table></figure></p>
+<p>打印出一堆&lt;<strong>main</strong>.Student object at 0x109afb190&gt;，不好看。</p>
+<p>怎么才能打印得好看呢？只需要定义好<strong>str</strong>()方法，返回一个好看的字符串就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     def __init__(self, name):</span><br><span class="line">...         self.name = name</span><br><span class="line">...     def __str__(self):</span><br><span class="line">...         return &apos;Student object (name: %s)&apos; % self.name</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; print(Student(&apos;Michael&apos;))</span><br><span class="line">Student object (name: Michael)</span><br></pre></td></tr></table></figure></p>
+<p>这样打印出来的实例，不但好看，而且容易看出实例内部重要的数据。</p>
+<p>但是细心的朋友会发现直接敲变量不用print，打印出来的实例还是不好看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student(&apos;Michael&apos;)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&lt;__main__.Student object at 0x109afb310&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这是因为直接显示变量调用的不是<strong>str</strong>()，而是<strong>repr</strong>()，两者的区别是<strong>str</strong>()返回用户看到的字符串，而<strong>repr</strong>()返回程序开发者看到的字符串，也就是说，<strong>repr</strong>()是为调试服务的。</p>
+<p>解决办法是再定义一个<strong>repr</strong>()。但是通常<strong>str</strong>()和<strong>repr</strong>()代码都是一样的，所以，有个偷懒的写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line">    def __str__(self):</span><br><span class="line">        return &apos;Student object (name=%s)&apos; % self.name</span><br><span class="line">    __repr__ = __str__</span><br></pre></td></tr></table></figure></p>
+<h1 id="iter"><a href="#iter" class="headerlink" title="iter"></a><strong>iter</strong></h1><p>如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个<strong>iter</strong>()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的<strong>next</strong>()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。</p>
+<p>我们以斐波那契数列为例，写一个Fib类，可以作用于for循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.a, self.b = 0, 1 # 初始化两个计数器a，b</span><br><span class="line"></span><br><span class="line">    def __iter__(self):</span><br><span class="line">        return self # 实例本身就是迭代对象，故返回自己</span><br><span class="line"></span><br><span class="line">    def __next__(self):</span><br><span class="line">        self.a, self.b = self.b, self.a + self.b # 计算下一个值</span><br><span class="line">        if self.a &gt; 100000: # 退出循环的条件</span><br><span class="line">            raise StopIteration()</span><br><span class="line">        return self.a # 返回下一个值</span><br></pre></td></tr></table></figure></p>
+<p>现在，试试把Fib实例作用于for循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for n in Fib():</span><br><span class="line">...     print(n)</span><br><span class="line">...</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">...</span><br><span class="line">46368</span><br><span class="line">75025</span><br></pre></td></tr></table></figure></p>
+<h1 id="getitem"><a href="#getitem" class="headerlink" title="getitem"></a><strong>getitem</strong></h1><p>Fib实例虽然能作用于for循环，看起来和list有点像，但是，把它当成list来使用还是不行，比如，取第5个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Fib()[5]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">TypeError: &apos;Fib&apos; object does not support indexing</span><br></pre></td></tr></table></figure></p>
+<p>要表现得像list那样按照下标取出元素，需要实现<strong>getitem</strong>()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    def __getitem__(self, n):</span><br><span class="line">        a, b = 1, 1</span><br><span class="line">        for x in range(n):</span><br><span class="line">            a, b = b, a + b</span><br><span class="line">        return a</span><br></pre></td></tr></table></figure></p>
+<p>现在，就可以按下标访问数列的任意一项了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = Fib()</span><br><span class="line">&gt;&gt;&gt; f[0]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; f[1]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; f[2]</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; f[3]</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; f[10]</span><br><span class="line">89</span><br><span class="line">&gt;&gt;&gt; f[100]</span><br><span class="line">573147844013817084101</span><br></pre></td></tr></table></figure></p>
+<p>但是list有个神奇的切片方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(range(100))[5:10]</span><br><span class="line">[5, 6, 7, 8, 9]</span><br></pre></td></tr></table></figure></p>
+<p>对于Fib却报错。原因是<strong>getitem</strong>()传入的参数可能是一个int，也可能是一个切片对象slice，所以要做判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    def __getitem__(self, n):</span><br><span class="line">        if isinstance(n, int): # n是索引</span><br><span class="line">            a, b = 1, 1</span><br><span class="line">            for x in range(n):</span><br><span class="line">                a, b = b, a + b</span><br><span class="line">            return a</span><br><span class="line">        if isinstance(n, slice): # n是切片</span><br><span class="line">            start = n.start</span><br><span class="line">            stop = n.stop</span><br><span class="line">            if start is None:</span><br><span class="line">                start = 0</span><br><span class="line">            a, b = 1, 1</span><br><span class="line">            L = []</span><br><span class="line">            for x in range(stop):</span><br><span class="line">                if x &gt;= start:</span><br><span class="line">                    L.append(a)</span><br><span class="line">                a, b = b, a + b</span><br><span class="line">            return L</span><br></pre></td></tr></table></figure></p>
+<p>现在试试Fib的切片：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = Fib()</span><br><span class="line">&gt;&gt;&gt; f[0:5]</span><br><span class="line">[1, 1, 2, 3, 5]</span><br><span class="line">&gt;&gt;&gt; f[:10]</span><br><span class="line">[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span><br></pre></td></tr></table></figure></p>
+<p>但是没有对step参数作处理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f[:10:2]</span><br><span class="line">[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</span><br></pre></td></tr></table></figure></p>
+<p>也没有对负数作处理，所以，要正确实现一个<strong>getitem</strong>()还是有很多工作要做的。</p>
+<p>此外，如果把对象看成dict，<strong>getitem</strong>()的参数也可能是一个可以作key的object，例如str。</p>
+<p>与之对应的是<strong>setitem</strong>()方法，把对象视作list或dict来对集合赋值。最后，还有一个<strong>delitem</strong>()方法，用于删除某个元素。</p>
+<p>总之，通过上面的方法，我们自己定义的类表现得和Python自带的list、tuple、dict没什么区别，这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口。</p>
+<h1 id="getattr"><a href="#getattr" class="headerlink" title="getattr"></a><strong>getattr</strong></h1><p>正常情况下，当我们调用类的方法或属性时，如果不存在，就会报错。比如定义Student类：</p>
+<p>class Student(object):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def __init__(self):</span><br><span class="line">    self.name = &apos;Michael&apos;</span><br></pre></td></tr></table></figure></p>
+<p>调用name属性，没问题，但是，调用不存在的score属性，就有问题了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; print(s.name)</span><br><span class="line">Michael</span><br><span class="line">&gt;&gt;&gt; print(s.score)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">AttributeError: &apos;Student&apos; object has no attribute &apos;score&apos;</span><br></pre></td></tr></table></figure></p>
+<p>错误信息很清楚地告诉我们，没有找到score这个attribute。</p>
+<p>要避免这个错误，除了可以加上一个score属性外，Python还有另一个机制，那就是写一个<strong>getattr</strong>()方法，动态返回一个属性。修改如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.name = &apos;Michael&apos;</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, attr):</span><br><span class="line">        if attr==&apos;score&apos;:</span><br><span class="line">            return 99</span><br></pre></td></tr></table></figure></p>
+<p>当调用不存在的属性时，比如score，Python解释器会试图调用<strong>getattr</strong>(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.name</span><br><span class="line">&apos;Michael&apos;</span><br><span class="line">&gt;&gt;&gt; s.score</span><br><span class="line">99</span><br></pre></td></tr></table></figure></p>
+<p>返回函数也是完全可以的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, attr):</span><br><span class="line">        if attr==&apos;age&apos;:</span><br><span class="line">            return lambda: 25</span><br></pre></td></tr></table></figure></p>
+<p>只是调用方式要变为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s.age()</span><br><span class="line">25</span><br></pre></td></tr></table></figure></p>
+<p>注意，只有在没有找到属性的情况下，才调用<strong>getattr</strong>，已有的属性，比如name，不会在<strong>getattr</strong>中查找。</p>
+<p>此外，注意到任意调用如s.abc都会返回None，这是因为我们定义的<strong>getattr</strong>默认返回就是None。要让class只响应特定的几个属性，我们就要按照约定，抛出AttributeError的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, attr):</span><br><span class="line">        if attr==&apos;age&apos;:</span><br><span class="line">            return lambda: 25</span><br><span class="line">        raise AttributeError(&apos;\&apos;Student\&apos; object has no attribute \&apos;%s\&apos;&apos; % attr)</span><br></pre></td></tr></table></figure></p>
+<p>这实际上可以把一个类的所有属性和方法调用全部动态化处理了，不需要任何特殊手段。</p>
+<p>这种完全动态调用的特性有什么实际作用呢？作用就是，可以针对完全动态的情况作调用。</p>
+<p>举个例子：</p>
+<p>现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：</p>
+<p><a href="http://api.server/user/friends" target="_blank" rel="noopener">http://api.server/user/friends</a></p>
+<p><a href="http://api.server/user/timeline/list" target="_blank" rel="noopener">http://api.server/user/timeline/list</a></p>
+<p>如果要写SDK，给每个URL对应的API都写一个方法，那得累死，而且，API一旦改动，SDK也要改。</p>
+<p>利用完全动态的<strong>getattr</strong>，我们可以写出一个链式调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Chain(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, path=&apos;&apos;):</span><br><span class="line">        self._path = path</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, path):</span><br><span class="line">        return Chain(&apos;%s/%s&apos; % (self._path, path))</span><br><span class="line"></span><br><span class="line">    def __str__(self):</span><br><span class="line">        return self._path</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br></pre></td></tr></table></figure></p>
+<p>试试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Chain().status.user.timeline.list</span><br><span class="line">&apos;/status/user/timeline/list&apos;</span><br></pre></td></tr></table></figure></p>
+<p>这样，无论API怎么变，SDK都可以根据URL实现完全动态的调用，而且，不随API的增加而改变！</p>
+<p>还有些REST API会把参数放到URL中，比如GitHub的API：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /users/:user/repos</span><br></pre></td></tr></table></figure></p>
+<p>调用时，需要把:user替换为实际用户名。如果我们能写出这样的链式调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chain().users(&apos;michael&apos;).repos</span><br></pre></td></tr></table></figure></p>
+<p>就可以非常方便地调用API了。有兴趣的童鞋可以试试写出来。</p>
+<h1 id="call"><a href="#call" class="headerlink" title="call"></a><strong>call</strong></h1><p>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。</p>
+<p>任何类，只需要定义一个<strong>call</strong>()方法，就可以直接对实例进行调用。请看示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    def __call__(self):</span><br><span class="line">        print(&apos;My name is %s.&apos; % self.name)</span><br></pre></td></tr></table></figure></p>
+<p>调用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student(&apos;Michael&apos;)</span><br><span class="line">&gt;&gt;&gt; s() # self参数不要传入</span><br><span class="line">My name is Michael.</span><br></pre></td></tr></table></figure></p>
+<p><strong>call</strong>()还可以定义参数。对实例进行直接调用就好比对一个函数进行调用一样，所以你完全可以把对象看成函数，把函数看成对象，因为这两者之间本来就没啥根本的区别。</p>
+<p>如果你把对象看成函数，那么函数本身其实也可以在运行期动态创建出来，因为类的实例都是运行期创建出来的，这么一来，我们就模糊了对象和函数的界限。</p>
+<p>那么，怎么判断一个变量是对象还是函数呢？其实，更多的时候，我们需要判断一个对象是否能被调用，能被调用的对象就是一个Callable对象，比如函数和我们上面定义的带有<strong>call</strong>()的类实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; callable(Student())</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; callable(max)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; callable([1, 2, 3])</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; callable(None)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; callable(&apos;str&apos;)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>通过callable()函数，我们就可以判断一个对象是否是“可调用”对象。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Python的class允许定义许多定制方法，可以让我们非常方便地生成特定的类。</p>
+<p>本节介绍的是最常用的几个定制方法，还有很多可定制的方法，请参考Python的官方文档。</p>
 
           
         

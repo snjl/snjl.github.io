@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="snjl">
 <meta property="og:description" content="查看sql_mode1select @@sql_mode; 查询出来的值为：1ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 去掉需要去掉的后，例如去掉NO_ZERO_DA">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-14T15:09:44.000Z">
+<meta property="og:updated_time" content="2019-01-25T02:54:47.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql：设置sql_mode">
 <meta name="twitter:description" content="查看sql_mode1select @@sql_mode; 查询出来的值为：1ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 去掉需要去掉的后，例如去掉NO_ZERO_DA">
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  224 字
+                  232 字
                 </span>
               
 
@@ -416,8 +416,8 @@
 <p>这是对于已存在的数据库，改变其sql_mode，但是对于以后新建的数据库，sql_mode的默认值还是一开始查出来的值。</p>
 <h1 id="设置新数据库的sql-mode"><a href="#设置新数据库的sql-mode" class="headerlink" title="设置新数据库的sql_mode"></a>设置新数据库的sql_mode</h1><p>使用<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> @@sql_mode=<span class="string">'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span></span><br></pre></td></tr></table></figure></p>
 <p>改变了全局sql_mode，对于新建的数据库有效，但是仅仅对于这次连接有效。</p>
-<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>安装了mysql后，网上说在etc目录中有my.cnf，但是5.7版本好像没有，但是在etc/mysql中有，在该文件夹末尾加上：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">set sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure></p>
-<p>即没有NO_ZERO_DATE，然后输入service mysql restart重启mysql服务，进入mysql后，输入select @@sql_mode，会发现就是配置文件中设置好的sql_mode。</p>
+<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>安装了mysql后，网上说在etc目录中有my.cnf，但是5.7版本好像没有，但是在etc/mysql中有，在该文件夹末尾加上：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">sql_mode=&apos;ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意，这里没有set。</strong><br>即没有NO_ZERO_DATE，然后输入service mysql restart重启mysql服务，进入mysql后，输入select @@sql_mode，会发现就是配置文件中设置好的sql_mode。</p>
 
       
     </div>

@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Ubuntu安装 添加GPG key： 1$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D  添加源 新建文件：/etc/apt/sources.list.d/docker.list，在里面添加内容： 1de">
+<meta name="description" content="Ubuntu安装获取最新版本的 Docker 安装包1wget -qO- https://get.docker.com/ | sh 输入当前用户的密码后，就会下载脚本并且安装Docker及依赖包。 启动docker 后台服务1sudo service docker start 测试运行hello-world1docker run hello-world Centos安装 确保 yum 包更新到最新">
 <meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker安装">
 <meta property="og:url" content="https://snjl.github.io/2019/01/07/docker安装/index.html">
 <meta property="og:site_name" content="snjl">
-<meta property="og:description" content="Ubuntu安装 添加GPG key： 1$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D  添加源 新建文件：/etc/apt/sources.list.d/docker.list，在里面添加内容： 1de">
+<meta property="og:description" content="Ubuntu安装获取最新版本的 Docker 安装包1wget -qO- https://get.docker.com/ | sh 输入当前用户的密码后，就会下载脚本并且安装Docker及依赖包。 启动docker 后台服务1sudo service docker start 测试运行hello-world1docker run hello-world Centos安装 确保 yum 包更新到最新">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-07T15:43:30.000Z">
+<meta property="og:updated_time" content="2019-01-25T02:55:14.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker安装">
-<meta name="twitter:description" content="Ubuntu安装 添加GPG key： 1$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D  添加源 新建文件：/etc/apt/sources.list.d/docker.list，在里面添加内容： 1de">
+<meta name="twitter:description" content="Ubuntu安装获取最新版本的 Docker 安装包1wget -qO- https://get.docker.com/ | sh 输入当前用户的密码后，就会下载脚本并且安装Docker及依赖包。 启动docker 后台服务1sudo service docker start 测试运行hello-world1docker run hello-world Centos安装 确保 yum 包更新到最新">
 
 
 
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  117 字
+                  98 字
                 </span>
               
 
@@ -410,21 +410,10 @@
       
 
       
-        <h1 id="Ubuntu安装"><a href="#Ubuntu安装" class="headerlink" title="Ubuntu安装"></a>Ubuntu安装</h1><ol>
-<li><p>添加GPG key：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加源<br> 新建文件：/etc/apt/sources.list.d/docker.list，在里面添加内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb https://apt.dockerproject.org/repo ubuntu-xenial main</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新源</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装与测试<br> 安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install docker-engine</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service docker start </span><br><span class="line">$ sudo docker run hello-world</span><br></pre></td></tr></table></figure></p>
+        <h1 id="Ubuntu安装"><a href="#Ubuntu安装" class="headerlink" title="Ubuntu安装"></a>Ubuntu安装</h1><p>获取最新版本的 Docker 安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure></p>
+<p>输入当前用户的密码后，就会下载脚本并且安装Docker及依赖包。</p>
+<p>启动docker 后台服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker start</span><br></pre></td></tr></table></figure></p>
+<p>测试运行hello-world<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure></p>
 <h1 id="Centos安装"><a href="#Centos安装" class="headerlink" title="Centos安装"></a>Centos安装</h1><ol>
 <li><p>确保 yum 包更新到最新</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
