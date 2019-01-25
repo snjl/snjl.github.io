@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/Ubuntu：安装npm和node/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/Ubuntu：tomcat安装和部署/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/12/Ubuntu：安装npm和node/" itemprop="url">Ubuntu：安装npm和node</a></h1>
+                <a class="post-title-link" href="/2019/01/23/Ubuntu：tomcat安装和部署/" itemprop="url">Ubuntu：tomcat安装和部署</a></h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:37:04+08:00">
-                2018-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:42:23+08:00">
+                2019-01-23
               </time>
             
 
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  50 字
+                  243 字
                 </span>
               
 
@@ -413,15 +413,19 @@
       
         
           
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装nodejs：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
-<p>安装npm：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
-<h1 id="nodejs和npm更新"><a href="#nodejs和npm更新" class="headerlink" title="nodejs和npm更新"></a>nodejs和npm更新</h1><p>npm更新：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g</span><br></pre></td></tr></table></figure>
-<p>更新Nodejs自身：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g n </span><br><span class="line">n latest</span><br></pre></td></tr></table></figure>
-<p>使用npm -v和node -v查看版本号。</p>
+            <p>两种方式，一种是apt直接安装，一种是tar解压安装。</p>
+<p>使用apt的方法简单，但是服务部署位置和日志位置，甚至配置的位置都是不一样的，分别在/var/lib/tomcat8,/var/log/tomcat8,/etc/tomcat8，所以如果有需要自动创建log文件夹的，不适配这种方式，更适用于解压版。</p>
+<h1 id="apt安装tomcat8"><a href="#apt安装tomcat8" class="headerlink" title="apt安装tomcat8"></a>apt安装tomcat8</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install tomcat8</span><br></pre></td></tr></table></figure>
+<p>会自动安装和配置。</p>
+<h1 id="tomcat服务启动关闭重启"><a href="#tomcat服务启动关闭重启" class="headerlink" title="tomcat服务启动关闭重启"></a>tomcat服务启动关闭重启</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service tomcat8 start</span><br><span class="line">service tomcat8 stop</span><br><span class="line">service tomcat8 restart</span><br></pre></td></tr></table></figure>
+<h1 id="tomcat服务部署位置"><a href="#tomcat服务部署位置" class="headerlink" title="tomcat服务部署位置"></a>tomcat服务部署位置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/lib/tomcat8/webapps</span><br></pre></td></tr></table></figure>
+<h1 id="tomcat日志位置"><a href="#tomcat日志位置" class="headerlink" title="tomcat日志位置"></a>tomcat日志位置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/log/tomcat8</span><br></pre></td></tr></table></figure>
+<p>一般是catalina.out。</p>
+<h1 id="tomcat配置位置"><a href="#tomcat配置位置" class="headerlink" title="tomcat配置位置"></a>tomcat配置位置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/tomcat8/</span><br></pre></td></tr></table></figure>
+<h1 id="tar解压安装"><a href="#tar解压安装" class="headerlink" title="tar解压安装"></a>tar解压安装</h1><p>例如安装tomcat8，先下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-tomcat-8.5.37.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>进入bin目录，启动和停止<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./startup.sh</span><br><span class="line">./shutdown.sh</span><br></pre></td></tr></table></figure></p>
+<p>项目文件放在webapps文件夹里即可，启动后访问localhost:8080显示tomcat的欢迎界面即完成。</p>
 
           
         
@@ -474,7 +478,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/Ubuntu：修改root密码/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/docker：run参数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -493,7 +497,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/12/Ubuntu：修改root密码/" itemprop="url">Ubuntu：修改root密码</a></h1>
+                <a class="post-title-link" href="/2019/01/23/docker：run参数/" itemprop="url">docker：run参数</a></h1>
         
 
         <div class="post-meta">
@@ -505,8 +509,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:36:35+08:00">
-                2018-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:41:40+08:00">
+                2019-01-23
               </time>
             
 
@@ -528,8 +532,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -559,373 +563,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  33 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>安装完系统后可以设置root密码，输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo root</span><br></pre></td></tr></table></figure>
-<p>可以创建root的密码。</p>
-<p>修改root密码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/Ubuntu：安装java/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/12/Ubuntu：安装java/" itemprop="url">Ubuntu：安装java</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:35:38+08:00">
-                2018-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  205 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="通过apt-get-的方式安装jdk"><a href="#通过apt-get-的方式安装jdk" class="headerlink" title="通过apt-get 的方式安装jdk"></a>通过apt-get 的方式安装jdk</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update //sudo表示超级用户，如果是在root用户下可以不写</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openjdk-8-jdk</span><br></pre></td></tr></table></figure>
-<p>安装完后的目录在：/usr/lib/jvm/java-8-openjdk-amd64<br>echo $JAVA_HOME，没有结果；javac -version可以显示版本。</p>
-<h1 id="然后配置JAVA-HOME-JRE-HOME-PATH，配置文件的位置：-etc-profile"><a href="#然后配置JAVA-HOME-JRE-HOME-PATH，配置文件的位置：-etc-profile" class="headerlink" title="然后配置JAVA_HOME,JRE_HOME,PATH，配置文件的位置：/etc/profile"></a>然后配置JAVA_HOME,JRE_HOME,PATH，配置文件的位置：/etc/profile</h1><p>在内容中加入下面的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>执行完之后，source /etc/profile ，使变动生效，不需用重启</p>
-<h1 id="用echo-JAVA-HOME检查是否配置成功"><a href="#用echo-JAVA-HOME检查是否配置成功" class="headerlink" title="用echo $JAVA_HOME检查是否配置成功"></a>用echo $JAVA_HOME检查是否配置成功</h1><h1 id="javac不成功"><a href="#javac不成功" class="headerlink" title="javac不成功"></a>javac不成功</h1><p>显示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">The program &apos;javac&apos; can be found in the following packages:</span><br><span class="line"> * default-jdk</span><br><span class="line"> * ecj</span><br><span class="line"> * gcj-5-jdk</span><br><span class="line"> * openjdk-8-jdk-headless</span><br><span class="line"> * gcj-4.8-jdk</span><br><span class="line"> * gcj-4.9-jdk</span><br><span class="line"> * openjdk-9-jdk-headless</span><br><span class="line">Try: apt install &lt;selected package&gt;</span><br></pre></td></tr></table></figure>
-<p>使用命令apt install default-jdk即可。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/springboot：项目启动时初始化资源/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/12/springboot：项目启动时初始化资源/" itemprop="url">springboot：项目启动时初始化资源</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:33:46+08:00">
-                2018-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  844 字
+                  962 字
                 </span>
               
 
@@ -963,573 +601,14 @@
 
       
         
-          <p>项目地址：<a href="https://github.com/snjl/springboot.CommandLineRunner.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.CommandLineRunner.git</a></p>
-<p>在我们实际工作中，总会遇到这样需求，在项目启动的时候需要做一些初始化的操作，比如初始化线程池，提前加载好加密证书等。今天就给大家介绍一个 Spring Boot 神器，专门帮助大家解决项目启动初始化资源操作。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/12/springboot：项目启动时初始化资源/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/springboot：单元测试/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/12/springboot：单元测试/" itemprop="url">springboot：单元测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:33:02+08:00">
-                2018-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  4k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  17 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目地址：<a href="https://github.com/snjl/springboot.exception.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.exception.git</a></p>
-<p>这次来介绍下Spring Boot中对单元测试的整合使用，本篇会通过以下4点来介绍，基本满足日常需求</p>
-<ul>
-<li><p>Service层单元测试</p>
-</li>
-<li><p>Controller层单元测试</p>
-</li>
-<li><p>新断言assertThat使用</p>
-</li>
-<li><p>单元测试的回滚</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/12/springboot：单元测试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/react：修改项目默认端口的方式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/12/react：修改项目默认端口的方式/" itemprop="url">react：修改项目默认端口的方式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:32:26+08:00">
-                2018-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/react/" itemprop="url" rel="index">
-                    <span itemprop="name">react</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  137 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Linux-下修改方法"><a href="#Linux-下修改方法" class="headerlink" title="Linux 下修改方法"></a>Linux 下修改方法</h1><p>修改 package.json 文件下 scripts 节点下的 start 的值，如下所示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;PORT=9000 react-scripts start&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;react-scripts build&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;,</span><br><span class="line">    &quot;eject&quot;: &quot;react-scripts eject&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Windows-下修改方法"><a href="#Windows-下修改方法" class="headerlink" title="Windows 下修改方法"></a>Windows 下修改方法</h1><p>修改 package.json 文件下 scripts 节点下的 start 的值，如下所示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;set PORT=9000 &amp;&amp; react-scripts start&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;react-scripts build&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;react-scripts test --env=jsdom&quot;,</span><br><span class="line">    &quot;eject&quot;: &quot;react-scripts eject&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/react：部署上线/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/12/react：部署上线/" itemprop="url">react：部署上线</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:31:41+08:00">
-                2018-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/react/" itemprop="url" rel="index">
-                    <span itemprop="name">react</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  114 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="react创建项目"><a href="#react创建项目" class="headerlink" title="react创建项目"></a>react创建项目</h1><p>react安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-react-app</span><br></pre></td></tr></table></figure>
-<p>创建：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create-react-app my-app</span><br></pre></td></tr></table></figure>
-<p>进入，打开：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd my-app</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
-<h1 id="react打包发布"><a href="#react打包发布" class="headerlink" title="react打包发布"></a>react打包发布</h1><p>安装服务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g serve</span><br></pre></td></tr></table></figure>
-<p>打包（在my-app文件夹中）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>打包后会出现一个build文件夹，不需要进入，直接在my-app文件夹中运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serve -s build</span><br></pre></td></tr></table></figure>
-<p>即会运行在5000默认端口。</p>
-<h1 id="改变默认端口"><a href="#改变默认端口" class="headerlink" title="改变默认端口"></a>改变默认端口</h1><p>运行时加入port：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PORT=8080 &amp;&amp; serve -s build</span><br></pre></td></tr></table></figure>
+            <p>在run的时候，给docker分配cpu0、1，分配4G内存，并且共享/home文件夹生成docker的容器，使用-it可以直接进入命令行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --cpuset-cpus 0-1 -it -m 4096M -v /home:/home ubuntu:18.04</span><br></pre></td></tr></table></figure></p>
+<p>参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">-d, --detach=false         指定容器运行于前台还是后台，默认为false     </span><br><span class="line">-i, --interactive=false   打开STDIN，用于控制台交互    </span><br><span class="line">-t, --tty=false            分配tty设备，该可以支持终端登录，默认为false    </span><br><span class="line">-u, --user=&quot;&quot;              指定容器的用户    </span><br><span class="line">-a, --attach=[]            登录容器（必须是以docker run -d启动的容器）  </span><br><span class="line">-w, --workdir=&quot;&quot;           指定容器的工作目录   </span><br><span class="line">-c, --cpu-shares=0        设置容器CPU权重，在CPU共享场景使用    </span><br><span class="line">-e, --env=[]               指定环境变量，容器中可以使用该环境变量    </span><br><span class="line">-m, --memory=&quot;&quot;            指定容器的内存上限    </span><br><span class="line">-P, --publish-all=false    指定容器暴露的端口    </span><br><span class="line">-p, --publish=[]           指定容器暴露的端口   </span><br><span class="line">-h, --hostname=&quot;&quot;          指定容器的主机名    </span><br><span class="line">-v, --volume=[]            给容器挂载存储卷，挂载到容器的某个目录    </span><br><span class="line">--volumes-from=[]          给容器挂载其他容器上的卷，挂载到容器的某个目录  </span><br><span class="line">--cap-add=[]               添加权限，权限清单详见：http://linux.die.net/man/7/capabilities    </span><br><span class="line">--cap-drop=[]              删除权限，权限清单详见：http://linux.die.net/man/7/capabilities    </span><br><span class="line">--cidfile=&quot;&quot;               运行容器后，在指定文件中写入容器PID值，一种典型的监控系统用法    </span><br><span class="line">--cpuset=&quot;&quot;                设置容器可以使用哪些CPU，此参数可以用来容器独占CPU    </span><br><span class="line">--device=[]                添加主机设备给容器，相当于设备直通    </span><br><span class="line">--dns=[]                   指定容器的dns服务器    </span><br><span class="line">--dns-search=[]            指定容器的dns搜索域名，写入到容器的/etc/resolv.conf文件    </span><br><span class="line">--entrypoint=&quot;&quot;            覆盖image的入口点    </span><br><span class="line">--env-file=[]              指定环境变量文件，文件格式为每行一个环境变量    </span><br><span class="line">--expose=[]                指定容器暴露的端口，即修改镜像的暴露端口    </span><br><span class="line">--link=[]                  指定容器间的关联，使用其他容器的IP、env等信息    </span><br><span class="line">--lxc-conf=[]              指定容器的配置文件，只有在指定--exec-driver=lxc时使用    </span><br><span class="line">--name=&quot;&quot;                  指定容器名字，后续可以通过名字进行容器管理，links特性需要使用名字    </span><br><span class="line">--net=&quot;bridge&quot;             容器网络设置:  </span><br><span class="line">                              bridge 使用docker daemon指定的网桥       </span><br><span class="line">                              host    //容器使用主机的网络    </span><br><span class="line">                              container:NAME_or_ID  &gt;//使用其他容器的网路，共享IP和PORT等网络资源    </span><br><span class="line">                              none 容器使用自己的网络（类似--net=bridge），但是不进行配置   </span><br><span class="line">--privileged=false         指定容器是否为特权容器，特权容器拥有所有的capabilities    </span><br><span class="line">--restart=&quot;no&quot;             指定容器停止后的重启策略:  </span><br><span class="line">                              no：容器退出时不重启    </span><br><span class="line">                              on-failure：容器故障退出（返回值非零）时重启   </span><br><span class="line">                              always：容器退出时总是重启    </span><br><span class="line">--rm=false                 指定容器停止后自动删除容器(不支持以docker run -d启动的容器)    </span><br><span class="line">--sig-proxy=true           设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理</span><br></pre></td></tr></table></figure></p>
+<p>使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mynginx -d nginx:latest</span><br></pre></td></tr></table></figure></p>
+<p>使用镜像nginx:latest以后台模式启动一个容器,并将容器的80端口映射到主机随机端口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -P -d nginx:latest</span><br></pre></td></tr></table></figure></p>
+<p>使用镜像 nginx:latest，以后台模式启动一个容器,将容器的 80 端口映射到主机的 80 端口,主机的目录 /data 映射到容器的 /data。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 -v /data:/data -d nginx:latest</span><br></pre></td></tr></table></figure></p>
+<p>绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 127.0.0.1:80:8080/tcp ubuntu bash</span><br></pre></td></tr></table></figure></p>
+<p>使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~$ docker run -it nginx:latest /bin/bash</span><br><span class="line">root@b8573233d675:/#</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1582,7 +661,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/12/Ubuntu：mysql安装和操作/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：继承和多态/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1601,7 +680,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/12/Ubuntu：mysql安装和操作/" itemprop="url">Ubuntu：mysql安装和操作</a></h1>
+                <a class="post-title-link" href="/2019/01/23/python：继承和多态/" itemprop="url">python：继承和多态</a></h1>
         
 
         <div class="post-meta">
@@ -1613,8 +692,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:29:48+08:00">
-                2018-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:40:51+08:00">
+                2019-01-23
               </time>
             
 
@@ -1636,382 +715,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  761 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>流程：更新软件包索引，安装mysql-server软件包，然后运行附带的安全脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mysql-server </span><br><span class="line">sudo mysql_secure_installation</span><br></pre></td></tr></table></figure>
-<p>sudo apt-get update：更新apt软件包索引；</p>
-<p>sudo apt-get install mysql-server：系统会提醒安装过程中创建root密码；</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/12/Ubuntu：mysql安装和操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/09/springboot：使用spring-boot-admin对spring-boot服务进行监控/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/springboot：使用spring-boot-admin对spring-boot服务进行监控/" itemprop="url">springboot：使用spring-boot-admin对spring-boot服务进行监控</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T23:38:01+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.8k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目地址：</p>
-<ul>
-<li>简单版本：<a href="https://github.com/snjl/springboot.admin-simple.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.admin-simple.git</a></li>
-<li>复杂版本：<a href="https://github.com/snjl/springboot.admin.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.admin.git</a></li>
-</ul>
-<p>Spring Boot Actuator提供了对单个Spring Boot的监控，信息包含：应用状态、内存、线程、堆栈等等，比较全面的监控了Spring Boot应用的整个生命周期。</p>
-<p>但是这样监控也有一些问题：第一，所有的监控都需要调用固定的接口来查看，如果全面查看应用状态需要调用很多接口，并且接口返回的Json信息不方便运营人员理解；第二，如果Spring Boot应用集群非常大，每个应用都需要调用不同的接口来查看监控信息，操作非常繁琐低效。在这样的背景下，就诞生了另外一个开源软件：Spring Boot Admin。</p>
-<p>Spring Boot Admin 是一个管理和监控Spring Boot 应用程序的开源软件。每个应用都认为是一个客户端，通过HTTP或者使用 Eureka注册到admin server中进行展示，Spring Boot Admin UI部分使用AngularJs将数据展示在前端。</p>
-<p>Spring Boot Admin 是一个针对spring-boot的actuator接口进行UI美化封装的监控工具。他可以：在列表中浏览所有被监控spring-boot项目的基本信息，详细的Health信息、内存信息、JVM信息、垃圾回收信息、各种配置信息（比如数据源、缓存列表和命中率）等，还可以直接修改logger的level。</p>
-<p>这篇文章给大家介绍如何使用Spring Boot Admin对Spring Boot应用进行监控。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/09/springboot：使用spring-boot-admin对spring-boot服务进行监控/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/12/09/springboot：使用Spring-Boot上传文件/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/springboot：使用Spring-Boot上传文件/" itemprop="url">springboot：使用Spring Boot上传文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T23:37:05+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -2057,6 +762,803 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在OOP程序设计中，当我们定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）。</p>
+<p>比如，我们已经编写了一个名为Animal的class，有一个run()方法可以直接打印：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Animal(object):</span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Animal is running...&apos;)</span><br></pre></td></tr></table></figure>
+<p>当我们需要编写Dog和Cat类时，就可以直接从Animal类继承：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Animal):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class Cat(Animal):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<p>对于Dog来说，Animal就是它的父类，对于Animal来说，Dog就是它的子类。Cat和Dog类似。</p>
+<p>继承有什么好处？最大的好处是子类获得了父类的全部功能。由于Animial实现了run()方法，因此，Dog和Cat作为它的子类，什么事也没干，就自动拥有了run()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dog = Dog()</span><br><span class="line">dog.run()</span><br><span class="line"></span><br><span class="line">cat = Cat()</span><br><span class="line">cat.run()</span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal is running...</span><br><span class="line">Animal is running...</span><br></pre></td></tr></table></figure></p>
+<p>当然，也可以对子类增加一些方法，比如Dog类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Animal):</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Dog is running...&apos;)</span><br><span class="line"></span><br><span class="line">    def eat(self):</span><br><span class="line">        print(&apos;Eating meat...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>继承的第二个好处需要我们对代码做一点改进。你看到了，无论是Dog还是Cat，它们run()的时候，显示的都是Animal is running…，符合逻辑的做法是分别显示Dog is running…和Cat is running…，因此，对Dog和Cat类改进如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Animal):</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Dog is running...&apos;)</span><br><span class="line"></span><br><span class="line">class Cat(Animal):</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Cat is running...&apos;)</span><br></pre></td></tr></table></figure>
+<p>再次运行，结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dog is running...</span><br><span class="line">Cat is running...</span><br></pre></td></tr></table></figure>
+<p>当子类和父类都存在相同的run()方法时，我们说，子类的run()覆盖了父类的run()，在代码运行的时候，总是会调用子类的run()。这样，我们就获得了继承的另一个好处：多态。</p>
+<p>要理解什么是多态，我们首先要对数据类型再作一点说明。当我们定义一个class的时候，我们实际上就定义了一种数据类型。我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = list() # a是list类型</span><br><span class="line">b = Animal() # b是Animal类型</span><br><span class="line">c = Dog() # c是Dog类型</span><br></pre></td></tr></table></figure></p>
+<p>判断一个变量是否是某个类型可以用isinstance()判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(a, list)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(b, Animal)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(c, Dog)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<p>看来a、b、c确实对应着list、Animal、Dog这3种类型。</p>
+<p>但是等等，试试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(c, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<p>看来c不仅仅是Dog，c还是Animal！</p>
+<p>不过仔细想想，这是有道理的，因为Dog是从Animal继承下来的，当我们创建了一个Dog的实例c时，我们认为c的数据类型是Dog没错，但c同时也是Animal也没错，Dog本来就是Animal的一种！</p>
+<p>所以，在继承关系中，如果一个实例的数据类型是某个子类，那它的数据类型也可以被看做是父类。但是，反过来就不行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b = Animal()</span><br><span class="line">&gt;&gt;&gt; isinstance(b, Dog)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>Dog可以看成Animal，但Animal不可以看成Dog。</p>
+<p>要理解多态的好处，我们还需要再编写一个函数，这个函数接受一个Animal类型的变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def run_twice(animal):</span><br><span class="line">    animal.run()</span><br><span class="line">    animal.run()</span><br></pre></td></tr></table></figure></p>
+<p>当我们传入Animal的实例时，run_twice()就打印出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Animal())</span><br><span class="line">Animal is running...</span><br><span class="line">Animal is running...</span><br></pre></td></tr></table></figure></p>
+<p>当我们传入Dog的实例时，run_twice()就打印出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Dog())</span><br><span class="line">Dog is running...</span><br><span class="line">Dog is running...</span><br></pre></td></tr></table></figure></p>
+<p>当我们传入Cat的实例时，run_twice()就打印出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Cat())</span><br><span class="line">Cat is running...</span><br><span class="line">Cat is running...</span><br></pre></td></tr></table></figure></p>
+<p>看上去没啥意思，但是仔细想想，现在，如果我们再定义一个Tortoise类型，也从Animal派生：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Tortoise(Animal):</span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Tortoise is running slowly...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>当我们调用run_twice()时，传入Tortoise的实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Tortoise())</span><br><span class="line">Tortoise is running slowly...</span><br><span class="line">Tortoise is running slowly...</span><br></pre></td></tr></table></figure></p>
+<p>你会发现，新增一个Animal的子类，不必对run_twice()做任何修改，实际上，任何依赖Animal作为参数的函数或者方法都可以不加修改地正常运行，原因就在于多态。</p>
+<p>多态的好处就是，当我们需要传入Dog、Cat、Tortoise……时，我们只需要接收Animal类型就可以了，因为Dog、Cat、Tortoise……都是Animal类型，然后，按照Animal类型进行操作即可。由于Animal类型有run()方法，因此，传入的任意类型，只要是Animal类或者子类，就会自动调用实际类型的run()方法，这就是多态的意思：</p>
+<p>对于一个变量，我们只需要知道它是Animal类型，无需确切地知道它的子类型，就可以放心地调用run()方法，而具体调用的run()方法是作用在Animal、Dog、Cat还是Tortoise对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种Animal的子类时，只要确保run()方法编写正确，不用管原来的代码是如何调用的。这就是著名的“开闭”原则：</p>
+<p>对扩展开放：允许新增Animal子类；</p>
+<p>对修改封闭：不需要修改依赖Animal类型的run_twice()等函数。</p>
+<h1 id="静态语言-vs-动态语言"><a href="#静态语言-vs-动态语言" class="headerlink" title="静态语言 vs 动态语言"></a>静态语言 vs 动态语言</h1><p>对于静态语言（例如Java）来说，如果需要传入Animal类型，则传入的对象必须是Animal类型或者它的子类，否则，将无法调用run()方法。</p>
+<p>对于Python这样的动态语言来说，则不一定需要传入Animal类型。我们只需要保证传入的对象有一个run()方法就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Timer(object):</span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Start...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。</p>
+<p>Python的“file-like object“就是一种鸭子类型。对真正的文件对象，它有一个read()方法，返回其内容。但是，许多对象，只要有read()方法，都被视为“file-like object“。许多函数接收的参数就是“file-like object“，你不一定要传入真正的文件对象，完全可以传入任何实现了read()方法的对象。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。</p>
+<p>动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：对xlsx文件和csv文件的读写/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/python：对xlsx文件和csv文件的读写/" itemprop="url">python：对xlsx文件和csv文件的读写</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:39:51+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  733 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>项目地址：<a href="https://github.com/snjl/python.csvandxlsx.git" target="_blank" rel="noopener">https://github.com/snjl/python.csvandxlsx.git</a></p>
+<h1 id="xlsx"><a href="#xlsx" class="headerlink" title="xlsx"></a>xlsx</h1><p>写入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from openpyxl import Workbook</span><br><span class="line">from openpyxl.utils import get_column_letter</span><br><span class="line"></span><br><span class="line"># 在内存中创建一个workbook对象，而且会至少创建一个 worksheet</span><br><span class="line">wb = Workbook()</span><br><span class="line"></span><br><span class="line">#获取当前活跃的worksheet,默认就是第一个worksheet</span><br><span class="line">ws = wb.active</span><br><span class="line"></span><br><span class="line">#设置单元格的值，A1等于6(测试可知openpyxl的行和列编号从1开始计算)，B1等于7</span><br><span class="line">ws.cell(row=1, column=1).value = 6</span><br><span class="line"></span><br><span class="line">#从第2行开始，写入9行10列数据，值为对应的列序号A、B、C、D...</span><br><span class="line">for row in range(2,11):</span><br><span class="line">    for col in range (1,11):</span><br><span class="line">        ws.cell(row=row, column=col).value = get_column_letter(col)</span><br><span class="line"></span><br><span class="line">#可以使用append插入一行数据</span><br><span class="line">ws.append([&quot;我&quot;,&quot;你&quot;,&quot;她&quot;])</span><br><span class="line"></span><br><span class="line">#保存</span><br><span class="line">wb.save(filename=&quot;a.xlsx&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>读取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from openpyxl import load_workbook</span><br><span class="line"></span><br><span class="line">#打开一个workbook</span><br><span class="line">wb = load_workbook(filename=&quot;a.xlsx&quot;)</span><br><span class="line"></span><br><span class="line">#获取当前活跃的worksheet,默认就是第一个worksheet</span><br><span class="line">#ws = wb.active</span><br><span class="line"></span><br><span class="line">#当然也可以使用下面的方法</span><br><span class="line"></span><br><span class="line">#获取所有表格(worksheet)的名字</span><br><span class="line">sheets = wb.get_sheet_names()</span><br><span class="line">#第一个表格的名称</span><br><span class="line">sheet_first = sheets[0]</span><br><span class="line">#获取特定的worksheet</span><br><span class="line">ws = wb.get_sheet_by_name(sheet_first)</span><br><span class="line"></span><br><span class="line">#获取表格所有行和列，两者都是可迭代的</span><br><span class="line">rows = ws.rows</span><br><span class="line">columns = ws.columns</span><br><span class="line"></span><br><span class="line">#迭代所有的行</span><br><span class="line">for row in rows:</span><br><span class="line">    line = [col.value for col in row]</span><br><span class="line">    print(line)</span><br><span class="line"></span><br><span class="line">#通过坐标读取值</span><br><span class="line">#print(ws.cell(&apos;A1&apos;).value)    # A表示列,1表示行print ws.cell(row=1, column=1).value</span><br><span class="line">print(ws[&apos;A1&apos;].value)</span><br></pre></td></tr></table></figure></p>
+<h1 id="csv写入"><a href="#csv写入" class="headerlink" title="csv写入"></a>csv写入</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def save_csv(file_name, headers, rows):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    将表头和数据写入新生成的文件中</span><br><span class="line">    :param file_name: 生成文件名，例如xxx.csv</span><br><span class="line">    :param headers:文件第一行的表头元素，list存储</span><br><span class="line">    :param rows:文件数据，每一行为一个list</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 保存格式必须以.csv，不然加上.csv</span><br><span class="line">    if file_name.endwith(&quot;.csv&quot;) is not True:</span><br><span class="line">        file_name += &apos;.csv&apos;</span><br><span class="line">    with open(file_name, &apos;a&apos;, encoding=&apos;utf8&apos;, errors=&apos;ignore&apos;, newline=&apos;&apos;) as f:</span><br><span class="line">        f_csv = csv.writer(f)</span><br><span class="line">        f_csv.writerow(headers)</span><br><span class="line">        f_csv.writerows(rows)</span><br></pre></td></tr></table></figure>
+<h1 id="csv、xlsx写入内容封装"><a href="#csv、xlsx写入内容封装" class="headerlink" title="csv、xlsx写入内容封装"></a>csv、xlsx写入内容封装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">from openpyxl import Workbook</span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_excel(file_name, headers, rows):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    将表头和数据写入新生成的excel文件中，生成*.xlsx文件</span><br><span class="line">    :param file_name:文件名</span><br><span class="line">    :param headers:文件第一行的表头元素，list存储</span><br><span class="line">    :param rows:文件数据，每一行为一个list</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 在内存中创建一个workbook对象，而且会至少创建一个 worksheet</span><br><span class="line">    wb = Workbook()</span><br><span class="line">    # 获取当前活跃的worksheet,默认就是第一个worksheet</span><br><span class="line">    ws = wb.active</span><br><span class="line">    ws.append(headers)</span><br><span class="line">    for row in rows:</span><br><span class="line">        ws.append(row)</span><br><span class="line">    # 保存格式必须以.xlsx结尾，不然加上.xlsx</span><br><span class="line">    if file_name.endswith(&quot;.xlsx&quot;) is not True:</span><br><span class="line">        file_name += &apos;.xlsx&apos;</span><br><span class="line">    wb.save(filename=file_name)</span><br><span class="line">    wb.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_csv(file_name, headers, rows):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    将表头和数据写入新生成的文件中</span><br><span class="line">    :param file_name: 生成文件名，例如xxx.csv</span><br><span class="line">    :param headers:文件第一行的表头元素，list存储</span><br><span class="line">    :param rows:文件数据，每一行为一个list</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 保存格式必须以.csv，不然加上.csv</span><br><span class="line">    if file_name.endwith(&quot;.csv&quot;) is not True:</span><br><span class="line">        file_name += &apos;.csv&apos;</span><br><span class="line">    with open(file_name, &apos;a&apos;, encoding=&apos;utf8&apos;, errors=&apos;ignore&apos;, newline=&apos;&apos;) as f:</span><br><span class="line">        f_csv = csv.writer(f)</span><br><span class="line">        f_csv.writerow(headers)</span><br><span class="line">        f_csv.writerows(rows)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/frp内网穿透配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/frp内网穿透配置/" itemprop="url">frp内网穿透配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:39:09+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  427 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考：<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">https://github.com/fatedier/frp/blob/master/README_zh.md</a></p>
+<p>frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp 协议，为 http 和 https 应用协议提供了额外的能力，且尝试性支持了点对点穿透。</p>
+<p>下载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.23.1/frp_0.23.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf frp_0.23.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>根据对应的操作系统及架构，从 Release 页面下载最新版本的程序。</p>
+<p>将 frps 及 frps.ini 放到具有公网 IP 的机器上。</p>
+<p>将 frpc 及 frpc.ini 放到处于内网环境的机器上。</p>
+<p>不需要的可以用rm -rf frpc<em>或rm -rf frps</em>删除。</p>
+<h1 id="通过-ssh-访问公司内网机器"><a href="#通过-ssh-访问公司内网机器" class="headerlink" title="通过 ssh 访问公司内网机器"></a>通过 ssh 访问公司内网机器</h1><p>修改 frps.ini 文件，这里使用了最简化的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># frps.ini</span><br><span class="line">[common]</span><br><span class="line">bind_port = 7000</span><br></pre></td></tr></table></figure>
+<p>ps:如果需要部署多台内网服务器，则可能需要复制一个frps.ini为frps1.ini&lt;bind_port设置为7001（有时候不需要，玄学）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp frps.ini frps1.ini</span><br></pre></td></tr></table></figure></p>
+<p>启动frps：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.ini</span><br></pre></td></tr></table></figure></p>
+<p>内网端配置，修改 frpc.ini 文件，假设 frps 所在服务器的公网 IP 为 x.x.x.x；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># frpc.ini</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br></pre></td></tr></table></figure></p>
+<p>启动 frpc：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure></p>
+<p>通过 ssh 访问内网机器，假设用户名为 test：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -oPort=6000 test@x.x.x.x</span><br></pre></td></tr></table></figure></p>
+<p>有多台服务器，例如第二台，可以将frpc.ini写成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># frpc.ini</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh2]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6001</span><br></pre></td></tr></table></figure></p>
+<p>注意server_port可能要改7001，remote_port要改成不冲突原6000的端口，项目名要改为ssh2或者其他。</p>
+<h1 id="杀frp进程"><a href="#杀frp进程" class="headerlink" title="杀frp进程"></a>杀frp进程</h1><p>使用htop可以看到frp的进程，可以使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 frp</span><br></pre></td></tr></table></figure></p>
+<p>杀掉所有frp的进程。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/echo命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/echo命令/" itemprop="url">echo命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:38:43+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  438 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>echo命令用于在shell中打印shell变量的值，或者直接输出指定的字符串。linux的echo命令，在shell编程中极为常用, 在终端下打印变量value的时候也是常常用到的，因此有必要了解下echo的用法echo命令的功能是在显示器上显示一段文字，一般起到一个提示的作用。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>echo(选项)(参数)</p>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><p>-e：激活转义字符。</p>
+<p>使用-e选项时，若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：</p>
+<ul>
+<li>\a 发出警告声；</li>
+<li>\b 删除前一个字符；</li>
+<li>\c 最后不加上换行符号；</li>
+<li>\f 换行但光标仍旧停留在原来的位置；</li>
+<li>\n 换行且光标移至行首；</li>
+<li>\r 光标移至行首，但不换行；</li>
+<li>\t 插入tab；</li>
+<li>\v 与\f相同；</li>
+<li>\ 插入\字符；</li>
+<li>\nnn 插入nnn（八进制）所代表的ASCII字符；</li>
+</ul>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>变量：指定要打印的变量。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>用echo命令打印带有色彩的文字：</p>
+<h2 id="文字色："><a href="#文字色：" class="headerlink" title="文字色："></a>文字色：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\e[1;31mThis is red text\e[0m&quot;</span><br><span class="line">This is red text</span><br></pre></td></tr></table></figure>
+<ul>
+<li>\e[1;31m 将颜色设置为红色</li>
+<li>\e[0m 将颜色重新置回</li>
+</ul>
+<p>颜色码：重置=0，黑色=30，红色=31，绿色=32，黄色=33，蓝色=34，洋红=35，青色=36，白色=37</p>
+<h2 id="背景色"><a href="#背景色" class="headerlink" title="背景色"></a>背景色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\e[1;42mGreed Background\e[0m&quot;</span><br><span class="line">Greed Background</span><br></pre></td></tr></table></figure>
+<p>颜色码：重置=0，黑色=40，红色=41，绿色=42，黄色=43，蓝色=44，洋红=45，青色=46，白色=47</p>
+<h2 id="文字闪动"><a href="#文字闪动" class="headerlink" title="文字闪动"></a>文字闪动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\033[37;31;5mMySQL Server Stop...\033[39;49;0m&quot;</span><br></pre></td></tr></table></figure>
+<p>红色数字处还有其他数字参数：0 关闭所有属性、1 设置高亮度（加粗）、4 下划线、5 闪烁、7 反显、8 消隐</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/grep命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/grep命令/" itemprop="url">grep命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:38:05+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
                   8 分钟
                 </span>
               
@@ -2079,14 +1581,10 @@
 
       
         
-          <p>项目地址：<a href="https://github.com/snjl/springboot.upload.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.upload.git</a></p>
-<p>上传多个文件项目地址：<a href="https://github.com/snjl/springboot.uploads.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.uploads.git</a></p>
-<p>使用Spring Boot最新版本1.5.9、jdk使用1.8、tomcat8.0。</p>
-<h1 id="pom包配置"><a href="#pom包配置" class="headerlink" title="pom包配置"></a>pom包配置</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>引入了spring-boot-starter-thymeleaf做页面模板引擎，写一些简单的上传示例。</p>
+          <p>grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/09/springboot：使用Spring-Boot上传文件/#more" rel="contents">
+            <a class="btn" href="/2019/01/23/grep命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2128,11 +1626,563 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/mv命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/mv命令/" itemprop="url">mv命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:37:11+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  698 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mv命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。source表示源文件或目录，target表示目标文件或目录。如果将一个文件移到一个已经存在的目标文件中，则目标文件的内容将被覆盖。</p>
+<p>mv命令可以用来将源文件移至一个目标文件中，或将一组文件移至一个目标目录中。源文件被移至目标文件有两种不同的结果：</p>
+<ol>
+<li>如果目标文件是到某一目录文件的路径，源文件会被移到此目录下，且文件名不变。</li>
+<li>如果目标文件不是目录文件，则源文件名（只能有一个）会变为此目标文件名，并覆盖己存在的同名文件。如果源文件和目标文件在同一个目录下，mv的作用就是改文件名。当目标文件是目录文件时，源文件或目录参数可以有多个，则所有的源文件都会被移至目标文件中。所有移到该目录下的文件都将保留以前的文件名。</li>
+</ol>
+<p>注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv(选项)(参数)</span><br></pre></td></tr></table></figure>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--backup=&lt;备份模式&gt;：若需覆盖文件，则覆盖前先行备份；</span><br><span class="line">-b：当文件存在时，覆盖前，为其创建一个备份；</span><br><span class="line">-f：若目标文件或目录与现有的文件或目录重复，则直接覆盖现有的文件或目录；</span><br><span class="line">-i：交互式操作，覆盖前先行询问用户，如果源文件与目标文件或目标目录中的文件同名，则询问用户是否覆盖目标文件。用户输入”y”，表示将覆盖目标文件；输入”n”，表示取消对源文件的移动。这样可以避免误将文件覆盖。</span><br><span class="line">--strip-trailing-slashes：删除源文件中的斜杠“/”；</span><br><span class="line">-S&lt;后缀&gt;：为备份文件指定后缀，而不使用默认的后缀；</span><br><span class="line">--target-directory=&lt;目录&gt;：指定源文件要移动到目标目录；</span><br><span class="line">-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</span><br></pre></td></tr></table></figure>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><ul>
+<li>源文件：源文件列表。</li>
+<li>目标文件：如果“目标文件”是文件名则在移动文件的同时，将其改名为“目标文件”；如果“目标文件”是目录名则将源文件移动到“目标文件”下。</li>
+</ul>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>将文件ex3改名为new1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv ex3 new1</span><br></pre></td></tr></table></figure></p>
+<p>将目录/usr/men中的所有文件移到当前目录（用.表示）中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /usr/men/* .</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：常用操作（二）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/python：常用操作（二）/" itemprop="url">python：常用操作（二）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:36:20+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  898 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="1-python以表名作为变量"><a href="#1-python以表名作为变量" class="headerlink" title="1.python以表名作为变量"></a>1.python以表名作为变量</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor.execute(<span class="string">'select * from '</span> + tableName)</span><br></pre></td></tr></table></figure>
+<p>注意：from后面有空格，不然例如tableName为 test，组合后会变成 select * fromtest，会报错。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/23/python：常用操作（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/mysql：sql按照某个字段排序，并且另一个字段为NULL或者空字符串或固定字符串排后面/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/mysql：sql按照某个字段排序，并且另一个字段为NULL或者空字符串或固定字符串排后面/" itemprop="url">mysql：sql按照某个字段排序，并且另一个字段为NULL或者空字符串或固定字符串排后面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:34:51+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  136 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面"><a href="#1-按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面" class="headerlink" title="1.按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面"></a>1.按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TABLE order by thumb is null,year desc;</span><br></pre></td></tr></table></figure>
+<h1 id="2-按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面"><a href="#2-按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面" class="headerlink" title="2.按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面"></a>2.按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TABLE order by thumb =&apos;&apos;,year desc;</span><br></pre></td></tr></table></figure>
+<h1 id="1-按照year从高到低排序，但是如果thumb为固定字符串no-picture，即使year很高也要排在有thumb的最低的year后面"><a href="#1-按照year从高到低排序，但是如果thumb为固定字符串no-picture，即使year很高也要排在有thumb的最低的year后面" class="headerlink" title="1.按照year从高到低排序，但是如果thumb为固定字符串no picture，即使year很高也要排在有thumb的最低的year后面"></a>1.按照year从高到低排序，但是如果thumb为固定字符串no picture，即使year很高也要排在有thumb的最低的year后面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TABLE order by thumb = &apos;no picture&apos;,year desc;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2180,7 +2230,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2191,7 +2241,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2202,7 +2252,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">87</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
