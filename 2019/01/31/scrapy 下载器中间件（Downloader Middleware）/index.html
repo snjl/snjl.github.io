@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,爬虫,scrapy,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="snjl" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="项目地址：https://github.com/snjl/python.scrapy.middlewarestest.git 下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。 主要功能修改request、response，相当于request和response加了一层处理后再给Sp">
+<meta name="keywords" content="python,爬虫,scrapy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="scrapy 下载中间件（Downloader Middleware）">
+<meta property="og:url" content="https://snjl.github.io/2019/01/31/scrapy 下载器中间件（Downloader Middleware）/index.html">
+<meta property="og:site_name" content="snjl">
+<meta property="og:description" content="项目地址：https://github.com/snjl/python.scrapy.middlewarestest.git 下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。 主要功能修改request、response，相当于request和response加了一层处理后再给Sp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-31T06:30:57.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="scrapy 下载中间件（Downloader Middleware）">
+<meta name="twitter:description" content="项目地址：https://github.com/snjl/python.scrapy.middlewarestest.git 下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。 主要功能修改request、response，相当于request和response加了一层处理后再给Sp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://snjl.github.io/2019/01/31/scrapy 下载器中间件（Downloader Middleware）/">
+
+
+
+
+
+  <title>scrapy 下载中间件（Downloader Middleware） | snjl</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+        <a href="https://github.com/snjl" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">snjl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我大概率会编程。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy 下载器中间件（Downloader Middleware）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">scrapy 下载中间件（Downloader Middleware）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>项目地址：<a href="https://github.com/snjl/python.scrapy.middlewarestest.git" target="_blank" rel="noopener">https://github.com/snjl/python.scrapy.middlewarestest.git</a></p>
+<p>下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。</p>
+<h1 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h1><p>修改request、response，相当于request和response加了一层处理后再给Spiders，例如request发送时使用cookie、代理等，response返回时增加状态码等，还有异常处理，例如无法正常访问时加一个异常处理，增加一个代理后再次请求request，使用代理后就正常访问了。</p>
+<h1 id="编写下载器中间件"><a href="#编写下载器中间件" class="headerlink" title="编写下载器中间件"></a>编写下载器中间件</h1><p>编写下载器中间件十分简单。每个中间件组件是一个定义了以下一个或多个方法的Python类:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class scrapy.downloadermiddlewares.DownloaderMiddleware</span><br></pre></td></tr></table></figure></p>
+<h2 id="process-request-request-spider"><a href="#process-request-request-spider" class="headerlink" title="process_request(request, spider)"></a>process_request(request, spider)</h2><p>当每个request通过下载中间件时，该方法被调用。</p>
+<p>process_request() 必须返回其中之一: 返回 None 、返回一个 Response 对象、返回一个 Request 对象或raise IgnoreRequest 。</p>
+<ol>
+<li><p>如果其返回 None ，Scrapy将继续处理该request，执行其他的中间件的相应方法，直到合适的下载器处理函数(download handler)被调用， 该request被执行(其response被下载)。（一般返回None，就是已经在request里加了东西，希望它继续处理，继续调用其他中间件的process_request()）</p>
+</li>
+<li><p>如果其返回 Response 对象，Scrapy将不会调用 任何 其他的 process_request() 或 process_exception() 方法，或相应地下载函数； 其将返回该response。 已安装的中间件的 process_response() 方法则会在每个response返回时被调用。</p>
+</li>
+<li><p>如果其返回 Request 对象，Scrapy则停止调用 process_request方法并重新调度返回的request。当新返回的request被执行后， 相应地中间件链将会根据下载的response被调用。</p>
+</li>
+<li><p>如果其raise一个 IgnoreRequest 异常，则安装的下载中间件的 process_exception() 方法会被调用。如果没有任何一个方法处理该异常， 则request的errback(Request.errback)方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。</p>
+</li>
+</ol>
+<p>参数:    </p>
+<ul>
+<li>request (Request 对象) – 处理的request</li>
+<li>spider (Spider 对象) – 该request对应的spider<a id="more"></a>
+<h2 id="process-response-request-response-spider"><a href="#process-response-request-response-spider" class="headerlink" title="process_response(request, response, spider)"></a>process_response(request, response, spider)</h2></li>
+</ul>
+<p>process_request() 必须返回以下之一: 返回一个 Response 对象、 返回一个Request 对象或raise一个 IgnoreRequest 异常。</p>
+<ol>
+<li><p>如果其返回一个 Response (可以与传入的response相同，也可以是全新的对象)， 该response会被在链中的其他中间件的 process_response() 方法处理。</p>
+</li>
+<li><p>如果其返回一个 Request 对象，则中间件链停止， 返回的request会被重新调度下载。处理类似于 process_request() 返回request所做的那样。</p>
+</li>
+<li><p>如果其抛出一个 IgnoreRequest 异常，则调用request的errback(Request.errback)。 如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。</p>
+</li>
+</ol>
+<p>参数:    </p>
+<ul>
+<li>request (Request 对象) – response所对应的request</li>
+<li>response (Response 对象) – 被处理的response</li>
+<li>spider (Spider 对象) – response所对应的spider</li>
+</ul>
+<h1 id="process-exception-request-exception-spider"><a href="#process-exception-request-exception-spider" class="headerlink" title="process_exception(request, exception, spider)"></a>process_exception(request, exception, spider)</h1><p>当下载处理器(download handler)或 process_request() (下载中间件)抛出异常(包括 IgnoreRequest 异常)时， Scrapy调用 process_exception() 。</p>
+<p>process_exception() 应该返回以下之一: 返回 None 、 一个 Response 对象、或者一个 Request 对象。</p>
+<ol>
+<li><p>如果其返回 None ，Scrapy将会继续处理该异常，接着调用已安装的其他中间件的 process_exception() 方法，直到所有中间件都被调用完毕，则调用默认的异常处理。</p>
+</li>
+<li><p>如果其返回一个 Response 对象，则已安装的中间件链的 process_response() 方法被调用。Scrapy将不会调用任何其他中间件的 process_exception() 方法。</p>
+</li>
+<li><p>如果其返回一个 Request 对象， 则返回的request将会被重新调用下载。这将停止中间件的 process_exception() 方法执行，就如返回一个response的那样。</p>
+</li>
+</ol>
+<p>参数:    </p>
+<ul>
+<li>request (是 Request 对象) – 产生异常的request</li>
+<li>exception (Exception 对象) – 抛出的异常</li>
+<li>spider (Spider 对象) – request对应的spider</li>
+</ul>
+<h1 id="举例：增加代理中间件"><a href="#举例：增加代理中间件" class="headerlink" title="举例：增加代理中间件"></a>举例：增加代理中间件</h1><p>新建项目httpbintest，创建爬虫<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider httpbin httpbin.org</span><br></pre></td></tr></table></figure></p>
+<p>修改代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class HttpbinSpider(scrapy.Spider):</span><br><span class="line">    name = &apos;httpbin&apos;</span><br><span class="line">    allowed_domains = [&apos;httpbin.org&apos;]</span><br><span class="line">    start_urls = [&apos;http://httpbin.org/get&apos;]</span><br><span class="line"></span><br><span class="line">    def parse(self, response):</span><br><span class="line">        print(response.text)</span><br></pre></td></tr></table></figure></p>
+<p>这里将start_urls改成了get。<br>输出后可以看到本机ip地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Scrapy/1.5.0 (+https://scrapy.org)&quot;</span><br><span class="line">  &#125;, </span><br><span class="line">  &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;, </span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/get&quot;</span><br><span class="line">&#125;</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p>如果要改变ip，使用代理，需要增加中间件，先简单测试，在middlewares.py中新建类，由于端口开在1080，所以使用localhost的ip的1080端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class ProxyMiddleware(object):</span><br><span class="line">    logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">    def process_request(self, request, spider):</span><br><span class="line">        self.logger.debug(&apos;Using Proxy&apos;)</span><br><span class="line">        request.meta[&apos;proxy&apos;] = &apos;http://127.0.0.1:1080&apos;</span><br><span class="line">        return None</span><br></pre></td></tr></table></figure></p>
+<p>在settings.py中开启配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   &apos;httpbintest.middlewares.ProxyMiddleware&apos;: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再次运行，可以看到地址改变了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Scrapy/1.5.0 (+https://scrapy.org)&quot;</span><br><span class="line">  &#125;, </span><br><span class="line">  &quot;origin&quot;: &quot;198.204.238.115&quot;, </span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/get&quot;</span><br><span class="line">&#125;</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p>这个地址变成了美国的ip。</p>
+<h1 id="修改response状态码"><a href="#修改response状态码" class="headerlink" title="修改response状态码"></a>修改response状态码</h1><p>在上述基础上，使用process_response(args…)可以对response进行修改，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def process_response(self, request, response, spider):</span><br><span class="line">    response.status = 201</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure></p>
+<p>在爬虫的parse函数中输出response.status，可以看到控制台输出了201。</p>
+<p><strong>注意：必须return response，不然实际上会返回None，没有对response进行修改。</strong></p>
+<h1 id="使用process-exception对无法访问的网页使用代理（例如google）"><a href="#使用process-exception对无法访问的网页使用代理（例如google）" class="headerlink" title="使用process_exception对无法访问的网页使用代理（例如google）"></a>使用process_exception对无法访问的网页使用代理（例如google）</h1><p>例如访问的时候出现异常，例如超时、连接等，能够捕捉异常，然后重新发起请求或者返回一个新的response等方法。</p>
+<p>新建一个爬虫<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider google google.com</span><br></pre></td></tr></table></figure></p>
+<p>google.py代码为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class GoogleSpider(scrapy.Spider):</span><br><span class="line">    name = &apos;google&apos;</span><br><span class="line">    allowed_domains = [&apos;google.com&apos;]</span><br><span class="line">    start_urls = [&apos;http://google.com/&apos;]</span><br><span class="line"></span><br><span class="line">    def parse(self, response):</span><br><span class="line">        print(response.text)</span><br></pre></td></tr></table></figure></p>
+<p>把settings.py中的ROBOTSTXT_OBEY置为False，不开启下载中间件，运行代码，会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-01-28 23:44:08 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)</span><br><span class="line">2019-01-28 23:44:12 [scrapy.downloadermiddlewares.retry] DEBUG: Gave up retrying &lt;GET http://google.com/robots.txt&gt; (failed 3 times): TCP connection timed out: 10060: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。.</span><br></pre></td></tr></table></figure></p>
+<p>给google.py设置一个超时时间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># google.py</span><br><span class="line"></span><br><span class="line">···</span><br><span class="line">    def make_requests_from_url(self, url):</span><br><span class="line">        return scrapy.Request(url=url, meta=&#123;&apos;download_timeout&apos;: 10&#125;, callback=self.parse)</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p>运行后会报出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-01-28 23:57:27 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying &lt;GET http://google.com/&gt; (failed 1 times): User timeout caused connection failure: Getting http://google.com/ took longer than 10 seconds..</span><br><span class="line">2019-01-28 23:57:37 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying &lt;GET http://google.com/&gt; (failed 2 times): User timeout caused connection failure.</span><br><span class="line">2019-01-28 23:57:47 [scrapy.downloadermiddlewares.retry] DEBUG: Gave up retrying &lt;GET http://google.com/&gt; (failed 3 times): User timeout caused connection failure.</span><br><span class="line">2019-01-28 23:57:57 [scrapy.downloadermiddlewares.retry] DEBUG: Gave up retrying &lt;GET http://google.com/&gt; (failed 3 times): User timeout caused connection failure.</span><br></pre></td></tr></table></figure></p>
+<p>由于启用了默认的Retry中间件，所以会重复请求，可以在settings.py中关闭：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">    &apos;httpbintest.middlewares.ProxyMiddleware&apos;: 543,</span><br><span class="line">    &apos;scrapy.downloadermiddlewares.retry.RetryMiddleware&apos;: None,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样进行一次尝试后，失败了会直接关闭。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-01-28 23:59:31 [scrapy.dupefilters] DEBUG: Filtered duplicate request: &lt;GET http://google.com/&gt; - no more duplicates will be shown (see DUPEFILTER_DEBUG to show all duplicates)</span><br><span class="line">2019-01-28 23:59:31 [scrapy.core.engine] INFO: Closing spider (finished)</span><br></pre></td></tr></table></figure></p>
+<p>定义下载中间件，运行后看看会不会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class ProxyMiddleware(object):</span><br><span class="line">    logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">    def process_exception(self, request, exception, spider):</span><br><span class="line">        self.logger.debug(&quot;Get Exception&quot;)</span><br><span class="line">        return request</span><br></pre></td></tr></table></figure></p>
+<p>运行，输出了debug，所以证明经过了process_exception。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2019-01-29 00:05:07 [httpbintest.middlewares] DEBUG: Get Exception</span><br><span class="line">2019-01-29 00:05:07 [scrapy.dupefilters] DEBUG: Filtered duplicate request: &lt;GET http://google.com/&gt; - no more duplicates will be shown (see DUPEFILTER_DEBUG to show all duplicates)</span><br><span class="line">2019-01-29 00:05:07 [scrapy.core.engine] INFO: Closing spider (finished)</span><br></pre></td></tr></table></figure></p>
+<p>在该方法中增加代理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class ProxyMiddleware(object):</span><br><span class="line">    logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">    def process_exception(self, request, exception, spider):</span><br><span class="line">        self.logger.debug(&quot;Get Exception&quot;)</span><br><span class="line">        request.meta[&apos;proxy&apos;] = &apos;http://127.0.0.1:1080&apos;</span><br><span class="line">        return request</span><br></pre></td></tr></table></figure></p>
+<p>运行后发现和原来没有差别，是因为在使用make_requests_from_url回调函数的时候，没设置dont_filter，默认为False，会去重，因为google.com访问失败了，所以不会在request的列表里，所以直接去重了，将其置为True即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def make_requests_from_url(self, url):</span><br><span class="line">    return scrapy.Request(url=url, meta=&#123;&apos;download_timeout&apos;: 10&#125;, callback=self.parse, dont_filter=True)</span><br></pre></td></tr></table></figure></p>
+<p>运行后结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">2019-01-29 00:09:14 [httpbintest.middlewares] DEBUG: Get Exception</span><br><span class="line">2019-01-29 00:09:14 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (301) to &lt;GET http://www.google.com/&gt; from &lt;GET http://google.com/&gt;</span><br><span class="line">2019-01-29 00:09:15 [scrapy.core.engine] DEBUG: Crawled (200) &lt;GET http://www.google.com/&gt; (referer: None)</span><br><span class="line">&lt;!doctype html&gt;&lt;html itemscope=&quot;&quot; itemtype=&quot;http://schema.org/WebPage&quot; lang=&quot;en&quot;&gt;&lt;head&gt;&lt;meta content=&quot;Search the world&apos;s information, including webpages, images, videos and more. Google has many special features to help you find exactly what you&apos;re looking for.&quot; name=&quot;description&quot;&gt;&lt;meta content=&quot;noodp&quot; name=&quot;robots&quot;&gt;&lt;meta content=&quot;text/html; charset=UTF-8&quot; http-equiv=&quot;Content-Type&quot;&gt;&lt;meta </span><br><span class="line">···</span><br><span class="line">···</span><br><span class="line">\x22uhde\x22:false&#125;&#125;&apos;;google.pmc=JSON.parse(pmc);&#125;)();(function()&#123;var r=[&apos;aa&apos;,&apos;async&apos;,&apos;ipv6&apos;,&apos;mu&apos;,&apos;sf&apos;];google.plm(r);&#125;)();&lt;/script&gt;       &lt;/body&gt;&lt;/html&gt;</span><br><span class="line">2019-01-29 00:09:15 [scrapy.core.engine] INFO: Closing spider (finished)</span><br><span class="line">···</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>流程就是，正常访问google.con，无法访问，进入下载中间件的process_exception，给request加入proxy后重新发起请求，由于dont_filter=True，所以能够再次发起请求，这次请求由于有代理（如果是别的网站，可能需求不一样，例如cookie，代理，sesson等），可以通过该中间件。</p>
+<p>加入一些打印输出日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># google.py</span><br><span class="line">import scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class GoogleSpider(scrapy.Spider):</span><br><span class="line">    name = &apos;google&apos;</span><br><span class="line">    allowed_domains = [&apos;google.com&apos;]</span><br><span class="line">    start_urls = [&apos;http://google.com/&apos;]</span><br><span class="line"></span><br><span class="line">    def make_requests_from_url(self, url):</span><br><span class="line">        self.logger.debug(&apos;Try first time&apos;)</span><br><span class="line">        return scrapy.Request(url=url, meta=&#123;&apos;download_timeout&apos;: 10&#125;, callback=self.parse, dont_filter=True)</span><br><span class="line"></span><br><span class="line">    def parse(self, response):</span><br><span class="line">        print(response.text)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># middlewares.py</span><br><span class="line">class ProxyMiddleware(object):</span><br><span class="line">    logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">    def process_exception(self, request, exception, spider):</span><br><span class="line">        self.logger.debug(&quot;Get Exception&quot;)</span><br><span class="line">        self.logger.debug(&apos;Try second time&apos;)</span><br><span class="line">        request.meta[&apos;proxy&apos;] = &apos;http://127.0.0.1:1080&apos;</span><br><span class="line">        return request</span><br></pre></td></tr></table></figure>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line"></span><br><span class="line">2019-01-29 00:17:15 [google] DEBUG: Try first time</span><br><span class="line">2019-01-29 00:17:25 [httpbintest.middlewares] DEBUG: Get Exception</span><br><span class="line">2019-01-29 00:17:25 [httpbintest.middlewares] DEBUG: Try second time</span><br><span class="line">2019-01-29 00:17:26 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (301) to &lt;GET http://www.google.com/&gt; from &lt;GET http://google.com/&gt;</span><br><span class="line">2019-01-29 00:17:26 [scrapy.core.engine] DEBUG: Crawled (200) &lt;GET http://www.google.com/&gt; (referer: None)</span><br><span class="line">&lt;!doctype html&gt;&lt;html itemscope=&quot;&quot; itemtype=&quot;http://schema.org/WebPage&quot; lang=&quot;en&quot;&gt;&lt;head&gt;&lt;meta content=&quot;Search the world&apos;s information, including webpages, images, videos and more. Google has many special features to help you find exactly what you&apos;re looking for.&quot; name=&quot;description&quot;&gt;&lt;meta</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<h1 id="查看系统默认下载中间件的优先级"><a href="#查看系统默认下载中间件的优先级" class="headerlink" title="查看系统默认下载中间件的优先级"></a>查看系统默认下载中间件的优先级</h1><p>命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy settings --get=DOWNLOADER_MIDDLEWARES_BASE</span><br></pre></td></tr></table></figure></p>
+<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\shu_item\httpbintest&gt;scrapy settings --get=DOWNLOADER_MIDDLEWARES_BASE</span><br><span class="line">&#123;&quot;scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware&quot;: 100, &quot;scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware&quot;: 300, &quot;scrapy.downloaderm</span><br><span class="line">iddlewares.downloadtimeout.DownloadTimeoutMiddleware&quot;: 350, &quot;scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware&quot;: 400, &quot;scrapy.downloa</span><br><span class="line">dermiddlewares.useragent.UserAgentMiddleware&quot;: 500, &quot;scrapy.downloadermiddlewares.retry.RetryMiddleware&quot;: 550, &quot;scrapy.downloadermiddlewares.ajaxcrawl.A</span><br><span class="line">jaxCrawlMiddleware&quot;: 560, &quot;scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware&quot;: 580, &quot;scrapy.downloadermiddlewares.httpcompression.HttpCompress</span><br><span class="line">ionMiddleware&quot;: 590, &quot;scrapy.downloadermiddlewares.redirect.RedirectMiddleware&quot;: 600, &quot;scrapy.downloadermiddlewares.cookies.CookiesMiddleware&quot;: 700, &quot;sc</span><br><span class="line">rapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware&quot;: 750, &quot;scrapy.downloadermiddlewares.stats.DownloaderStats&quot;: 850, &quot;scrapy.downloadermiddlewares</span><br><span class="line">.httpcache.HttpCacheMiddleware&quot;: 900&#125;</span><br></pre></td></tr></table></figure></p>
+<p>数字越小，代表优先级越高，一般自定义的下载中间件优先级为543左右</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/爬虫/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+          
+            <a href="/tags/scrapy/" rel="tag"><i class="fa fa-tag"></i> scrapy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/31/Ubuntu：安装selenium和chromedriver并测试（不需要图形化界面）/" rel="next" title="Ubuntu：安装selenium和chromedriver并测试（不需要图形化界面）">
+                <i class="fa fa-chevron-left"></i> Ubuntu：安装selenium和chromedriver并测试（不需要图形化界面）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/31/requests库高级用法/" rel="prev" title="requests库高级用法">
+                requests库高级用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="snjl">
+            
+              <p class="site-author-name" itemprop="name">snjl</p>
+              <p class="site-description motion-element" itemprop="description">越过山丘，才发现无人等候。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">174</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/snjl" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:349245467@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/yyrjl" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-Weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主要功能"><span class="nav-number">1.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写下载器中间件"><span class="nav-number">2.</span> <span class="nav-text">编写下载器中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#process-request-request-spider"><span class="nav-number">2.1.</span> <span class="nav-text">process_request(request, spider)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#process-response-request-response-spider"><span class="nav-number">2.2.</span> <span class="nav-text">process_response(request, response, spider)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#process-exception-request-exception-spider"><span class="nav-number">3.</span> <span class="nav-text">process_exception(request, exception, spider)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#举例：增加代理中间件"><span class="nav-number">4.</span> <span class="nav-text">举例：增加代理中间件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改response状态码"><span class="nav-number">5.</span> <span class="nav-text">修改response状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用process-exception对无法访问的网页使用代理（例如google）"><span class="nav-number">6.</span> <span class="nav-text">使用process_exception对无法访问的网页使用代理（例如google）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看系统默认下载中间件的优先级"><span class="nav-number">7.</span> <span class="nav-text">查看系统默认下载中间件的优先级</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">snjl</span>
+
+  
+</div>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

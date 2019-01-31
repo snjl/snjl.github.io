@@ -440,11 +440,11 @@
 <p>仔细观察，发现如下问题：</p>
 <ul>
 <li>邮件没有主题；</li>
-<li>收件人的名字没有显示为友好的名字，比如Mr Green <a href="mailto:&#103;&#x72;&#101;&#x65;&#x6e;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;" target="_blank" rel="noopener">&#103;&#x72;&#101;&#x65;&#x6e;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;</a>；</li>
+<li>收件人的名字没有显示为友好的名字，比如Mr Green <a href="mailto:&#103;&#114;&#101;&#101;&#x6e;&#x40;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;" target="_blank" rel="noopener">&#103;&#114;&#101;&#101;&#x6e;&#x40;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a>；</li>
 <li>明明收到了邮件，却提示不在收件人中。</li>
 </ul>
 <p>这是因为邮件主题、如何显示发件人、收件人等信息并不是通过SMTP协议发给MTA，而是包含在发给MTA的文本中的，所以，我们必须把From、To和Subject添加到MIMEText中，才是一封完整的邮件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import smtplib</span><br><span class="line">from email.mime.image import MIMEImage</span><br><span class="line">from email.mime.multipart import MIMEMultipart</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.header import Header</span><br><span class="line">from email.utils import parseaddr, formataddr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def _format_addr(s):</span><br><span class="line">    name, addr = parseaddr(s)</span><br><span class="line">    return formataddr((Header(name, &apos;utf-8&apos;).encode(), addr))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sender = &apos;&apos;</span><br><span class="line">password = &apos;&apos;</span><br><span class="line">receivers = [&apos;&apos;]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱</span><br><span class="line"></span><br><span class="line">msgRoot = MIMEMultipart(&apos;related&apos;)</span><br><span class="line">msgRoot[&apos;From&apos;] = _format_addr(&apos;Python爱好者 &lt;%s&gt;&apos; % sender)</span><br><span class="line">msgRoot[&apos;To&apos;] = _format_addr(&apos;管理员 &lt;%s&gt;&apos; % password)</span><br><span class="line">msgRoot[&apos;Subject&apos;] = Header(&apos;来自SMTP的问候……&apos;, &apos;utf-8&apos;).encode()</span><br><span class="line"></span><br><span class="line">msgAlternative = MIMEMultipart(&apos;alternative&apos;)</span><br><span class="line">msgRoot.attach(msgAlternative)</span><br><span class="line"></span><br><span class="line">mail_msg = &quot;&quot;&quot;</span><br><span class="line">&lt;p&gt;Python 邮件发送测试...&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;a href=&quot;&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;图片演示：&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;img src=&quot;cid:image1&quot;&gt;&lt;/p&gt;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">msgAlternative.attach(MIMEText(mail_msg, &apos;html&apos;, &apos;utf-8&apos;))</span><br><span class="line"></span><br><span class="line"># 指定图片为当前目录</span><br><span class="line">fp = open(&apos;a.jpg&apos;, &apos;rb&apos;)</span><br><span class="line">msgImage = MIMEImage(fp.read())</span><br><span class="line">fp.close()</span><br><span class="line"></span><br><span class="line"># 定义图片 ID，在 HTML 文本中引用</span><br><span class="line">msgImage.add_header(&apos;Content-ID&apos;, &apos;&lt;image1&gt;&apos;)</span><br><span class="line">msgRoot.attach(msgImage)</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    server = smtplib.SMTP_SSL(&quot;smtp.qq.com&quot;, 465)</span><br><span class="line">    server.login(sender, password)</span><br><span class="line">    server.sendmail(sender, receivers, msgRoot.as_string())</span><br><span class="line">    print(&quot;邮件发送成功&quot;)</span><br><span class="line">except smtplib.SMTPException:</span><br><span class="line">    print(&quot;Error: 无法发送邮件&quot;)</span><br></pre></td></tr></table></figure></p>
-<p>编写了一个函数_format_addr()来格式化一个邮件地址。注意不能简单地传入name <a href="mailto:&#97;&#100;&#x64;&#x72;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#111;&#x6d;" target="_blank" rel="noopener">&#97;&#100;&#x64;&#x72;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#111;&#x6d;</a>，因为如果包含中文，需要通过Header对象进行编码。</p>
+<p>编写了一个函数_format_addr()来格式化一个邮件地址。注意不能简单地传入name <a href="mailto:&#97;&#x64;&#100;&#x72;&#x40;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;" target="_blank" rel="noopener">&#97;&#x64;&#100;&#x72;&#x40;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;</a>，因为如果包含中文，需要通过Header对象进行编码。</p>
 <p>msg[‘To’]接收的是字符串而不是list，如果有多个邮件地址，用,分隔即可。</p>
 <p>再发送一遍邮件，就可以在收件人邮箱中看到正确的标题、发件人和收件人。</p>
 <p>构造一个邮件对象就是一个Messag对象，如果构造一个MIMEText对象，就表示一个文本邮件对象，如果构造一个MIMEImage对象，就表示一个作为附件的图片，要把多个对象组合起来，就用MIMEMultipart对象，而MIMEBase可以表示任何对象。它们的继承关系如下：</p>
@@ -585,7 +585,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">174</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -596,7 +596,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -607,7 +607,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

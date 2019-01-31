@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/14/Mybatis一对一/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/26/numpy常用函数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/14/Mybatis一对一/" itemprop="url">Mybatis一对一</a></h1>
+                <a class="post-title-link" href="/2018/11/26/numpy常用函数/" itemprop="url">numpy常用函数</a></h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T22:00:20+08:00">
-                2018-11-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-26T23:34:51+08:00">
+                2018-11-26
               </time>
             
 
@@ -343,19 +343,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/SSM框架/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM框架</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -385,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  555 字
+                  455 字
                 </span>
               
 
@@ -401,7 +390,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -423,584 +412,17 @@
 
       
         
-          
-            <h1 id="0-前期准备"><a href="#0-前期准备" class="headerlink" title="0.前期准备"></a>0.前期准备</h1><p>数据库配置：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_card</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span>   <span class="built_in">INT</span> AUTO_INCREMENT</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  code <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> tb_card_id_uindex</span><br><span class="line">  <span class="keyword">UNIQUE</span> (<span class="keyword">id</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_person</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span>      <span class="built_in">INT</span> AUTO_INCREMENT</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  <span class="keyword">name</span>    <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  sex     <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  age     <span class="built_in">INT</span>         <span class="literal">NULL</span>,</span><br><span class="line">  card_id <span class="built_in">INT</span>         <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> tb_person_id_uindex</span><br><span class="line">  <span class="keyword">UNIQUE</span> (<span class="keyword">id</span>),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> tb_person_card_id_uindex</span><br><span class="line">  <span class="keyword">UNIQUE</span> (card_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> tb_person_tb_card_id_fk</span><br><span class="line">  <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (card_id) <span class="keyword">REFERENCES</span> tb_card (<span class="keyword">id</span>)</span><br><span class="line">)</span><br><span class="line">  <span class="keyword">ENGINE</span> = Inno</span><br></pre></td></tr></table></figure></p>
-<p> 身份证和人是一对一的关系，在tb_person表中，card_id为外键，对应tb_card主键，且card_id唯一，就满足了一对一的关系。</p>
-<h1 id="2-POJO类"><a href="#2-POJO类" class="headerlink" title="2.POJO类"></a>2.POJO类</h1><p> 两个pojo类：<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Card</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> Integer id;</span><br><span class="line"> <span class="keyword">private</span> String code;</span><br><span class="line"> <span class="comment">//getter，setter</span></span><br></pre></td></tr></table></figure></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> Integer id;</span><br><span class="line"> <span class="keyword">private</span> String name;</span><br><span class="line"> <span class="keyword">private</span> String sex;</span><br><span class="line"> <span class="keyword">private</span> Integer age;</span><br><span class="line"> <span class="keyword">private</span> Card card;</span><br><span class="line"> <span class="comment">//getter,setter</span></span><br></pre></td></tr></table></figure>
-<h1 id="3-mapper和mybatis-config-xml配置"><a href="#3-mapper和mybatis-config-xml配置" class="headerlink" title="3.mapper和mybatis-config.xml配置"></a>3.mapper和mybatis-config.xml配置</h1><p>mapper配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//CardMapper.xml</span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"org.fkit.mapper.CardMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectCardById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"org.fkit.domain.Card"</span>&gt;</span></span><br><span class="line">        SELECT * FROM tb_card WHERE id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//PersonMapper.xml</span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"org.fkit.mapper.PersonMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectPersonById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultMap</span>=<span class="string">"personMapper"</span>&gt;</span></span><br><span class="line">          select * from tb_person where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"personMapper"</span> <span class="attr">type</span>=<span class="string">"org.fkit.domain.Person"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"sex"</span> <span class="attr">column</span>=<span class="string">"sex"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"age"</span> <span class="attr">column</span>=<span class="string">"age"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"card"</span> <span class="attr">column</span>=<span class="string">"card_id"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">select</span>=<span class="string">"org.fkit.mapper.CardMapper.selectCardById"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">javaType</span>=<span class="string">"org.fkit.domain.Card"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在此可以给PersonMapper设置一个接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//PersonMapper.java</span></span><br><span class="line"><span class="keyword">package</span> org.fkit.mapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.fkit.domain.Person;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PersonMapper</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Person</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Person <span class="title">selectPersonById</span><span class="params">(Integer id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在mybatis-config.xml中配置这2个mapper：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"org/fkit/mapper/PersonMapper.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"org/fkit/mapper/CardMapper.xml"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h1><p>测试代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//OneToOneTset.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OneToOneTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSession sqlSession = FKSqlSessionFactory.getSqlSession();</span><br><span class="line">        Person person = sqlSession.selectOne(<span class="string">"org.fkit.mapper.PersonMapper.selectPersonById"</span>, <span class="number">1</span>);</span><br><span class="line">        System.out.println(person);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">Person&#123;id=<span class="number">1</span>, name=<span class="string">'jack'</span>, sex=<span class="string">'男'</span>, age=<span class="number">23</span>, card=Card&#123;id=<span class="number">1</span>, code=<span class="string">'432801198009191038'</span>&#125;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>因为设置了接口，也可以如此测试：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//OneToOneTset.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OneToOneTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        InputStream inputStream = Resources.getResourceAsStream(<span class="string">"mybatis-config.xml"</span>);</span><br><span class="line">        SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">        SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line">        PersonMapper personMapper = session.getMapper(PersonMapper.class);</span><br><span class="line">        Person person = personMapper.selectPersonById(<span class="number">1</span>);</span><br><span class="line">        System.out.println(person);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">Person&#123;id=<span class="number">1</span>, name=<span class="string">'jack'</span>, sex=<span class="string">'男'</span>, age=<span class="number">23</span>, card=Card&#123;id=<span class="number">1</span>, code=<span class="string">'432801198009191038'</span>&#125;&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/14/注册登录测试/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/14/注册登录测试/" itemprop="url">注册登录测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T21:58:02+08:00">
-                2018-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/SSM框架/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  578 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<p>java:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.fkit.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogFactory;</span><br><span class="line"><span class="keyword">import</span> org.domain2.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.Model;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> List&lt;User&gt; userList;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserController</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        userList = <span class="keyword">new</span> ArrayList&lt;User&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Log logger = LogFactory.getLog(UserController.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/register"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">requireForm</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"register GET被调用"</span>);</span><br><span class="line">        System.out.println(<span class="string">"register GET被调用"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"registerForm"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/register"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">register</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @RequestParam(<span class="string">"loginname"</span>)</span> String loginname,</span></span><br><span class="line"><span class="function">            @<span class="title">RequestParam</span><span class="params">(<span class="string">"password"</span>)</span> String password,</span></span><br><span class="line"><span class="function">            @<span class="title">RequestParam</span><span class="params">(<span class="string">"username"</span>)</span> String username) </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"register POST被调用"</span>);</span><br><span class="line">        System.out.println(<span class="string">"register POST被调用"</span>);</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setLoginname(loginname);</span><br><span class="line">        user.setUsername(username);</span><br><span class="line">        user.setPassword(password);</span><br><span class="line"></span><br><span class="line">        userList.add(user);</span><br><span class="line">        System.out.println(userList);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"loginForm"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/login"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @RequestParam(<span class="string">"loginname"</span>)</span> String loginname,</span></span><br><span class="line"><span class="function">            @<span class="title">RequestParam</span><span class="params">(<span class="string">"password"</span>)</span> String password,</span></span><br><span class="line"><span class="function">            Model model)</span>&#123;</span><br><span class="line">        logger.info(<span class="string">"登录名"</span> + loginname + <span class="string">"  密码"</span> + password);</span><br><span class="line">        <span class="keyword">for</span> (User user : userList) &#123;</span><br><span class="line">            <span class="keyword">if</span> (user.getLoginname().equals(loginname) &amp;&amp;</span><br><span class="line">                    user.getPassword().equals(password)) &#123;</span><br><span class="line">                model.addAttribute(<span class="string">"user"</span>, user);</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"welcome"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"loginForm"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>springmvc-config2.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;bean name="/hello" class="org.fkit.controller.HelloController"/&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"org.fkit.controller"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"viewResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/content/<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>.jsp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>web.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">version</span>=<span class="string">"3.1"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc2<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">            org.springframework.web.servlet.DispatcherServlet</span><br><span class="line">        <span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>WEB-INF/springmvc-config2.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc2<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>log4jConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/log4j.properties<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span></span><br><span class="line">            org.springframework.web.util.Log4jConfigListener</span><br><span class="line">        <span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/14/PathVariable，RequestHeader，CookieValue注解测试/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/14/PathVariable，RequestHeader，CookieValue注解测试/" itemprop="url">PathVariable，RequestHeader，CookieValue注解测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T21:56:34+08:00">
-                2018-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/SSM框架/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  265 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.fkit.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.CookieValue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestHeader;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataBindingController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Log logger = LogFactory.getLog(DataBindingController.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/pathVariableTest/&#123;userId&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pathVariableTest</span><span class="params">(@PathVariable Integer userId)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"通过@PathVariable获得的数据："</span> + userId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/requestHeaderTest"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestHeaderTest</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @RequestHeader(<span class="string">"User-Agent"</span>)</span> String userAgent,</span></span><br><span class="line"><span class="function">            @<span class="title">RequestHeader</span><span class="params">(value = <span class="string">"Accept"</span>)</span> String[] accepts) </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"通过@requestHeaderTest获得的数据:"</span> + userAgent);</span><br><span class="line">        <span class="keyword">for</span> (String accept : accepts) &#123;</span><br><span class="line">            logger.info(accept);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/cookieValueTest"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookieValueTest</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @CookieValue(value = <span class="string">"JSESSIONID"</span>, defaultValue = <span class="string">""</span>)</span> String sessionId) </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"通过@CookieValue获得的数据："</span> + sessionId);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/testWebsite"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">testWebsite</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>jsp:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: <span class="number">34924</span></span><br><span class="line">  Date: <span class="number">2018</span>/<span class="number">8</span>/<span class="number">1</span></span><br><span class="line">  Time: <span class="number">22</span>:<span class="number">40</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;test&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;a href="/pathVariableTest/1"&gt;测试注解1&lt;/a&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;a href="/requestHeaderTest"&gt;注解2&lt;/a&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;a href="/cookieValueTest"&gt;注解3&lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/14/log4-properties配置/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/14/log4-properties配置/" itemprop="url">log4.properties配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T21:49:38+08:00">
-                2018-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/日志配置/" itemprop="url" rel="index">
-                    <span itemprop="name">日志配置</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  187 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>放在WEB-INF的目录下：<br>
+          <h1 id="np-linspace-start-stop-num-50-endpoint-True-retstep-False-dtype-None"><a href="#np-linspace-start-stop-num-50-endpoint-True-retstep-False-dtype-None" class="headerlink" title="np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)"></a>np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">start标量</span><br><span class="line">    序列的起始值。</span><br><span class="line">stop标量</span><br><span class="line">    除非`endpoint`设置为False，否则序列的结束值。</span><br><span class="line">    在这种情况下，序列由除``num + 1``的最后一个组成</span><br><span class="line">    均匀间隔的样本，以便排除`stop`。注意这一步</span><br><span class="line">    当`endpoint`为False时，大小会改变。</span><br><span class="line"></span><br><span class="line">num：int，可选</span><br><span class="line">    要生成的样本数。默认值为50.必须为非负数。</span><br><span class="line"></span><br><span class="line">endpoint：bool，可选</span><br><span class="line">    如果为True，则`stop`是最后一个样本。否则，它不包括在内。</span><br><span class="line">    默认为True。</span><br><span class="line">    </span><br><span class="line">retstep：bool，可选</span><br><span class="line">    如果为True，则返回（`samples`，`step`），其中`step`是间距</span><br><span class="line">    样本之间。</span><br><span class="line">    </span><br><span class="line">dtype：dtype，可选</span><br><span class="line">    输出数组的类型。如果没有给出`dtype`，推断数据</span><br><span class="line">    从其他输入参数中键入。</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/14/log4-properties配置/#more" rel="contents">
+            <a class="btn" href="/2018/11/26/numpy常用函数/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
     
     
     
@@ -1048,7 +470,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/14/react的route路由跳转获取url参数方法/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/26/matplotlib画图/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1067,7 +489,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/14/react的route路由跳转获取url参数方法/" itemprop="url">react的router路由跳转获取url参数方法</a></h1>
+                <a class="post-title-link" href="/2018/11/26/matplotlib画图/" itemprop="url">matplotlib画图</a></h1>
         
 
         <div class="post-meta">
@@ -1079,8 +501,930 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T21:19:44+08:00">
-                2018-11-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-26T23:27:15+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  170 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">data = np.arange(<span class="number">100</span>, <span class="number">201</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(data)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/clipboard.png" alt="image"></p>
+<p>1.通过np.arange(100, 201)生成一个[100, 200]之间的整数数组，它的值是：[100, 101, 102, … , 200]</p>
+<p>2.通过matplotlib.pyplot将其绘制出来。很显然，绘制出来的值对应了图中的纵坐标（y轴）。而matplotlib本身为我们设置了图形的横坐标（x轴）：[0, 100]，因为我们刚好有100个数值</p>
+<p>3.通过plt.show()将这个图形显示出来</p>
+<p>修改代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">data = np.arange(1, 200, 20)</span><br><span class="line"></span><br><span class="line">plt.plot(data, &apos;ro&apos;)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://pi6jpxhir.bkt.clouddn.com/clipboard2.png" alt="image"></p>
+<p>加入点也可以用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([1,2],[3,4])</span><br></pre></td></tr></table></figure></p>
+<p>加入的2个点为(1,3),(2,4)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/26/python：mysql报错记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/26/python：mysql报错记录/" itemprop="url">python：mysql报错记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-26T23:25:27+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  116 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="1-Operand-should-contain-1-column"><a href="#1-Operand-should-contain-1-column" class="headerlink" title="1.Operand should contain 1 column"></a>1.Operand should contain 1 column</h1><p>字面意思是，需要有1个数据列。<br>如下sql：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor.execute(<span class="string">"INSERT INTO lunwen(url) VALUES (%s)"</span>, (url,))</span><br></pre></td></tr></table></figure></p>
+<p>可能是因为url并不是一个字符串，而是一个tuple或者list。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/26/python：mysql报错记录/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/26/python：常用操作（一）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/26/python：常用操作（一）/" itemprop="url">python：常用操作（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-26T23:23:44+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  560 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="1-生成随机数"><a href="#1-生成随机数" class="headerlink" title="1.生成随机数"></a>1.生成随机数</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">print(<span class="number">3</span> * random.random())</span><br></pre></td></tr></table></figure>
+<p>生成0-3的随机数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(random.randint(<span class="number">0</span>,<span class="number">99</span>))</span><br></pre></td></tr></table></figure></p>
+<p>生成0-99的随机整数。</p>
+<p>还有很多，用的不多，临时百度。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/26/python：常用操作（一）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/26/python：list差集/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/26/python：list差集/" itemprop="url">python：list差集</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-26T23:22:36+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  84 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>list并集：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> list(set(a).union(set(b)))</span><br></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">k = [x for x in s1 if x in s2]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; x1 = [1,2,3,4,5,6,7]</span><br><span class="line">&gt;&gt;&gt; s1 = x1</span><br><span class="line">&gt;&gt;&gt; s2 = (3,4,6,8)</span><br><span class="line">&gt;&gt;&gt; k = [x for x in s1 if x in s2]</span><br><span class="line">&gt;&gt;&gt; k</span><br><span class="line">[3, 4, 6]</span><br></pre></td></tr></table></figure></p>
+<p>list差集：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> list(set(b).difference(set(a)))</span><br><span class="line"><span class="comment"># b中有而a中没有的</span></span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/react：页面中存在多个input设置value属性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/25/react：页面中存在多个input设置value属性/" itemprop="url">react：页面中存在多个input设置value属性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:26:25+08:00">
+                2018-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  254 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先要为这些所有的input框绑定上onChange的方法，然后还需要在this.state中去设置不同的input对应不同的值，最后还需要在changeValue的方法中去一一监听input输入时去修改对应的input的值。</p>
+<p>也可以写一个changeValue方法，但是input的属性的name要和state里的名字要一样，如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">        login:&#123;</span><br><span class="line">            username:<span class="string">''</span>,</span><br><span class="line">            password:<span class="string">''</span></span><br><span class="line">        &#125;,</span><br><span class="line">        user:&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用户名：</span><br><span class="line">&lt;input type=&#123;<span class="string">'text'</span>&#125; name=&#123;<span class="string">'username'</span>&#125; value=&#123;<span class="keyword">this</span>.state.login.username&#125; </span><br><span class="line">className=&#123;<span class="string">'username'</span>&#125; onChange=&#123;<span class="keyword">this</span>.changeValue.bind(<span class="keyword">this</span>)&#125;/&gt;</span><br><span class="line">&lt;br/&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=&#123;<span class="string">'password'</span>&#125; name=&#123;<span class="string">'password'</span>&#125; value=&#123;<span class="keyword">this</span>.state.login.password&#125; </span><br><span class="line">className=&#123;<span class="string">'password'</span>&#125; onChange=&#123;<span class="keyword">this</span>.changeValue.bind(<span class="keyword">this</span>)&#125;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">changeValue(event) &#123;</span><br><span class="line">    <span class="keyword">let</span> newLogin = <span class="keyword">this</span>.state.login;</span><br><span class="line">    newLogin[event.target.name] = event.target.value;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">login</span>: newLogin&#125;)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>使用event.target.name获取input的name属性，使用evnet.target.value获取input的value，令newLogin为this.state.login，然后将newLogin中名为event.target.name的属性的值设为event.target.value，之后再setState，从而可以改变state.login的值。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/react：存储session-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/25/react：存储session-1/" itemprop="url">react：存储session</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:25:33+08:00">
+                2018-11-25
               </time>
             
 
@@ -1144,7 +1488,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  223 字
+                  80 字
                 </span>
               
 
@@ -1182,15 +1526,14 @@
 
       
         
-          <p>例如一个页面分为三块，导航栏，左栏右栏，左栏为页面跳转，右栏为显示list页面或者detail页面，如下所示：</p>
-<p><img src="http://pi6jpxhir.bkt.clouddn.com/react-router.png" alt="image"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/14/react的route路由跳转获取url参数方法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>react框架中使用session，如果是单个字符串：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(<span class="string">"key"</span>,value);</span><br></pre></td></tr></table></figure></p>
+<p>取出时：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = sessionStorage.getItem(<span class="string">"key"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果是json，在存储时需要将json对象通过stringify()方法转为字符串，存入sessionStorage：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(<span class="string">"jsonKey"</span>,<span class="built_in">JSON</span>.stringify(jsonData));</span><br></pre></td></tr></table></figure></p>
+<p>取出时需要再转回json：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">JSON</span>.parse(sessionStorage.getItem(<span class="string">"jsonKey"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>移除session：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.removeItem(<span class="string">"data"</span>);</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -1241,7 +1584,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/13/Mybatis注解写法/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/jQuery禁止回车提交/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1260,7 +1603,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/13/Mybatis注解写法/" itemprop="url">Mybatis注解写法</a></h1>
+                <a class="post-title-link" href="/2018/11/25/jQuery禁止回车提交/" itemprop="url">jQuery禁止回车提交</a></h1>
         
 
         <div class="post-meta">
@@ -1272,8 +1615,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T23:45:05+08:00">
-                2018-11-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:23:44+08:00">
+                2018-11-25
               </time>
             
 
@@ -1295,19 +1638,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/SSM框架/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM框架</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1337,199 +1669,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  650 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="1-普通增删改查"><a href="#1-普通增删改查" class="headerlink" title="1.普通增删改查"></a>1.普通增删改查</h1><p>使用表：User<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/13/Mybatis注解写法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/13/mabatis逆向工程/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/13/mabatis逆向工程/" itemprop="url">mabatis逆向工程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T23:40:05+08:00">
-                2018-11-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/SSM框架/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  305 字
+                  68 字
                 </span>
               
 
@@ -1567,14 +1707,10 @@
 
       
         
-          <p>本文使用idea编译器，安装Mybatisplus插件后可以使用逆向工程。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/13/mabatis逆向工程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>在有input框进行输入提交时，如果有input的type为submit，则默认按回车会提交，可以用jQuery的方法进行阻拦：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">"input"</span>).each(</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                $(<span class="keyword">this</span>).keypress( <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> key = <span class="built_in">window</span>.event ? e.keyCode : e.which;</span><br><span class="line">                    <span class="keyword">if</span>(key.toString() === <span class="string">"13"</span>)&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -1625,7 +1761,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/13/idea创建maven项目时显示“Loading archetype list ”/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/25/react：form表单提交/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1644,7 +1780,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/13/idea创建maven项目时显示“Loading archetype list ”/" itemprop="url">idea创建maven项目时显示“Loading archetype list ”</a></h1>
+                <a class="post-title-link" href="/2018/11/25/react：form表单提交/" itemprop="url">react：form表单提交</a></h1>
         
 
         <div class="post-meta">
@@ -1656,8 +1792,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T23:33:05+08:00">
-                2018-11-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:23:01+08:00">
+                2018-11-25
               </time>
             
 
@@ -1679,8 +1815,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
+                  <a href="/categories/react/" itemprop="url" rel="index">
+                    <span itemprop="name">react</span>
                   </a>
                 </span>
 
@@ -1690,8 +1826,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Maven/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/react/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1721,7 +1857,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  515 字
+                  423 字
                 </span>
               
 
@@ -1759,14 +1895,14 @@
 
       
         
-          <h1 id="本文参考"><a href="#本文参考" class="headerlink" title="本文参考"></a>本文参考</h1><p><a href="https://blog.csdn.net/u011403655/article/details/46843331" target="_blank" rel="noopener">https://blog.csdn.net/u011403655/article/details/46843331</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/13/idea创建maven项目时显示“Loading archetype list ”/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>由于React在浏览器显示的是虚拟的DOM，我们在表单输入值后直接提交，是无法获取到这个值的。对此，官方给出的解决办法是：先把输入的值存放在组件的状态（state）中，之后通过状态的改变更新页面内容，从而显示出正确的值，用户提交的也是从state里获取的表单的value。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line"></span><br><span class="line">        item:&#123;</span><br><span class="line">            name:<span class="string">''</span>,</span><br><span class="line">            organization:<span class="string">''</span>,</span><br><span class="line">            school:<span class="string">''</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设置提交方法和改变state的状态的方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">handleSubmit(event) &#123;</span><br><span class="line">    <span class="comment">//阻止表单默认提交</span></span><br><span class="line">    event.preventDefault();</span><br><span class="line">    <span class="keyword">let</span> item = <span class="keyword">this</span>.state.item;</span><br><span class="line">    axios.post(host + <span class="string">'xxx/insert'</span>, item).then(</span><br><span class="line">        response =&gt; &#123;</span><br><span class="line">            <span class="keyword">let</span> message = response.data;</span><br><span class="line">            <span class="keyword">if</span> (message === <span class="string">'success'</span>) &#123;</span><br><span class="line">                alert(<span class="string">"插入成功"</span>);</span><br><span class="line">                <span class="built_in">window</span>.location.href = <span class="string">'/xxx/list'</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                alert(<span class="string">"插入失败，请重试"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">item</span>:item&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeValue(event) &#123;</span><br><span class="line">    <span class="keyword">let</span> newItem = <span class="keyword">this</span>.state.item;</span><br><span class="line">    newItem[event.target.name] = event.target.value;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">item</span>: newItem&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&#123;</span>'<span class="attr">post</span>'&#125; <span class="attr">onSubmit</span>=<span class="string">&#123;this.handleSubmit.bind(this)&#125;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>申请数据集名称：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">&#123;</span>'<span class="attr">name</span>'&#125; <span class="attr">onChange</span>=<span class="string">&#123;this.changeValue.bind(this)&#125;/</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>学校：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">&#123;</span>'<span class="attr">organization</span>'&#125; <span class="attr">value</span>=<span class="string">&#123;this.state.item.organization&#125;</span> <span class="attr">onChange</span>=<span class="string">&#123;this.changeValue.bind(this)&#125;/</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>学院：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">&#123;</span>'<span class="attr">school</span>'&#125; <span class="attr">value</span>=<span class="string">&#123;this.state.item.school&#125;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">onChange</span>=<span class="string">&#123;this.changeValue.bind(this)&#125;/</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#123;</span>'<span class="attr">submit</span>'&#125; <span class="attr">value</span>=<span class="string">&#123;</span>'提交'&#125;/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">&#123;</span>'重置'&#125; <span class="attr">type</span>=<span class="string">&#123;</span>'<span class="attr">reset</span>'&#125;/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注：form中用onSubmit替代action，其中每个input的name需要对应定义state时的状态，在使用axios调接口传值时，如果是java的springmvc的后端，需要将传输的属性与对应的实体类对接好。</strong></p>
+
+          
         
       
     </div>
@@ -1817,7 +1953,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/13/Mybatis的动态sql/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/24/springboot报错记录（一）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1836,7 +1972,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/13/Mybatis的动态sql/" itemprop="url">Mybatis的动态sql</a></h1>
+                <a class="post-title-link" href="/2018/11/24/springboot报错记录（一）/" itemprop="url">springboot报错记录（一）</a></h1>
         
 
         <div class="post-meta">
@@ -1848,8 +1984,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T23:04:05+08:00">
-                2018-11-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T23:47:01+08:00">
+                2018-11-24
               </time>
             
 
@@ -1871,19 +2007,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/SSM框架/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM框架</span>
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
                   </a>
                 </span>
 
@@ -1913,7 +2038,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k 字
+                  2k 字
                 </span>
               
 
@@ -1929,189 +2054,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文是关于mybatis的早期使用方法。</p>
-<h1 id="0-前期准备"><a href="#0-前期准备" class="headerlink" title="0.前期准备"></a>0.前期准备</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_employee</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span>        <span class="built_in">INT</span> AUTO_INCREMENT</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  loginname <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">password</span>  <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">name</span>      <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  sex       <span class="built_in">CHAR</span>(<span class="number">2</span>)     <span class="literal">NULL</span>,</span><br><span class="line">  age       <span class="built_in">INT</span>         <span class="literal">NULL</span>,</span><br><span class="line">  phone     <span class="built_in">VARCHAR</span>(<span class="number">21</span>) <span class="literal">NULL</span>,</span><br><span class="line">  sal       <span class="keyword">DOUBLE</span>      <span class="literal">NULL</span>,</span><br><span class="line">  state     <span class="built_in">VARCHAR</span>(<span class="number">18</span>) <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> tb_employee_id_uindex</span><br><span class="line">  <span class="keyword">UNIQUE</span> (<span class="keyword">id</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/13/Mybatis的动态sql/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2018/11/13/范数/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/13/范数/" itemprop="url">范数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T22:04:05+08:00">
-                2018-11-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  189 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -2134,20 +2077,36 @@
       
         
           
-            <p>p-范数:</p>
-<p>$||x||_p = (|x_1|^p + |x_2|^p + |x_3|^3 + … + |x_n|^p)^{1/p} =\sqrt[p]{ \sum_{i=1}^n|x_i|^p}$</p>
-<p>2-范数(欧式范数):</p>
-<p>$||x||_2 = (|x_1|^2 + |x_2|^2 + |x_3|^2 + … + |x_n|^2)^{1/2} = \sqrt{ \sum_{i=1}^n x_i^2}$</p>
-<p>∞-范数:</p>
-<p>$||x||_∞ = max(x_1,x_2,x_3,…,x_n) = max_i|x_i|$</p>
-<p>1-范数即向量元素绝对值之和；</p>
-<p>2-范数为Euclid范数（欧几里得范数，常用计算向量长度），即向量元素绝对值的平方和再开方；</p>
-<p>∞-范数即所有向量元素绝对值中的最大值；</p>
-<p>-∞-范数即所有向量元素绝对值中的最小值；</p>
-<p>p-范数即向量元素绝对值的p次方和的1/p次幂。</p>
-<p>可以参考：<br><a href="https://blog.csdn.net/susanzhang1231/article/details/52127011" target="_blank" rel="noopener">https://blog.csdn.net/susanzhang1231/article/details/52127011</a></p>
-<p><a href="https://www.jianshu.com/p/bf860ad177dd" target="_blank" rel="noopener">https://www.jianshu.com/p/bf860ad177dd</a></p>
-<p><a href="https://blog.csdn.net/bitcarmanlee/article/details/51945271" target="_blank" rel="noopener">https://blog.csdn.net/bitcarmanlee/article/details/51945271</a></p>
+            <h1 id="1-Failed-to-configure-a-DataSource-‘url’-attribute-is-not-specified-and-no-embedded-datasource-could-be-configured"><a href="#1-Failed-to-configure-a-DataSource-‘url’-attribute-is-not-specified-and-no-embedded-datasource-could-be-configured" class="headerlink" title="1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured"></a>1. Failed to configure a DataSource: ‘url’ attribute is not specified and no embedded datasource could be configured</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Failed to configure a DataSource: &apos;url&apos; attribute is not specified and no embedded datasource could be configured.</span><br><span class="line"></span><br><span class="line">Reason: Failed to determine a suitable driver class</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider the following:</span><br><span class="line">	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.</span><br><span class="line">	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).</span><br></pre></td></tr></table></figure>
+<p>原因：引入mybatis的jar包时：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>springboot会默认加载org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration这个类，而DataSourceAutoConfiguration类使用了@Configuration注解向spring注入了dataSource bean，又因为项目中并没有关于dataSource相关的配置信息，所以当spring创建dataSource bean时因缺少相关的信息就会报错。</p>
+<p>解决办法：</p>
+<ol>
+<li>在@SpringBootApplication注解上加上exclude，解除自动加载DataSourceAutoConfiguration。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span>(exclude = DataSourceAutoConfiguration.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在parent项目的pom.xml文件中保存所有子模块的共有jar依赖，非共有的依赖则在各模块自身的pom.xml文件中进行申明。建议采用此方法，好处在于各模块的依赖不会相互产生干扰。</li>
+</ol>
+<h1 id="2-maven配置时，测试出现“’mvn’-不是内部或外部命令-也不是可运行的程序”错误"><a href="#2-maven配置时，测试出现“’mvn’-不是内部或外部命令-也不是可运行的程序”错误" class="headerlink" title="2.maven配置时，测试出现“’mvn’ 不是内部或外部命令,也不是可运行的程序”错误"></a>2.maven配置时，测试出现“’mvn’ 不是内部或外部命令,也不是可运行的程序”错误</h1><p>配置maven。</p>
+<p>在环境变量的PATH中配置maven的bin目录。</p>
+<p>使用mvn package打包成功后显示日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-----------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 46.791 s</span><br><span class="line">[INFO] Finished at: 2018-11-21T16:12:36+08:00</span><br><span class="line">[INFO] Final Memory: 35M/275M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<h1 id="3-java-sql-SQLException-The-server-time-zone-value-‘-u±e×-±-’-is-unrecognized-or-represents……"><a href="#3-java-sql-SQLException-The-server-time-zone-value-‘-u±e×-±-’-is-unrecognized-or-represents……" class="headerlink" title="3.java.sql.SQLException: The server time zone value ‘???ú±ê×??±??’ is unrecognized or represents…….."></a>3.java.sql.SQLException: The server time zone value ‘???ú±ê×??±??’ is unrecognized or represents……..</h1><p>具体错误：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">Loading <span class="class"><span class="keyword">class</span> `<span class="title">com</span>.<span class="title">mysql</span>.<span class="title">jdbc</span>.<span class="title">Driver</span>'. <span class="title">This</span> <span class="title">is</span> <span class="title">deprecated</span>. <span class="title">The</span> <span class="title">new</span> <span class="title">driver</span> <span class="title">class</span> <span class="title">is</span> `<span class="title">com</span>.<span class="title">mysql</span>.<span class="title">cj</span>.<span class="title">jdbc</span>.<span class="title">Driver</span>'. <span class="title">The</span> <span class="title">driver</span> <span class="title">is</span> <span class="title">automatically</span> <span class="title">registered</span> <span class="title">via</span> <span class="title">the</span> <span class="title">SPI</span> <span class="title">and</span> <span class="title">manual</span> <span class="title">loading</span> <span class="title">of</span> <span class="title">the</span> <span class="title">driver</span> <span class="title">class</span> <span class="title">is</span> <span class="title">generally</span> <span class="title">unnecessary</span>.</span></span><br><span class="line">Tue May 15 21:38:04 CST 2018 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.</span><br><span class="line">java.sql.SQLException: The server time zone value <span class="string">'???ú±ê×??±??'</span> is unrecognized or represents more than one time zone. <span class="function">You must configure either the server or JDBC <span class="title">driver</span> <span class="params">(via the serverTimezone configuration property)</span> to use a more specifc time zone value <span class="keyword">if</span> you want to utilize time zone support.</span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.exceptions.SQLError.<span class="title">createSQLException</span><span class="params">(SQLError.java:<span class="number">127</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.exceptions.SQLError.<span class="title">createSQLException</span><span class="params">(SQLError.java:<span class="number">95</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.exceptions.SQLError.<span class="title">createSQLException</span><span class="params">(SQLError.java:<span class="number">87</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.exceptions.SQLError.<span class="title">createSQLException</span><span class="params">(SQLError.java:<span class="number">61</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.exceptions.SQLError.<span class="title">createSQLException</span><span class="params">(SQLError.java:<span class="number">71</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.<span class="title">translateException</span><span class="params">(SQLExceptionsMapping.java:<span class="number">76</span>)</span></span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.ConnectionImpl.<span class="title">createNewIO</span><span class="params">(ConnectionImpl.java:<span class="number">862</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.ConnectionImpl.&lt;init&gt;<span class="params">(ConnectionImpl.java:<span class="number">444</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.ConnectionImpl.<span class="title">getInstance</span><span class="params">(ConnectionImpl.java:<span class="number">230</span>)</span></span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.NonRegisteringDriver.<span class="title">connect</span><span class="params">(NonRegisteringDriver.java:<span class="number">226</span>)</span></span></span><br><span class="line"><span class="function">	at java.sql.DriverManager.<span class="title">getConnection</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at java.sql.DriverManager.<span class="title">getConnection</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.unit.UnitMysql.<span class="title">getConnection</span><span class="params">(UnitMysql.java:<span class="number">34</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.dao.imp.ITb_UserImpI.<span class="title">insertData</span><span class="params">(ITb_UserImpI.java:<span class="number">55</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.dao.imp.ITb_UserImpI.<span class="title">insertData</span><span class="params">(ITb_UserImpI.java:<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.service.imp.ITb_UserServiceImpI.<span class="title">insertData</span><span class="params">(ITb_UserServiceImpI.java:<span class="number">35</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.service.imp.ITb_UserServiceImpI.<span class="title">insertData</span><span class="params">(ITb_UserServiceImpI.java:<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.servlet.Servlet_TbUser.<span class="title">Insert</span><span class="params">(Servlet_TbUser.java:<span class="number">87</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.servlet.Servlet_TbUser.<span class="title">doPost</span><span class="params">(Servlet_TbUser.java:<span class="number">41</span>)</span></span></span><br><span class="line"><span class="function">	at javax.servlet.http.HttpServlet.<span class="title">service</span><span class="params">(HttpServlet.java:<span class="number">661</span>)</span></span></span><br><span class="line"><span class="function">	at javax.servlet.http.HttpServlet.<span class="title">service</span><span class="params">(HttpServlet.java:<span class="number">742</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">internalDoFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">231</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">doFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">166</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.tomcat.websocket.server.WsFilter.<span class="title">doFilter</span><span class="params">(WsFilter.java:<span class="number">52</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">internalDoFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">193</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">doFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">166</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardWrapperValve.<span class="title">invoke</span><span class="params">(StandardWrapperValve.java:<span class="number">198</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardContextValve.<span class="title">invoke</span><span class="params">(StandardContextValve.java:<span class="number">96</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.authenticator.AuthenticatorBase.<span class="title">invoke</span><span class="params">(AuthenticatorBase.java:<span class="number">496</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardHostValve.<span class="title">invoke</span><span class="params">(StandardHostValve.java:<span class="number">140</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.valves.ErrorReportValve.<span class="title">invoke</span><span class="params">(ErrorReportValve.java:<span class="number">81</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.valves.AbstractAccessLogValve.<span class="title">invoke</span><span class="params">(AbstractAccessLogValve.java:<span class="number">650</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardEngineValve.<span class="title">invoke</span><span class="params">(StandardEngineValve.java:<span class="number">87</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.connector.CoyoteAdapter.<span class="title">service</span><span class="params">(CoyoteAdapter.java:<span class="number">342</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.coyote.http11.Http11Processor.<span class="title">service</span><span class="params">(Http11Processor.java:<span class="number">803</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.coyote.AbstractProcessorLight.<span class="title">process</span><span class="params">(AbstractProcessorLight.java:<span class="number">66</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.coyote.AbstractProtocol$ConnectionHandler.<span class="title">process</span><span class="params">(AbstractProtocol.java:<span class="number">790</span>)</span></span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function">	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.<span class="title">doRun</span><span class="params">(NioEndpoint.java:<span class="number">1459</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.tomcat.util.net.SocketProcessorBase.<span class="title">run</span><span class="params">(SocketProcessorBase.java:<span class="number">49</span>)</span></span></span><br><span class="line"><span class="function">	at java.util.concurrent.ThreadPoolExecutor.<span class="title">runWorker</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at java.util.concurrent.ThreadPoolExecutor$Worker.<span class="title">run</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.<span class="title">run</span><span class="params">(TaskThread.java:<span class="number">61</span>)</span></span></span><br><span class="line"><span class="function">	at java.lang.Thread.<span class="title">run</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">Caused by: com.mysql.cj.exceptions.InvalidConnectionAttributeException: The server time zone value '???ú±ê×??±??' is unrecognized or represents more than one time zone. You must configure either the server or JDBC <span class="title">driver</span> <span class="params">(via the serverTimezone configuration property)</span> to use a more specifc time zone value <span class="keyword">if</span> you want to utilize time zone support.</span></span><br><span class="line"><span class="function">	at sun.reflect.NativeConstructorAccessorImpl.<span class="title">newInstance0</span><span class="params">(Native Method)</span></span></span><br><span class="line"><span class="function">	at sun.reflect.NativeConstructorAccessorImpl.<span class="title">newInstance</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at sun.reflect.DelegatingConstructorAccessorImpl.<span class="title">newInstance</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at java.lang.reflect.Constructor.<span class="title">newInstance</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.exceptions.ExceptionFactory.<span class="title">createException</span><span class="params">(ExceptionFactory.java:<span class="number">59</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.exceptions.ExceptionFactory.<span class="title">createException</span><span class="params">(ExceptionFactory.java:<span class="number">83</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.util.TimeUtil.<span class="title">getCanonicalTimezone</span><span class="params">(TimeUtil.java:<span class="number">128</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.protocol.a.NativeProtocol.<span class="title">configureTimezone</span><span class="params">(NativeProtocol.java:<span class="number">2201</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.protocol.a.NativeProtocol.<span class="title">initServerSession</span><span class="params">(NativeProtocol.java:<span class="number">2225</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.ConnectionImpl.<span class="title">initializePropsFromServer</span><span class="params">(ConnectionImpl.java:<span class="number">1391</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.ConnectionImpl.<span class="title">connectOneTryOnly</span><span class="params">(ConnectionImpl.java:<span class="number">993</span>)</span></span></span><br><span class="line"><span class="function">	at com.mysql.cj.jdbc.ConnectionImpl.<span class="title">createNewIO</span><span class="params">(ConnectionImpl.java:<span class="number">852</span>)</span></span></span><br><span class="line"><span class="function">	... 36 more</span></span><br><span class="line"><span class="function">五月 15, 2018 9:38:04 下午 org.apache.catalina.core.StandardWrapperValve invoke</span></span><br><span class="line"><span class="function">严重: Servlet.<span class="title">service</span><span class="params">()</span> <span class="keyword">for</span> servlet [Servlet_TbUser] in context with path [/myweb2] threw exception</span></span><br><span class="line"><span class="function">java.lang.NullPointerException</span></span><br><span class="line"><span class="function">	at zhu.jdbc.dao.imp.ITb_UserImpI.<span class="title">insertData</span><span class="params">(ITb_UserImpI.java:<span class="number">59</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.dao.imp.ITb_UserImpI.<span class="title">insertData</span><span class="params">(ITb_UserImpI.java:<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.service.imp.ITb_UserServiceImpI.<span class="title">insertData</span><span class="params">(ITb_UserServiceImpI.java:<span class="number">35</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.service.imp.ITb_UserServiceImpI.<span class="title">insertData</span><span class="params">(ITb_UserServiceImpI.java:<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.servlet.Servlet_TbUser.<span class="title">Insert</span><span class="params">(Servlet_TbUser.java:<span class="number">87</span>)</span></span></span><br><span class="line"><span class="function">	at zhu.jdbc.servlet.Servlet_TbUser.<span class="title">doPost</span><span class="params">(Servlet_TbUser.java:<span class="number">41</span>)</span></span></span><br><span class="line"><span class="function">	at javax.servlet.http.HttpServlet.<span class="title">service</span><span class="params">(HttpServlet.java:<span class="number">661</span>)</span></span></span><br><span class="line"><span class="function">	at javax.servlet.http.HttpServlet.<span class="title">service</span><span class="params">(HttpServlet.java:<span class="number">742</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">internalDoFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">231</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">doFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">166</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.tomcat.websocket.server.WsFilter.<span class="title">doFilter</span><span class="params">(WsFilter.java:<span class="number">52</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">internalDoFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">193</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.ApplicationFilterChain.<span class="title">doFilter</span><span class="params">(ApplicationFilterChain.java:<span class="number">166</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardWrapperValve.<span class="title">invoke</span><span class="params">(StandardWrapperValve.java:<span class="number">198</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardContextValve.<span class="title">invoke</span><span class="params">(StandardContextValve.java:<span class="number">96</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.authenticator.AuthenticatorBase.<span class="title">invoke</span><span class="params">(AuthenticatorBase.java:<span class="number">496</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardHostValve.<span class="title">invoke</span><span class="params">(StandardHostValve.java:<span class="number">140</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.valves.ErrorReportValve.<span class="title">invoke</span><span class="params">(ErrorReportValve.java:<span class="number">81</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.valves.AbstractAccessLogValve.<span class="title">invoke</span><span class="params">(AbstractAccessLogValve.java:<span class="number">650</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.core.StandardEngineValve.<span class="title">invoke</span><span class="params">(StandardEngineValve.java:<span class="number">87</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.catalina.connector.CoyoteAdapter.<span class="title">service</span><span class="params">(CoyoteAdapter.java:<span class="number">342</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.coyote.http11.Http11Processor.<span class="title">service</span><span class="params">(Http11Processor.java:<span class="number">803</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.coyote.AbstractProcessorLight.<span class="title">process</span><span class="params">(AbstractProcessorLight.java:<span class="number">66</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.coyote.AbstractProtocol$ConnectionHandler.<span class="title">process</span><span class="params">(AbstractProtocol.java:<span class="number">790</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.<span class="title">doRun</span><span class="params">(NioEndpoint.java:<span class="number">1459</span>)</span></span></span><br><span class="line"><span class="function">	at org.apache.tomcat.util.net.SocketProcessorBase.<span class="title">run</span><span class="params">(SocketProcessorBase.java:<span class="number">49</span>)</span></span></span><br><span class="line"><span class="function">	at java.util.concurrent.ThreadPoolExecutor.<span class="title">runWorker</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at java.util.concurrent.ThreadPoolExecutor$Worker.<span class="title">run</span><span class="params">(Unknown Source)</span></span></span><br><span class="line"><span class="function">	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.<span class="title">run</span><span class="params">(TaskThread.java:<span class="number">61</span>)</span></span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function">	at java.lang.Thread.<span class="title">run</span><span class="params">(Unknown Source)</span></span></span><br></pre></td></tr></table></figure></p>
+<p><strong>出现这个的原因是因为 mysql返回的时间总是有问题，比实际时间要早8小时。</strong></p>
+<h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><p>在jdbc连接的url后面加上serverTimezone=GMT即可解决问题，如果需要使用gmt+8时区，需要写成GMT%2B8。</p>
+<p>为了防止因为日期为null报错，可以直接加上：</p>
+<p>?serverTimezone=UTC&amp;zeroDateTimeBehavior=convertToNull</p>
+<p>例如链接数据库，可以写为：</p>
+<p>jdbc.url=jdbc:mysql://xxx.xxx.xxx.xxx/xxxxx?serverTimezone=UTC&amp;zeroDateTimeBehavior=convertToNull</p>
+<h1 id="4-Loading-class-com-mysql-jdbc-Driver-This-is-deprecated-The-new-driver-class-is-com-mysql-cj-jdbc-Driver-The-driver-is-automatically-registered-via-the-SPI-and-manual-loading-of-the-driver-class-is-generally-unnecessary"><a href="#4-Loading-class-com-mysql-jdbc-Driver-This-is-deprecated-The-new-driver-class-is-com-mysql-cj-jdbc-Driver-The-driver-is-automatically-registered-via-the-SPI-and-manual-loading-of-the-driver-class-is-generally-unnecessary" class="headerlink" title="4.Loading class com.mysql.jdbc.Driver. This is deprecated. The new driver class is com.mysql.cj.jdbc.Driver. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary."></a>4.Loading class com.mysql.jdbc.Driver. This is deprecated. The new driver class is com.mysql.cj.jdbc.Driver. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.</h1><p>这个问题是 使用了新的mysql驱动包，但驱动声明不是最新的：</p>
+<p>DriverClassName 从 “com.mysql.jdbc.Driver” 换成 “com.mysql.cj.jdbc.Driver” 即可。</p>
+<h1 id="5-spring-Failed-to-convert-property-value-of-type-‘java-lang-String’-to-required-type-‘int’-for-property"><a href="#5-spring-Failed-to-convert-property-value-of-type-‘java-lang-String’-to-required-type-‘int’-for-property" class="headerlink" title="5.spring Failed to convert property value of type ‘java.lang.String’ to required type ‘int’ for property"></a>5.spring Failed to convert property value of type ‘java.lang.String’ to required type ‘int’ for property</h1><p>原错误是不能将long的null属性转化出来，但是没找到原来的错误。采取的方式是，把pojo类中的long全改为Integer。</p>
+<p>如果是date出错，参考问题3，在数据库连接时加上zeroDateTimeBehavior=convertToNull。</p>
+<h1 id="6-This-application-has-no-explicit-mapping-for-…"><a href="#6-This-application-has-no-explicit-mapping-for-…" class="headerlink" title="6. This application has no explicit mapping for /…"></a>6. This application has no explicit mapping for /…</h1><p>原因1:<br>Application启动类的位置不对.要将Application类放在最外侧,即包含所有子包<br>原因:spring-boot会自动加载启动类所在包下及其子包下的所有组件.</p>
+<p>原因2:<br>在springboot的配置文件:application.yml或application.properties中关于视图解析器的配置问题:<br>当pom文件下的spring-boot-starter-paren版本高时使用:<br>spring.mvc.view.prefix/spring.mvc.view.suffix<br>当pom文件下的spring-boot-starter-paren版本低时使用:<br>spring.view.prefix/spring.view.suffix</p>
+<p>原因3:<br>控制器的URL路径书写问题<br>@RequestMapping(“xxxxxxxxxxxxxx”)<br>实际访问的路径与”xxx”不符合.</p>
+<p>原因4：<br>**application.properties中设置thymeleaf的属性时，注释掉spring.thymeleaf.view-names=，这是可解析的视图名称列表，用逗号分隔，但是如果不写，就会报这个错误。</p>
+<h1 id="7-springboot中-server-context-path-spring报错：Deprecated-configuration-property"><a href="#7-springboot中-server-context-path-spring报错：Deprecated-configuration-property" class="headerlink" title="7.springboot中 server: context-path: /spring报错：Deprecated configuration property"></a>7.springboot中 server: context-path: /spring报错：Deprecated configuration property</h1><p>是版本问题，这个新版本不是这种写法：应该变化为：server.servlet.context-path: /spring</p>
 
           
         
@@ -2191,7 +2150,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2239,7 +2198,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">174</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2250,7 +2209,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2261,7 +2220,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
