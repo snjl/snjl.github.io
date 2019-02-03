@@ -689,7 +689,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/requests库高级用法/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy架构/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -708,7 +708,831 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/31/requests库高级用法/" itemprop="url">requests库高级用法</a></h1>
+                <a class="post-title-link" href="/2019/01/31/scrapy架构/" itemprop="url">scrapy架构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://www.runoob.com/wp-content/uploads/2018/10/8c591d54457bb033812a2b0364011e9c_articlex.png" alt="image"></p>
+<h2 id="Scrapy-Engine-引擎"><a href="#Scrapy-Engine-引擎" class="headerlink" title="Scrapy Engine(引擎)"></a>Scrapy Engine(引擎)</h2><p>负责Spider、ItemPipeline、Downloader、Scheduler中间的通讯，信号、数据传递等。</p>
+<h2 id="Scheduler-调度器"><a href="#Scheduler-调度器" class="headerlink" title="Scheduler(调度器)"></a>Scheduler(调度器)</h2><p>它负责接受引擎发送过来的Request请求，并按照一定的方式进行整理排列，入队，当引擎需要时，交还给引擎。初始的爬取URL和后续在页面中获取的待爬取的URL将放入调度器中，等待爬取。同时调度器会自动去除重复的URL（如果特定的URL不需要去重也可以通过设置实现，如post请求的URL）</p>
+<h2 id="Downloader（下载器）"><a href="#Downloader（下载器）" class="headerlink" title="Downloader（下载器）"></a>Downloader（下载器）</h2><p>负责下载Scrapy Engine(引擎)发送的所有Requests请求，并将其获取到的Responses交还给Scrapy Engine(引擎)，由引擎交给Spider来处理，</p>
+<h2 id="Spider（爬虫）"><a href="#Spider（爬虫）" class="headerlink" title="Spider（爬虫）"></a>Spider（爬虫）</h2><p>它负责处理所有Responses,从中分析提取数据，获取Item字段需要的数据，并将需要跟进的URL提交给引擎，再次进入Scheduler(调度器).</p>
+<h2 id="Item-Pipeline-管道"><a href="#Item-Pipeline-管道" class="headerlink" title="Item Pipeline(管道)"></a>Item Pipeline(管道)</h2><p>它负责处理Spider中获取到的Item，并进行进行后期处理（详细分析、过滤、存储等）的地方。</p>
+<h2 id="Downloader-Middlewares（下载中间件）"><a href="#Downloader-Middlewares（下载中间件）" class="headerlink" title="Downloader Middlewares（下载中间件）"></a>Downloader Middlewares（下载中间件）</h2><p>你可以当作是一个可以自定义扩展下载功能的组件。</p>
+<h2 id="Spider-Middlewares（Spider中间件）"><a href="#Spider-Middlewares（Spider中间件）" class="headerlink" title="Spider Middlewares（Spider中间件）"></a>Spider Middlewares（Spider中间件）</h2><p>可以理解为是一个可以自定扩展和操作引擎和Spider中间通信的功能组件（比如进入Spider的Responses;和从Spider出去的Requests）</p>
+<h1 id="运作流程"><a href="#运作流程" class="headerlink" title="运作流程"></a>运作流程</h1><ol>
+<li><p>引擎打开一个网站(open a domain)，找到处理该网站的Spider并向该spider请求第一个要爬取的URL(s)。</p>
+</li>
+<li><p>引擎从Spider中获取到第一个要爬取的URL并在调度器(Scheduler)以Request调度。</p>
+</li>
+<li><p>引擎向调度器请求下一个要爬取的URL。</p>
+</li>
+<li><p>调度器返回下一个要爬取的URL给引擎，引擎将URL通过下载中间件(请求(request)方向)转发给下载器(Downloader)。</p>
+</li>
+<li><p>一旦页面下载完毕，下载器生成一个该页面的Response，并将其通过下载中间件(返回(response)方向)发送给引擎。</p>
+</li>
+<li><p>引擎从下载器中接收到Response并通过Spider中间件(输入方向)发送给Spider处理。</p>
+</li>
+<li><p>Spider处理Response并返回爬取到的Item及(跟进的)新的Request给引擎。</p>
+</li>
+<li><p>引擎将(Spider返回的)爬取到的Item给Item Pipeline，将(Spider返回的)Request给调度器。</p>
+</li>
+</ol>
+<p>9.(从第二步)重复直到调度器中没有更多地request，引擎关闭该网站。</p>
+<h2 id="通俗解释"><a href="#通俗解释" class="headerlink" title="通俗解释"></a>通俗解释</h2><ol>
+<li>引擎：Hi！Spider, 你要处理哪一个网站？</li>
+<li>Spider：老大要我处理xxxx网页。</li>
+<li>引擎：你把第一个需要处理的URL给我吧。</li>
+<li>Spider：给你，第一个URL是xxxxxxx</li>
+<li>引擎：Hi！调度器，我这有request请求你帮我排序入队一下。</li>
+<li>调度器：好的，正在处理你等一下。</li>
+<li>引擎：Hi！调度器，把你处理好的request请求给我。</li>
+<li>调度器：给你，这是我处理好的request</li>
+<li>引擎：Hi！下载器，你按照老大的下载中间件的设置帮我下载一下这个request请求</li>
+<li>下载器：好的！给你，这是下载好的东西。（如果失败：sorry，这个request下载失败了。然后引擎告诉调度器，这个request下载失败了，你记录一下，我们待会儿再下载）</li>
+<li>引擎：Hi！Spider，这是下载好的东西，并且已经按照老大的下载中间件处理过了，你自己处理一下（注意！这儿responses默认是交给def parse()这个函数处理的）</li>
+<li>Spider：（处理完毕数据之后对于需要跟进的URL），Hi！引擎，我这里有两个结果，这个是我需要跟进的URL，还有这个是我获取到的Item数据。</li>
+<li>引擎：Hi ！管道 我这儿有个item你帮我处理一下！调度器！这是需要跟进URL你帮我处理下。然后从第四步开始循环，直到获取完老大需要全部信息。</li>
+<li>管道调度器：好的，现在就做！</li>
+</ol>
+<p><strong>注意！只有当调度器中不存在任何request了，整个程序才会停止，（也就是说，对于下载失败的URL，Scrapy也会重新下载。）</strong></p>
+<h1 id="Spider类"><a href="#Spider类" class="headerlink" title="Spider类"></a>Spider类</h1><p>Spider是用户编写用于从单个网站(或者一些网站)爬取数据的类。</p>
+<p>其包含了一个用于下载的初始URL，如何跟进网页中的链接以及如何分析页面中的内容， 提取生成 item 的方法。</p>
+<p>为了创建一个Spider，您必须继承 scrapy.Spider 类， 且定义以下三个属性:</p>
+<ul>
+<li>name: 用于区别Spider。 该名字必须是唯一的，不可以为不同的Spider设定相同的名字。</li>
+<li>start_urls: 包含了Spider在启动时进行爬取的url列表。 因此，第一个被获取到的页面将是其中之一。 后续的URL则从初始的URL获取到的数据中提取。</li>
+<li>parse() 是spider的一个方法。 被调用时，每个初始URL完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(response data)，提取数据(生成item)以及生成需要进一步处理的URL的 Request 对象。</li>
+</ul>
+<h1 id="制作Scrapy爬虫步骤"><a href="#制作Scrapy爬虫步骤" class="headerlink" title="制作Scrapy爬虫步骤"></a>制作Scrapy爬虫步骤</h1><ol>
+<li>新建项目 (scrapy startproject xxx)：新建一个新的爬虫项目</li>
+<li>明确目标 （编写items.py）：明确你想要抓取的目标<br>3.制作爬虫 （spiders/xxspider.py）：制作爬虫开始爬取网页</li>
+<li>存储内容 （pipelines.py）：设计管道存储爬取内容</li>
+</ol>
+<h1 id="新建项目目录"><a href="#新建项目目录" class="headerlink" title="新建项目目录"></a>新建项目目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject mySpider</span><br></pre></td></tr></table></figure>
+<p>目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mySpider/</span><br><span class="line">    scrapy.cfg</span><br><span class="line">    mySpider/</span><br><span class="line">        __init__.py</span><br><span class="line">        items.py</span><br><span class="line">        pipelines.py</span><br><span class="line">        settings.py</span><br><span class="line">        spiders/</span><br><span class="line">            __init__.py</span><br><span class="line">            ...</span><br></pre></td></tr></table></figure></p>
+<p>其中：</p>
+<ul>
+<li>scrapy.cfg: 项目的配置文件。</li>
+<li>mySpider/: 项目的Python模块，将会从这里引用代码。</li>
+<li>mySpider/items.py: 项目的目标文件。</li>
+<li>mySpider/pipelines.py: 项目的管道文件。</li>
+<li>mySpider/settings.py: 项目的设置文件。</li>
+<li>mySpider/spiders/: 存储爬虫代码目录。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/安装nginx和简单使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/安装nginx和简单使用/" itemprop="url">安装nginx和简单使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  36 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nginx</span><br></pre></td></tr></table></figure>
+<p>启动nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx start</span><br></pre></td></tr></table></figure></p>
+<p>需要输入密码，成功即启动。</p>
+<p>修改nginx配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure></p>
+<p>nginx重启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx reload</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/Ubuntu：关机、重启、注销等命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/Ubuntu：关机、重启、注销等命令/" itemprop="url">Ubuntu：关机、重启、注销等命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  706 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h1><p>shutdown命令用来系统关机命令。shutdown指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown(选项)(参数)</span><br></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-c：当执行“shutdown -h 11:50”指令时，只要按+键就可以中断关机的指令；</span><br><span class="line">-f：重新启动时不执行fsck；</span><br><span class="line">-F：重新启动时执行fsck；</span><br><span class="line">-h：将系统关机；</span><br><span class="line">-k：只是送出信息给所有用户，但不会实际关机；</span><br><span class="line">-n：不调用init程序进行关机，而由shutdown自己进行；</span><br><span class="line">-r：shutdown之后重新启动；</span><br><span class="line">-t&lt;秒数&gt;：送出警告信息和删除信息之间要延迟多少秒。</span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li>[时间]：设置多久时间后执行shutdown指令；</li>
+<li>[警告信息]：要传送给所有登入用户的信息。<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2>指定现在立即关机：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>指定5分钟后关机，同时送出警告信息给登入用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown +5 &quot;System will shutdown after 5 minutes&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="其他实例"><a href="#其他实例" class="headerlink" title="其他实例"></a>其他实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now 现在立即关机</span><br><span class="line"></span><br><span class="line">shutdown -r now 现在立即重启</span><br><span class="line"></span><br><span class="line">shutdown -r +3 三分钟后重启</span><br><span class="line"></span><br><span class="line">shutdown -h +3 “The System will shutdown after 3 minutes” 提示使用者将在三分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown -r 20:23 在20：23时将重启计算机</span><br><span class="line"></span><br><span class="line">shutdown -r 20:23 &amp; 可以将在20：23时重启的任务放到后台去，用户可以继续操作终端</span><br></pre></td></tr></table></figure>
+<h1 id="reboot"><a href="#reboot" class="headerlink" title="reboot"></a>reboot</h1><p>reboot命令用来重新启动正在运行的Linux操作系统。</p>
+<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot(选项)</span><br></pre></td></tr></table></figure>
+<h2 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d：重新开机时不把数据写入记录文件/var/tmp/wtmp。本参数具有“-n”参数效果；</span><br><span class="line">-f：强制重新开机，不调用shutdown指令的功能；</span><br><span class="line">-i：在重开机之前，先关闭所有网络界面；</span><br><span class="line">-n：重开机之前不检查是否有未结束的程序；</span><br><span class="line">-w：仅做测试，并不真正将系统重新开机，只会把重开机的数据写入/var/log目录下的wtmp记录文件。</span><br></pre></td></tr></table></figure>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot        //重开机。</span><br><span class="line">reboot -w     //做个重开机的模拟（只有纪录并不会真的重开机）。</span><br></pre></td></tr></table></figure>
+<h1 id="logout"><a href="#logout" class="headerlink" title="logout"></a>logout</h1><p>logout命令用于退出当前登录的Shell，logout指令让用户退出系统，其功能和login指令相互对应。</p>
+<h1 id="login"><a href="#login" class="headerlink" title="login"></a>login</h1><p>login命令用于给出登录界面，可用于重新登录或者切换用户身份，也可通过它的功能随时更换登入身份。在Slackware发行版中 ，您可在命令后面附加欲登入的用户名称，它会直接询问密码，等待用户输入。当/etc/nologin文件存在时，系统只root帐号登入系统，其他用户一律不准登入。</p>
+<h2 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login(选项)(参数)</span><br></pre></td></tr></table></figure>
+<h2 id="选项-2"><a href="#选项-2" class="headerlink" title="选项"></a>选项</h2><ul>
+<li>-p：告诉login指令不销毁环境变量；</li>
+<li>-h：指定远程服务器的主机名。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名：指定登录使用的用户名。</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy pycharm调试/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/scrapy pycharm调试/" itemprop="url">scrapy pycharm调试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  188 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.参考网站<br><a href="https://blog.csdn.net/heyifei88/article/details/53197797" target="_blank" rel="noopener">https://blog.csdn.net/heyifei88/article/details/53197797</a></p>
+<p>2.另一种方式（更好一些）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line"></span><br><span class="line"># 获取当前文件所在目录</span><br><span class="line">current_dir = os.path.dirname(os.path.abspath(__file__))  # 当前文件的绝对路径，然后再找他的父级目录</span><br><span class="line">sys.path.append(current_dir)  # 将当前路径加入到path中</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;爬虫名&apos;,&apos;参数&apos;])</span><br></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line"></span><br><span class="line"># 获取当前文件所在目录</span><br><span class="line">current_dir = os.path.dirname(os.path.abspath(__file__))  # 当前文件的绝对路径，然后再找他的父级目录</span><br><span class="line">sys.path.append(current_dir)  # 将当前路径加入到path中</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;quotes&apos;, &apos;-o quotes1.jl&apos;])</span><br></pre></td></tr></table></figure></p>
+<p>也可以不带参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;quotes&apos;])</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/单元测试/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/单元测试/" itemprop="url">单元测试</a></h1>
         
 
         <div class="post-meta">
@@ -774,7 +1598,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.3k 字
+                  1.3k 字
                 </span>
               
 
@@ -790,7 +1614,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -812,14 +1636,251 @@
 
       
         
-          <h1 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&apos;http://httpbin.org/post&apos;,files=files)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">    &apos;args&apos;:&#123;&#125;,</span><br><span class="line">    &apos;data&apos;:&quot;&quot;,</span><br><span class="line">    &apos;files&apos;:&#123;</span><br><span class="line">        xxxxx</span><br><span class="line">    &#125;,</span><br><span class="line">    ···</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/31/requests库高级用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>如果你听说过“测试驱动开发”（TDD：Test-Driven Development），单元测试就不陌生。</p>
+<p>单元测试是用来对一个模块、一个函数或者一个类来进行正确性检验的测试工作。</p>
+<p>比如对函数abs()，我们可以编写出以下几个测试用例：</p>
+<p>输入正数，比如1、1.2、0.99，期待返回值与输入相同；</p>
+<p>输入负数，比如-1、-1.2、-0.99，期待返回值与输入相反；</p>
+<p>输入0，期待返回0；</p>
+<p>输入非数值类型，比如None、[]、{}，期待抛出TypeError。</p>
+<p>把上面的测试用例放到一个测试模块里，就是一个完整的单元测试。</p>
+<p>如果单元测试通过，说明我们测试的这个函数能够正常工作。如果单元测试不通过，要么函数有bug，要么测试条件输入不正确，总之，需要修复使单元测试能够通过。</p>
+<p>单元测试通过后有什么意义呢？如果我们对abs()函数代码做了修改，只需要再跑一遍单元测试，如果通过，说明我们的修改不会对abs()函数原有的行为造成影响，如果测试不通过，说明我们的修改与原有行为不一致，要么修改代码，要么修改测试。</p>
+<p>这种以测试为驱动的开发模式最大的好处就是确保一个程序模块的行为符合我们设计的测试用例。在将来修改的时候，可以极大程度地保证该模块行为仍然是正确的。</p>
+<p>我们来编写一个Dict类，这个类的行为和dict一致，但是可以通过属性来访问，用起来就像下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; d = Dict(a=1, b=2)</span><br><span class="line">&gt;&gt;&gt; d[&apos;a&apos;]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; d.a</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<p>mydict.py代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class Dict(dict):</span><br><span class="line"></span><br><span class="line">    def __init__(self, **kw):</span><br><span class="line">        super().__init__(**kw)</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, key):</span><br><span class="line">        try:</span><br><span class="line">            return self[key]</span><br><span class="line">        except KeyError:</span><br><span class="line">            raise AttributeError(r&quot;&apos;Dict&apos; object has no attribute &apos;%s&apos;&quot; % key)</span><br><span class="line"></span><br><span class="line">    def __setattr__(self, key, value):</span><br><span class="line">        self[key] = value</span><br></pre></td></tr></table></figure></p>
+<p>为了编写单元测试，我们需要引入Python自带的unittest模块，编写mydict_test.py如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">from mydict import Dict</span><br><span class="line"></span><br><span class="line">class TestDict(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    def test_init(self):</span><br><span class="line">        d = Dict(a=1, b=&apos;test&apos;)</span><br><span class="line">        self.assertEqual(d.a, 1)</span><br><span class="line">        self.assertEqual(d.b, &apos;test&apos;)</span><br><span class="line">        self.assertTrue(isinstance(d, dict))</span><br><span class="line"></span><br><span class="line">    def test_key(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        d[&apos;key&apos;] = &apos;value&apos;</span><br><span class="line">        self.assertEqual(d.key, &apos;value&apos;)</span><br><span class="line"></span><br><span class="line">    def test_attr(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        d.key = &apos;value&apos;</span><br><span class="line">        self.assertTrue(&apos;key&apos; in d)</span><br><span class="line">        self.assertEqual(d[&apos;key&apos;], &apos;value&apos;)</span><br><span class="line"></span><br><span class="line">    def test_keyerror(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        with self.assertRaises(KeyError):</span><br><span class="line">            value = d[&apos;empty&apos;]</span><br><span class="line"></span><br><span class="line">    def test_attrerror(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        with self.assertRaises(AttributeError):</span><br><span class="line">            value = d.empty</span><br></pre></td></tr></table></figure></p>
+<p>编写单元测试时，我们需要编写一个测试类，从unittest.TestCase继承。</p>
+<p>以test开头的方法就是测试方法，不以test开头的方法不被认为是测试方法，测试的时候不会被执行。</p>
+<p>对每一类测试都需要编写一个test_xxx()方法。由于unittest.TestCase提供了很多内置的条件判断，我们只需要调用这些方法就可以断言输出是否是我们所期望的。最常用的断言就是assertEqual()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">self.assertEqual(abs(-1), 1) # 断言函数返回的结果与1相等</span><br></pre></td></tr></table></figure></p>
+<p>另一种重要的断言就是期待抛出指定类型的Error，比如通过d[‘empty’]访问不存在的key时，断言会抛出KeyError：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">with self.assertRaises(KeyError):</span><br><span class="line">    value = d[&apos;empty&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>而通过d.empty访问不存在的key时，我们期待抛出AttributeError：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">with self.assertRaises(AttributeError):</span><br><span class="line">    value = d.empty</span><br></pre></td></tr></table></figure></p>
+<h1 id="运行单元测试"><a href="#运行单元测试" class="headerlink" title="运行单元测试"></a>运行单元测试</h1><p>一旦编写好单元测试，我们就可以运行单元测试。最简单的运行方式是在mydict_test.py的最后加上两行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以把mydict_test.py当做正常的python脚本运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python mydict_test.py</span><br></pre></td></tr></table></figure></p>
+<p>另一种方法是在命令行通过参数-m unittest直接运行单元测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python -m unittest mydict_test</span><br><span class="line">.....</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran 5 tests in 0.000s</span><br><span class="line"></span><br><span class="line">OK</span><br></pre></td></tr></table></figure></p>
+<p>这是推荐的做法，因为这样可以一次批量运行很多单元测试，并且，有很多工具可以自动来运行这些单元测试。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setUp与tearDown</span><br></pre></td></tr></table></figure></p>
+<p>可以在单元测试中编写两个特殊的setUp()和tearDown()方法。这两个方法会分别在每调用一个测试方法的前后分别被执行。</p>
+<p>setUp()和tearDown()方法有什么用呢？设想你的测试需要启动一个数据库，这时，就可以在setUp()方法中连接数据库，在tearDown()方法中关闭数据库，这样，不必在每个测试方法中重复相同的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class TestDict(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    def setUp(self):</span><br><span class="line">        print(&apos;setUp...&apos;)</span><br><span class="line"></span><br><span class="line">    def tearDown(self):</span><br><span class="line">        print(&apos;tearDown...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>可以再次运行测试看看每个测试方法调用前后是否会打印出setUp…和tearDown…。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>单元测试可以有效地测试某个程序模块的行为，是未来重构代码的信心保证。</p>
+<p>单元测试的测试用例要覆盖常用的输入组合、边界条件和异常。</p>
+<p>单元测试代码要非常简单，如果测试代码太复杂，那么测试代码本身就可能有bug。</p>
+<p>单元测试通过了并不意味着程序就没有bug了，但是不通过程序肯定有bug。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy命令行/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/scrapy命令行/" itemprop="url">scrapy命令行</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  769 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>命令行输入scrapy，输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  scrapy &lt;command&gt; [options] [args]</span><br><span class="line"></span><br><span class="line">Available commands:</span><br><span class="line">  bench         Run quick benchmark test</span><br><span class="line">  commands</span><br><span class="line">  fetch         Fetch a URL using the Scrapy downloader</span><br><span class="line">  genspider     Generate new spider using pre-defined templates</span><br><span class="line">  runspider     Run a self-contained spider (without creating a project)</span><br><span class="line">  settings      Get settings values</span><br><span class="line">  shell         Interactive scraping console</span><br><span class="line">  startproject  Create new project</span><br><span class="line">  version       Print Scrapy version</span><br><span class="line">  view          Open URL in browser, as seen by Scrapy</span><br><span class="line"></span><br><span class="line">  [ more ]      More commands available when run from project directory</span><br><span class="line"></span><br><span class="line">Use &quot;scrapy &lt;command&gt; -h&quot; to see more info about a command</span><br></pre></td></tr></table></figure></p>
+<p>以下介绍常用的。</p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject myproject [ project_dir ]</span><br></pre></td></tr></table></figure>
+<p>这将在该project_dir目录下创建一个Scrapy项目。如果project_dir没有指定，project_dir将会和myproject名称一样。</p>
+<p>接下来，进入新的项目目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd project_dir</span><br></pre></td></tr></table></figure></p>
+<h1 id="创建爬虫"><a href="#创建爬虫" class="headerlink" title="创建爬虫"></a>创建爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider mydomain mydomain.com</span><br></pre></td></tr></table></figure>
+<p>通过上述命令创建了一个spider name为mydomain的爬虫，start_urls为<a href="http://www.cnblogs.com/的爬虫。" target="_blank" rel="noopener">http://www.cnblogs.com/的爬虫。</a></p>
+<h1 id="启动爬虫"><a href="#启动爬虫" class="headerlink" title="启动爬虫"></a>启动爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl &lt;spider&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="检查爬虫"><a href="#检查爬虫" class="headerlink" title="检查爬虫"></a>检查爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy check [-l] &lt;spider&gt;</span><br></pre></td></tr></table></figure>
+<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\shu_item\tutorial&gt;scrapy check quotes</span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran 0 contracts in 0.000s</span><br><span class="line"></span><br><span class="line">OK</span><br></pre></td></tr></table></figure></p>
+<h1 id="列出爬虫"><a href="#列出爬虫" class="headerlink" title="列出爬虫"></a>列出爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy list</span><br></pre></td></tr></table></figure>
+<p>列出当前项目中的所有可用爬虫。每行输出一个爬虫。</p>
+<h1 id="打开shell"><a href="#打开shell" class="headerlink" title="打开shell"></a>打开shell</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy shell [url]</span><br></pre></td></tr></table></figure>
+<p>参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--spider=SPIDER：绕过爬虫自动检测和强制使用特定的爬虫</span><br><span class="line">-c code：评估shell中的代码，打印结果并退出</span><br><span class="line">--no-redirect：不遵循HTTP 3xx重定向（默认是遵循它们）; 这只影响你可以在命令行上作为参数传递的URL; 一旦你在shell中，fetch(url)默认情况下仍然会遵循HTTP重定向。</span><br></pre></td></tr></table></figure></p>
+<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ scrapy shell http://www.example.com/some/page.html</span><br><span class="line">[ ... scrapy shell starts ... ]</span><br><span class="line"></span><br><span class="line">$ scrapy shell --nolog http://www.example.com/ -c &apos;(response.status, response.url)&apos;</span><br><span class="line">(200, &apos;http://www.example.com/&apos;)</span><br><span class="line"></span><br><span class="line"># shell follows HTTP redirects by default</span><br><span class="line">$ scrapy shell --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c &apos;(response.status, response.url)&apos;</span><br><span class="line">(200, &apos;http://example.com/&apos;)</span><br><span class="line"></span><br><span class="line"># you can disable this with --no-redirect</span><br><span class="line"># (only for the URL passed as command line argument)</span><br><span class="line">$ scrapy shell --no-redirect --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c &apos;(response.status, response.url)&apos;</span><br><span class="line">(302, &apos;http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F&apos;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="view"><a href="#view" class="headerlink" title="view"></a>view</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy view &lt;url&gt;</span><br></pre></td></tr></table></figure>
+<p>在浏览器中打开给定的URL，并以Scrapy spider获取到的形式展现。 有些时候spider获取到的页面和普通用户看到的并不相同。 因此该命令可以用来检查spider所获取到的页面，并确认这是您所期望的。</p>
+<p>例如，访问淘宝，就会发现很多内容是ajax加载的，实际上写在页面中的基本只有一个模版。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scarpy view http://www.taobao.com</span><br></pre></td></tr></table></figure></p>
+<h1 id="version"><a href="#version" class="headerlink" title="version"></a>version</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy version [-v]</span><br></pre></td></tr></table></figure>
+<p>输出Scrapy版本。配合 -v 运行时，该命令同时输出Python, Twisted以及平台的信息，方便bug提交。<br>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">λ scrapy version -v</span><br><span class="line">Scrapy       : 1.5.0</span><br><span class="line">lxml         : 4.2.1.0</span><br><span class="line">libxml2      : 2.9.5</span><br><span class="line">cssselect    : 1.0.3</span><br><span class="line">parsel       : 1.4.0</span><br><span class="line">w3lib        : 1.19.0</span><br><span class="line">Twisted      : 17.9.0</span><br><span class="line">Python       : 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:54:40) [MSC v.1900 64 bit (AMD64)]</span><br><span class="line">pyOpenSSL    : 17.5.0 (OpenSSL 1.1.0h  27 Mar 2018)</span><br><span class="line">cryptography : 2.2.2</span><br><span class="line">Platform     : Windows-10-10.0.17134-SP0</span><br></pre></td></tr></table></figure></p>
+<h1 id="bench测试"><a href="#bench测试" class="headerlink" title="bench测试"></a>bench测试</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy bench</span><br></pre></td></tr></table></figure>
+<p>测试当前爬行速度，运行性能等。</p>
+<h1 id="settings"><a href="#settings" class="headerlink" title="settings"></a>settings</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy settings [options]</span><br></pre></td></tr></table></figure>
+<p>在项目中运行时，该命令将会输出项目的设定值，否则输出Scrapy默认设定。</p>
+<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\shu_item\tutorial&gt;scrapy settings --get MONGO_URI</span><br><span class="line">localhost</span><br><span class="line">C:\shu_item\tutorial&gt;scrapy settings --getbool=ROBOYSTXT_OBEY</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -1081,7 +2142,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/Ubuntu：安装selenium和chromedriver并测试（不需要图形化界面）/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/requests库高级用法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1100,7 +2161,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/31/Ubuntu：安装selenium和chromedriver并测试（不需要图形化界面）/" itemprop="url">Ubuntu：安装selenium和chromedriver并测试（不需要图形化界面）</a></h1>
+                <a class="post-title-link" href="/2019/01/31/requests库高级用法/" itemprop="url">requests库高级用法</a></h1>
         
 
         <div class="post-meta">
@@ -1112,212 +2173,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T10:18:45+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/爬虫/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  174 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>安装chrome驱动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npm.taobao.org/mirrors/chromedriver/72.0.3626.7/chromedriver_linux64.zip</span><br><span class="line">unzip chromedriver_linux64.zip</span><br></pre></td></tr></table></figure></p>
-<p>将文件移动到usr/bin文件夹，配置即完成。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv chromedriver /usr/bin/</span><br></pre></td></tr></table></figure></p>
-<p>安装chrome<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb</span><br><span class="line">sudo dpkg -i google-chrome*.deb</span><br></pre></td></tr></table></figure></p>
-<p>测试代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from selenium.webdriver.chrome.options import Options</span><br><span class="line"></span><br><span class="line">chrome_options = Options()</span><br><span class="line">chrome_options.add_argument(&apos;--headless&apos;)    # 设置无界面</span><br><span class="line">chrome_options.add_argument(&apos;--no-sandbox&apos;)  # root用户下运行代码需添加这一行</span><br><span class="line">driver = webdriver.Chrome(chrome_options=chrome_options)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">print(driver.page_source)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure></p>
-<p>如果遇到不兼容其他安装包，应该会提示执行命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -f</span><br></pre></td></tr></table></figure>
-<p>sudo apt-get -f install 是修复损坏的软件包，尝试卸载出错的包，重新安装正确版本。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/python：os文件和目录/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/python：os文件和目录/" itemprop="url">python：os文件和目录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T10:18:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
                 2019-01-31
               </time>
             
@@ -1371,7 +2227,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  158 字
+                  2.3k 字
                 </span>
               
 
@@ -1387,7 +2243,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  12 分钟
                 </span>
               
             </div>
@@ -1409,763 +2265,14 @@
 
       
         
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.listdir(path)</span><br></pre></td></tr></table></figure>
-<p>返回path指定的文件夹包含的文件或文件夹的名字的列表。</p>
-<p>path为“.”时，返回当前路径下的文件和文件夹内容；path为绝对路径时，返回绝对路径下的文件和文件夹内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.mkdir(path[, mode])</span><br></pre></td></tr></table></figure>
-<p>以数字mode的mode创建一个名为path的文件夹.默认的 mode 是 0777 (八进制)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.exists(path)</span><br></pre></td></tr></table></figure>
-<p>判断某个路径是否存在，存在的话则返回True，不存在返回False。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.makedirs(path, mode=0o777)</span><br></pre></td></tr></table></figure>
-<p>用于递归创建目录。像 mkdir(), 但创建的所有intermediate-level文件夹需要包含子目录。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/history命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/history命令/" itemprop="url">history命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  324 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>history命令用于显示指定数目的指令命令，读取历史命令文件中的目录到历史命令缓冲区和将历史命令缓冲区中的目录写入命令文件。</p>
-<p>该命令单独使用时，仅显示历史命令，在命令行中，可以使用符号!执行指定序号的历史命令。例如，要执行第2个历史命令，则输入!2。</p>
-<p>历史命令是被保存在内存中的，当退出或者登录shell时，会自动保存或读取。在内存中，历史命令仅能够存储1000条历史命令，该数量是由环境变量HISTSIZE进行控制。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>history(选项)(参数)</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c：清空当前历史命令；</span><br><span class="line">-a：将历史命令缓冲区中命令写入历史命令文件中；</span><br><span class="line">-r：将历史命令文件中的命令读入当前历史命令缓冲区；</span><br><span class="line">-w：将当前历史命令缓冲区命令写入历史命令文件中。</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>n：打印最近的n条历史命令。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>使用history命令显示最近使用的10条历史命令，输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# history 10</span><br><span class="line">   92  ls</span><br><span class="line">   93  cd ..</span><br><span class="line">   94  ls</span><br><span class="line">   95  exit</span><br><span class="line">   96  ls -a</span><br><span class="line">   97  cd .ssh/</span><br><span class="line">   98  ls</span><br><span class="line">   99  cat known_hosts</span><br><span class="line">  100  exit</span><br><span class="line">  101  history 10</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/linux压缩解压缩/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/linux压缩解压缩/" itemprop="url">linux压缩解压缩</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Linux的环境中，压缩档案的副档名大多是：『 <em>.tar, </em>.tar.gz, <em>.tgz, </em>.gz, <em>.Z, </em>.bz2 』，以下是常见的压缩档案副档名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">*.Z compress程式压缩的档案； </span><br><span class="line">*.gz gzip程式压缩的档案； </span><br><span class="line">*.bz2 bzip2程式压缩的档案； </span><br><span class="line">*.tar tar程式打包的资料，并没有压缩过； </span><br><span class="line">*.tar.gz tar程式打包的档案，其中并且经过gzip 的压缩</span><br><span class="line">*.tar.bz2 tar 程式打包的档案，其中并且经过bzip2 的压缩</span><br></pre></td></tr></table></figure></p>
-<p>tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
-<p>首先要弄清两个概念：<strong>打包和压缩</strong>。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。</p>
-<p>为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
-<h1 id="最简单的使用-tar"><a href="#最简单的使用-tar" class="headerlink" title="最简单的使用 tar"></a>最简单的使用 tar</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称</span><br><span class="line">查　询：tar -jtv -f filename.tar.bz2</span><br><span class="line">解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录</span><br></pre></td></tr></table></figure>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar(选项)(参数)</span><br></pre></td></tr></table></figure>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-A或--catenate：新增文件到以存在的备份文件；</span><br><span class="line">-B：设置区块大小；</span><br><span class="line">-c或--create：建立新的备份文件；</span><br><span class="line">-C &lt;目录&gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。</span><br><span class="line">-d：记录文件的差别；</span><br><span class="line">-x或--extract或--get：从备份文件中还原文件；</span><br><span class="line">-t或--list：列出备份文件的内容；</span><br><span class="line">-z或--gzip或--ungzip：通过gzip指令处理备份文件；</span><br><span class="line">-Z或--compress或--uncompress：通过compress指令处理备份文件；</span><br><span class="line">-f&lt;备份文件&gt;或--file=&lt;备份文件&gt;：指定备份文件；</span><br><span class="line">-v或--verbose：显示指令执行过程；</span><br><span class="line">-r：添加文件到已经压缩的文件；</span><br><span class="line">-u：添加改变了和现有的文件到已经存在的压缩文件；</span><br><span class="line">-j：支持bzip2解压文件；</span><br><span class="line">-v：显示操作过程；</span><br><span class="line">-l：文件系统边界设置；</span><br><span class="line">-k：保留原有文件不覆盖；</span><br><span class="line">-m：保留文件不被覆盖；</span><br><span class="line">-w：确认压缩文件的正确性；</span><br><span class="line">-p或--same-permissions：用原来的文件权限还原文件；</span><br><span class="line">-P或--absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；</span><br><span class="line">-N &lt;日期格式&gt; 或 --newer=&lt;日期时间&gt;：只将较指定日期更新的文件保存到备份文件里；</span><br><span class="line">--exclude=&lt;范本样式&gt;：排除符合范本样式的文件。</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件或目录：指定要打包的文件或目录列表。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="将文件全部打包成tar包："><a href="#将文件全部打包成tar包：" class="headerlink" title="将文件全部打包成tar包："></a>将文件全部打包成tar包：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf log.tar log2012.log    仅打包，不压缩！ </span><br><span class="line">tar -zcvf log.tar.gz log2012.log   打包后，以 gzip 压缩 </span><br><span class="line">tar -jcvf log.tar.bz2 log2012.log  打包后，以 bzip2 压缩</span><br></pre></td></tr></table></figure>
-<p>在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。</p>
-<h2 id="查阅上述tar包内有哪些文件："><a href="#查阅上述tar包内有哪些文件：" class="headerlink" title="查阅上述tar包内有哪些文件："></a>查阅上述tar包内有哪些文件：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -ztvf log.tar.gz</span><br></pre></td></tr></table></figure>
-<p>由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。</p>
-<h2 id="将tar包解压缩："><a href="#将tar包解压缩：" class="headerlink" title="将tar包解压缩："></a>将tar包解压缩：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf /opt/soft/test/log.tar.gz</span><br></pre></td></tr></table></figure>
-<p>在预设的情况下，我们可以将压缩档在任何地方解开的</p>
-<h2 id="只将tar内的部分文件解压出来："><a href="#只将tar内的部分文件解压出来：" class="headerlink" title="只将tar内的部分文件解压出来："></a>只将tar内的部分文件解压出来：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf /opt/soft/test/log30.tar.gz log2013.log</span><br></pre></td></tr></table></figure>
-<p>我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件。</p>
-<h1 id="文件备份下来，并且保存其权限："><a href="#文件备份下来，并且保存其权限：" class="headerlink" title="文件备份下来，并且保存其权限："></a>文件备份下来，并且保存其权限：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvpf log31.tar.gz log2014.log log2015.log log2016.log</span><br></pre></td></tr></table></figure>
-<p>这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。</p>
-<h2 id="在文件夹当中，比某个日期新的文件才备份："><a href="#在文件夹当中，比某个日期新的文件才备份：" class="headerlink" title="在文件夹当中，比某个日期新的文件才备份："></a>在文件夹当中，比某个日期新的文件才备份：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -N &quot;2012/11/13&quot; -zcvf log17.tar.gz test</span><br></pre></td></tr></table></figure>
-<h2 id="备份文件夹内容是排除部分文件："><a href="#备份文件夹内容是排除部分文件：" class="headerlink" title="备份文件夹内容是排除部分文件："></a>备份文件夹内容是排除部分文件：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar --exclude scf/service -zcvf scf.tar.gz scf/*</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/df命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/df命令/" itemprop="url">df命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  805 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df(选项)(参数)</span><br></pre></td></tr></table></figure>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：包含全部的文件系统；</span><br><span class="line">--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</span><br><span class="line">-h或--human-readable：以可读性较高的方式来显示信息；</span><br><span class="line">-H或--si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</span><br><span class="line">-i或--inodes：显示inode的信息；</span><br><span class="line">-k或--kilobytes：指定区块大小为1024字节；</span><br><span class="line">-l或--local：仅显示本地端的文件系统；</span><br><span class="line">-m或--megabytes：指定区块大小为1048576字节；</span><br><span class="line">--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</span><br><span class="line">-P或--portability：使用POSIX的输出格式；</span><br><span class="line">--sync：在取得磁盘使用信息前，先执行sync指令；</span><br><span class="line">-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</span><br><span class="line">-T或--print-type：显示文件系统的类型；</span><br><span class="line">-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</span><br><span class="line">--help：显示帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件：指定文件系统上的文件。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>查看系统磁盘设备，默认是KB为单位：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df</span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">udev              938580        0    938580   0% /dev</span><br><span class="line">tmpfs             191716    19944    171772  11% /run</span><br><span class="line">/dev/vda1       51474044 12273468  36562808  26% /</span><br><span class="line">tmpfs             958576       24    958552   1% /dev/shm</span><br><span class="line">tmpfs               5120        0      5120   0% /run/lock</span><br><span class="line">tmpfs             958576        0    958576   0% /sys/fs/cgroup</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/500</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-<p>以MB为单位：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -m</span><br><span class="line">Filesystem     1M-blocks  Used Available Use% Mounted on</span><br><span class="line">udev                 917     0       917   0% /dev</span><br><span class="line">tmpfs                188    20       168  11% /run</span><br><span class="line">/dev/vda1          50268 11986     35706  26% /</span><br><span class="line">tmpfs                937     1       937   1% /dev/shm</span><br><span class="line">tmpfs                  5     0         5   0% /run/lock</span><br><span class="line">tmpfs                937     0       937   0% /sys/fs/cgroup</span><br><span class="line">tmpfs                188     0       188   0% /run/user/500</span><br><span class="line">tmpfs                188     0       188   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-<p>使用-h选项以KB以上的单位来显示，可读性高：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">udev            917M     0  917M   0% /dev</span><br><span class="line">tmpfs           188M   20M  168M  11% /run</span><br><span class="line">/dev/vda1        50G   12G   35G  26% /</span><br><span class="line">tmpfs           937M   24K  937M   1% /dev/shm</span><br><span class="line">tmpfs           5.0M     0  5.0M   0% /run/lock</span><br><span class="line">tmpfs           937M     0  937M   0% /sys/fs/cgroup</span><br><span class="line">tmpfs           188M     0  188M   0% /run/user/500</span><br><span class="line">tmpfs           188M     0  188M   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-<p>查看全部文件系统：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ df -a</span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">sysfs                  0        0         0    - /sys</span><br><span class="line">proc                   0        0         0    - /proc</span><br><span class="line">udev              938580        0    938580   0% /dev</span><br><span class="line">devpts                 0        0         0    - /dev/pts</span><br><span class="line">tmpfs             191716    19944    171772  11% /run</span><br><span class="line">/dev/vda1       51474044 12273496  36562780  26% /</span><br><span class="line">securityfs             0        0         0    - /sys/kernel/security</span><br><span class="line">tmpfs             958576       24    958552   1% /dev/shm</span><br><span class="line">tmpfs               5120        0      5120   0% /run/lock</span><br><span class="line">tmpfs             958576        0    958576   0% /sys/fs/cgroup</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/systemd</span><br><span class="line">pstore                 0        0         0    - /sys/fs/pstore</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/perf_event</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/hugetlb</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/freezer</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/memory</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/devices</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/net_cls,net_prio</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/cpu,cpuacct</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/pids</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/cpuset</span><br><span class="line">cgroup                 0        0         0    - /sys/fs/cgroup/blkio</span><br><span class="line">systemd-1              -        -         -    - /proc/sys/fs/binfmt_misc</span><br><span class="line">mqueue                 0        0         0    - /dev/mqueue</span><br><span class="line">debugfs                0        0         0    - /sys/kernel/debug</span><br><span class="line">hugetlbfs              0        0         0    - /dev/hugepages</span><br><span class="line">fusectl                0        0         0    - /sys/fs/fuse/connections</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/500</span><br><span class="line">binfmt_misc            0        0         0    - /proc/sys/fs/binfmt_misc</span><br><span class="line">tmpfs             191716        0    191716   0% /run/user/1001</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/cat命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/cat命令/" itemprop="url">cat命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  318 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>cat命令连接文件并打印到标准输出设备上，cat经常用来显示文件的内容，类似于下的type命令。</p>
-<p>注意：当文件较大时，文本在屏幕上迅速闪过（滚屏），用户往往看不清所显示的内容。因此，一般用more等命令分屏显示。为了控制滚屏，可以按Ctrl+S键，停止滚屏；按Ctrl+Q键可以恢复滚屏。按Ctrl+C（中断）键可以终止该命令的执行，并且返回Shell提示符状态。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>cat(选项)(参数)</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-n或-number：有1开始对所有输出的行数编号；</span><br><span class="line">-b或--number-nonblank：和-n相似，只不过对于空白行不编号；</span><br><span class="line">-s或--squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行；</span><br><span class="line">-A：显示不可打印字符，行尾显示“$”；</span><br><span class="line">-e：等价于&quot;-vE&quot;选项；</span><br><span class="line">-t：等价于&quot;-vT&quot;选项；</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件列表：指定要连接的文件列表。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>设ml和m2是当前目录下的两个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat m1 （在屏幕上显示文件ml的内容）</span><br><span class="line">cat m1 m2 （同时显示文件ml和m2的内容）</span><br><span class="line">cat m1 m2 &gt; file （将文件ml和m2合并后放入文件file中）</span><br></pre></td></tr></table></figure></p>
-
-          
+          <h1 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&apos;http://httpbin.org/post&apos;,files=files)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">    &apos;args&apos;:&#123;&#125;,</span><br><span class="line">    &apos;data&apos;:&quot;&quot;,</span><br><span class="line">    &apos;files&apos;:&#123;</span><br><span class="line">        xxxxx</span><br><span class="line">    &#125;,</span><br><span class="line">    ···</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/31/requests库高级用法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2207,7 +2314,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2255,7 +2362,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">174</span>
+                  <span class="site-state-item-count">183</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2266,7 +2373,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2277,7 +2384,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

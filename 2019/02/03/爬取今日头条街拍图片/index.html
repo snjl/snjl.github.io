@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,案例,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="snjl" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="项目地址：https://github.com/snjl/python.spider.jiepai.git 爬取网址https://www.toutiao.com/search/?keyword=%E8%A1%97%E6%8B%8D 前期研究访问网址后，会发现列表页有多种形式，第一种是视频，第二种是广告，第三种是所有图片在一个网页里面，第四种是图片需要跳转，我们做的是第四种。 通过f12开发者工具">
+<meta name="keywords" content="python,案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取今日头条街拍图片">
+<meta property="og:url" content="https://snjl.github.io/2019/02/03/爬取今日头条街拍图片/index.html">
+<meta property="og:site_name" content="snjl">
+<meta property="og:description" content="项目地址：https://github.com/snjl/python.spider.jiepai.git 爬取网址https://www.toutiao.com/search/?keyword=%E8%A1%97%E6%8B%8D 前期研究访问网址后，会发现列表页有多种形式，第一种是视频，第二种是广告，第三种是所有图片在一个网页里面，第四种是图片需要跳转，我们做的是第四种。 通过f12开发者工具">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-03T16:02:27.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬取今日头条街拍图片">
+<meta name="twitter:description" content="项目地址：https://github.com/snjl/python.spider.jiepai.git 爬取网址https://www.toutiao.com/search/?keyword=%E8%A1%97%E6%8B%8D 前期研究访问网址后，会发现列表页有多种形式，第一种是视频，第二种是广告，第三种是所有图片在一个网页里面，第四种是图片需要跳转，我们做的是第四种。 通过f12开发者工具">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://snjl.github.io/2019/02/03/爬取今日头条街拍图片/">
+
+
+
+
+
+  <title>爬取今日头条街拍图片 | snjl</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+        <a href="https://github.com/snjl" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">snjl</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我大概率会编程。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/爬取今日头条街拍图片/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬取今日头条街拍图片</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/案例/" itemprop="url" rel="index">
+                    <span itemprop="name">案例</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>项目地址：<a href="https://github.com/snjl/python.spider.jiepai.git" target="_blank" rel="noopener">https://github.com/snjl/python.spider.jiepai.git</a></p>
+<h1 id="爬取网址"><a href="#爬取网址" class="headerlink" title="爬取网址"></a>爬取网址</h1><p><a href="https://www.toutiao.com/search/?keyword=%E8%A1%97%E6%8B%8D" target="_blank" rel="noopener">https://www.toutiao.com/search/?keyword=%E8%A1%97%E6%8B%8D</a></p>
+<h1 id="前期研究"><a href="#前期研究" class="headerlink" title="前期研究"></a>前期研究</h1><p>访问网址后，会发现列表页有多种形式，第一种是视频，第二种是广告，第三种是所有图片在一个网页里面，第四种是图片需要跳转，我们做的是第四种。</p>
+<p>通过f12开发者工具可以看到比较详细的信息。<br><strong>点preserve log，可以刷新时保留记录，点XHR，可以看到传输过来的ajax数据。</strong></p>
+<h2 id="列表页分析"><a href="#列表页分析" class="headerlink" title="列表页分析"></a>列表页分析</h2><p>列表是通过ajax传输过来的，参数有多个，在python爬取的时候需要传输：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line">    &apos;aid&apos;: 24,</span><br><span class="line">    &apos;offset&apos;: offset,</span><br><span class="line">    &apos;format&apos;: &apos;json&apos;,</span><br><span class="line">    &apos;keyword&apos;: keyword,</span><br><span class="line">    &apos;autoload&apos;: &apos;true&apos;,</span><br><span class="line">    &apos;count&apos;: 20,</span><br><span class="line">    &apos;cur_tab&apos;: 3,</span><br><span class="line">    &apos;from&apos;: &apos;gallery&apos;,</span><br><span class="line">    &apos;pd&apos;: &apos;synthesis&apos;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中keyword是可以改变的，offset是偏移值，一般是为20的倍数，因为每次json传输20个数据。</p>
+<p>列表页需要获取的是每个详情页的title和url。</p>
+<h2 id="详情页分析"><a href="#详情页分析" class="headerlink" title="详情页分析"></a>详情页分析</h2><p>分析详情页，可以发现每次跳转网页实际上不是ajax交互，而是在初始的网页中有数据，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    gallery: JSON.parse(&quot;&#123;\&quot;count\&quot;:9,\&quot;sub_images\&quot;:[&#123;\&quot;url\&quot;:\&quot;http:\\/\\/p1.pstatp.com\\/origin\\/pgc-image\\/e4de890cc2084bc5b3557ee5b6ea0ed9\&quot;,\&quot;width\&quot;:800,\&quot;url_list\&quot;:[&#123;\&quot;url\&quot;:\&quot;http:\\/\\/p1.pstatp.com\\/origin\\/pgc-image\\/e4de890cc2084bc5b3557ee5b6ea0ed9\&quot;&#125;,</span><br><span class="line"></span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p>所以实际上已经把图的地址写在doc里，拿到网页的url，然后通过正则获取就可以得到地址。</p>
+<h1 id="代码功能"><a href="#代码功能" class="headerlink" title="代码功能"></a>代码功能</h1><h2 id="三部分"><a href="#三部分" class="headerlink" title="三部分"></a>三部分</h2><h3 id="列表页"><a href="#列表页" class="headerlink" title="列表页"></a>列表页</h3><p>列表页需要两个函数，第一个是获取列表页的的response.text（需要进行错误处理），第二个是对列表页进行解析，获取到需要抓取的详情页的一些信息。</p>
+<h3 id="详情页"><a href="#详情页" class="headerlink" title="详情页"></a>详情页</h3><p>详情页里，需要通过正则获取到所有需要下载的链接，所以也是两个函数，一个获取详情页的response.text，一个获取详情页中的下载信息。</p>
+<h3 id="数据库、图片下载等"><a href="#数据库、图片下载等" class="headerlink" title="数据库、图片下载等"></a>数据库、图片下载等</h3><p>数据库使用mongodb，这里的代码可以插入在详情页的下载信息或者main函数中每次处理完一个详情页信息后进行存储；</p>
+<p>图片下载同样处理，也可以放在获取到详情页的下载链接后的for循环遍历。</p>
+<h2 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h2><h3 id="列表页-1"><a href="#列表页-1" class="headerlink" title="列表页"></a>列表页</h3><p>获取列表页response.text<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def get_page_index(offset, keyword):</span><br><span class="line">    data = &#123;</span><br><span class="line">        &apos;aid&apos;: 24,</span><br><span class="line">        &apos;offset&apos;: offset,</span><br><span class="line">        &apos;format&apos;: &apos;json&apos;,</span><br><span class="line">        &apos;keyword&apos;: keyword,</span><br><span class="line">        &apos;autoload&apos;: &apos;true&apos;,</span><br><span class="line">        &apos;count&apos;: 20,</span><br><span class="line">        &apos;cur_tab&apos;: 3,</span><br><span class="line">        &apos;from&apos;: &apos;gallery&apos;,</span><br><span class="line">        &apos;pd&apos;: &apos;synthesis&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">    url = &apos;https://www.toutiao.com/api/search/content/?&apos; + urlencode(data)</span><br><span class="line">    print(url)</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(url=url, headers=headers)</span><br><span class="line">        if response.status_code == 200:</span><br><span class="line">            response.encoding = &apos;utf8&apos;  # 原编码不是utf8，会有一定乱码</span><br><span class="line">            return response.text</span><br><span class="line">        return None</span><br><span class="line">    except RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        print(&quot;请求json出错&quot;)</span><br><span class="line">        return None</span><br></pre></td></tr></table></figure></p>
+<p>传入keyword，offset获取列表页text。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def parse_page_index(html):</span><br><span class="line">    try:</span><br><span class="line">        data = json.loads(html)</span><br><span class="line">        # 判断data不为空，且&apos;data&apos;在keys中，并且data[&apos;data&apos;]不为空</span><br><span class="line">        if data and &apos;data&apos; in data.keys() and data[&apos;data&apos;]:</span><br><span class="line">            items = data[&apos;data&apos;]</span><br><span class="line">            for item in items:</span><br><span class="line">                # 判断abstract为空，且app_info存在，且item[&apos;app_info&apos;][&apos;db_name&apos;]为SITE</span><br><span class="line">                if item and &apos;abstract&apos; in item.keys() and \</span><br><span class="line">                        item[&apos;abstract&apos;] == &apos;&apos; and &apos;app_info&apos; in item.keys() \</span><br><span class="line">                        and item[&apos;app_info&apos;][&apos;db_name&apos;] == &apos;SITE&apos;:</span><br><span class="line">                    yield &#123;</span><br><span class="line">                        &apos;title&apos;: item[&apos;title&apos;],</span><br><span class="line">                        &apos;url&apos;: item[&apos;article_url&apos;]</span><br><span class="line">                    &#125;</span><br><span class="line">    except JSONDecodeError as e:</span><br><span class="line">        print(e)</span><br></pre></td></tr></table></figure></p>
+<p>由于拿到的是ajjax的json数据，所以可以通过json.loads()方法解析到数据，然后判断data是否为空，data里面是否有‘data’字段，如果有的话判断里面的每一个item是否有’abstract’字段和’app_info’字段，如果有，里面字段’db_name’的值为SITE（其实还是有误差）的才是第四类，通过这种方式获取的列表页信息才是比较干净的数据。最后返回title和url数据。</p>
+<h3 id="详情页-1"><a href="#详情页-1" class="headerlink" title="详情页"></a>详情页</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def get_page_detail(url):</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(url=url, headers=headers)</span><br><span class="line">        if response.status_code == 200:</span><br><span class="line">            return response.text</span><br><span class="line">        return None</span><br><span class="line">    except RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        print(&quot;请求详情页出错&quot;)</span><br><span class="line">        return None</span><br></pre></td></tr></table></figure>
+<p>获取详情页response.text代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def parse_page_detail(html):</span><br><span class="line">    images_pattern = re.compile(&apos;gallery: JSON.parse\(&quot;(.*?)&quot;\)&apos;)</span><br><span class="line">    result = re.search(images_pattern, html)</span><br><span class="line">    if result:</span><br><span class="line">        result_data = re.sub(r&apos;\\&apos;, &apos;&apos;, result.group(1))</span><br><span class="line">        data = json.loads(result_data)</span><br><span class="line">        images = [sub_image[&apos;url&apos;] for sub_image in data[&apos;sub_images&apos;]]</span><br><span class="line">        for image in images:</span><br><span class="line">            download_image(image)</span><br><span class="line">        return images</span><br></pre></td></tr></table></figure></p>
+<p>通过正则，获取内容后，由于反斜杠‘\’的存在影响了我们的进一步操作，因此，有必要把反斜杠去掉，需要注意的是，这里显示的每一个反斜杠，实际上源字符串中都有两个反斜杠，还有一个反斜杠是用来转义的，故print是并不显示。</p>
+<p>因此，我们要实际上要去掉的是两个连续的反斜杠，使用re.sbu(r’\’,’’,results)进行替换</p>
+<p>处理后，获得的就是一个images的url的list列表（此处还调用了一个下载图片的函数，后续会介绍），然后返回。</p>
+<h3 id="数据库和图片下载代码等"><a href="#数据库和图片下载代码等" class="headerlink" title="数据库和图片下载代码等"></a>数据库和图片下载代码等</h3><p>数据库可以使用配置类，所以另建一个配置文件config.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MONGO_URL = &apos;localhost&apos;</span><br><span class="line">MONGO_DB = &apos;toutiao&apos;</span><br><span class="line">MONGO_TABLE = &apos;toutiao&apos;</span><br><span class="line"></span><br><span class="line">GROUT_START = 1</span><br><span class="line">GROUP_END = 40</span><br><span class="line"></span><br><span class="line">KEYWORD = &apos;街拍&apos;</span><br></pre></td></tr></table></figure></p>
+<p>然后在使用mongo的时候调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 生成mongodb数据库对象</span><br><span class="line">client = pymongo.MongoClient(MONGO_URL,connect=False)</span><br><span class="line">db = client[MONGO_DB]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_to_mongo(result):</span><br><span class="line">    if db[MONGO_TABLE].insert(result):</span><br><span class="line">        print(&quot;存储到mongodb成功&quot;, result)</span><br><span class="line">        return True</span><br><span class="line">    return False</span><br></pre></td></tr></table></figure></p>
+<p>图片下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def download_image(url):</span><br><span class="line">    print(&quot;正在下载&quot;, url)</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(url=url, headers=headers)</span><br><span class="line">        if response.status_code == 200:</span><br><span class="line">            save_image(response.content)</span><br><span class="line">        return None</span><br><span class="line">    except RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        print(&quot;请求图片出错&quot;, url)</span><br><span class="line">        return None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_image(content):</span><br><span class="line">    file_path = &apos;&#123;0&#125;/&#123;1&#125;.&#123;2&#125;&apos;.format(os.getcwd(), md5(content).hexdigest(), &apos;jpg&apos;)</span><br><span class="line">    if not os.path.exists(file_path):</span><br><span class="line">        with open(file_path, &apos;wb&apos;) as f:</span><br><span class="line">            f.write(content)</span><br></pre></td></tr></table></figure></p>
+<p>下载图片使用md5计算名称，存到当前路径。</p>
+<h3 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def main(offset):</span><br><span class="line">    html = get_page_index(offset, KEYWORD)</span><br><span class="line">    for item in parse_page_index(html):</span><br><span class="line">        print(item)</span><br><span class="line">        html = get_page_detail(item[&apos;url&apos;])</span><br><span class="line">        if html:</span><br><span class="line">            images = parse_page_detail(html)</span><br><span class="line">            save_to_mongo(&#123;</span><br><span class="line">                &apos;title&apos;: item[&apos;title&apos;],</span><br><span class="line">                &apos;url&apos;: item[&apos;url&apos;],</span><br><span class="line">                &apos;images&apos;: images</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
+<p>main函数参数为offset，keyword由配置文件传入。</p>
+<p>main函数逻辑是，获取offset（偏移）后，获取这个json的数据并且解析出每一个item（dict类型，含有url和title），通过get_page_detail解析出每个网页的html，通过parse_page_detail解析出images，并且通过save_to_mongo存储到mongodb。</p>
+<p>在调用parse_page_detail的时候就已经下载了图片。</p>
+<h3 id="运行函数"><a href="#运行函数" class="headerlink" title="运行函数"></a>运行函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main(offset=20)</span><br></pre></td></tr></table></figure>
+<p>如果要多进程，使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    groups = [x * 20 for x in range(GROUT_START, GROUP_END + 1)]</span><br><span class="line">    pool = Pool()</span><br><span class="line">    pool.map(main, groups)</span><br></pre></td></tr></table></figure></p>
+<p>groups为config.py中设置的1-40，groups实际上值为[20,40，60，…,400]。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/案例/" rel="tag"><i class="fa fa-tag"></i> 案例</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/03/anaconda安装后为3.7版本，修改为3.6/" rel="next" title="anaconda安装后为3.7版本，修改为3.6">
+                <i class="fa fa-chevron-left"></i> anaconda安装后为3.7版本，修改为3.6
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="snjl">
+            
+              <p class="site-author-name" itemprop="name">snjl</p>
+              <p class="site-description motion-element" itemprop="description">越过山丘，才发现无人等候。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">183</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/snjl" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:349245467@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/yyrjl" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-Weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#爬取网址"><span class="nav-number">1.</span> <span class="nav-text">爬取网址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前期研究"><span class="nav-number">2.</span> <span class="nav-text">前期研究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表页分析"><span class="nav-number">2.1.</span> <span class="nav-text">列表页分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详情页分析"><span class="nav-number">2.2.</span> <span class="nav-text">详情页分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码功能"><span class="nav-number">3.</span> <span class="nav-text">代码功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三部分"><span class="nav-number">3.1.</span> <span class="nav-text">三部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#列表页"><span class="nav-number">3.1.1.</span> <span class="nav-text">列表页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详情页"><span class="nav-number">3.1.2.</span> <span class="nav-text">详情页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库、图片下载等"><span class="nav-number">3.1.3.</span> <span class="nav-text">数据库、图片下载等</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体代码"><span class="nav-number">3.2.</span> <span class="nav-text">具体代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#列表页-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">列表页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详情页-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">详情页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库和图片下载代码等"><span class="nav-number">3.2.3.</span> <span class="nav-text">数据库和图片下载代码等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main函数"><span class="nav-number">3.2.4.</span> <span class="nav-text">main函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行函数"><span class="nav-number">3.2.5.</span> <span class="nav-text">运行函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">snjl</span>
+
+  
+</div>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
