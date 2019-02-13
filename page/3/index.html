@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/调试/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/anaconda安装后为3.7版本，修改为3.6/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/31/调试/" itemprop="url">调试</a></h1>
+                <a class="post-title-link" href="/2019/02/03/anaconda安装后为3.7版本，修改为3.6/" itemprop="url">anaconda安装后为3.7版本，修改为3.6</a></h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
               </time>
             
 
@@ -343,225 +343,7 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.3k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>程序能一次写完并正常运行的概率很小，基本不超过1%。总会有各种各样的bug需要修正。有的bug很简单，看看错误信息就知道，有的bug很复杂，我们需要知道出错时，哪些变量的值是正确的，哪些变量的值是错误的，因此，需要一整套调试程序的手段来修复bug。</p>
-<p>第一种方法简单直接粗暴有效，就是用print()把可能有问题的变量打印出来看看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def foo(s):</span><br><span class="line">    n = int(s)</span><br><span class="line">    print(&apos;&gt;&gt;&gt; n = %d&apos; % n)</span><br><span class="line">    return 10 / n</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    foo(&apos;0&apos;)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure></p>
-<p>执行后在输出中查找打印的变量值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python err.py</span><br><span class="line">&gt;&gt;&gt; n = 0</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ZeroDivisionError: integer division or modulo by zero</span><br></pre></td></tr></table></figure></p>
-<p>用print()最大的坏处是将来还得删掉它，想想程序里到处都是print()，运行结果也会包含很多垃圾信息。所以，我们又有第二种方法。</p>
-<h1 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h1><p>凡是用print()来辅助查看的地方，都可以用断言（assert）来替代：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def foo(s):</span><br><span class="line">    n = int(s)</span><br><span class="line">    assert n != 0, &apos;n is zero!&apos;</span><br><span class="line">    return 10 / n</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    foo(&apos;0&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>assert的意思是，表达式n != 0应该是True，否则，根据程序运行的逻辑，后面的代码肯定会出错。</p>
-<p>如果断言失败，assert语句本身就会抛出AssertionError：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python err.py</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">AssertionError: n is zero!</span><br></pre></td></tr></table></figure></p>
-<p>程序中如果到处充斥着assert，和print()相比也好不到哪去。不过，启动Python解释器时可以用-O参数来关闭assert：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python -O err.py</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ZeroDivisionError: division by zero</span><br></pre></td></tr></table></figure></p>
-<p>关闭后，你可以把所有的assert语句当成pass来看。</p>
-<h1 id="logging"><a href="#logging" class="headerlink" title="logging"></a>logging</h1><p>把print()替换为logging是第3种方式，和assert比，logging不会抛出错误，而且可以输出到文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import logging</span><br><span class="line"></span><br><span class="line">s = &apos;0&apos;</span><br><span class="line">n = int(s)</span><br><span class="line">logging.info(&apos;n = %d&apos; % n)</span><br><span class="line">print(10 / n)</span><br></pre></td></tr></table></figure></p>
-<p>logging.info()就可以输出一段文本。运行，发现除了ZeroDivisionError，没有任何信息。怎么回事？</p>
-<p>别急，在import logging之后添加一行配置再试试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import logging</span><br><span class="line">logging.basicConfig(level=logging.INFO)</span><br></pre></td></tr></table></figure></p>
-<p>看到输出了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python err.py</span><br><span class="line">INFO:root:n = 0</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;err.py&quot;, line 8, in &lt;module&gt;</span><br><span class="line">    print(10 / n)</span><br><span class="line">ZeroDivisionError: division by zero</span><br></pre></td></tr></table></figure></p>
-<p>这就是logging的好处，它允许你指定记录信息的级别，有debug，info，warning，error等几个级别，当我们指定level=INFO时，logging.debug就不起作用了。同理，指定level=WARNING后，debug和info就不起作用了。这样一来，你可以放心地输出不同级别的信息，也不用删除，最后统一控制输出哪个级别的信息。</p>
-<p>logging的另一个好处是通过简单的配置，一条语句可以同时输出到不同的地方，比如console和文件。</p>
-<h1 id="pdb"><a href="#pdb" class="headerlink" title="pdb"></a>pdb</h1><p>第4种方式是启动Python的调试器pdb，让程序以单步方式运行，可以随时查看运行状态。我们先准备好程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># err.py</span><br><span class="line">s = &apos;0&apos;</span><br><span class="line">n = int(s)</span><br><span class="line">print(10 / n)</span><br></pre></td></tr></table></figure></p>
-<p>然后启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python -m pdb err.py</span><br><span class="line">&gt; /Users/michael/Github/learn-python3/samples/debug/err.py(2)&lt;module&gt;()</span><br><span class="line">-&gt; s = &apos;0&apos;</span><br></pre></td></tr></table></figure></p>
-<p>以参数-m pdb启动后，pdb定位到下一步要执行的代码-&gt; s = ‘0’。输入命令l来查看代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(Pdb) l</span><br><span class="line">  1     # err.py</span><br><span class="line">  2  -&gt; s = &apos;0&apos;</span><br><span class="line">  3     n = int(s)</span><br><span class="line">  4     print(10 / n)</span><br></pre></td></tr></table></figure></p>
-<p>输入命令n可以单步执行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(Pdb) n</span><br><span class="line">&gt; /Users/michael/Github/learn-python3/samples/debug/err.py(3)&lt;module&gt;()</span><br><span class="line">-&gt; n = int(s)</span><br><span class="line">(Pdb) n</span><br><span class="line">&gt; /Users/michael/Github/learn-python3/samples/debug/err.py(4)&lt;module&gt;()</span><br><span class="line">-&gt; print(10 / n)</span><br></pre></td></tr></table></figure></p>
-<p>任何时候都可以输入命令p 变量名来查看变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(Pdb) p s</span><br><span class="line">&apos;0&apos;</span><br><span class="line">(Pdb) p n</span><br><span class="line">0</span><br></pre></td></tr></table></figure></p>
-<p>输入命令q结束调试，退出程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(Pdb) q</span><br></pre></td></tr></table></figure></p>
-<p>这种通过pdb在命令行调试的方法理论上是万能的，但实在是太麻烦了，如果有一千行代码，要运行到第999行得敲多少命令啊。还好，我们还有另一种调试方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pdb.set_trace()</span><br></pre></td></tr></table></figure></p>
-<p>这个方法也是用pdb，但是不需要单步执行，我们只需要import pdb，然后，在可能出错的地方放一个pdb.set_trace()，就可以设置一个断点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># err.py</span><br><span class="line">import pdb</span><br><span class="line"></span><br><span class="line">s = &apos;0&apos;</span><br><span class="line">n = int(s)</span><br><span class="line">pdb.set_trace() # 运行到这里会自动暂停</span><br><span class="line">print(10 / n)</span><br></pre></td></tr></table></figure></p>
-<p>运行代码，程序会自动在pdb.set_trace()暂停并进入pdb调试环境，可以用命令p查看变量，或者用命令c继续运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python err.py </span><br><span class="line">&gt; /Users/michael/Github/learn-python3/samples/debug/err.py(7)&lt;module&gt;()</span><br><span class="line">-&gt; print(10 / n)</span><br><span class="line">(Pdb) p n</span><br><span class="line">0</span><br><span class="line">(Pdb) c</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;err.py&quot;, line 7, in &lt;module&gt;</span><br><span class="line">    print(10 / n)</span><br><span class="line">ZeroDivisionError: division by zero</span><br></pre></td></tr></table></figure></p>
-<p>这个方式比直接启动pdb单步调试效率要高很多，但也高不到哪去。</p>
-<h1 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h1><p>如果要比较爽地设置断点、单步执行，就需要一个支持调试功能的IDE。目前比较好的Python IDE有：</p>
-<p>Visual Studio Code：<a href="https://code.visualstudio.com/，需要安装Python插件。" target="_blank" rel="noopener">https://code.visualstudio.com/，需要安装Python插件。</a></p>
-<p>PyCharm：<a href="http://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">http://www.jetbrains.com/pycharm/</a></p>
-<p>另外，Eclipse加上pydev插件也可以调试Python程序。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>写程序最痛苦的事情莫过于调试，程序往往会以你意想不到的流程来运行，你期待执行的语句其实根本没有执行，这时候，就需要调试了。</p>
-<p>虽然用IDE调试起来比较方便，但是最后你会发现，logging才是终极武器。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy项目测试/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/scrapy项目测试/" itemprop="url">scrapy项目测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/" itemprop="url" rel="index">
-                    <span itemprop="name">scrapy</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
                     <span itemprop="name">爬虫</span>
                   </a>
                 </span>
@@ -592,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.8k 字
+                  115 字
                 </span>
               
 
@@ -608,200 +390,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  13 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目地址：<a href="https://github.com/snjl/python.spider.scrapy_test.git" target="_blank" rel="noopener">https://github.com/snjl/python.spider.scrapy_test.git</a></p>
-<h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><p>在开始爬取之前，必须创建一个新的Scrapy项目。进入自定义的项目目录中，运行下列命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject tutorial</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/31/scrapy项目测试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy架构/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/scrapy架构/" itemprop="url">scrapy架构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/" itemprop="url" rel="index">
-                    <span itemprop="name">scrapy</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.4k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -824,74 +413,9 @@
       
         
           
-            <p><img src="http://www.runoob.com/wp-content/uploads/2018/10/8c591d54457bb033812a2b0364011e9c_articlex.png" alt="image"></p>
-<h2 id="Scrapy-Engine-引擎"><a href="#Scrapy-Engine-引擎" class="headerlink" title="Scrapy Engine(引擎)"></a>Scrapy Engine(引擎)</h2><p>负责Spider、ItemPipeline、Downloader、Scheduler中间的通讯，信号、数据传递等。</p>
-<h2 id="Scheduler-调度器"><a href="#Scheduler-调度器" class="headerlink" title="Scheduler(调度器)"></a>Scheduler(调度器)</h2><p>它负责接受引擎发送过来的Request请求，并按照一定的方式进行整理排列，入队，当引擎需要时，交还给引擎。初始的爬取URL和后续在页面中获取的待爬取的URL将放入调度器中，等待爬取。同时调度器会自动去除重复的URL（如果特定的URL不需要去重也可以通过设置实现，如post请求的URL）</p>
-<h2 id="Downloader（下载器）"><a href="#Downloader（下载器）" class="headerlink" title="Downloader（下载器）"></a>Downloader（下载器）</h2><p>负责下载Scrapy Engine(引擎)发送的所有Requests请求，并将其获取到的Responses交还给Scrapy Engine(引擎)，由引擎交给Spider来处理，</p>
-<h2 id="Spider（爬虫）"><a href="#Spider（爬虫）" class="headerlink" title="Spider（爬虫）"></a>Spider（爬虫）</h2><p>它负责处理所有Responses,从中分析提取数据，获取Item字段需要的数据，并将需要跟进的URL提交给引擎，再次进入Scheduler(调度器).</p>
-<h2 id="Item-Pipeline-管道"><a href="#Item-Pipeline-管道" class="headerlink" title="Item Pipeline(管道)"></a>Item Pipeline(管道)</h2><p>它负责处理Spider中获取到的Item，并进行进行后期处理（详细分析、过滤、存储等）的地方。</p>
-<h2 id="Downloader-Middlewares（下载中间件）"><a href="#Downloader-Middlewares（下载中间件）" class="headerlink" title="Downloader Middlewares（下载中间件）"></a>Downloader Middlewares（下载中间件）</h2><p>你可以当作是一个可以自定义扩展下载功能的组件。</p>
-<h2 id="Spider-Middlewares（Spider中间件）"><a href="#Spider-Middlewares（Spider中间件）" class="headerlink" title="Spider Middlewares（Spider中间件）"></a>Spider Middlewares（Spider中间件）</h2><p>可以理解为是一个可以自定扩展和操作引擎和Spider中间通信的功能组件（比如进入Spider的Responses;和从Spider出去的Requests）</p>
-<h1 id="运作流程"><a href="#运作流程" class="headerlink" title="运作流程"></a>运作流程</h1><ol>
-<li><p>引擎打开一个网站(open a domain)，找到处理该网站的Spider并向该spider请求第一个要爬取的URL(s)。</p>
-</li>
-<li><p>引擎从Spider中获取到第一个要爬取的URL并在调度器(Scheduler)以Request调度。</p>
-</li>
-<li><p>引擎向调度器请求下一个要爬取的URL。</p>
-</li>
-<li><p>调度器返回下一个要爬取的URL给引擎，引擎将URL通过下载中间件(请求(request)方向)转发给下载器(Downloader)。</p>
-</li>
-<li><p>一旦页面下载完毕，下载器生成一个该页面的Response，并将其通过下载中间件(返回(response)方向)发送给引擎。</p>
-</li>
-<li><p>引擎从下载器中接收到Response并通过Spider中间件(输入方向)发送给Spider处理。</p>
-</li>
-<li><p>Spider处理Response并返回爬取到的Item及(跟进的)新的Request给引擎。</p>
-</li>
-<li><p>引擎将(Spider返回的)爬取到的Item给Item Pipeline，将(Spider返回的)Request给调度器。</p>
-</li>
-</ol>
-<p>9.(从第二步)重复直到调度器中没有更多地request，引擎关闭该网站。</p>
-<h2 id="通俗解释"><a href="#通俗解释" class="headerlink" title="通俗解释"></a>通俗解释</h2><ol>
-<li>引擎：Hi！Spider, 你要处理哪一个网站？</li>
-<li>Spider：老大要我处理xxxx网页。</li>
-<li>引擎：你把第一个需要处理的URL给我吧。</li>
-<li>Spider：给你，第一个URL是xxxxxxx</li>
-<li>引擎：Hi！调度器，我这有request请求你帮我排序入队一下。</li>
-<li>调度器：好的，正在处理你等一下。</li>
-<li>引擎：Hi！调度器，把你处理好的request请求给我。</li>
-<li>调度器：给你，这是我处理好的request</li>
-<li>引擎：Hi！下载器，你按照老大的下载中间件的设置帮我下载一下这个request请求</li>
-<li>下载器：好的！给你，这是下载好的东西。（如果失败：sorry，这个request下载失败了。然后引擎告诉调度器，这个request下载失败了，你记录一下，我们待会儿再下载）</li>
-<li>引擎：Hi！Spider，这是下载好的东西，并且已经按照老大的下载中间件处理过了，你自己处理一下（注意！这儿responses默认是交给def parse()这个函数处理的）</li>
-<li>Spider：（处理完毕数据之后对于需要跟进的URL），Hi！引擎，我这里有两个结果，这个是我需要跟进的URL，还有这个是我获取到的Item数据。</li>
-<li>引擎：Hi ！管道 我这儿有个item你帮我处理一下！调度器！这是需要跟进URL你帮我处理下。然后从第四步开始循环，直到获取完老大需要全部信息。</li>
-<li>管道调度器：好的，现在就做！</li>
-</ol>
-<p><strong>注意！只有当调度器中不存在任何request了，整个程序才会停止，（也就是说，对于下载失败的URL，Scrapy也会重新下载。）</strong></p>
-<h1 id="Spider类"><a href="#Spider类" class="headerlink" title="Spider类"></a>Spider类</h1><p>Spider是用户编写用于从单个网站(或者一些网站)爬取数据的类。</p>
-<p>其包含了一个用于下载的初始URL，如何跟进网页中的链接以及如何分析页面中的内容， 提取生成 item 的方法。</p>
-<p>为了创建一个Spider，您必须继承 scrapy.Spider 类， 且定义以下三个属性:</p>
-<ul>
-<li>name: 用于区别Spider。 该名字必须是唯一的，不可以为不同的Spider设定相同的名字。</li>
-<li>start_urls: 包含了Spider在启动时进行爬取的url列表。 因此，第一个被获取到的页面将是其中之一。 后续的URL则从初始的URL获取到的数据中提取。</li>
-<li>parse() 是spider的一个方法。 被调用时，每个初始URL完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(response data)，提取数据(生成item)以及生成需要进一步处理的URL的 Request 对象。</li>
-</ul>
-<h1 id="制作Scrapy爬虫步骤"><a href="#制作Scrapy爬虫步骤" class="headerlink" title="制作Scrapy爬虫步骤"></a>制作Scrapy爬虫步骤</h1><ol>
-<li>新建项目 (scrapy startproject xxx)：新建一个新的爬虫项目</li>
-<li>明确目标 （编写items.py）：明确你想要抓取的目标<br>3.制作爬虫 （spiders/xxspider.py）：制作爬虫开始爬取网页</li>
-<li>存储内容 （pipelines.py）：设计管道存储爬取内容</li>
-</ol>
-<h1 id="新建项目目录"><a href="#新建项目目录" class="headerlink" title="新建项目目录"></a>新建项目目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject mySpider</span><br></pre></td></tr></table></figure>
-<p>目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mySpider/</span><br><span class="line">    scrapy.cfg</span><br><span class="line">    mySpider/</span><br><span class="line">        __init__.py</span><br><span class="line">        items.py</span><br><span class="line">        pipelines.py</span><br><span class="line">        settings.py</span><br><span class="line">        spiders/</span><br><span class="line">            __init__.py</span><br><span class="line">            ...</span><br></pre></td></tr></table></figure></p>
-<p>其中：</p>
-<ul>
-<li>scrapy.cfg: 项目的配置文件。</li>
-<li>mySpider/: 项目的Python模块，将会从这里引用代码。</li>
-<li>mySpider/items.py: 项目的目标文件。</li>
-<li>mySpider/pipelines.py: 项目的管道文件。</li>
-<li>mySpider/settings.py: 项目的设置文件。</li>
-<li>mySpider/spiders/: 存储爬虫代码目录。</li>
-</ul>
+            <p>在安装anaconda后，python版本为3.7，由于很多包不支持或者支持效果不好（例如TensorFlow等），所以要降到3.6版本由于使用shell命令使用anaconda创建的环境可能出现问题，所以要在base环境下安装python3.6，可以使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install python=3.6</span><br></pre></td></tr></table></figure>
+<p>安装完成后，使用python（或者python3）命令打开python3.6.8，使用pip（不是pip3）可以直接进行包管理。</p>
 
           
         
@@ -944,7 +468,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/安装nginx和简单使用/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/linux python多版本共存/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -963,7 +487,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/31/安装nginx和简单使用/" itemprop="url">安装nginx和简单使用</a></h1>
+                <a class="post-title-link" href="/2019/02/03/linux python多版本共存/" itemprop="url">linux python多版本共存</a></h1>
         
 
         <div class="post-meta">
@@ -975,8 +499,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
               </time>
             
 
@@ -1029,7 +553,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  36 字
+                  195 字
                 </span>
               
 
@@ -1068,11 +592,10 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nginx</span><br></pre></td></tr></table></figure>
-<p>启动nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx start</span><br></pre></td></tr></table></figure></p>
-<p>需要输入密码，成功即启动。</p>
-<p>修改nginx配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure></p>
-<p>nginx重启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx reload</span><br></pre></td></tr></table></figure></p>
+            <p>输出环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ echo $PATH</span><br><span class="line">/home/snjl/bin:/home/snjl/.local/bin:home/snjl/anaconda3/bin:/home/snjl/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure></p>
+<p>使用whereis查看目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">snjl@VM-0-2-ubuntu:~$ whereis python2</span><br><span class="line">python2: /usr/bin/python2.7 /usr/bin/python2 /usr/lib/python2.7 /etc/python2.7 /usr/local/lib/python2.7 /usr/share/man/man1/python2.1.gz</span><br><span class="line">snjl@VM-0-2-ubuntu:~$ whereis python3</span><br><span class="line">python3: /usr/bin/python3.5 /usr/bin/python3 /usr/bin/python3.5m /usr/lib/python3.5 /usr/lib/python3 /etc/python3.5 /etc/python3 /usr/local/lib/python3.5 /usr/share/python3 /home/snjl/anaconda3/bin/python3.7-config /home/snjl/anaconda3/bin/python3 /home/snjl/anaconda3/bin/python3.7m-config /home/snjl/anaconda3/bin/python3.7 /home/snjl/anaconda3/bin/python3.7m /usr/share/man/man1/python3.1.gz</span><br><span class="line">snjl@VM-0-2-ubuntu:~$</span><br></pre></td></tr></table></figure></p>
+<p>创建软链接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -s /usr/bin/python3.5 /user/bin/python3</span><br></pre></td></tr></table></figure></p>
+<p>这样可以直接调用python3，不用调用python3.5。</p>
 
           
         
@@ -1125,7 +648,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/Ubuntu：关机、重启、注销等命令/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/mongdb配置/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1144,7 +667,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/31/Ubuntu：关机、重启、注销等命令/" itemprop="url">Ubuntu：关机、重启、注销等命令</a></h1>
+                <a class="post-title-link" href="/2019/02/03/mongdb配置/" itemprop="url">mongodb配置</a></h1>
         
 
         <div class="post-meta">
@@ -1156,8 +679,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
               </time>
             
 
@@ -1179,205 +702,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  706 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h1><p>shutdown命令用来系统关机命令。shutdown指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown(选项)(参数)</span><br></pre></td></tr></table></figure>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-c：当执行“shutdown -h 11:50”指令时，只要按+键就可以中断关机的指令；</span><br><span class="line">-f：重新启动时不执行fsck；</span><br><span class="line">-F：重新启动时执行fsck；</span><br><span class="line">-h：将系统关机；</span><br><span class="line">-k：只是送出信息给所有用户，但不会实际关机；</span><br><span class="line">-n：不调用init程序进行关机，而由shutdown自己进行；</span><br><span class="line">-r：shutdown之后重新启动；</span><br><span class="line">-t&lt;秒数&gt;：送出警告信息和删除信息之间要延迟多少秒。</span><br></pre></td></tr></table></figure>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
-<li>[时间]：设置多久时间后执行shutdown指令；</li>
-<li>[警告信息]：要传送给所有登入用户的信息。<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2>指定现在立即关机：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>指定5分钟后关机，同时送出警告信息给登入用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown +5 &quot;System will shutdown after 5 minutes&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="其他实例"><a href="#其他实例" class="headerlink" title="其他实例"></a>其他实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now 现在立即关机</span><br><span class="line"></span><br><span class="line">shutdown -r now 现在立即重启</span><br><span class="line"></span><br><span class="line">shutdown -r +3 三分钟后重启</span><br><span class="line"></span><br><span class="line">shutdown -h +3 “The System will shutdown after 3 minutes” 提示使用者将在三分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown -r 20:23 在20：23时将重启计算机</span><br><span class="line"></span><br><span class="line">shutdown -r 20:23 &amp; 可以将在20：23时重启的任务放到后台去，用户可以继续操作终端</span><br></pre></td></tr></table></figure>
-<h1 id="reboot"><a href="#reboot" class="headerlink" title="reboot"></a>reboot</h1><p>reboot命令用来重新启动正在运行的Linux操作系统。</p>
-<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot(选项)</span><br></pre></td></tr></table></figure>
-<h2 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d：重新开机时不把数据写入记录文件/var/tmp/wtmp。本参数具有“-n”参数效果；</span><br><span class="line">-f：强制重新开机，不调用shutdown指令的功能；</span><br><span class="line">-i：在重开机之前，先关闭所有网络界面；</span><br><span class="line">-n：重开机之前不检查是否有未结束的程序；</span><br><span class="line">-w：仅做测试，并不真正将系统重新开机，只会把重开机的数据写入/var/log目录下的wtmp记录文件。</span><br></pre></td></tr></table></figure>
-<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot        //重开机。</span><br><span class="line">reboot -w     //做个重开机的模拟（只有纪录并不会真的重开机）。</span><br></pre></td></tr></table></figure>
-<h1 id="logout"><a href="#logout" class="headerlink" title="logout"></a>logout</h1><p>logout命令用于退出当前登录的Shell，logout指令让用户退出系统，其功能和login指令相互对应。</p>
-<h1 id="login"><a href="#login" class="headerlink" title="login"></a>login</h1><p>login命令用于给出登录界面，可用于重新登录或者切换用户身份，也可通过它的功能随时更换登入身份。在Slackware发行版中 ，您可在命令后面附加欲登入的用户名称，它会直接询问密码，等待用户输入。当/etc/nologin文件存在时，系统只root帐号登入系统，其他用户一律不准登入。</p>
-<h2 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login(选项)(参数)</span><br></pre></td></tr></table></figure>
-<h2 id="选项-2"><a href="#选项-2" class="headerlink" title="选项"></a>选项</h2><ul>
-<li>-p：告诉login指令不销毁环境变量；</li>
-<li>-h：指定远程服务器的主机名。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名：指定登录使用的用户名。</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy pycharm调试/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/scrapy pycharm调试/" itemprop="url">scrapy pycharm调试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/" itemprop="url" rel="index">
-                    <span itemprop="name">scrapy</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -1387,8 +713,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
+                  <a href="/categories/数据库/mongodb/" itemprop="url" rel="index">
+                    <span itemprop="name">mongodb</span>
                   </a>
                 </span>
 
@@ -1418,404 +744,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  188 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.参考网站<br><a href="https://blog.csdn.net/heyifei88/article/details/53197797" target="_blank" rel="noopener">https://blog.csdn.net/heyifei88/article/details/53197797</a></p>
-<p>2.另一种方式（更好一些）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line"></span><br><span class="line"># 获取当前文件所在目录</span><br><span class="line">current_dir = os.path.dirname(os.path.abspath(__file__))  # 当前文件的绝对路径，然后再找他的父级目录</span><br><span class="line">sys.path.append(current_dir)  # 将当前路径加入到path中</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;爬虫名&apos;,&apos;参数&apos;])</span><br></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line"></span><br><span class="line"># 获取当前文件所在目录</span><br><span class="line">current_dir = os.path.dirname(os.path.abspath(__file__))  # 当前文件的绝对路径，然后再找他的父级目录</span><br><span class="line">sys.path.append(current_dir)  # 将当前路径加入到path中</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;quotes&apos;, &apos;-o quotes1.jl&apos;])</span><br></pre></td></tr></table></figure></p>
-<p>也可以不带参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;quotes&apos;])</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/单元测试/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/单元测试/" itemprop="url">单元测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.3k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果你听说过“测试驱动开发”（TDD：Test-Driven Development），单元测试就不陌生。</p>
-<p>单元测试是用来对一个模块、一个函数或者一个类来进行正确性检验的测试工作。</p>
-<p>比如对函数abs()，我们可以编写出以下几个测试用例：</p>
-<p>输入正数，比如1、1.2、0.99，期待返回值与输入相同；</p>
-<p>输入负数，比如-1、-1.2、-0.99，期待返回值与输入相反；</p>
-<p>输入0，期待返回0；</p>
-<p>输入非数值类型，比如None、[]、{}，期待抛出TypeError。</p>
-<p>把上面的测试用例放到一个测试模块里，就是一个完整的单元测试。</p>
-<p>如果单元测试通过，说明我们测试的这个函数能够正常工作。如果单元测试不通过，要么函数有bug，要么测试条件输入不正确，总之，需要修复使单元测试能够通过。</p>
-<p>单元测试通过后有什么意义呢？如果我们对abs()函数代码做了修改，只需要再跑一遍单元测试，如果通过，说明我们的修改不会对abs()函数原有的行为造成影响，如果测试不通过，说明我们的修改与原有行为不一致，要么修改代码，要么修改测试。</p>
-<p>这种以测试为驱动的开发模式最大的好处就是确保一个程序模块的行为符合我们设计的测试用例。在将来修改的时候，可以极大程度地保证该模块行为仍然是正确的。</p>
-<p>我们来编写一个Dict类，这个类的行为和dict一致，但是可以通过属性来访问，用起来就像下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; d = Dict(a=1, b=2)</span><br><span class="line">&gt;&gt;&gt; d[&apos;a&apos;]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; d.a</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
-<p>mydict.py代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class Dict(dict):</span><br><span class="line"></span><br><span class="line">    def __init__(self, **kw):</span><br><span class="line">        super().__init__(**kw)</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, key):</span><br><span class="line">        try:</span><br><span class="line">            return self[key]</span><br><span class="line">        except KeyError:</span><br><span class="line">            raise AttributeError(r&quot;&apos;Dict&apos; object has no attribute &apos;%s&apos;&quot; % key)</span><br><span class="line"></span><br><span class="line">    def __setattr__(self, key, value):</span><br><span class="line">        self[key] = value</span><br></pre></td></tr></table></figure></p>
-<p>为了编写单元测试，我们需要引入Python自带的unittest模块，编写mydict_test.py如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">from mydict import Dict</span><br><span class="line"></span><br><span class="line">class TestDict(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    def test_init(self):</span><br><span class="line">        d = Dict(a=1, b=&apos;test&apos;)</span><br><span class="line">        self.assertEqual(d.a, 1)</span><br><span class="line">        self.assertEqual(d.b, &apos;test&apos;)</span><br><span class="line">        self.assertTrue(isinstance(d, dict))</span><br><span class="line"></span><br><span class="line">    def test_key(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        d[&apos;key&apos;] = &apos;value&apos;</span><br><span class="line">        self.assertEqual(d.key, &apos;value&apos;)</span><br><span class="line"></span><br><span class="line">    def test_attr(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        d.key = &apos;value&apos;</span><br><span class="line">        self.assertTrue(&apos;key&apos; in d)</span><br><span class="line">        self.assertEqual(d[&apos;key&apos;], &apos;value&apos;)</span><br><span class="line"></span><br><span class="line">    def test_keyerror(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        with self.assertRaises(KeyError):</span><br><span class="line">            value = d[&apos;empty&apos;]</span><br><span class="line"></span><br><span class="line">    def test_attrerror(self):</span><br><span class="line">        d = Dict()</span><br><span class="line">        with self.assertRaises(AttributeError):</span><br><span class="line">            value = d.empty</span><br></pre></td></tr></table></figure></p>
-<p>编写单元测试时，我们需要编写一个测试类，从unittest.TestCase继承。</p>
-<p>以test开头的方法就是测试方法，不以test开头的方法不被认为是测试方法，测试的时候不会被执行。</p>
-<p>对每一类测试都需要编写一个test_xxx()方法。由于unittest.TestCase提供了很多内置的条件判断，我们只需要调用这些方法就可以断言输出是否是我们所期望的。最常用的断言就是assertEqual()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">self.assertEqual(abs(-1), 1) # 断言函数返回的结果与1相等</span><br></pre></td></tr></table></figure></p>
-<p>另一种重要的断言就是期待抛出指定类型的Error，比如通过d[‘empty’]访问不存在的key时，断言会抛出KeyError：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">with self.assertRaises(KeyError):</span><br><span class="line">    value = d[&apos;empty&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>而通过d.empty访问不存在的key时，我们期待抛出AttributeError：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">with self.assertRaises(AttributeError):</span><br><span class="line">    value = d.empty</span><br></pre></td></tr></table></figure></p>
-<h1 id="运行单元测试"><a href="#运行单元测试" class="headerlink" title="运行单元测试"></a>运行单元测试</h1><p>一旦编写好单元测试，我们就可以运行单元测试。最简单的运行方式是在mydict_test.py的最后加上两行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure></p>
-<p>这样就可以把mydict_test.py当做正常的python脚本运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python mydict_test.py</span><br></pre></td></tr></table></figure></p>
-<p>另一种方法是在命令行通过参数-m unittest直接运行单元测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python -m unittest mydict_test</span><br><span class="line">.....</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran 5 tests in 0.000s</span><br><span class="line"></span><br><span class="line">OK</span><br></pre></td></tr></table></figure></p>
-<p>这是推荐的做法，因为这样可以一次批量运行很多单元测试，并且，有很多工具可以自动来运行这些单元测试。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setUp与tearDown</span><br></pre></td></tr></table></figure></p>
-<p>可以在单元测试中编写两个特殊的setUp()和tearDown()方法。这两个方法会分别在每调用一个测试方法的前后分别被执行。</p>
-<p>setUp()和tearDown()方法有什么用呢？设想你的测试需要启动一个数据库，这时，就可以在setUp()方法中连接数据库，在tearDown()方法中关闭数据库，这样，不必在每个测试方法中重复相同的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class TestDict(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    def setUp(self):</span><br><span class="line">        print(&apos;setUp...&apos;)</span><br><span class="line"></span><br><span class="line">    def tearDown(self):</span><br><span class="line">        print(&apos;tearDown...&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>可以再次运行测试看看每个测试方法调用前后是否会打印出setUp…和tearDown…。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>单元测试可以有效地测试某个程序模块的行为，是未来重构代码的信心保证。</p>
-<p>单元测试的测试用例要覆盖常用的输入组合、边界条件和异常。</p>
-<p>单元测试代码要非常简单，如果测试代码太复杂，那么测试代码本身就可能有bug。</p>
-<p>单元测试通过了并不意味着程序就没有bug了，但是不通过程序肯定有bug。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy命令行/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/scrapy命令行/" itemprop="url">scrapy命令行</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/" itemprop="url" rel="index">
-                    <span itemprop="name">scrapy</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  769 字
+                  668 字
                 </span>
               
 
@@ -1854,31 +783,1266 @@
       
         
           
-            <p>命令行输入scrapy，输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  scrapy &lt;command&gt; [options] [args]</span><br><span class="line"></span><br><span class="line">Available commands:</span><br><span class="line">  bench         Run quick benchmark test</span><br><span class="line">  commands</span><br><span class="line">  fetch         Fetch a URL using the Scrapy downloader</span><br><span class="line">  genspider     Generate new spider using pre-defined templates</span><br><span class="line">  runspider     Run a self-contained spider (without creating a project)</span><br><span class="line">  settings      Get settings values</span><br><span class="line">  shell         Interactive scraping console</span><br><span class="line">  startproject  Create new project</span><br><span class="line">  version       Print Scrapy version</span><br><span class="line">  view          Open URL in browser, as seen by Scrapy</span><br><span class="line"></span><br><span class="line">  [ more ]      More commands available when run from project directory</span><br><span class="line"></span><br><span class="line">Use &quot;scrapy &lt;command&gt; -h&quot; to see more info about a command</span><br></pre></td></tr></table></figure></p>
-<p>以下介绍常用的。</p>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject myproject [ project_dir ]</span><br></pre></td></tr></table></figure>
-<p>这将在该project_dir目录下创建一个Scrapy项目。如果project_dir没有指定，project_dir将会和myproject名称一样。</p>
-<p>接下来，进入新的项目目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd project_dir</span><br></pre></td></tr></table></figure></p>
-<h1 id="创建爬虫"><a href="#创建爬虫" class="headerlink" title="创建爬虫"></a>创建爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider mydomain mydomain.com</span><br></pre></td></tr></table></figure>
-<p>通过上述命令创建了一个spider name为mydomain的爬虫，start_urls为<a href="http://www.cnblogs.com/的爬虫。" target="_blank" rel="noopener">http://www.cnblogs.com/的爬虫。</a></p>
-<h1 id="启动爬虫"><a href="#启动爬虫" class="headerlink" title="启动爬虫"></a>启动爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl &lt;spider&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="检查爬虫"><a href="#检查爬虫" class="headerlink" title="检查爬虫"></a>检查爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy check [-l] &lt;spider&gt;</span><br></pre></td></tr></table></figure>
-<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\shu_item\tutorial&gt;scrapy check quotes</span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran 0 contracts in 0.000s</span><br><span class="line"></span><br><span class="line">OK</span><br></pre></td></tr></table></figure></p>
-<h1 id="列出爬虫"><a href="#列出爬虫" class="headerlink" title="列出爬虫"></a>列出爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy list</span><br></pre></td></tr></table></figure>
-<p>列出当前项目中的所有可用爬虫。每行输出一个爬虫。</p>
-<h1 id="打开shell"><a href="#打开shell" class="headerlink" title="打开shell"></a>打开shell</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy shell [url]</span><br></pre></td></tr></table></figure>
-<p>参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--spider=SPIDER：绕过爬虫自动检测和强制使用特定的爬虫</span><br><span class="line">-c code：评估shell中的代码，打印结果并退出</span><br><span class="line">--no-redirect：不遵循HTTP 3xx重定向（默认是遵循它们）; 这只影响你可以在命令行上作为参数传递的URL; 一旦你在shell中，fetch(url)默认情况下仍然会遵循HTTP重定向。</span><br></pre></td></tr></table></figure></p>
-<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ scrapy shell http://www.example.com/some/page.html</span><br><span class="line">[ ... scrapy shell starts ... ]</span><br><span class="line"></span><br><span class="line">$ scrapy shell --nolog http://www.example.com/ -c &apos;(response.status, response.url)&apos;</span><br><span class="line">(200, &apos;http://www.example.com/&apos;)</span><br><span class="line"></span><br><span class="line"># shell follows HTTP redirects by default</span><br><span class="line">$ scrapy shell --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c &apos;(response.status, response.url)&apos;</span><br><span class="line">(200, &apos;http://example.com/&apos;)</span><br><span class="line"></span><br><span class="line"># you can disable this with --no-redirect</span><br><span class="line"># (only for the URL passed as command line argument)</span><br><span class="line">$ scrapy shell --no-redirect --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c &apos;(response.status, response.url)&apos;</span><br><span class="line">(302, &apos;http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F&apos;)</span><br></pre></td></tr></table></figure></p>
-<h1 id="view"><a href="#view" class="headerlink" title="view"></a>view</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy view &lt;url&gt;</span><br></pre></td></tr></table></figure>
-<p>在浏览器中打开给定的URL，并以Scrapy spider获取到的形式展现。 有些时候spider获取到的页面和普通用户看到的并不相同。 因此该命令可以用来检查spider所获取到的页面，并确认这是您所期望的。</p>
-<p>例如，访问淘宝，就会发现很多内容是ajax加载的，实际上写在页面中的基本只有一个模版。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scarpy view http://www.taobao.com</span><br></pre></td></tr></table></figure></p>
-<h1 id="version"><a href="#version" class="headerlink" title="version"></a>version</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy version [-v]</span><br></pre></td></tr></table></figure>
-<p>输出Scrapy版本。配合 -v 运行时，该命令同时输出Python, Twisted以及平台的信息，方便bug提交。<br>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">λ scrapy version -v</span><br><span class="line">Scrapy       : 1.5.0</span><br><span class="line">lxml         : 4.2.1.0</span><br><span class="line">libxml2      : 2.9.5</span><br><span class="line">cssselect    : 1.0.3</span><br><span class="line">parsel       : 1.4.0</span><br><span class="line">w3lib        : 1.19.0</span><br><span class="line">Twisted      : 17.9.0</span><br><span class="line">Python       : 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:54:40) [MSC v.1900 64 bit (AMD64)]</span><br><span class="line">pyOpenSSL    : 17.5.0 (OpenSSL 1.1.0h  27 Mar 2018)</span><br><span class="line">cryptography : 2.2.2</span><br><span class="line">Platform     : Windows-10-10.0.17134-SP0</span><br></pre></td></tr></table></figure></p>
-<h1 id="bench测试"><a href="#bench测试" class="headerlink" title="bench测试"></a>bench测试</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy bench</span><br></pre></td></tr></table></figure>
-<p>测试当前爬行速度，运行性能等。</p>
-<h1 id="settings"><a href="#settings" class="headerlink" title="settings"></a>settings</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy settings [options]</span><br></pre></td></tr></table></figure>
-<p>在项目中运行时，该命令将会输出项目的设定值，否则输出Scrapy默认设定。</p>
-<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\shu_item\tutorial&gt;scrapy settings --get MONGO_URI</span><br><span class="line">localhost</span><br><span class="line">C:\shu_item\tutorial&gt;scrapy settings --getbool=ROBOYSTXT_OBEY</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+            <h1 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>官网下载。</p>
+<h2 id="配置数据库路径"><a href="#配置数据库路径" class="headerlink" title="配置数据库路径"></a>配置数据库路径</h2><p>下载安装mongo后，在server的版本路径地址下添加文件夹data，data内建立文件夹db，用来存储mongo的配置文件和数据库：</p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup1.png" alt="image"></p>
+<p>之后在bin路径下打开cmd或cmder（管理员权限），输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath &quot;C:\Program Files\MongoDB\Server\3.4\data\db&quot;</span><br></pre></td></tr></table></figure></p>
+<p>即使用mongod命令指定db的路径，如下所示，在浏览器中输入localhost:27017(mongo默认端口)看到显示就是配置正确：</p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup2.png" alt="image"></p>
+<p>开启另一个命令行，在bin路径下输入mongo即可进入数据库：</p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup3.png" alt="image"></p>
+<h2 id="配置mongo系统服务："><a href="#配置mongo系统服务：" class="headerlink" title="配置mongo系统服务："></a>配置mongo系统服务：</h2><p>进入server文件夹-3.4-data，创建logs文件夹，里面创建mongo.log日志文件，然后在bin文件夹中，使用管理员的cmd中输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --bind_ip 0.0.0.0 --logpath &quot;C:\Program Files\MongoDB\Server\3.4\data\logs\mongo.log&quot; --logappend --dbpath &quot;C:\Program Files\MongoDB\Server\3.4\data\db&quot; --port 27017 --serviceName &quot;MongoDB&quot; --serviceDisplayName &quot;MongoDB&quot; --install</span><br></pre></td></tr></table></figure></p>
+<p>如果mongo的路径中含有空格，一定要加双引号，这里选定了log的路径，且指定为append方式添加日志，指定端口27017，指定服务名称MongoDB，显示名称也是MongoDB。</p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup4.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup5.png" alt="image"></p>
+<p>未显示报错即成功。</p>
+<h2 id="查看是否配置成功"><a href="#查看是否配置成功" class="headerlink" title="查看是否配置成功"></a>查看是否配置成功</h2><p>打开计算机的服务，查找Mongo：</p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup6.png" alt="image"></p>
+<p>右键启动后，在浏览器输入localhost:27017即可访问，在日志文件也能看到访问信息：</p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup7.png" alt="image"></p>
+<h2 id="使用可视化工具"><a href="#使用可视化工具" class="headerlink" title="使用可视化工具"></a>使用可视化工具</h2><p>安装robo 3T，连接localhost的27017端口，如下显示就是连接正确：</p>
+<p><img src="https://raw.githubusercontent.com/snjl/picture/master/db/mongodb/mongo_setup8.png" alt="image"></p>
+<h1 id="linux安装"><a href="#linux安装" class="headerlink" title="linux安装"></a>linux安装</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install mongodb-server</span><br></pre></td></tr></table></figure>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ mongo</span><br><span class="line">MongoDB shell version: 2.6.10</span><br><span class="line">connecting to: test</span><br><span class="line">Welcome to the MongoDB shell.</span><br><span class="line">For interactive help, type &quot;help&quot;.</span><br><span class="line">For more comprehensive documentation, see</span><br><span class="line">        http://docs.mongodb.org/</span><br><span class="line">Questions? Try the support group</span><br><span class="line">        http://groups.google.com/group/mongodb-user</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; use local</span><br><span class="line">switched to db local</span><br><span class="line">&gt; db.test.insert(&#123;&apos;a&apos;:&apos;bb&apos;&#125;)</span><br><span class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</span><br><span class="line">&gt; db.test.find()</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5c531d6efafa716545110885&quot;), &quot;a&quot; : &quot;bb&quot; &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="远程连接配置"><a href="#远程连接配置" class="headerlink" title="远程连接配置"></a>远程连接配置</h1><p>mongodb远程连接配置如下：</p>
+<h2 id="修改配置文件mongodb-conf"><a href="#修改配置文件mongodb-conf" class="headerlink" title="修改配置文件mongodb.conf"></a>修改配置文件mongodb.conf</h2><p>命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mongodb.conf</span><br></pre></td></tr></table></figure></p>
+<p>把 bind_ip=127.0.0.1 这一行注释掉或者是修改成 bind_ip=0.0.0.0</p>
+<h2 id="重启mongodb服务"><a href="#重启mongodb服务" class="headerlink" title="重启mongodb服务"></a>重启mongodb服务</h2><p>命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/mongodb restart</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mongodb restart</span><br></pre></td></tr></table></figure></p>
+<h2 id="防火墙开放27017端口"><a href="#防火墙开放27017端口" class="headerlink" title="防火墙开放27017端口"></a>防火墙开放27017端口</h2><p>命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 27017 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><p>要连接的IP：134.567.345.23</p>
+<p>命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo 134.567.345.23:27017</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以连接到134.567.345.23的mongodb/test的数据库</p>
+<h2 id="连接到自定义的用户"><a href="#连接到自定义的用户" class="headerlink" title="连接到自定义的用户"></a>连接到自定义的用户</h2><h3 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; use admin</span><br><span class="line">switched to db admin</span><br><span class="line">&gt; db.addUser(&apos;username&apos;,&apos;password&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="远程连接-1"><a href="#远程连接-1" class="headerlink" title="远程连接"></a>远程连接</h3><p>命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo 134.567.345.23:27017/admin -uusername -p</span><br></pre></td></tr></table></figure></p>
+<p>输入password即可</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/flask：运行/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/03/flask：运行/" itemprop="url">flask：运行</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  171 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>官方文档中，新版本的 Flask(&gt;=0.11) 运行方式和以前有所不同，但是按照官方文档，可能会碰到坑的地方：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Could not locate Flask application. You did not provide the FLASK_APP environment variable.</span><br></pre></td></tr></table></figure></p>
+<p>问题出在终端上面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># run.py</span><br><span class="line">from flask import Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def hello():</span><br><span class="line">    return &quot;Hello World!&quot;</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure></p>
+<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ export FLASK_APP=run.py</span><br><span class="line">$ flask run</span><br><span class="line"> * Running on http://127.0.0.1:5000/</span><br></pre></td></tr></table></figure></p>
+<h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><p>如果你的 Terminal 用的是 cmd，那么运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; set FLASK_APP=run.py </span><br><span class="line">&gt; flask run</span><br><span class="line"> * Running on http://127.0.0.1:5000/</span><br></pre></td></tr></table></figure></p>
+<p>如果你的 Terminal 用的是 powershell，那么运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> &gt; $env:FLASK_APP=&quot;.\run.py&quot; | flask run</span><br><span class="line">* Running on http://127.0.0.1:5000/</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/flask：模版/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/03/flask：模版/" itemprop="url">flask：模版</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>项目地址：<a href="https://github.com/snjl/python.flask.templates.git" target="_blank" rel="noopener">https://github.com/snjl/python.flask.templates.git</a></p>
+<h1 id="什么是模板"><a href="#什么是模板" class="headerlink" title="什么是模板?"></a>什么是模板?</h1><p>我想要我的首页头部有一个欢迎用户的显示。当然现在应用中还没有用户的概念，在后面会加上。取而代之的是，我将会使用一个 mock 用户(模拟用户)，我用一个 Python 字典来实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = &#123;&apos;username&apos;: &apos;snjl&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>创建一些模拟对象是一项比较有用的技术，这样使得你能专心于应用的一部分，而不用担心系统的其他部分还不存在。我想为我的应用设计一个首页，但是我不想被系统目前没有用户系统而烦恼，因此我模拟了一个用户对象，这样我就可以继续我的工作了。</p>
+<p>视图函数返回了一个简单的字符串。我要做的就是将这个返回的字符串展开成一个完整的 HTML 页面。比如这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">@app.route(&apos;/index&apos;)</span><br><span class="line">def index():</span><br><span class="line">    user = &#123;&apos;username&apos;: &apos;snjl&apos;&#125;</span><br><span class="line">    return &apos;&apos;&apos;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Home Page - Home&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;Hello, &apos;&apos;&apos; + user[&apos;username&apos;] + &apos;&apos;&apos;!&lt;/h1&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure></p>
+<h1 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h1><p>上述将 HTML 传递到浏览器的方式不是很好。当我想将用户的文章返回的时候，视图函数将会变得复杂，而且文章还会经常改变。而且应用还会有与其他 URL 绑定的视图函数，那么想象以下将来有一天我要改变应用的布局，那么我就得在每个视图函数中更新 HTML。所以这绝不是一个应对应用规模不断增长的方案。</p>
+<p>如果能将应用的逻辑和 web 页面的展示和布局分开的话，所有的东西都变得易于组织，甚至可以雇佣一个 web 页面设计者来创造非常牛逼的页面，而你只需要使用 Python 完成应用的逻辑代码。</p>
+<p>模板帮助实现了表示层和业务逻辑的分离。在 Flask 中，模板被写在单独的文件中，存储在应用的包的 templates 文件夹中。因此确保你在项目文件夹下，创建 templates 文件夹。</p>
+<p>下面你可以看到你的第一个模板，和上面 index() 视图函数返回的 HTML 页面很相似，将这个文件保存在 app/templates/index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;&#123;&#123; title &#125;&#125; - Home&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;Hello, &#123;&#123; user.username &#125;&#125;!&lt;/h1&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这一个标准的，非常简单的 HTML 页面。里面值得注意的是，两个花括号括起来的用于动态内容的部分。这表示里面的内容是变量，而且之后再运行的时候才能生成。</p>
+<p>现在页面的展示已经放到了 HTML 模板中，视图函数就被简化了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from flask import render_template</span><br><span class="line">from flask import Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">@app.route(&apos;/index&apos;)</span><br><span class="line">def index():</span><br><span class="line">    user = &#123;&apos;username&apos;: &apos;snjl&apos;&#125;</span><br><span class="line">    return render_template(&apos;index.html&apos;, title=&apos;Home&apos;, user=user)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure>
+<p>是不是看起来更好了。在应用中试试看看模板是怎么工作的。一旦你在浏览器中载入了这个页面，你可能想看看 HTML 源代码和以前有什么不一样。</p>
+<p>将模板转换成完整的 HTML 页面的过程叫做渲染(rendering)。为了渲染模板，我必须从 Flask 中导入一个函数叫做 render_template，这个函数将模板名字和一个模板参数的变量列表作为参数，然后返回同样的模板，但是已经用变量将模板中的占位符给替换了。</p>
+<p>render_template() 函数调用了 Jinja2 模板引擎，该引擎是和 Flask 绑定在一起的。Jinja2 将会使用通过 render_template 函数传递进来的参数来替代对应的块。</p>
+<h1 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h1><p>你已经看到了 Jinja2 在渲染的时候是如何将真实的值替换占位符的，但是这只是 Jinja2 众多强大功能之一。比如，模板同样支持控制语句。index.html 的下一个版本就是增加一个条件语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &#123;% if title %&#125;</span><br><span class="line">        &lt;title&gt;&#123;&#123; title &#125;&#125; - snjl&lt;/title&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">        &lt;title&gt;Welcome to snjl!&lt;/title&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;Hello, &#123;&#123; user.username &#125;&#125;!&lt;/h1&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>现在模板变得更智能了。如果视图函数忘记传递 title 参数，模板会使用默认值来渲染而不是一个空的 title。你可以通过移除 title 参数来查看条件语句是如何工作的。</p>
+<h1 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h1><p>登录的用户可能想看在首页的所有用户最近的文章列表。那么应该如何扩展应用来支持这个功能呢。</p>
+<p>同样，我会创建一些模拟的用户对象和一些文章对象来展示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">from flask import render_template</span><br><span class="line">from flask import Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">@app.route(&apos;/index&apos;)</span><br><span class="line">def index():</span><br><span class="line">    user = &#123;&apos;username&apos;: &apos;snjl&apos;&#125;</span><br><span class="line">    posts = [</span><br><span class="line">        &#123;</span><br><span class="line">            &apos;author&apos;: &#123;&apos;username&apos;: &apos;John&apos;&#125;,</span><br><span class="line">            &apos;body&apos;: &apos;Beautiful day in Portland!&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &apos;author&apos;: &#123;&apos;username&apos;: &apos;Susan&apos;&#125;,</span><br><span class="line">            &apos;body&apos;: &apos;The Avengers movie was so cool!&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">    return render_template(&apos;index_3.html&apos;, title=&apos;Home&apos;, user=user, posts=posts)</span><br><span class="line">    # return render_template(&apos;index_3.html&apos;, user=user, posts=posts)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure>
+<p>使用了个列表，里面每个元素都是一个字典，并且都包含 author 和 body 字段。当我要实现用户和文章的时候我也会尽量保留现在的字段名字，所以在之后我在设计和测试之中使用的这些对象依然有效。</p>
+<p>在模板方面我必须得解决一个新的问题。posts 列表可能有任意多个元素，它取决于视图函数决定多少个 posts 将会在页面展示。模板不能对有多少 posts 做任何假定，因此它必须以通用的方式来渲染任意视图函数传递给它的 posts。</p>
+<p>对于这个问题，Jinja2 提供了 for 控制结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &#123;% if title %&#125;</span><br><span class="line">        &lt;title&gt;&#123;&#123; title &#125;&#125; - snjl&lt;/title&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">        &lt;title&gt;Welcome to snjl&lt;/title&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;Hi, &#123;&#123; user.username &#125;&#125;!&lt;/h1&gt;</span><br><span class="line">        &#123;% for post in posts %&#125;</span><br><span class="line">        &lt;div&gt;&lt;p&gt;&#123;&#123; post.author.username &#125;&#125; says: &lt;b&gt;&#123;&#123; post.body &#125;&#125;&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h1><p>大多数 web 应用在页面顶部都会有一个导航栏，上面放置一些比较常用的链接，比如编辑个人资料，登录登出等。我可以很容易的给 index.html 模板来添加一个导航栏，但是随着应用的规模增长我需要将同样的导航栏放到其他页面上。但是我不想在多个 HTML 模板中维护数个一样的导航栏。not repeat yourself 不要重复你自己！</p>
+<p>Jinja2 拥有模板继承特性就是来解决这个问题的。在本质上，你要做的就是将所有模板共同的东西拿到一个基础模板中，然后其他模板从这个基础模板派生。</p>
+<p>所以我要做的就是定义一个叫 base.html 的基础模板，其包含了一个简单的导航栏以及之前实现的简单逻辑。你需要将下面的代码保存到app/template/base.html 模板中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">      &#123;% if title %&#125;</span><br><span class="line">      &lt;title&gt;&#123;&#123; title &#125;&#125; - Microblog&lt;/title&gt;</span><br><span class="line">      &#123;% else %&#125;</span><br><span class="line">      &lt;title&gt;Welcome to Microblog&lt;/title&gt;</span><br><span class="line">      &#123;% endif %&#125;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div&gt;Microblog: &lt;a href=&quot;/index&quot;&gt;Home&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在这个模板中我使用了 block 控制语句来定义派生模板可以插入的位置。block 的名字是唯一的，这样派生模板就可以在提供他们的内容时候引用。</p>
+<p>在有了基础模板，我现在可以让 index.html 来继承 base.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">    &lt;h1&gt;Hi, &#123;&#123; user.username &#125;&#125;!&lt;/h1&gt;</span><br><span class="line">    &#123;% for post in posts %&#125;</span><br><span class="line">    &lt;div&gt;&lt;p&gt;&#123;&#123; post.author.username &#125;&#125; says: &lt;b&gt;&#123;&#123; post.body &#125;&#125;&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>既然 base.html 现在可以承担通用的页面结构，我将这些元素从 index.html 中移除了，只留下了内容部分。extends 语句在两个模板间建立了继承关系，因此 Jinja2 知道当要渲染 index.html 的时候，需要将其嵌入到 base.html。两个模板会来用名字 content 来匹配 block 语句，这也是 Jinja2 为什么知道如何将两个模板合并成一个。现在如果我需要为应用创建其他页面的话，我可以从同样的 base.html 来派生模板，这也是我可以使得应用的所有页面都看起来相似但是又不会感觉到重复。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/爬取今日头条街拍图片/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/03/爬取今日头条街拍图片/" itemprop="url">爬取今日头条街拍图片</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/案例/" itemprop="url" rel="index">
+                    <span itemprop="name">案例</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>项目地址：<a href="https://github.com/snjl/python.spider.jiepai.git" target="_blank" rel="noopener">https://github.com/snjl/python.spider.jiepai.git</a></p>
+<h1 id="爬取网址"><a href="#爬取网址" class="headerlink" title="爬取网址"></a>爬取网址</h1><p><a href="https://www.toutiao.com/search/?keyword=%E8%A1%97%E6%8B%8D" target="_blank" rel="noopener">https://www.toutiao.com/search/?keyword=%E8%A1%97%E6%8B%8D</a></p>
+<h1 id="前期研究"><a href="#前期研究" class="headerlink" title="前期研究"></a>前期研究</h1><p>访问网址后，会发现列表页有多种形式，第一种是视频，第二种是广告，第三种是所有图片在一个网页里面，第四种是图片需要跳转，我们做的是第四种。</p>
+<p>通过f12开发者工具可以看到比较详细的信息。<br><strong>点preserve log，可以刷新时保留记录，点XHR，可以看到传输过来的ajax数据。</strong></p>
+<h2 id="列表页分析"><a href="#列表页分析" class="headerlink" title="列表页分析"></a>列表页分析</h2><p>列表是通过ajax传输过来的，参数有多个，在python爬取的时候需要传输：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line">    &apos;aid&apos;: 24,</span><br><span class="line">    &apos;offset&apos;: offset,</span><br><span class="line">    &apos;format&apos;: &apos;json&apos;,</span><br><span class="line">    &apos;keyword&apos;: keyword,</span><br><span class="line">    &apos;autoload&apos;: &apos;true&apos;,</span><br><span class="line">    &apos;count&apos;: 20,</span><br><span class="line">    &apos;cur_tab&apos;: 3,</span><br><span class="line">    &apos;from&apos;: &apos;gallery&apos;,</span><br><span class="line">    &apos;pd&apos;: &apos;synthesis&apos;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中keyword是可以改变的，offset是偏移值，一般是为20的倍数，因为每次json传输20个数据。</p>
+<p>列表页需要获取的是每个详情页的title和url。</p>
+<h2 id="详情页分析"><a href="#详情页分析" class="headerlink" title="详情页分析"></a>详情页分析</h2><p>分析详情页，可以发现每次跳转网页实际上不是ajax交互，而是在初始的网页中有数据，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    gallery: JSON.parse(&quot;&#123;\&quot;count\&quot;:9,\&quot;sub_images\&quot;:[&#123;\&quot;url\&quot;:\&quot;http:\\/\\/p1.pstatp.com\\/origin\\/pgc-image\\/e4de890cc2084bc5b3557ee5b6ea0ed9\&quot;,\&quot;width\&quot;:800,\&quot;url_list\&quot;:[&#123;\&quot;url\&quot;:\&quot;http:\\/\\/p1.pstatp.com\\/origin\\/pgc-image\\/e4de890cc2084bc5b3557ee5b6ea0ed9\&quot;&#125;,</span><br><span class="line"></span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p>所以实际上已经把图的地址写在doc里，拿到网页的url，然后通过正则获取就可以得到地址。</p>
+<h1 id="代码功能"><a href="#代码功能" class="headerlink" title="代码功能"></a>代码功能</h1><h2 id="三部分"><a href="#三部分" class="headerlink" title="三部分"></a>三部分</h2><h3 id="列表页"><a href="#列表页" class="headerlink" title="列表页"></a>列表页</h3><p>列表页需要两个函数，第一个是获取列表页的的response.text（需要进行错误处理），第二个是对列表页进行解析，获取到需要抓取的详情页的一些信息。</p>
+<h3 id="详情页"><a href="#详情页" class="headerlink" title="详情页"></a>详情页</h3><p>详情页里，需要通过正则获取到所有需要下载的链接，所以也是两个函数，一个获取详情页的response.text，一个获取详情页中的下载信息。</p>
+<h3 id="数据库、图片下载等"><a href="#数据库、图片下载等" class="headerlink" title="数据库、图片下载等"></a>数据库、图片下载等</h3><p>数据库使用mongodb，这里的代码可以插入在详情页的下载信息或者main函数中每次处理完一个详情页信息后进行存储；</p>
+<p>图片下载同样处理，也可以放在获取到详情页的下载链接后的for循环遍历。</p>
+<h2 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h2><h3 id="列表页-1"><a href="#列表页-1" class="headerlink" title="列表页"></a>列表页</h3><p>获取列表页response.text<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def get_page_index(offset, keyword):</span><br><span class="line">    data = &#123;</span><br><span class="line">        &apos;aid&apos;: 24,</span><br><span class="line">        &apos;offset&apos;: offset,</span><br><span class="line">        &apos;format&apos;: &apos;json&apos;,</span><br><span class="line">        &apos;keyword&apos;: keyword,</span><br><span class="line">        &apos;autoload&apos;: &apos;true&apos;,</span><br><span class="line">        &apos;count&apos;: 20,</span><br><span class="line">        &apos;cur_tab&apos;: 3,</span><br><span class="line">        &apos;from&apos;: &apos;gallery&apos;,</span><br><span class="line">        &apos;pd&apos;: &apos;synthesis&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">    url = &apos;https://www.toutiao.com/api/search/content/?&apos; + urlencode(data)</span><br><span class="line">    print(url)</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(url=url, headers=headers)</span><br><span class="line">        if response.status_code == 200:</span><br><span class="line">            response.encoding = &apos;utf8&apos;  # 原编码不是utf8，会有一定乱码</span><br><span class="line">            return response.text</span><br><span class="line">        return None</span><br><span class="line">    except RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        print(&quot;请求json出错&quot;)</span><br><span class="line">        return None</span><br></pre></td></tr></table></figure></p>
+<p>传入keyword，offset获取列表页text。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def parse_page_index(html):</span><br><span class="line">    try:</span><br><span class="line">        data = json.loads(html)</span><br><span class="line">        # 判断data不为空，且&apos;data&apos;在keys中，并且data[&apos;data&apos;]不为空</span><br><span class="line">        if data and &apos;data&apos; in data.keys() and data[&apos;data&apos;]:</span><br><span class="line">            items = data[&apos;data&apos;]</span><br><span class="line">            for item in items:</span><br><span class="line">                # 判断abstract为空，且app_info存在，且item[&apos;app_info&apos;][&apos;db_name&apos;]为SITE</span><br><span class="line">                if item and &apos;abstract&apos; in item.keys() and \</span><br><span class="line">                        item[&apos;abstract&apos;] == &apos;&apos; and &apos;app_info&apos; in item.keys() \</span><br><span class="line">                        and item[&apos;app_info&apos;][&apos;db_name&apos;] == &apos;SITE&apos;:</span><br><span class="line">                    yield &#123;</span><br><span class="line">                        &apos;title&apos;: item[&apos;title&apos;],</span><br><span class="line">                        &apos;url&apos;: item[&apos;article_url&apos;]</span><br><span class="line">                    &#125;</span><br><span class="line">    except JSONDecodeError as e:</span><br><span class="line">        print(e)</span><br></pre></td></tr></table></figure></p>
+<p>由于拿到的是ajjax的json数据，所以可以通过json.loads()方法解析到数据，然后判断data是否为空，data里面是否有‘data’字段，如果有的话判断里面的每一个item是否有’abstract’字段和’app_info’字段，如果有，里面字段’db_name’的值为SITE（其实还是有误差）的才是第四类，通过这种方式获取的列表页信息才是比较干净的数据。最后返回title和url数据。</p>
+<h3 id="详情页-1"><a href="#详情页-1" class="headerlink" title="详情页"></a>详情页</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def get_page_detail(url):</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(url=url, headers=headers)</span><br><span class="line">        if response.status_code == 200:</span><br><span class="line">            return response.text</span><br><span class="line">        return None</span><br><span class="line">    except RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        print(&quot;请求详情页出错&quot;)</span><br><span class="line">        return None</span><br></pre></td></tr></table></figure>
+<p>获取详情页response.text代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def parse_page_detail(html):</span><br><span class="line">    images_pattern = re.compile(&apos;gallery: JSON.parse\(&quot;(.*?)&quot;\)&apos;)</span><br><span class="line">    result = re.search(images_pattern, html)</span><br><span class="line">    if result:</span><br><span class="line">        result_data = re.sub(r&apos;\\&apos;, &apos;&apos;, result.group(1))</span><br><span class="line">        data = json.loads(result_data)</span><br><span class="line">        images = [sub_image[&apos;url&apos;] for sub_image in data[&apos;sub_images&apos;]]</span><br><span class="line">        for image in images:</span><br><span class="line">            download_image(image)</span><br><span class="line">        return images</span><br></pre></td></tr></table></figure></p>
+<p>通过正则，获取内容后，由于反斜杠‘\’的存在影响了我们的进一步操作，因此，有必要把反斜杠去掉，需要注意的是，这里显示的每一个反斜杠，实际上源字符串中都有两个反斜杠，还有一个反斜杠是用来转义的，故print是并不显示。</p>
+<p>因此，我们要实际上要去掉的是两个连续的反斜杠，使用re.sbu(r’\’,’’,results)进行替换</p>
+<p>处理后，获得的就是一个images的url的list列表（此处还调用了一个下载图片的函数，后续会介绍），然后返回。</p>
+<h3 id="数据库和图片下载代码等"><a href="#数据库和图片下载代码等" class="headerlink" title="数据库和图片下载代码等"></a>数据库和图片下载代码等</h3><p>数据库可以使用配置类，所以另建一个配置文件config.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MONGO_URL = &apos;localhost&apos;</span><br><span class="line">MONGO_DB = &apos;toutiao&apos;</span><br><span class="line">MONGO_TABLE = &apos;toutiao&apos;</span><br><span class="line"></span><br><span class="line">GROUT_START = 1</span><br><span class="line">GROUP_END = 40</span><br><span class="line"></span><br><span class="line">KEYWORD = &apos;街拍&apos;</span><br></pre></td></tr></table></figure></p>
+<p>然后在使用mongo的时候调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 生成mongodb数据库对象</span><br><span class="line">client = pymongo.MongoClient(MONGO_URL,connect=False)</span><br><span class="line">db = client[MONGO_DB]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_to_mongo(result):</span><br><span class="line">    if db[MONGO_TABLE].insert(result):</span><br><span class="line">        print(&quot;存储到mongodb成功&quot;, result)</span><br><span class="line">        return True</span><br><span class="line">    return False</span><br></pre></td></tr></table></figure></p>
+<p>图片下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def download_image(url):</span><br><span class="line">    print(&quot;正在下载&quot;, url)</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(url=url, headers=headers)</span><br><span class="line">        if response.status_code == 200:</span><br><span class="line">            save_image(response.content)</span><br><span class="line">        return None</span><br><span class="line">    except RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        print(&quot;请求图片出错&quot;, url)</span><br><span class="line">        return None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_image(content):</span><br><span class="line">    file_path = &apos;&#123;0&#125;/&#123;1&#125;.&#123;2&#125;&apos;.format(os.getcwd(), md5(content).hexdigest(), &apos;jpg&apos;)</span><br><span class="line">    if not os.path.exists(file_path):</span><br><span class="line">        with open(file_path, &apos;wb&apos;) as f:</span><br><span class="line">            f.write(content)</span><br></pre></td></tr></table></figure></p>
+<p>下载图片使用md5计算名称，存到当前路径。</p>
+<h3 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def main(offset):</span><br><span class="line">    html = get_page_index(offset, KEYWORD)</span><br><span class="line">    for item in parse_page_index(html):</span><br><span class="line">        print(item)</span><br><span class="line">        html = get_page_detail(item[&apos;url&apos;])</span><br><span class="line">        if html:</span><br><span class="line">            images = parse_page_detail(html)</span><br><span class="line">            save_to_mongo(&#123;</span><br><span class="line">                &apos;title&apos;: item[&apos;title&apos;],</span><br><span class="line">                &apos;url&apos;: item[&apos;url&apos;],</span><br><span class="line">                &apos;images&apos;: images</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
+<p>main函数参数为offset，keyword由配置文件传入。</p>
+<p>main函数逻辑是，获取offset（偏移）后，获取这个json的数据并且解析出每一个item（dict类型，含有url和title），通过get_page_detail解析出每个网页的html，通过parse_page_detail解析出images，并且通过save_to_mongo存储到mongodb。</p>
+<p>在调用parse_page_detail的时候就已经下载了图片。</p>
+<h3 id="运行函数"><a href="#运行函数" class="headerlink" title="运行函数"></a>运行函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main(offset=20)</span><br></pre></td></tr></table></figure>
+<p>如果要多进程，使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    groups = [x * 20 for x in range(GROUT_START, GROUP_END + 1)]</span><br><span class="line">    pool = Pool()</span><br><span class="line">    pool.map(main, groups)</span><br></pre></td></tr></table></figure></p>
+<p>groups为config.py中设置的1-40，groups实际上值为[20,40，60，…,400]。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/redis配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/03/redis配置/" itemprop="url">redis配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  690 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis-简介"><a href="#Redis-简介" class="headerlink" title="Redis 简介"></a>Redis 简介</h1><p>Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。</p>
+<p>Redis 与其他 key - value 缓存产品有以下三个特点：</p>
+<ul>
+<li>Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。</li>
+<li>Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。</li>
+<li>Redis支持数据的备份，即master-slave模式的数据备份。<h1 id="Redis-优势"><a href="#Redis-优势" class="headerlink" title="Redis 优势"></a>Redis 优势</h1></li>
+<li>性能极高 – Redis能读的速度是110000次/s,写的速度是81000次/s 。</li>
+<li>丰富的数据类型 – Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作。</li>
+<li>原子 – Redis的所有操作都是原子性的，意思就是要么成功执行要么失败完全不执行。单个操作是原子性的。多个操作也支持事务，即原子性，通过MULTI和EXEC指令包起来。</li>
+<li>丰富的特性 – Redis还支持 publish/subscribe, 通知, key 过期等等特性。<h1 id="Redis与其他key-value存储有什么不同？"><a href="#Redis与其他key-value存储有什么不同？" class="headerlink" title="Redis与其他key-value存储有什么不同？"></a>Redis与其他key-value存储有什么不同？</h1></li>
+<li><p>Redis有着更为复杂的数据结构并且提供对他们的原子性操作，这是一个不同于其他数据库的进化路径。Redis的数据类型都是基于基本数据结构的同时对程序员透明，无需进行额外的抽象。</p>
+</li>
+<li><p>Redis运行在内存中但是可以持久化到磁盘，所以在对不同数据集进行高速读写时需要权衡内存，因为数据量不能大于硬件内存。在内存数据库方面的另一个优点是，相比在磁盘上相同的复杂的数据结构，在内存中操作起来非常简单，这样Redis可以做很多内部复杂性很强的事情。同时，在磁盘格式方面他们是紧凑的以追加的方式产生的，因为他们并不需要进行随机访问。</p>
+</li>
+</ul>
+<h1 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h1><p>去菜鸟教程找redis的下载地址（<a href="https://github.com/MSOpenTech/redis/releases），下载msi。之后找redis" target="_blank" rel="noopener">https://github.com/MSOpenTech/redis/releases），下载msi。之后找redis</a> desktop manager下载安装。</p>
+<p>在github上搜redis desktop，安装一个可视化界面：<br><a href="https://github.com/uglide/RedisDesktopManager" target="_blank" rel="noopener">https://github.com/uglide/RedisDesktopManager</a></p>
+<p>默认端口为6379。</p>
+<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install redis-server</span><br></pre></td></tr></table></figure>
+<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">snjl@VM-0-2-ubuntu:~$ redis-cli</span><br><span class="line">127.0.0.1:6379&gt; set &apos;a&apos; &apos;b&apos;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get &apos;a&apos;</span><br><span class="line">&quot;b&quot;</span><br></pre></td></tr></table></figure></p>
+<p>设置远程连接和密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
+<p>找到里面的bind 127.0.0.1，改为0.0.0.0，找到requirepass，取消注释后把后面的内容修改为密码。</p>
+<p>重启服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service redis restart</span><br></pre></td></tr></table></figure></p>
+<p>这时候登录需要加入密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -a PASSWORD</span><br></pre></td></tr></table></figure></p>
+<p>此时才可以用get ‘a’获取值。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/flask：hello world/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/03/flask：hello world/" itemprop="url">flask：hello world</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  836 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/snjl/python.flask.helloworld.git" target="_blank" rel="noopener">https://github.com/snjl/python.flask.helloworld.git</a></p>
+<h1 id="flask优点"><a href="#flask优点" class="headerlink" title="flask优点"></a>flask优点</h1><ul>
+<li>Flask确实很“轻”，不愧是Micro Framework，从Django转向Flask的开发者一定会如此感慨，除非二者均未深入使用过</li>
+<li>Flask自由、灵活，可扩展性强，第三方库的选择面广，开发时可以结合自己最喜欢用的轮子，也能结合最流行最强大的Python库</li>
+<li>入门简单，即便没有多少web开发经验，也能很快做出网站</li>
+<li>非常适用于小型网站</li>
+<li>非常适用于开发web服务的API</li>
+<li>开发大型网站无压力，但代码架构需要自己设计，开发成本取决于开发者的能力和经验</li>
+<li>各方面性能均等于或优于Django</li>
+<li>Django自带的或第三方的好评如潮的功能，Flask上总会找到与之类似第三方库</li>
+<li>Flask灵活开发，Python高手基本都会喜欢Flask，但对Django却可能褒贬不一</li>
+<li>Flask与关系型数据库的配合使用不弱于Django，而其与NoSQL数据库的配合远远优于Django</li>
+<li>Flask比Django更加Pythonic，与Python的philosophy更加吻合</li>
+</ul>
+<h1 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h1><p>使用pycharm生成一个flask项目，项目结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">helloworld</span><br><span class="line">    static</span><br><span class="line">    templates</span><br><span class="line">    helloworld.py</span><br></pre></td></tr></table></figure></p>
+<p>其中helloworld.py代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from app import app</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">@app.route(&apos;/index&apos;)</span><br><span class="line">def index():</span><br><span class="line">    return &quot;Hello, World!&quot;</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure></p>
+<p>使用app.run(debug=True)，可以直接在pycharm中跑，而且这样在修改网页模版的时候，刷新网页内容会直接更新。</p>
+<p>这个视图函数其实很简单，这是返回了这个 Hello, World! 字符串。在函数定义上面的是两个装饰器，Python 中特别的语法糖。装饰器改变或者增加了被装饰函数的功能。一个装饰器经常会用到的地方是将函数注册为某些事件的回调函数。在这里，@app.route 装饰器创建了以参数给定的 URL 和视图函数的联系。这里有两个装饰器，将 / 和 /index 和 index 函数关联起来了。这意味着，不论 web 浏览器向哪个 URL 发送请求，Flask 将会调用这个函数，然后将返回值作为对浏览器的响应。</p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; set FLASK_APP=run.py </span><br><span class="line">&gt; flask run</span><br><span class="line"> * Running on http://127.0.0.1:5000/</span><br></pre></td></tr></table></figure>
+<p>函数写成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from app import app</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">@app.route(&apos;/index&apos;)</span><br><span class="line">def index():</span><br><span class="line">    return &quot;Hello, World!&quot;</span><br></pre></td></tr></table></figure></p>
+<p>在服务器初始化完成之后，它就在等待来自客户端的链接了。flask run 的输出表示服务器正在运行在 127.0.0.1 这个 IP 地址上，这个总是你本机的地址。这个地址很常用，因此有一个更简单的别名: localhost。服务器会监听特定的端口，在生产环境上的服务器一般会监听 443 端口，或者在不需要加密的时候使用 80 端口，但是这些都需要管理员权限。因为应用在开发环境上运行，Flask 使用了可用的 5000 端口。下面在浏览器中输入下面的 URL：<a href="http://localhost:5000/，当然你也可以输入下面这个" target="_blank" rel="noopener">http://localhost:5000/，当然你也可以输入下面这个</a>: <a href="http://localhost:5000/index" target="_blank" rel="noopener">http://localhost:5000/index</a></p>
+<p>两个不同的 URL 会返回同样的东西。但是你输入其他 URL 将会发生一个 404 错误，因为只有上面两个 URL 可以被应用识别。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/03/requests+BeautifulSoup爬取猫眼电影/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/03/requests+BeautifulSoup爬取猫眼电影/" itemprop="url">requests+BeautifulSoup爬取猫眼电影</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T14:26:13+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/案例/" itemprop="url" rel="index">
+                    <span itemprop="name">案例</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  915 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>提取的站点URL为<a href="http://maoyan.com/board/4，提取的结果会以文件形式保存下来。" target="_blank" rel="noopener">http://maoyan.com/board/4，提取的结果会以文件形式保存下来。</a></p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>分为几个部分，分别是：</p>
+<ul>
+<li>获取单个网页的内容，解析单个网页；</li>
+<li>解析整个网页多个项目，并且每个项目返回dict（使用field）；</li>
+<li>存储数据；</li>
+<li>生成需要爬取的多个网页，并且调用上述函数进行爬取和存储。</li>
+</ul>
+<h2 id="获取单个网页内容"><a href="#获取单个网页内容" class="headerlink" title="获取单个网页内容"></a>获取单个网页内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def get_one_page(url, headers):</span><br><span class="line">    try:</span><br><span class="line"></span><br><span class="line">        response = requests.get(url=url, headers=headers)</span><br><span class="line">        if response.status_code == 200:</span><br><span class="line">            return response.text</span><br><span class="line">        return None</span><br><span class="line">    except RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        return None</span><br></pre></td></tr></table></figure>
+<p>传入url和headers，使用异常类进行捕获。</p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def parse_one_page(html):</span><br><span class="line">    bs_obj = BeautifulSoup(html)</span><br><span class="line">    items = bs_obj.find_all(&quot;dd&quot;)</span><br><span class="line">    for item in items:</span><br><span class="line">        yield &#123;</span><br><span class="line">            &apos;img&apos;: item.find(&apos;img&apos;, &#123;&apos;class&apos;: &apos;board-img&apos;&#125;).get(&apos;data-src&apos;),</span><br><span class="line">            &apos;title&apos;: item.find(&apos;p&apos;, &#123;&apos;class&apos;: &apos;name&apos;&#125;).find(&apos;a&apos;).get(&apos;title&apos;).strip(),</span><br><span class="line">            &apos;stars&apos;: item.find(&apos;p&apos;, &#123;&apos;class&apos;: &apos;star&apos;&#125;).text.strip(),</span><br><span class="line">            &apos;time&apos;: item.find(&apos;p&apos;, &#123;&apos;class&apos;: &apos;releasetime&apos;&#125;).text.strip(),</span><br><span class="line">            &apos;score&apos;: item.find(&apos;i&apos;, &#123;&apos;class&apos;: &apos;integer&apos;&#125;).text + item.find(&apos;i&apos;, &#123;&apos;class&apos;: &apos;fraction&apos;&#125;).text</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>分析网页可以知道dd标签分割每个项目，将单个项目拿出来，使用BeautifulSoup进行解析，使用yield返回数据。</p>
+<h2 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def write_to_file(content):</span><br><span class="line">    with open(&apos;result.txt&apos;, &apos;a&apos;, encoding=&apos;utf8&apos;) as f:</span><br><span class="line">        f.write(json.dumps(content, ensure_ascii=False) + &apos;\n&apos;)</span><br></pre></td></tr></table></figure>
+<p>使用with，可以保证异常关闭；使用a，可以保证写入不清空；使用utf8和json存储时的ensure_ascii=False，可以使写入数据为utf8编码。</p>
+<h2 id="翻页爬取"><a href="#翻页爬取" class="headerlink" title="翻页爬取"></a>翻页爬取</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def main(offset):</span><br><span class="line">    headers = &#123;</span><br><span class="line">        &apos;user-agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &apos;</span><br><span class="line">                      &apos;Chrome/71.0.3578.98 Safari/537.36&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    url = &apos;https://maoyan.com/board/4?offset=&apos; + str(offset)</span><br><span class="line"></span><br><span class="line">    html = get_one_page(url, headers)</span><br><span class="line">    for item in parse_one_page(html):</span><br><span class="line">        print(item)</span><br><span class="line">        write_to_file(item)</span><br></pre></td></tr></table></figure>
+<p>跳转页面，可以发现网址从<a href="http://maoyan.com/board/4变为了http://maoyan.com/board/4?offset=10。" target="_blank" rel="noopener">http://maoyan.com/board/4变为了http://maoyan.com/board/4?offset=10。</a></p>
+<p>比之前的URL多了一个参数，那就是offset=10，而目前显示的结果是排行11~20名的电影，初步推断这是一个偏移量的参数。再点击下一页，发现页面的URL变成了<a href="http://maoyan.com/board/4?offset=20，参数offset变成了20，而显示的结果是排行21~30的电影。" target="_blank" rel="noopener">http://maoyan.com/board/4?offset=20，参数offset变成了20，而显示的结果是排行21~30的电影。</a></p>
+<p>由此可以总结出规律，offset代表偏移量值，如果偏移量为n，则显示的电影序号就是n+1到n+10，每页显示10个。所以，如果想获取TOP100电影，只需要分开请求10次，而10次的offset参数分别设置为0、10、20、…90即可，这样获取不同的页面之后，再用正则表达式提取出相关信息，就可以得到TOP100的所有电影信息了。</p>
+<h2 id="main方法"><a href="#main方法" class="headerlink" title="main方法"></a>main方法</h2><p>最后，实现main()方法来调用前面实现的方法，将单页的电影结果写入到文件。相关代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    for i in range(10):</span><br><span class="line">        main(i*10)</span><br></pre></td></tr></table></figure></p>
+<p>如果需要考虑爬虫过快，可以在后面加一个sleep：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    for i in range(10):</span><br><span class="line">        main(i*10)</span><br><span class="line">        time.sleep(1)</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用多进程"><a href="#使用多进程" class="headerlink" title="使用多进程"></a>使用多进程</h1><p>将main的代码改成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line"></span><br><span class="line">    # 使用多进程</span><br><span class="line">    pool = Pool()</span><br><span class="line">    pool.map(main, [i * 10 for i in range(10)])</span><br></pre></td></tr></table></figure></p>
+<p>引入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br></pre></td></tr></table></figure></p>
+<p>如果使用多进程，想要防止爬虫过快，可以在main函数里加一个sleep<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def main(offset):</span><br><span class="line">    headers = &#123;</span><br><span class="line">        &apos;user-agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &apos;</span><br><span class="line">                      &apos;Chrome/71.0.3578.98 Safari/537.36&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    url = &apos;https://maoyan.com/board/4?offset=&apos; + str(offset)</span><br><span class="line"></span><br><span class="line">    html = get_one_page(url, headers)</span><br><span class="line">    for item in parse_one_page(html):</span><br><span class="line">        print(item)</span><br><span class="line">        write_to_file(item)</span><br><span class="line">    time.sleep(1)</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -2129,192 +2293,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/requests库高级用法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/requests库高级用法/" itemprop="url">requests库高级用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.3k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  12 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&apos;http://httpbin.org/post&apos;,files=files)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">    &apos;args&apos;:&#123;&#125;,</span><br><span class="line">    &apos;data&apos;:&quot;&quot;,</span><br><span class="line">    &apos;files&apos;:&#123;</span><br><span class="line">        xxxxx</span><br><span class="line">    &#125;,</span><br><span class="line">    ···</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/31/requests库高级用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2362,7 +2345,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">183</span>
+                  <span class="site-state-item-count">203</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2373,7 +2356,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2384,7 +2367,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

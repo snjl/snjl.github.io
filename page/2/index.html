@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/文件读写/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask：http方法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/31/文件读写/" itemprop="url">文件读写</a></h1>
+                <a class="post-title-link" href="/2019/02/13/flask：http方法/" itemprop="url">flask：http方法</a></h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
               </time>
             
 
@@ -343,8 +343,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
                   </a>
                 </span>
 
@@ -374,1182 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>读写文件是最常见的IO操作。Python内置了读写文件的函数，用法和C是兼容的。</p>
-<p>读写文件前，我们先必须了解一下，在磁盘上读写文件的功能都是由操作系统提供的，现代操作系统不允许普通的程序直接操作磁盘，所以，读写文件就是请求操作系统打开一个文件对象（通常称为文件描述符），然后，通过操作系统提供的接口从这个文件对象中读取数据（读文件），或者把数据写入这个文件对象（写文件）。</p>
-<h1 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h1><p>要以读文件的模式打开一个文件对象，使用Python内置的open()函数，传入文件名和标示符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/test.txt&apos;, &apos;r&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>标示符’r’表示读，这样，我们就成功地打开了一个文件。</p>
-<p>如果文件不存在，open()函数就会抛出一个IOError的错误，并且给出错误码和详细的信息告诉你文件不存在：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f=open(&apos;/Users/michael/notfound.txt&apos;, &apos;r&apos;)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">FileNotFoundError: [Errno 2] No such file or directory: &apos;/Users/michael/notfound.txt&apos;</span><br></pre></td></tr></table></figure></p>
-<p>如果文件打开成功，接下来，调用read()方法可以一次读取文件的全部内容，Python把内容读到内存，用一个str对象表示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;Hello, world!&apos;</span><br></pre></td></tr></table></figure></p>
-<p>最后一步是调用close()方法关闭文件。文件使用完毕后必须关闭，因为文件对象会占用操作系统的资源，并且操作系统同一时间能打开的文件数量也是有限的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
-<p>由于文件读写时都有可能产生IOError，一旦出错，后面的f.close()就不会调用。所以，为了保证无论是否出错都能正确地关闭文件，我们可以使用try … finally来实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">try:</span><br><span class="line">    f = open(&apos;/path/to/file&apos;, &apos;r&apos;)</span><br><span class="line">    print(f.read())</span><br><span class="line">finally:</span><br><span class="line">    if f:</span><br><span class="line">        f.close()</span><br></pre></td></tr></table></figure></p>
-<p>但是每次都这么写实在太繁琐，所以，Python引入了with语句来自动帮我们调用close()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">with open(&apos;/path/to/file&apos;, &apos;r&apos;) as f:</span><br><span class="line">    print(f.read())</span><br></pre></td></tr></table></figure></p>
-<p>这和前面的try … finally是一样的，但是代码更佳简洁，并且不必调用f.close()方法。</p>
-<p>调用read()会一次性读取文件的全部内容，如果文件有10G，内存就爆了，所以，要保险起见，可以反复调用read(size)方法，每次最多读取size个字节的内容。另外，调用readline()可以每次读取一行内容，调用readlines()一次读取所有内容并按行返回list。因此，要根据需要决定怎么调用。</p>
-<p>如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">for line in f.readlines():</span><br><span class="line">    print(line.strip()) # 把末尾的&apos;\n&apos;删掉</span><br></pre></td></tr></table></figure></p>
-<h1 id="file-like-Object"><a href="#file-like-Object" class="headerlink" title="file-like Object"></a>file-like Object</h1><p>像open()函数返回的这种有个read()方法的对象，在Python中统称为file-like Object。除了file外，还可以是内存的字节流，网络流，自定义流等等。file-like Object不要求从特定类继承，只要写个read()方法就行。</p>
-<p>StringIO就是在内存中创建的file-like Object，常用作临时缓冲。</p>
-<h1 id="二进制文件"><a href="#二进制文件" class="headerlink" title="二进制文件"></a>二进制文件</h1><p>前面讲的默认都是读取文本文件，并且是UTF-8编码的文本文件。要读取二进制文件，比如图片、视频等等，用’rb’模式打开文件即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/test.jpg&apos;, &apos;rb&apos;)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">b&apos;\xff\xd8\xff\xe1\x00\x18Exif\x00\x00...&apos; # 十六进制表示的字节</span><br></pre></td></tr></table></figure></p>
-<h1 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h1><p>要读取非UTF-8编码的文本文件，需要给open()函数传入encoding参数，例如，读取GBK编码的文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/gbk.txt&apos;, &apos;r&apos;, encoding=&apos;gbk&apos;)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&apos;测试&apos;</span><br></pre></td></tr></table></figure></p>
-<p>遇到有些编码不规范的文件，你可能会遇到UnicodeDecodeError，因为在文本文件中可能夹杂了一些非法编码的字符。遇到这种情况，open()函数还接收一个errors参数，表示如果遇到编码错误后如何处理。最简单的方式是直接忽略：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/gbk.txt&apos;, &apos;r&apos;, encoding=&apos;gbk&apos;, errors=&apos;ignore&apos;)</span><br></pre></td></tr></table></figure></p>
-<h1 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h1><p>写文件和读文件是一样的，唯一区别是调用open()函数时，传入标识符’w’或者’wb’表示写文本文件或写二进制文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;/Users/michael/test.txt&apos;, &apos;w&apos;)</span><br><span class="line">&gt;&gt;&gt; f.write(&apos;Hello, world!&apos;)</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
-<p>你可以反复调用write()来写入文件，但是务必要调用f.close()来关闭文件。当我们写文件时，操作系统往往不会立刻把数据写入磁盘，而是放到内存缓存起来，空闲的时候再慢慢写入。只有调用close()方法时，操作系统才保证把没有写入的数据全部写入磁盘。忘记调用close()的后果是数据可能只写了一部分到磁盘，剩下的丢失了。所以，还是用with语句来得保险：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">with open(&apos;/Users/michael/test.txt&apos;, &apos;w&apos;) as f:</span><br><span class="line">    f.write(&apos;Hello, world!&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>要写入特定编码的文本文件，请给open()函数传入encoding参数，将字符串自动转换成指定编码。</p>
-<p>细心的童鞋会发现，以’w’模式写入文件时，如果文件已存在，会直接覆盖（相当于删掉后新写入一个文件）。如果我们希望追加到文件末尾怎么办？可以传入’a’以追加（append）模式写入。</p>
-<p>所有模式的定义及含义可以参考Python的官方文档。</p>
-<h1 id="需要多次读取同一文件内容"><a href="#需要多次读取同一文件内容" class="headerlink" title="需要多次读取同一文件内容"></a>需要多次读取同一文件内容</h1><p>python在读取文件的时候是根据光标位置来读取的。读一行以后光标位置到了下一行。再来个read又到了下一行。</p>
-<p>想要重新从头开始读的话用f.seek(0)</p>
-<p>将光标位置放到最前面。这样再f.read()就是第一行的内容</p>
-<p>还有个方法是f.tell()</p>
-<p>告诉你当前光标的位置。你可以把文件都读完了以后f.tell()一下看看光标位置</p>
-<p>然后再f.seek(0)  </p>
-<p>再f.tell()一下看看光标位置<br>如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = f.open(&apos;a.txt&apos;,&apos;r&apos;)</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&gt;&gt;&gt; &apos;abc&apos;</span><br><span class="line">&gt;&gt;&gt; f.read()</span><br><span class="line">&gt;&gt;&gt; &apos;&apos;</span><br><span class="line">&gt;&gt;&gt; f.seek(0)</span><br><span class="line">&gt;&gt;&gt; &apos;abc&apos;</span><br><span class="line">&gt;&gt;&gt; f.seek(1)</span><br><span class="line">&gt;&gt;&gt; &apos;bc&apos;</span><br></pre></td></tr></table></figure></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>在Python中，文件读写是通过open()函数打开的文件对象完成的。使用with语句操作文件IO是个好习惯。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/操作文件和目录/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/操作文件和目录/" itemprop="url">操作文件和目录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果我们要操作文件、目录，可以在命令行下面输入操作系统提供的各种命令来完成。比如dir、cp等命令。</p>
-<p>如果要在Python程序中执行这些目录和文件的操作怎么办？其实操作系统提供的命令只是简单地调用了操作系统提供的接口函数，Python内置的os模块也可以直接调用操作系统提供的接口函数。</p>
-<p>打开Python交互式命令行，我们来看看如何使用os模块的基本功能：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; os.name # 操作系统类型</span><br><span class="line">&apos;posix&apos;</span><br></pre></td></tr></table></figure></p>
-<p>如果是posix，说明系统是Linux、Unix或Mac OS X，如果是nt，就是Windows系统。</p>
-<p>要获取详细的系统信息，可以调用uname()函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; os.uname()</span><br><span class="line">posix.uname_result(sysname=&apos;Darwin&apos;, nodename=&apos;MichaelMacPro.local&apos;, release=&apos;14.3.0&apos;, version=&apos;Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64&apos;, machine=&apos;x86_64&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>注意uname()函数在Windows上不提供，也就是说，os模块的某些函数是跟操作系统相关的。</p>
-<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1><p>在操作系统中定义的环境变量，全部保存在os.environ这个变量中，可以直接查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; os.environ</span><br><span class="line">environ(&#123;&apos;VERSIONER_PYTHON_PREFER_32_BIT&apos;: &apos;no&apos;, &apos;TERM_PROGRAM_VERSION&apos;: &apos;326&apos;, &apos;LOGNAME&apos;: &apos;michael&apos;, &apos;USER&apos;: &apos;michael&apos;, &apos;PATH&apos;: &apos;/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/mysql/bin&apos;, ...&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>要获取某个环境变量的值，可以调用os.environ.get(‘key’)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; os.environ.get(&apos;PATH&apos;)</span><br><span class="line">&apos;/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/mysql/bin&apos;</span><br><span class="line">&gt;&gt;&gt; os.environ.get(&apos;x&apos;, &apos;default&apos;)</span><br><span class="line">&apos;default&apos;</span><br></pre></td></tr></table></figure></p>
-<h1 id="操作文件和目录"><a href="#操作文件和目录" class="headerlink" title="操作文件和目录"></a>操作文件和目录</h1><p>操作文件和目录的函数一部分放在os模块中，一部分放在os.path模块中，这一点要注意一下。查看、创建和删除目录可以这么调用：</p>
-<h1 id="查看当前目录的绝对路径"><a href="#查看当前目录的绝对路径" class="headerlink" title="查看当前目录的绝对路径:"></a>查看当前目录的绝对路径:</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; os.path.abspath(&apos;.&apos;)</span><br><span class="line">&apos;/Users/michael&apos;</span><br><span class="line"># 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:</span><br><span class="line">&gt;&gt;&gt; os.path.join(&apos;/Users/michael&apos;, &apos;testdir&apos;)</span><br><span class="line">&apos;/Users/michael/testdir&apos;</span><br><span class="line"># 然后创建一个目录:</span><br><span class="line">&gt;&gt;&gt; os.mkdir(&apos;/Users/michael/testdir&apos;)</span><br><span class="line"># 删掉一个目录:</span><br><span class="line">&gt;&gt;&gt; os.rmdir(&apos;/Users/michael/testdir&apos;)</span><br></pre></td></tr></table></figure>
-<p>把两个路径合成一个时，不要直接拼字符串，而要通过os.path.join()函数，这样可以正确处理不同操作系统的路径分隔符。在Linux/Unix/Mac下，os.path.join()返回这样的字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">part-1/part-2</span><br></pre></td></tr></table></figure></p>
-<p>而Windows下会返回这样的字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">part-1\part-2</span><br></pre></td></tr></table></figure></p>
-<p>同样的道理，要拆分路径时，也不要直接去拆字符串，而要通过os.path.split()函数，这样可以把一个路径拆分为两部分，后一部分总是最后级别的目录或文件名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; os.path.split(&apos;/Users/michael/testdir/file.txt&apos;)</span><br><span class="line">(&apos;/Users/michael/testdir&apos;, &apos;file.txt&apos;)</span><br><span class="line">os.path.splitext()可以直接让你得到文件扩展名，很多时候非常方便：</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; os.path.splitext(&apos;/path/to/file.txt&apos;)</span><br><span class="line">(&apos;/path/to/file&apos;, &apos;.txt&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>这些合并、拆分路径的函数并不要求目录和文件要真实存在，它们只对字符串进行操作。</p>
-<p>文件操作使用下面的函数。假定当前目录下有一个test.txt文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 对文件重命名:</span><br><span class="line">&gt;&gt;&gt; os.rename(&apos;test.txt&apos;, &apos;test.py&apos;)</span><br><span class="line"># 删掉文件:</span><br><span class="line">&gt;&gt;&gt; os.remove(&apos;test.py&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>但是复制文件的函数居然在os模块中不存在！原因是复制文件并非由操作系统提供的系统调用。理论上讲，我们通过上一节的读写文件可以完成文件复制，只不过要多写很多代码。</p>
-<p>幸运的是shutil模块提供了copyfile()的函数，你还可以在shutil模块中找到很多实用函数，它们可以看做是os模块的补充。</p>
-<p>最后看看如何利用Python的特性来过滤文件。比如我们要列出当前目录下的所有目录，只需要一行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [x for x in os.listdir(&apos;.&apos;) if os.path.isdir(x)]</span><br><span class="line">[&apos;.lein&apos;, &apos;.local&apos;, &apos;.m2&apos;, &apos;.npm&apos;, &apos;.ssh&apos;, &apos;.Trash&apos;, &apos;.vim&apos;, &apos;Applications&apos;, &apos;Desktop&apos;, ...]</span><br></pre></td></tr></table></figure></p>
-<p>要列出所有的.py文件，也只需一行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [x for x in os.listdir(&apos;.&apos;) if os.path.isfile(x) and os.path.splitext(x)[1]==&apos;.py&apos;]</span><br><span class="line">[&apos;apis.py&apos;, &apos;config.py&apos;, &apos;models.py&apos;, &apos;pymonitor.py&apos;, &apos;test_db.py&apos;, &apos;urls.py&apos;, &apos;wsgiapp.py&apos;]</span><br></pre></td></tr></table></figure></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Python的os模块封装了操作系统的目录和文件操作，要注意这些函数有的在os模块中，有的在os.path模块中。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/Ubuntu18.04 安装Mysql时未让输入密码/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/Ubuntu18.04 安装Mysql时未让输入密码/" itemprop="url">Ubuntu18.04安装Mysql时未让输入密码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  222 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在ubuntu18.04中使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install mysql-server</span><br></pre></td></tr></table></figure></p>
-<p>安装数据库时，在安装过程中，并没有像ubuntu16中提示输入root用户的密码，所以无法登录。</p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>mysql5.7暂时不支持ubuntu18.04，所以需要安装mysql8.0，需要引入mysql的deb。</p>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>下载 <a href="https://dev.mysql.com/downloads/repo/apt/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/repo/apt/</a> 中的deb包。<br>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i deb_name</span><br></pre></td></tr></table></figure></p>
-<p>根据需求选择配置。</p>
-<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update </span><br><span class="line">apt install mysql-server</span><br></pre></td></tr></table></figure></p>
-<p>此时的安装过程就会提示输入root密码，安装完成后普通用户也能直接登录。</p>
-<p><strong>注：mysql8.0很多配置方面与mysql5.7不一样，所以可能需要先使用ubuntu16.04安装好mysql后更新到18.04，或者不更新，或者等mysql5.7支持18.04版本后再安装。或者使用docker。。。 </strong></p>
-<h1 id="mysql8-0使用原先配置产生的问题（已发现）"><a href="#mysql8-0使用原先配置产生的问题（已发现）" class="headerlink" title="mysql8.0使用原先配置产生的问题（已发现）"></a>mysql8.0使用原先配置产生的问题（已发现）</h1><p>设置mysqld的sql_mode的时候会出现bug，无法设置。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/winscp 服务器拒绝了SFTP连接，但它监听FTP连接/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/winscp 服务器拒绝了SFTP连接，但它监听FTP连接/" itemprop="url">winscp服务器拒绝了SFTP连接，但它监听FTP连接</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/报错/" itemprop="url" rel="index">
-                    <span itemprop="name">报错</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/报错/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  42 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>出错：  在linux系统上没有安装sshd或者sshd配置出错</p>
-<p>原因是没有安装sshd或者sshd配置出错。</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>安装openssh-server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install openssh-server</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/python IO编程/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/python IO编程/" itemprop="url">python IO编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  934 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>IO在计算机中指Input/Output，也就是输入和输出。由于程序和运行时数据是在内存中驻留，由CPU这个超快的计算核心来执行，涉及到数据交换的地方，通常是磁盘、网络等，就需要IO接口。</p>
-<p>比如你打开浏览器，访问新浪首页，浏览器这个程序就需要通过网络IO获取新浪的网页。浏览器首先会发送数据给新浪服务器，告诉它我想要首页的HTML，这个动作是往外发数据，叫Output，随后新浪服务器把网页发过来，这个动作是从外面接收数据，叫Input。所以，通常，程序完成IO操作会有Input和Output两个数据流。当然也有只用一个的情况，比如，从磁盘读取文件到内存，就只有Input操作，反过来，把数据写到磁盘文件里，就只是一个Output操作。</p>
-<p>IO编程中，Stream（流）是一个很重要的概念，可以把流想象成一个水管，数据就是水管里的水，但是只能单向流动。Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存流到外面去。对于浏览网页来说，浏览器和新浪服务器之间至少需要建立两根水管，才可以既能发数据，又能收数据。</p>
-<p>由于CPU和内存的速度远远高于外设的速度，所以，在IO编程中，就存在速度严重不匹配的问题。举个例子来说，比如要把100M的数据写入磁盘，CPU输出100M的数据只需要0.01秒，可是磁盘要接收这100M数据可能需要10秒，怎么办呢？有两种办法：</p>
-<p>第一种是CPU等着，也就是程序暂停执行后续代码，等100M的数据在10秒后写入磁盘，再接着往下执行，这种模式称为同步IO；</p>
-<p>另一种方法是CPU不等待，只是告诉磁盘，“您老慢慢写，不着急，我接着干别的事去了”，于是，后续代码可以立刻接着执行，这种模式称为异步IO。</p>
-<p>同步和异步的区别就在于是否等待IO执行的结果。好比你去麦当劳点餐，你说“来个汉堡”，服务员告诉你，对不起，汉堡要现做，需要等5分钟，于是你站在收银台前面等了5分钟，拿到汉堡再去逛商场，这是同步IO。</p>
-<p>你说“来个汉堡”，服务员告诉你，汉堡需要等5分钟，你可以先去逛商场，等做好了，我们再通知你，这样你可以立刻去干别的事情（逛商场），这是异步IO。</p>
-<p>很明显，使用异步IO来编写程序性能会远远高于同步IO，但是异步IO的缺点是编程模型复杂。想想看，你得知道什么时候通知你“汉堡做好了”，而通知你的方法也各不相同。如果是服务员跑过来找到你，这是回调模式，如果服务员发短信通知你，你就得不停地检查手机，这是轮询模式。总之，异步IO的复杂度远远高于同步IO。</p>
-<p>操作IO的能力都是由操作系统提供的，每一种编程语言都会把操作系统提供的低级C接口封装起来方便使用，Python也不例外。我们后面会详细讨论Python的IO编程接口。</p>
-<p>注意，本章的IO编程都是同步模式，异步IO由于复杂度太高，后续涉及到服务器端程序开发时我们再讨论。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/序列化/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/序列化/" itemprop="url">序列化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在程序运行的过程中，所有的变量都是在内存中，比如，定义一个dict：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = dict(name=&apos;Bob&apos;, age=20, score=88)</span><br></pre></td></tr></table></figure></p>
-<p>可以随时修改变量，比如把name改成’Bill’，但是一旦程序结束，变量所占用的内存就被操作系统全部回收。如果没有把修改后的’Bill’存储到磁盘上，下次重新运行程序，变量又被初始化为’Bob’。</p>
-<p>我们把变量从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。</p>
-<p>序列化之后，就可以把序列化后的内容写入磁盘，或者通过网络传输到别的机器上。</p>
-<p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
-<p>Python提供了pickle模块来实现序列化。</p>
-<p>首先，我们尝试把一个对象序列化并写入文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import pickle</span><br><span class="line">&gt;&gt;&gt; d = dict(name=&apos;Bob&apos;, age=20, score=88)</span><br><span class="line">&gt;&gt;&gt; pickle.dumps(d)</span><br><span class="line">b&apos;\x80\x03&#125;q\x00(X\x03\x00\x00\x00ageq\x01K\x14X\x05\x00\x00\x00scoreq\x02KXX\x04\x00\x00\x00nameq\x03X\x03\x00\x00\x00Bobq\x04u.&apos;</span><br></pre></td></tr></table></figure></p>
-<p>pickle.dumps()方法把任意对象序列化成一个bytes，然后，就可以把这个bytes写入文件。或者用另一个方法pickle.dump()直接把对象序列化后写入一个file-like Object：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;dump.txt&apos;, &apos;wb&apos;)</span><br><span class="line">&gt;&gt;&gt; pickle.dump(d, f)</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
-<p>看看写入的dump.txt文件，一堆乱七八糟的内容，这些都是Python保存的对象内部信息。</p>
-<p>当我们要把对象从磁盘读到内存时，可以先把内容读到一个bytes，然后用pickle.loads()方法反序列化出对象，也可以直接用pickle.load()方法从一个file-like Object中直接反序列化出对象。我们打开另一个Python命令行来反序列化刚才保存的对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;dump.txt&apos;, &apos;rb&apos;)</span><br><span class="line">&gt;&gt;&gt; d = pickle.load(f)</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line">&gt;&gt;&gt; d</span><br><span class="line">&#123;&apos;age&apos;: 20, &apos;score&apos;: 88, &apos;name&apos;: &apos;Bob&apos;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>变量的内容又回来了！</p>
-<p>当然，这个变量和原来的变量是完全不相干的对象，它们只是内容相同而已。</p>
-<p>Pickle的问题和所有其他编程语言特有的序列化问题一样，就是它只能用于Python，并且可能不同版本的Python彼此都不兼容，因此，只能用Pickle保存那些不重要的数据，不能成功地反序列化也没关系。</p>
-<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，比如XML，但更好的方法是序列化为JSON，因为JSON表示出来就是一个字符串，可以被所有语言读取，也可以方便地存储到磁盘或者通过网络传输。JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。</p>
-<p>JSON表示的对象就是标准的JavaScript语言的对象，JSON和Python内置的数据类型对应如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JSON类型	Python类型</span><br><span class="line">&#123;&#125;	dict</span><br><span class="line">[]	list</span><br><span class="line">&quot;string&quot;	str</span><br><span class="line">1234.56	int或float</span><br><span class="line">true/false	True/False</span><br><span class="line">null	None</span><br></pre></td></tr></table></figure></p>
-<p>Python内置的json模块提供了非常完善的Python对象到JSON格式的转换。我们先看看如何把Python对象变成一个JSON：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import json</span><br><span class="line">&gt;&gt;&gt; d = dict(name=&apos;Bob&apos;, age=20, score=88)</span><br><span class="line">&gt;&gt;&gt; json.dumps(d)</span><br><span class="line">&apos;&#123;&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;&#125;&apos;</span><br></pre></td></tr></table></figure></p>
-<p>dumps()方法返回一个str，内容就是标准的JSON。类似的，dump()方法可以直接把JSON写入一个file-like Object。</p>
-<p>要把JSON反序列化为Python对象，用loads()或者对应的load()方法，前者把JSON的字符串反序列化，后者从file-like Object中读取字符串并反序列化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = open(&apos;d.txt&apos;,&apos;w&apos;) #此处是w写入，不是wb，写入的文件可读</span><br><span class="line">&gt;&gt;&gt; json.dump(d,f) # 将d写入文件f中</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;d.txt&apos;,&apos;r&apos;) # 从文件读入json的方式一</span><br><span class="line">&gt;&gt;&gt; w = json.load(f)</span><br><span class="line">&gt;&gt;&gt; w</span><br><span class="line">&apos;&#123;&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;&#125;&apos;</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = open(&apos;d.txt&apos;,&apos;r&apos;) # 从文件读入json的方式二</span><br><span class="line">&gt;&gt;&gt; w = json.loads(f.read())</span><br><span class="line">&gt;&gt;&gt; w</span><br><span class="line">&apos;&#123;&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;&#125;&apos;</span><br><span class="line">&gt;&gt;&gt; f.close()</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：使用dump方法写入文件时，文件打开方式要为w，而不是wb。如果将文件读成字符串，使用的是load，如果直接读入文件，使用的是loads。</strong><br>由于JSON标准规定JSON编码是UTF-8，所以我们总是能正确地在Python的str与JSON的字符串之间转换。</p>
-<h1 id="JSON进阶"><a href="#JSON进阶" class="headerlink" title="JSON进阶"></a>JSON进阶</h1><p>Python的dict对象可以直接序列化为JSON的{}，不过，很多时候，我们更喜欢用class表示对象，比如定义Student类，然后序列化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line"></span><br><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name, age, score):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">s = Student(&apos;Bob&apos;, 20, 88)</span><br><span class="line">print(json.dumps(s))</span><br></pre></td></tr></table></figure></p>
-<p>运行代码，毫不留情地得到一个TypeError：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">TypeError: &lt;__main__.Student object at 0x10603cc50&gt; is not JSON serializable</span><br></pre></td></tr></table></figure></p>
-<p>错误的原因是Student对象不是一个可序列化为JSON的对象。</p>
-<p>如果连class的实例对象都无法序列化为JSON，这肯定不合理！</p>
-<p>别急，我们仔细看看dumps()方法的参数列表，可以发现，除了第一个必须的obj参数外，dumps()方法还提供了一大堆的可选参数：</p>
-<p><a href="https://docs.python.org/3/library/json.html#json.dumps" target="_blank" rel="noopener">https://docs.python.org/3/library/json.html#json.dumps</a></p>
-<p>这些可选参数就是让我们来定制JSON序列化。前面的代码之所以无法把Student类实例序列化为JSON，是因为默认情况下，dumps()方法不知道如何将Student实例变为一个JSON的{}对象。</p>
-<p>可选参数default就是把任意一个对象变成一个可序列为JSON的对象，我们只需要为Student专门写一个转换函数，再把函数传进去即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def student2dict(std):</span><br><span class="line">    return &#123;</span><br><span class="line">        &apos;name&apos;: std.name,</span><br><span class="line">        &apos;age&apos;: std.age,</span><br><span class="line">        &apos;score&apos;: std.score</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>这样，Student实例首先被student2dict()函数转换成dict，然后再被顺利序列化为JSON：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(json.dumps(s, default=student2dict))</span><br><span class="line">&#123;&quot;age&quot;: 20, &quot;name&quot;: &quot;Bob&quot;, &quot;score&quot;: 88&#125;</span><br></pre></td></tr></table></figure></p>
-<p>不过，下次如果遇到一个Teacher类的实例，照样无法序列化为JSON。我们可以偷个懒，把任意class的实例变为dict：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(json.dumps(s, default=lambda obj: obj.__dict__))</span><br></pre></td></tr></table></figure></p>
-<p>因为通常class的实例都有一个<strong>dict</strong>属性，它就是一个dict，用来存储实例变量。也有少数例外，比如定义了<strong>slots</strong>的class。</p>
-<p>同样的道理，如果我们要把JSON反序列化为一个Student对象实例，loads()方法首先转换出一个dict对象，然后，我们传入的object_hook函数负责把dict转换为Student实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def dict2student(d):</span><br><span class="line">    return Student(d[&apos;name&apos;], d[&apos;age&apos;], d[&apos;score&apos;])</span><br></pre></td></tr></table></figure></p>
-<p>运行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; json_str = &apos;&#123;&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;&#125;&apos;</span><br><span class="line">&gt;&gt;&gt; print(json.loads(json_str, object_hook=dict2student))</span><br><span class="line">&lt;__main__.Student object at 0x10cd3c190&gt;</span><br></pre></td></tr></table></figure></p>
-<p>打印出的是反序列化的Student实例对象。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Python语言特定的序列化模块是pickle，但如果要把序列化搞得更通用、更符合Web标准，就可以使用json模块。</p>
-<p>json模块的dumps()和loads()函数是定义得非常好的接口的典范。当我们使用时，只需要传入一个必须的参数。但是，当默认的序列化或反序列机制不满足我们的要求时，我们又可以传入更多的参数来定制序列化或反序列化的规则，既做到了接口简单易用，又做到了充分的扩展性和灵活性。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/无界面selenium/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/无界面selenium/" itemprop="url">无界面selenium</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  502 字
+                  656 字
                 </span>
               
 
@@ -1588,20 +413,21 @@
       
         
           
-            <p>selenium中文文档：<a href="https://selenium-python-zh.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">https://selenium-python-zh.readthedocs.io/en/latest/index.html</a></p>
-<p>使用selenium，安装好对应版本的chromedriver和chrome，然后将driver放入项目，用 driver = webdriver.Chrome()启动。</p>
-<p>selenium刷新：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">driver.refresh()</span><br><span class="line"><span class="comment"># 或调用js</span></span><br><span class="line">driver.execute_script(<span class="string">"location.reload()"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>请求头配置参考：<a href="https://blog.csdn.net/u013440574/article/details/81911954" target="_blank" rel="noopener">https://blog.csdn.net/u013440574/article/details/81911954</a></p>
-<p>仅添加普通请求头：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">opt = webdriver.ChromeOptions()</span><br><span class="line">   opt.set_headless()</span><br><span class="line">   opt.add_argument(</span><br><span class="line">       <span class="string">'user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.6726.400 QQBrowser/10.2.2265.400'</span>)</span><br><span class="line"></span><br><span class="line">   driver = webdriver.Chrome(options=opt)</span><br></pre></td></tr></table></figure></p>
-<p>这里使用opt作为chromedriver的参数，添加user-agent信息，然后调用webdriver.Chrome，并传入opt。</p>
-<p><strong>注：这里使用的是无窗口界面的chrome selenium爬虫，所以可以设置，如果使用有界面的，则不必设置，因为带界面必定带请求头和各种信息。</strong></p>
-<p>Selenium不再推荐使用PhantomJS，会报如下警告<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: Selenium support for PhantomJS has been deprecated, please use headless versions of Chrome or Firefox instead</span><br><span class="line"> warnings.warn(&apos;Selenium support for PhantomJS has been deprecated, please use headless &apos;</span><br></pre></td></tr></table></figure></p>
-<p>于是从PhantomJS转移到Chrome，使用headless versions of Chrome时，首先要安装Chrome，然后下载chromedriver，再把chromedriver的地址配置到系统环境变量path中，方便调用。如果不把chromedriver的地址配置到系统环境变量的话，也可以在使用时指定chromedriver的地址。</p>
-<p>注意Chrome和chromedriver有版本对应的要求，系统中安装了某一版本的chrome要使用对应版本的chromedriver，其实下载最新版本的Chrome和chromedriver就行了，一般都是对应的。</p>
-<p>Chrome下载地址：<a href="https://chrome.en.softonic.com/" target="_blank" rel="noopener">https://chrome.en.softonic.com/</a></p>
-<p>chromedriver下载地址：<a href="http://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/chromedriver/</a></p>
-<h1 id="报错：-0917-002914-533-ERROR-gpu-process-transport-factory-cc-1007-Lost-UI-shared-context"><a href="#报错：-0917-002914-533-ERROR-gpu-process-transport-factory-cc-1007-Lost-UI-shared-context" class="headerlink" title="报错：[0917/002914.533:ERROR:gpu_process_transport_factory.cc(1007)] Lost UI shared context."></a>报错：[0917/002914.533:ERROR:gpu_process_transport_factory.cc(1007)] Lost UI shared context.</h1><p>原因是在windows系统中Chrome无头模式下，其中的SwiftShader软件会触发断言失败，但实际上不影响程序执行，可以忽略该错误。</p>
-<p>可以设置chromedriver的日志级别，只有大于设置级别的日志还会输出，该配置参数为：log-level：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">opt.add_argument(<span class="string">'log-level=3'</span>)</span><br><span class="line"><span class="comment"># INFO = 0, </span></span><br><span class="line"><span class="comment"># WARNING = 1, </span></span><br><span class="line"><span class="comment"># LOG_ERROR = 2, </span></span><br><span class="line"><span class="comment"># LOG_FATAL = 3</span></span><br><span class="line"><span class="comment"># default is 0</span></span><br></pre></td></tr></table></figure></p>
+            <p>默认情况下，Flask路由响应GET请求。 但是，可以通过为route()装饰器提供方法参数来更改此首选项。为了演示在URL路由中使用POST方法，首先创建一个HTML表单并使用POST方法将表单数据发送到URL。将以下脚本保存到文件:login.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;</span><br><span class="line">    &lt;title&gt;Flask HTTP请求方法处理&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line">      &lt;form action = &quot;http://localhost:5000/login&quot; method = &quot;post&quot;&gt;</span><br><span class="line">         &lt;p&gt;输入姓名:&lt;/p&gt;</span><br><span class="line">         &lt;p&gt;&lt;input type = &quot;text&quot; name = &quot;name&quot; value=&quot;&quot;/&gt;&lt;/p&gt;</span><br><span class="line">         &lt;p&gt;&lt;input type = &quot;submit&quot; value = &quot;提交&quot; /&gt;&lt;/p&gt;</span><br><span class="line">      &lt;/form&gt;</span><br><span class="line"></span><br><span class="line">   &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>HTML现在在Python shell中输入以下脚本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, redirect, url_for, request</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/success/&lt;name&gt;&apos;)</span><br><span class="line">def success(name):</span><br><span class="line">    return &apos;welcome %s&apos; % name</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/login&apos;,methods = [&apos;POST&apos;, &apos;GET&apos;])</span><br><span class="line">def login():</span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        user = request.form[&apos;name&apos;]</span><br><span class="line">        return redirect(url_for(&apos;success&apos;,name = user))</span><br><span class="line">    else:</span><br><span class="line">        user = request.args.get(&apos;name&apos;)</span><br><span class="line">        return redirect(url_for(&apos;success&apos;,name = user))</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug = True)</span><br></pre></td></tr></table></figure></p>
+<p>Python开发服务器开始运行后，在浏览器中打开login.html，在文本字段中输入名称(如:maxsu )并单击提交。</p>
+<p>表单数据被提交到<form>标签的action属性指定的URL。<a href="http://localhost:5000/login被映射到login()函数。" target="_blank" rel="noopener">http://localhost:5000/login被映射到login()函数。</a> 由于服务器已通过POST方法接收数据，因此从表单数据获得’name’参数的值，通过以下方式-<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = request.form[&apos;name&apos;]</span><br></pre></td></tr></table></figure></form></p>
+<p>Python它作为可变部分传递给URL:/success。 浏览器在窗口中显示欢迎消息。</p>
+<p>将login.html中的方法参数更改为GET并在浏览器中再次打开。 在服务器上收到的数据是通过GET方法。 ‘name’参数的值现在通过以下方式获得 -<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User = request.args.get(&apos;name&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>Python这里，args是字典对象，它包含一系列表单参数及其对应值。 与之前一样，与’name’参数对应的值将传递到URL:/success。</p>
+<h1 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h1><p>来自客户端网页的数据作为全局请求对象发送到服务器。要处理请求数据，请求对旬应该从Flask模块导入。请求对象的重要属性如下所列 </p>
+<ul>
+<li>form  包含表单参数及其值的键和值对的字典对象。</li>
+<li>args  解析问号(?)后的URL部分查询字符串的内容。</li>
+<li>cookies 保存Cookie名称和值的字典对象。</li>
+<li>file 与上传文件有关的数据。</li>
+<li>method 当前请求方法。</li>
+</ul>
 
           
         
@@ -1654,7 +480,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/文档测试/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/简单使用SQLAlchemy/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1673,7 +499,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/31/文档测试/" itemprop="url">文档测试</a></h1>
+                <a class="post-title-link" href="/2019/02/13/简单使用SQLAlchemy/" itemprop="url">SQLAlchemy：简单使用SQLAlchemy</a></h1>
         
 
         <div class="post-meta">
@@ -1685,8 +511,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
               </time>
             
 
@@ -1715,373 +541,12 @@
 
                 
                 
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
+                  ， 
                 
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  798 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果你经常阅读Python的官方文档，可以看到很多文档都有示例代码。比如re模块就带了很多示例代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; import re</span><br><span class="line">&gt;&gt;&gt; m = re.search(&apos;(?&lt;=abc)def&apos;, &apos;abcdef&apos;)</span><br><span class="line">&gt;&gt;&gt; m.group(0)</span><br><span class="line">&apos;def&apos;</span><br></pre></td></tr></table></figure></p>
-<p>可以把这些示例代码在Python的交互式环境下输入并执行，结果与文档中的示例代码显示的一致。</p>
-<p>这些代码与其他说明可以写在注释中，然后，由一些工具来自动生成文档。既然这些代码本身就可以粘贴出来直接运行，那么，可不可以自动执行写在注释中的这些代码呢？</p>
-<p>答案是肯定的。</p>
-<p>当我们编写注释时，如果写上这样的注释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def abs(n):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    Function to get absolute value of number.</span><br><span class="line"></span><br><span class="line">    Example:</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; abs(1)</span><br><span class="line">    1</span><br><span class="line">    &gt;&gt;&gt; abs(-1)</span><br><span class="line">    1</span><br><span class="line">    &gt;&gt;&gt; abs(0)</span><br><span class="line">    0</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    return n if n &gt;= 0 else (-n)</span><br></pre></td></tr></table></figure></p>
-<p>无疑更明确地告诉函数的调用者该函数的期望输入和输出。</p>
-<p>并且，Python内置的“文档测试”（doctest）模块可以直接提取注释中的代码并执行测试。</p>
-<p>doctest严格按照Python交互式命令行的输入和输出来判断测试结果是否正确。只有测试异常的时候，可以用…表示中间一大段烦人的输出。</p>
-<p>让我们用doctest来测试上次编写的Dict类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># mydict2.py</span><br><span class="line">class Dict(dict):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    Simple dict but also support access as x.y style.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; d1 = Dict()</span><br><span class="line">    &gt;&gt;&gt; d1[&apos;x&apos;] = 100</span><br><span class="line">    &gt;&gt;&gt; d1.x</span><br><span class="line">    100</span><br><span class="line">    &gt;&gt;&gt; d1.y = 200</span><br><span class="line">    &gt;&gt;&gt; d1[&apos;y&apos;]</span><br><span class="line">    200</span><br><span class="line">    &gt;&gt;&gt; d2 = Dict(a=1, b=2, c=&apos;3&apos;)</span><br><span class="line">    &gt;&gt;&gt; d2.c</span><br><span class="line">    &apos;3&apos;</span><br><span class="line">    &gt;&gt;&gt; d2[&apos;empty&apos;]</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">        ...</span><br><span class="line">    KeyError: &apos;empty&apos;</span><br><span class="line">    &gt;&gt;&gt; d2.empty</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">        ...</span><br><span class="line">    AttributeError: &apos;Dict&apos; object has no attribute &apos;empty&apos;</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    def __init__(self, **kw):</span><br><span class="line">        super(Dict, self).__init__(**kw)</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, key):</span><br><span class="line">        try:</span><br><span class="line">            return self[key]</span><br><span class="line">        except KeyError:</span><br><span class="line">            raise AttributeError(r&quot;&apos;Dict&apos; object has no attribute &apos;%s&apos;&quot; % key)</span><br><span class="line"></span><br><span class="line">    def __setattr__(self, key, value):</span><br><span class="line">        self[key] = value</span><br><span class="line"></span><br><span class="line">if __name__==&apos;__main__&apos;:</span><br><span class="line">    import doctest</span><br><span class="line">    doctest.testmod()</span><br></pre></td></tr></table></figure></p>
-<p>运行python mydict2.py：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python mydict2.py</span><br></pre></td></tr></table></figure></p>
-<p>什么输出也没有。这说明我们编写的doctest运行都是正确的。如果程序有问题，比如把<strong>getattr</strong>()方法注释掉，再运行就会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python mydict2.py</span><br><span class="line">**********************************************************************</span><br><span class="line">File &quot;/Users/michael/Github/learn-python3/samples/debug/mydict2.py&quot;, line 10, in __main__.Dict</span><br><span class="line">Failed example:</span><br><span class="line">    d1.x</span><br><span class="line">Exception raised:</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">      ...</span><br><span class="line">    AttributeError: &apos;Dict&apos; object has no attribute &apos;x&apos;</span><br><span class="line">**********************************************************************</span><br><span class="line">File &quot;/Users/michael/Github/learn-python3/samples/debug/mydict2.py&quot;, line 16, in __main__.Dict</span><br><span class="line">Failed example:</span><br><span class="line">    d2.c</span><br><span class="line">Exception raised:</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">      ...</span><br><span class="line">    AttributeError: &apos;Dict&apos; object has no attribute &apos;c&apos;</span><br><span class="line">**********************************************************************</span><br><span class="line">1 items had failures:</span><br><span class="line">   2 of   9 in __main__.Dict</span><br><span class="line">***Test Failed*** 2 failures.</span><br></pre></td></tr></table></figure></p>
-<p>注意到最后3行代码。当模块正常导入时，doctest不会被执行。只有在命令行直接运行时，才执行doctest。所以，不必担心doctest会在非测试环境下执行。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>doctest非常有用，不但可以用来测试，还可以直接作为示例代码。通过某些文档生成工具，就可以自动把包含doctest的注释提取出来。用户看文档的时候，同时也看到了doctest。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/selenium简单使用/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/selenium简单使用/" itemprop="url">selenium简单使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  5.8k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  24 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>selenium可以解决js渲染问题，模拟网页加载。</p>
-<h1 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from selenium.webdriver.common.by import By</span><br><span class="line">from selenium.webdriver.common.keys import Keys</span><br><span class="line">from selenium.webdriver.support import expected_conditions as EC</span><br><span class="line">from selenium.webdriver.support.wait import WebDriverWait</span><br><span class="line"></span><br><span class="line">browser = webdriver.Chrome()</span><br><span class="line">try:</span><br><span class="line">    browser.get(&apos;https://www.baidu.com&apos;)</span><br><span class="line">    input = browser.find_element_by_id(&apos;kw&apos;)</span><br><span class="line">    input.send_keys(&apos;Python&apos;)</span><br><span class="line">    input.send_keys(Keys.ENTER)</span><br><span class="line">    wait = WebDriverWait(browser, 10)</span><br><span class="line">    wait.until(EC.presence_of_element_located((By.ID, &apos;content_left&apos;)))</span><br><span class="line">    print(browser.current_url)</span><br><span class="line">    print(browser.get_cookies())</span><br><span class="line">    print(browser.page_source)</span><br><span class="line">finally:</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
-<p>运行代码之后，如果正确配置好了ChromeDriver，可以发现会自动弹出一个浏览器，浏览器首先会跳转到百度，然后在搜索框中输入Python进行搜索，然后跳转到搜索结果页，等待搜索结果加载出来之后，控制台分别会输出当前的URL，当前的Cookies还有网页源代码。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/31/selenium简单使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/requests库的get和post方法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/31/requests库的get和post方法/" itemprop="url">requests库的get和post方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
-                2019-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/python/SQLAlchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">SQLAlchemy</span>
                   </a>
                 </span>
 
@@ -2127,7 +592,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -2150,33 +615,1561 @@
       
         
           
-            <h1 id="获取网页的方式"><a href="#获取网页的方式" class="headerlink" title="获取网页的方式"></a>获取网页的方式</h1><p>其实在加载网页的时候, 有几种类型, 而这几种类型就是你打开网页的关键. 最重要的类型 (method) 就是 get 和 post (当然还有其他的, 比如 head, delete)。</p>
-<p>以下分析两个重要的类型的重要特点。</p>
-<h2 id="post"><a href="#post" class="headerlink" title="post"></a>post</h2><ul>
-<li>账号登录</li>
-<li>搜索内容</li>
-<li>上传图片</li>
-<li>上传文件</li>
-<li>往服务器传数据等<h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2></li>
-<li>正常打开网页</li>
-<li>不往服务器传数据<br>这样看来, 很多网页使用 get 就可以了, 而 post, 我们则是给服务器发送个性化请求, 比如将你的账号密码传给服务器, 让它给你返回一个含有你个人信息的 HTML.</li>
+            <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>导入SQLAlchemy，并初始化DBSession：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 导入:</span><br><span class="line">from sqlalchemy import Column, String, create_engine</span><br><span class="line">from sqlalchemy.orm import sessionmaker</span><br><span class="line">from sqlalchemy.ext.declarative import declarative_base</span><br><span class="line"></span><br><span class="line"># 创建对象的基类:</span><br><span class="line">Base = declarative_base()</span><br><span class="line"></span><br><span class="line"># 定义User对象:</span><br><span class="line">class User(Base):</span><br><span class="line">    # 表的名字:</span><br><span class="line">    __tablename__ = &apos;user&apos;</span><br><span class="line"></span><br><span class="line">    # 表的结构:</span><br><span class="line">    id = Column(String(20), primary_key=True)</span><br><span class="line">    name = Column(String(20))</span><br><span class="line"></span><br><span class="line"># 初始化数据库连接:</span><br><span class="line">engine = create_engine(&apos;mysql+mysqlconnector://root:password@localhost:3306/test&apos;)</span><br><span class="line"># 创建DBSession类型:</span><br><span class="line">DBSession = sessionmaker(bind=engine)</span><br></pre></td></tr></table></figure></p>
+<p><strong>注：create_engine可以使用echo参数，echo=True，可以输出日志，如下所示“</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">2019-02-05 16:20:31,866 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE &apos;sql_mode&apos;</span><br><span class="line">2019-02-05 16:20:31,866 INFO sqlalchemy.engine.base.Engine &#123;&#125;</span><br><span class="line">2019-02-05 16:20:31,872 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE &apos;lower_case_table_names&apos;</span><br><span class="line">2019-02-05 16:20:31,872 INFO sqlalchemy.engine.base.Engine &#123;&#125;</span><br><span class="line">2019-02-05 16:20:31,879 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()</span><br><span class="line">2019-02-05 16:20:31,879 INFO sqlalchemy.engine.base.Engine &#123;&#125;</span><br><span class="line">2019-02-05 16:20:31,882 INFO sqlalchemy.engine.base.Engine SELECT CAST(&apos;test plain returns&apos; AS CHAR(60)) AS anon_1</span><br><span class="line">2019-02-05 16:20:31,882 INFO sqlalchemy.engine.base.Engine &#123;&#125;</span><br><span class="line">2019-02-05 16:20:31,883 INFO sqlalchemy.engine.base.Engine SELECT CAST(&apos;test unicode returns&apos; AS CHAR(60)) AS anon_1</span><br><span class="line">2019-02-05 16:20:31,883 INFO sqlalchemy.engine.base.Engine &#123;&#125;</span><br><span class="line">2019-02-05 16:20:31,885 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)</span><br><span class="line">2019-02-05 16:20:31,887 INFO sqlalchemy.engine.base.Engine SELECT `USER`.id AS `USER_id`, `USER`.name AS `USER_name` </span><br><span class="line">FROM `USER` </span><br><span class="line">WHERE `USER`.name = %(name_1)s AND `USER`.id = %(id_1)s</span><br><span class="line">2019-02-05 16:20:31,887 INFO sqlalchemy.engine.base.Engine &#123;&apos;name_1&apos;: &apos;Bob&apos;, &apos;id_1&apos;: &apos;5&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上代码完成SQLAlchemy的初始化和具体每个表的class定义。如果有多个表，就继续定义其他class，例如School：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class School(Base):</span><br><span class="line">    __tablename__ = &apos;school&apos;</span><br><span class="line">    id = ...</span><br><span class="line">    name = ...</span><br></pre></td></tr></table></figure></p>
+<p><strong>注：类必须继承Base基类，而且必须定义<strong>tablename</strong>，对应数据库中表的名称，且类中每个字段的名称必须对应数据库中的字段名称（windows中可以大小写，linux未测试），类中的字段可以少，例如数据库中有time字段，如果不是必要字段，可以在类中不定义time字段。</strong></p>
+<p>定义了<strong>tablename</strong>，可以输出类构建的表的信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; User.__table__</span><br><span class="line">Out[2]: Table(&apos;USER&apos;, MetaData(bind=None), Column(&apos;id&apos;, String(length=20), table=&lt;USER&gt;, primary_key=True, nullable=False), Column(&apos;name&apos;, String(length=20), table=&lt;USER&gt;), schema=None)</span><br></pre></td></tr></table></figure></p>
+<p>create_engine()用来初始化数据库连接。SQLAlchemy用一个字符串表示连接信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;数据库类型+数据库驱动名称://用户名:口令@机器地址:端口号/数据库名&apos;</span><br></pre></td></tr></table></figure></p>
+<p>你只需要根据需要替换掉用户名、口令等信息即可。</p>
+<p>下面，我们看看如何向数据库表中添加一行记录。</p>
+<p>由于有了ORM，我们向数据库表中添加一行记录，可以视为添加一个User对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建session对象:</span><br><span class="line">session = DBSession()</span><br><span class="line"># 创建新User对象:</span><br><span class="line">new_user = User(id=&apos;5&apos;, name=&apos;Bob&apos;)</span><br><span class="line"># 添加到session:</span><br><span class="line">session.add(new_user)</span><br><span class="line"># 提交即保存到数据库:</span><br><span class="line">session.commit()</span><br><span class="line"># 关闭session:</span><br><span class="line">session.close()</span><br></pre></td></tr></table></figure></p>
+<p><strong>注：这里的sesson就是pymysql中的cursor游标，DBSession才是pymysql中的session。</strong><br>可见，关键是获取session，然后把对象添加到session，最后提交并关闭。DBSession对象可视为当前数据库连接。</p>
+<p>如何从数据库表中查询数据呢？有了ORM，查询出来的可以不再是tuple，而是User对象。SQLAlchemy提供的查询接口如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 创建Session:</span><br><span class="line">session = DBSession()</span><br><span class="line"># 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:</span><br><span class="line">user = session.query(User).filter(User.id==&apos;5&apos;).one()</span><br><span class="line"># 打印类型和对象的name属性:</span><br><span class="line">print(&apos;type:&apos;, type(user))</span><br><span class="line">print(&apos;name:&apos;, user.name)</span><br><span class="line"># 关闭Session:</span><br><span class="line">session.close()</span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type: &lt;class &apos;__main__.User&apos;&gt;</span><br><span class="line">name: Bob</span><br></pre></td></tr></table></figure></p>
+<p>如果要查找多个条件，可以写成以下几种形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = session.query(User).filter(User.name == &apos;Bob&apos;).filter(User.id == &apos;5&apos;).all()</span><br><span class="line">a = session.query(User).filter(User.name == &apos;Bob&apos;, User.id == &apos;5&apos;).all()</span><br><span class="line">a = session.query(User).filter(User.name == &apos;Bob&apos; and User.id == &apos;5&apos;).all()</span><br></pre></td></tr></table></figure></p>
+<p>更通用的方法是用and_<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = session.query(User).filter(and_(User.name == &apos;Bob&apos;, User.id == &apos;5&apos;)).all()</span><br></pre></td></tr></table></figure></p>
+<p>使用like，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = session.query(User).filter(and_(User.name.like(&quot;%%&quot;), User.id.like(&apos;%2%&apos;))).all()</span><br></pre></td></tr></table></figure></p>
+<p>使用filter_by<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = session.query(User).filter_by(id=&apos;5&apos;).all()</span><br></pre></td></tr></table></figure></p>
+<p>filter_by特点是不需要使用类属性表示，可以使用参数，例如id,name等。</p>
+<p>可见，ORM就是把数据库表的行与相应的对象建立关联，互相转换。</p>
+<p>由于关系数据库的多个表还可以用外键实现一对多、多对多等关联，相应地，ORM框架也可以提供两个对象之间的一对多、多对多等功能。</p>
+<p>例如，如果一个User拥有多个Book，就可以定义一对多关系如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class User(Base):</span><br><span class="line">    __tablename__ = &apos;user&apos;</span><br><span class="line"></span><br><span class="line">    id = Column(String(20), primary_key=True)</span><br><span class="line">    name = Column(String(20))</span><br><span class="line">    # 一对多:</span><br><span class="line">    books = relationship(&apos;Book&apos;)</span><br><span class="line"></span><br><span class="line">class Book(Base):</span><br><span class="line">    __tablename__ = &apos;book&apos;</span><br><span class="line"></span><br><span class="line">    id = Column(String(20), primary_key=True)</span><br><span class="line">    name = Column(String(20))</span><br><span class="line">    # “多”的一方的book表是通过外键关联到user表的:</span><br><span class="line">    user_id = Column(String(20), ForeignKey(&apos;user.id&apos;))</span><br></pre></td></tr></table></figure></p>
+<p>当我们查询一个User对象时，该对象的books属性将返回一个包含若干个Book对象的list。</p>
+<h1 id="run参数"><a href="#run参数" class="headerlink" title="run参数"></a>run参数</h1><p>最后，Flask类的run()方法在本地开发服务器上运行应用程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.run(host, port, debug, options)</span><br></pre></td></tr></table></figure></p>
+<p>Python上面方法中的所有参数都是可选的，作用如下表描述说明 </p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>host</td>
+<td>监听的主机名。默认为127.0.0.1(localhost)。 设置为’0.0.0.0’使服务器在外部可用</td>
+</tr>
+<tr>
+<td>2</td>
+<td>port</td>
+<td>监听端口号，默认为:5000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>debug</td>
+<td>默认为:false。 如果设置为:true，则提供调试信息</td>
+</tr>
+<tr>
+<td>4</td>
+<td>options</td>
+<td>被转发到底层的Werkzeug服务器。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>ORM框架的作用就是把数据库表的一行记录与一个对象互相做自动转换。</p>
+<p>正确使用ORM的前提是了解关系数据库的原理。</p>
+<h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><p>报错找不到mysql的包，需要安装mysql-connector</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mysql-connector</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask返回json数据/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask返回json数据/" itemprop="url">flask返回json数据</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  174 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>定义类后，在里面定义方法to_json():<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 创建对象的基类:</span><br><span class="line">Base = declarative_base()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Address对象:</span><br><span class="line">class Address(Base):</span><br><span class="line">    # 表的名字:</span><br><span class="line">    __tablename__ = &apos;address&apos;</span><br><span class="line">    # 表的结构:</span><br><span class="line">    id = Column(Integer, primary_key=True)</span><br><span class="line">    address = Column(String(20))</span><br><span class="line">    status = Column(Integer)</span><br><span class="line"></span><br><span class="line">    def to_json(self):</span><br><span class="line">        return &#123;</span><br><span class="line">            &apos;id&apos;: self.id,</span><br><span class="line">            &apos;address&apos;: self.address,</span><br><span class="line">            &apos;status&apos;: self.status</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>返回dict数据。</p>
+<p>返回json数据，使用jsonify：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, jsonify</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/ajax&apos;)</span><br><span class="line">def ajax():</span><br><span class="line">    session = DBSession()</span><br><span class="line">    try:</span><br><span class="line">        addresses = session.query(Address).filter().all()</span><br><span class="line">        addresses_json = list()</span><br><span class="line">        for address in addresses:</span><br><span class="line">            print(address.address)</span><br><span class="line">            addresses_json.append(address.to_json())</span><br><span class="line">        return jsonify(&#123;&apos;addresses&apos;: addresses_json&#125;)</span><br><span class="line"></span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(e)</span><br><span class="line">    finally:</span><br><span class="line">        session.close()</span><br></pre></td></tr></table></figure></p>
+<p>返回的数据如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">addresses: [</span><br><span class="line">&#123;</span><br><span class="line">address: &quot;xxx#qq.com&quot;,</span><br><span class="line">id: 1,</span><br><span class="line">status: 0</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">address: &quot;xxx@163.com&quot;,</span><br><span class="line">id: 2,</span><br><span class="line">status: 0</span><br><span class="line">&#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask：cookie处理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask：cookie处理/" itemprop="url">flask：cookie处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  685 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Cookie以文本文件的形式存储在客户端计算机上。</p>
+<p>其目的是记住和跟踪与客户使用有关的数据，以获得更好的访问体验和网站统计。Request对象包含一个cookie的属性。</p>
+<p>它是所有cookie变量及其对应值的字典对象，客户端已发送。</p>
+<p>除此之外，cookie还会存储其到期时间，路径和站点的域名。在Flask中，cookies设置在响应对象上。</p>
+<p>使用make_response()函数从视图函数的返回值中获取响应对象。</p>
+<p>之后，使用响应对象的set_cookie()函数来存储cookie。重读cookie很容易。 </p>
+<p>可以使用request.cookies属性的get()方法来读取cookie。在下面的Flask应用程序中，当访问URL =&gt; / 时，会打开一个简单的表单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&apos;index.html&apos;)</span><br></pre></td></tr></table></figure>
+<p>这个HTML页面包含一个文本输入，完整代码如下所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</span><br><span class="line">&lt;title&gt;Flask Cookies示例&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line"></span><br><span class="line">      &lt;form action = &quot;/setcookie&quot; method = &quot;POST&quot;&gt;</span><br><span class="line">         &lt;p&gt;&lt;h3&gt;Enter userID&lt;/h3&gt;&lt;/p&gt;</span><br><span class="line">         &lt;p&gt;&lt;input type = &apos;text&apos; name = &apos;name&apos;/&gt;&lt;/p&gt;</span><br><span class="line">         &lt;p&gt;&lt;input type = &apos;submit&apos; value = &apos;登录&apos;/&gt;&lt;/p&gt;</span><br><span class="line">      &lt;/form&gt;</span><br><span class="line"></span><br><span class="line">   &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>表单提交到URL =&gt; /setcookie。 关联的视图函数设置一个Cookie名称为:userID，并的另一个页面中呈现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/setcookie&apos;, methods = [&apos;POST&apos;, &apos;GET&apos;])</span><br><span class="line">def setcookie():</span><br><span class="line">   if request.method == &apos;POST&apos;:</span><br><span class="line">        user = request.form[&apos;name&apos;]</span><br><span class="line"></span><br><span class="line">        resp = make_response(render_template(&apos;readcookie.html&apos;))</span><br><span class="line">        resp.set_cookie(&apos;userID&apos;, user)</span><br><span class="line"></span><br><span class="line">        return resp</span><br></pre></td></tr></table></figure></p>
+<p>readcookie.html代码可为空：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>readcookie.html 包含超链接到另一个函数getcookie()的视图，该函数读回并在浏览器中显示cookie值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/getcookie&apos;)</span><br><span class="line">def getcookie():</span><br><span class="line">    name = request.cookies.get(&apos;userID&apos;)</span><br><span class="line">    return &apos;&lt;h1&gt;welcome &apos;+name+&apos;&lt;/h1&gt;&apos;</span><br></pre></td></tr></table></figure>
+<p>完整的应用程序代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">from flask import render_template</span><br><span class="line">from flask import request</span><br><span class="line">from flask import make_response</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&apos;index.html&apos;)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/setcookie&apos;, methods = [&apos;POST&apos;, &apos;GET&apos;])</span><br><span class="line">def setcookie():</span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        user = request.form[&apos;name&apos;]</span><br><span class="line"></span><br><span class="line">        resp = make_response(render_template(&apos;readcookie.html&apos;))</span><br><span class="line">        resp.set_cookie(&apos;userID&apos;, user)</span><br><span class="line">        return resp</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/getcookie&apos;)</span><br><span class="line">def getcookie():</span><br><span class="line">    name = request.cookies.get(&apos;userID&apos;)</span><br><span class="line">    print (name)</span><br><span class="line">    return &apos;&lt;h1&gt;welcome, &apos;+name+&apos;&lt;/h1&gt;&apos;</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug = True)</span><br></pre></td></tr></table></figure></p>
+<p>运行该应用程序并访问URL =&gt; <a href="http://localhost:5000/，设置cookie后，会跳转到readcookie.html，再访问getcookie页面，会看到cookie值。" target="_blank" rel="noopener">http://localhost:5000/，设置cookie后，会跳转到readcookie.html，再访问getcookie页面，会看到cookie值。</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask：消息闪现/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask：消息闪现/" itemprop="url">flask：消息闪现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  970 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一个基于GUI好的应用程序需要向用户提供交互的反馈信息。 例如，桌面应用程序使用对话框或消息框，JavaScript使用alert()函数用于类似的目的。</p>
+<p>在Flask Web应用程序中生成这样的信息消息很容易。 Flask框架的闪现系统使得可以在一个视图中创建一个消息并将其呈现在名为next的视图函数中。</p>
+<p>Flask模块包含flash()方法。 它将消息传递给下一个请求，该请求通常是一个模板。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flash(message, category)</span><br></pre></td></tr></table></figure></p>
+<p>在这里 </p>
+<ul>
+<li>message - 参数是要刷新的实际消息。</li>
+<li>category - 参数是可选的。 它可以是’错误’，’信息’或’警告’。</li>
 </ul>
-<p>从主动和被动的角度来说, post 中文是发送, 比较主动, 你控制了服务器返回的内容. 而 get 中文是取得, 是被动的, 你没有发送给服务器个性化的信息, 它不会根据你个性化的信息返回不一样的 HTML.</p>
-<h1 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h1><p>get请求的参数一般是在网址后面加入?parameter1=xxx&amp;parameter2=xxxx，使用?传递参数，用&amp;并列参数。</p>
-<p>使用requests的包直接请求baidu，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&quot;http://www.baidu.com&quot;)</span><br><span class="line">&gt;&gt;&gt; r.text</span><br><span class="line">&apos;&lt;!DOCTYPE html&gt;\r\n&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;ç\x99¾åº¦ä¸\x80ä</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
-<p>r.text得到的是unicode编码数据，可能会出现乱码，可以使用r.encoding = ‘utf8’强制转换后再提取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.encoding=&apos;utf8&apos;</span><br><span class="line">&gt;&gt;&gt; r.text</span><br><span class="line">&apos;&lt;!DOCTYPE html&gt;\r\n&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;百度一下，你就知道&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：注意：response.content得到的是二进制数据，而response.text得到的是Unicode编码数据，一般content用于获取图片、视频等，text用于获取文字类数据。</strong></p>
-<p>访问<a href="http://httpbin/get" target="_blank" rel="noopener">http://httpbin/get</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;&#125;,</span><br><span class="line">  &quot;headers&quot;: &#123;</span><br><span class="line">    &quot;Accept&quot;: &quot;*/*&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;python-requests/2.18.4&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;,</span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/get&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果带参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get?a=2&amp;c=3&amp;w=&apos;)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;</span><br><span class="line">    &quot;a&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;c&quot;: &quot;3&quot;,</span><br><span class="line">    &quot;w&quot;: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
-<p>可以看到他获取到了参数并且输出了。</p>
-<p>也可以使用另一种写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get&apos;,params=parameter)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;</span><br><span class="line">    &quot;a&quot;: &quot;23&quot;,</span><br><span class="line">    &quot;b&quot;: &quot;32&quot;,</span><br><span class="line">    &quot;c&quot;: &quot;string&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;headers&quot;: &#123;</span><br><span class="line">    &quot;Accept&quot;: &quot;*/*&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;python-requests/2.18.4&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;,</span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/get?a=23&amp;b=32&amp;c=string&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以直接使用json方法转化成json（与使用json的loads效果一样）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.json</span><br><span class="line">&lt;bound method Response.json of &lt;Response [200]&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; r.json()</span><br><span class="line">&#123;&apos;args&apos;: &#123;&apos;a&apos;: &apos;23&apos;, &apos;b&apos;: &apos;32&apos;, &apos;c&apos;: &apos;string&apos;&#125;, &apos;headers&apos;: &#123;&apos;Accept&apos;: &apos;*/*&apos;, &apos;Accept-Encoding&apos;: &apos;gzip, deflate&apos;, &apos;Connection&apos;: &apos;close&apos;, &apos;Host&apos;: &apos;httpbin.org&apos;, &apos;User-Agent&apos;: &apos;python-requests/2.18.4&apos;&#125;, &apos;origin&apos;: &apos;115.153.174.11&apos;, &apos;url&apos;: &apos;http://httpbin.org/get?a=23&amp;b=32&amp;c=string&apos;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>有一些网页不使用headers无法访问，例如知乎，使用headers：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; headers = &#123;&apos;User-agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.5221.400 QQBrowser/10.0.1125.400&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; r = requests.get(&quot;http://www.zhihu.com&quot;)</span><br><span class="line">&gt;&gt;&gt; print(r)</span><br><span class="line">&lt;Response [400]&gt;</span><br><span class="line">&gt;&gt;&gt; r = requests.get(&quot;http://www.zhihu.com&quot;,headers=headers)</span><br><span class="line">&gt;&gt;&gt; r</span><br><span class="line">&lt;Response [200]&gt;</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>可以通过r.headers看到请求头信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.headers</span><br><span class="line">&#123;&apos;Date&apos;: &apos;Tue, 29 Jan 2019 09:05:50 GMT&apos;, &apos;Content-Type&apos;: &apos;text/html; charset=utf-8&apos;, &apos;Transfer-Encoding&apos;: &apos;chunked&apos;, &apos;Connection&apos;: &apos;keep-alive&apos;, &apos;Vary&apos;: &apos;Accept-Encoding&apos;, &apos;Content-Security-Policy&apos;: &quot;default-src * blob:; img-src * data: blob:; connect-src * wss: blob:; frame-src &apos;self&apos; *.zhihu.com weixin: *.vzuu.com getpocket.com note.youdao.com safari-extension://com.evernote.safari.clipper-Q79WDW8YH9 zhihujs: captcha.guard.qcloud.com; script-src &apos;self&apos; blob: *.zhihu.com res.wx.qq.com &apos;unsafe-eval&apos; unpkg.zhimg.com unicom.zhimg.com captcha.gtimg.com captcha.guard.qcloud.com pagead2.googlesyndication.com i.hao61.net &apos;nonce-a0691bfd-cf49-40b4-8ad7-37d552f59c50&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos; *.zhihu.com unicom.zhimg.com captcha.gtimg.com&quot;, &apos;X-Frame-Options&apos;: &apos;SAMEORIGIN&apos;, &apos;Strict-Transport-Security&apos;: &apos;max-age=15552000; includeSubDomains&apos;, &apos;Surrogate-Control&apos;: &apos;no-store&apos;, &apos;Cache-Control&apos;: &apos;no-store, no-cache, must-revalidate, proxy-revalidate&apos;, &apos;Pragma&apos;: &apos;no-cache&apos;, &apos;Expires&apos;: &apos;0&apos;, &apos;X-Content-Type-Options&apos;: &apos;nosniff&apos;, &apos;X-XSS-Protection&apos;: &apos;1; mode=block&apos;, &apos;Content-Encoding&apos;: &apos;gzip&apos;, &apos;Server&apos;: &apos;ZWS&apos;&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="post方法"><a href="#post方法" class="headerlink" title="post方法"></a>post方法</h1><p>最简单的依然是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&quot;http://httpbin.org/post&quot;)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;&#125;,</span><br><span class="line">  &quot;data&quot;: &quot;&quot;,</span><br><span class="line">  &quot;files&quot;: &#123;&#125;,</span><br><span class="line">  &quot;form&quot;: &#123;&#125;,</span><br><span class="line">  &quot;headers&quot;: &#123;</span><br><span class="line">    &quot;Accept&quot;: &quot;*/*&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Content-Length&quot;: &quot;0&quot;,</span><br><span class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;python-requests/2.18.4&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;json&quot;: null,</span><br><span class="line">  &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;,</span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/post&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>传入参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&quot;http://httpbin.org/post&quot;,params=parameter)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;</span><br><span class="line">    &quot;a&quot;: &quot;23&quot;,</span><br><span class="line">    &quot;b&quot;: &quot;32&quot;,</span><br><span class="line">    &quot;c&quot;: &quot;string&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
-<p>使用headers和get方法一样。</p>
+<p>要从会话中删除消息，模板调用get_flashed_messages()函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_flashed_messages(with_categories, category_filter)</span><br></pre></td></tr></table></figure></p>
+<p>两个参数都是可选的。 如果收到的消息具有类别，则第一个参数是元组。 第二个参数对于仅显示特定消息很有用。</p>
+<p>以下闪现模板中收到消息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% with messages = get_flashed_messages() %&#125;</span><br><span class="line">   &#123;% if messages %&#125;</span><br><span class="line">      &#123;% for message in messages %&#125;</span><br><span class="line">         &#123;&#123; message &#125;&#125;</span><br><span class="line">      &#123;% endfor %&#125;</span><br><span class="line">   &#123;% endif %&#125;</span><br><span class="line">&#123;% endwith %&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们来看一个简单的例子，演示Flask中的闪现机制。 在下面的代码中，URL =&gt; “/”显示了到登录页面的链接，没有指定要发送的消息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&apos;index.html&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>该链接引导用户显示登录表单的URL =&gt; “/login”。 提交时，login()函数验证用户名和密码，并相应地闪现“成功”或“错误”变量消息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/login&apos;, methods = [&apos;GET&apos;, &apos;POST&apos;])</span><br><span class="line">def login():</span><br><span class="line">    error = None</span><br><span class="line"></span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        if request.form[&apos;username&apos;] != &apos;admin&apos; or \</span><br><span class="line">            request.form[&apos;password&apos;] != &apos;admin&apos;:</span><br><span class="line">            error = &apos;Invalid username or password. Please try again!&apos;</span><br><span class="line">        else:</span><br><span class="line">            flash(&apos;You were successfully logged in&apos;)</span><br><span class="line">            return redirect(url_for(&apos;index&apos;))</span><br><span class="line">    return render_template(&apos;login.html&apos;, error = error)</span><br></pre></td></tr></table></figure></p>
+<p>如有错误，登录模板将重新显示并显示错误消息。</p>
+<p>模板文件:login.html 代码如下 -<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</span><br><span class="line">&lt;title&gt;Flask示例&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line"></span><br><span class="line">     &lt;h1&gt;登录&lt;/h1&gt;</span><br><span class="line">      &#123;% if error %&#125;</span><br><span class="line">      &lt;p&gt;&lt;strong&gt;Error:&lt;/strong&gt; &#123;&#123; error &#125;&#125;</span><br><span class="line">      &#123;% endif %&#125;</span><br><span class="line">      &lt;form action = &quot;/login&quot; method =&quot;POST&quot;&gt;</span><br><span class="line">         &lt;dl&gt;</span><br><span class="line">            &lt;dt&gt;用户名:&lt;/dt&gt;</span><br><span class="line">            &lt;dd&gt;</span><br><span class="line">               &lt;input type = text name = &quot;username&quot; </span><br><span class="line">                  value = &quot;&#123;&#123;request.form.username &#125;&#125;&quot;&gt;</span><br><span class="line">            &lt;/dd&gt;</span><br><span class="line">            &lt;dt&gt;密码:&lt;/dt&gt;</span><br><span class="line">            &lt;dd&gt;&lt;input type =&quot;password&quot; name =&quot;password&quot;&gt;&lt;/dd&gt;</span><br><span class="line">         &lt;/dl&gt;</span><br><span class="line">         &lt;p&gt;&lt;input type = submit value =&quot;登录&quot;&gt;&lt;/p&gt;</span><br><span class="line">      &lt;/form&gt;</span><br><span class="line"></span><br><span class="line">   &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果登录成功，则在索引模板上闪现成功消息。以下代码保存在文件(index.html)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</span><br><span class="line">&lt;title&gt;Flask消息闪现&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">         &#123;% with messages = get_flashed_messages() %&#125;</span><br><span class="line">          &#123;% if messages %&#125;</span><br><span class="line">            &lt;ul class=flashes&gt;</span><br><span class="line">            &#123;% for message in messages %&#125;</span><br><span class="line">              &lt;li&gt;&#123;&#123; message &#125;&#125;&lt;/li&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">          &#123;% endif %&#125;</span><br><span class="line">        &#123;% endwith %&#125;</span><br><span class="line"></span><br><span class="line">      &lt;h1&gt;Flask Message Flashing Example&lt;/h1&gt;</span><br><span class="line">      &lt;p&gt;您想要&lt;a href = &quot;&#123;&#123; url_for(&apos;login&apos;) &#125;&#125;&quot;&gt;</span><br><span class="line">         &lt;b&gt;登录?&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">   &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Flask消息闪现示例的完整代码如下所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, flash, redirect, render_template, request, url_for</span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.secret_key = &apos;random string&apos;</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def index():</span><br><span class="line">   return render_template(&apos;index.html&apos;)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/login&apos;, methods = [&apos;GET&apos;, &apos;POST&apos;])</span><br><span class="line">def login():</span><br><span class="line">    error = None</span><br><span class="line">    print(request.method)</span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        if request.form[&apos;username&apos;] != &apos;admin&apos; or \</span><br><span class="line">            request.form[&apos;password&apos;] != &apos;admin&apos;:</span><br><span class="line">            error = &apos;Invalid username or password. Please try again!&apos;</span><br><span class="line">        else:</span><br><span class="line">            #flash(&apos;您已成功登录&apos;)</span><br><span class="line">            flash(&apos;You were successfully logged in&apos;)</span><br><span class="line">            return redirect(url_for(&apos;index&apos;))</span><br><span class="line">    return render_template(&apos;login.html&apos;, error = error)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(debug = True)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask简单示例：学生信息添加展示/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask简单示例：学生信息添加展示/" itemprop="url">flask简单示例：学生信息添加展示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>项目地址：<a href="https://github.com/snjl/python.flask.student_item.git" target="_blank" rel="noopener">https://github.com/snjl/python.flask.student_item.git</a></p>
+<p>使用的是flask-sqlalchemy，需要使用pip安装然后导入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from flask_sqlalchemy import SQLAlchemy</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/13/flask简单示例：学生信息添加展示/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask：变量规则/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask：变量规则/" itemprop="url">flask：变量规则</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  570 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>可以通过将可变部分添加到规则参数来动态构建URL。 这个变量部分被标记为<variable-name>。 它作为关键字参数传递给规则所关联的函数。在以下示例中，route()装饰器的规则参数包含附加到URL /hello的<name>变量部分。 因此，如果在浏览器中输入URL: <a href="http://localhost:5000/hello/YiibaiYiibai，那么" target="_blank" rel="noopener">http://localhost:5000/hello/YiibaiYiibai，那么</a> ‘YiibaiYiibai’ 将作为参数提供给hello()函数。参考如下代码 -<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/hello/&lt;name&gt;&apos;)</span><br><span class="line">def hello_name(name):</span><br><span class="line">    return &apos;Hello %s!&apos; % name</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug = True)</span><br></pre></td></tr></table></figure></name></variable-name></p>
+<p>Python将上面的脚本保存到文件:hello.py，并从Python shell运行它。<br>接下来，打开浏览器并输入URL =&gt; <a href="http://localhost:5000/hello/YiibaiYiibai可以看到结果。" target="_blank" rel="noopener">http://localhost:5000/hello/YiibaiYiibai可以看到结果。</a> </p>
+<p>除了默认的字符串变量部分之外，还可以使用以下转换器构造规则 -<br>编号 | 转换器 | 描述<br>—|—|—<br>1 | int | 接受整数<br>2 | float | 对于浮点值<br>3 | path | 接受用作目录分隔符的斜杠符(/)在下面的代码中，使用了所有这些构造函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/blog/&lt;int:postID&gt;&apos;)</span><br><span class="line">def show_blog(postID):</span><br><span class="line">    return &apos;Blog Number %d&apos; % postID</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/rev/&lt;float:revNo&gt;&apos;)</span><br><span class="line">def revision(revNo):</span><br><span class="line">    return &apos;Revision Number %f&apos; % revNo</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></p>
+<p>Python从Python Shell运行上述代码。 在浏览器中访问URL =&gt; http:// localhost:5000/blog/11。给定的数字值作为:show_blog()函数的参数。 浏览器显示以下输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Blog Number 11</span><br></pre></td></tr></table></figure></p>
+<p>Shell在浏览器中输入此URL - <a href="http://localhost:5000/rev/1.1revision()函数将浮点数作为参数。" target="_blank" rel="noopener">http://localhost:5000/rev/1.1revision()函数将浮点数作为参数。</a> 以下结果出现在浏览器窗口中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Revision Number 1.100000</span><br></pre></td></tr></table></figure></p>
+<p>ShellFlask的URL规则基于Werkzeug的路由模块。<br>这确保了形成的URL是唯一的，并且基于Apache制定的先例。考虑以下脚本中定义的规则 -<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/flask&apos;)</span><br><span class="line">def hello_flask():</span><br><span class="line">    return &apos;Hello Flask&apos;</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/python/&apos;)</span><br><span class="line">def hello_python():</span><br><span class="line">    return &apos;Hello Python&apos;</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></p>
+<p>Python两条规则看起来都很相似，但在第二条规则中，使用了尾部斜线(/)。 因此，它变成了一个规范的URL。 因此，使用/python或/python/返回相同的输出。 但是，在第一条规则的情况下， URL:/flask/会导致404 Not Found页面。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask：路由/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask：路由/" itemprop="url">flask：路由</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  163 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>现代Web框架使用路由技术来帮助用户记住应用程序URL。 无需从主页导航即可直接访问所需页面。Flask中的route()装饰器用于将URL绑定到函数。 例如 <a href="mailto:-@app.route" target="_blank" rel="noopener">-@app.route</a>(‘/hello’)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def hello_world():</span><br><span class="line">    return &apos;hello world&apos;</span><br></pre></td></tr></table></figure></p>
+<p>Python这里，URL /hello规则绑定到hello_world()函数。 因此，如果用户访问URL : <a href="http://localhost:5000/hello" target="_blank" rel="noopener">http://localhost:5000/hello</a> ，就会调用hello_world()函数，这个函数中的执行的结果输出将在浏览器中呈现。应用程序对象的add_url_rule()函数也可用于将URL与函数绑定，如上例所示，使用route()。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def hello_world():</span><br><span class="line">    return &apos;hello world&apos;</span><br><span class="line"></span><br><span class="line">app.add_url_rule(&apos;/&apos;, &apos;hello&apos;, hello_world)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask：静态文件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask：静态文件/" itemprop="url">flask静态文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  298 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Web应用程序通常需要一个静态文件，例如支持显示网页的JavaScript文件或CSS文件。 通常，可以通过配置Web服务器提供这些服务，但在开发过程中，这些文件将从包中的静态文件夹或模块旁边提供，它将在应用程序的/static上提供。使用特殊的端点“静态”来为静态文件生成URL。在以下示例中，index.html中的HTML按钮的OnClick事件调用hello.js中定义的javascript函数，该函数在Flask应用程序的URL =&gt; / 中呈现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, render_template</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug = True)</span><br></pre></td></tr></table></figure></p>
+<p>Pythonindex.html 中的HTML脚本如下所示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;script type = &quot;text/javascript&quot; </span><br><span class="line">         src = &quot;&#123;&#123; url_for(&apos;static&apos;, filename = &apos;hello.js&apos;) &#125;&#125;&quot; &gt;&lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line">      &lt;input type = &quot;button&quot; onclick = &quot;sayHello()&quot; value = &quot;Say Hello&quot; /&gt;</span><br><span class="line">   &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>HTML文件:hello.js 中定义包含 sayHello() 函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function sayHello() &#123;</span><br><span class="line">   alert(&quot;Hello World&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>也可以使用html正常的引入方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type = &quot;text/javascript&quot; src = &quot;/static/hello.js&quot; &gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/02/13/flask：重定向和错误/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/13/flask：重定向和错误/" itemprop="url">flask：重定向和错误</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T16:22:05+08:00">
+                2019-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/flask/" itemprop="url" rel="index">
+                    <span itemprop="name">flask</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  467 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Flask类有重定向redirect()函数。调用时，它会返回一个响应对象，并将用户重定向到具有指定状态码的另一个目标位置。</p>
+<p>redirect()函数的原型如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flask.redirect(location, statuscode, response)</span><br></pre></td></tr></table></figure></p>
+<p>在上述函数中 </p>
+<ul>
+<li>location 参数是响应应该被重定向的URL。</li>
+<li>statuscode 参数发送到浏览器的头标，默认为302。</li>
+<li>response 参数用于实例化响应。</li>
+</ul>
+<p>以下状态代码是标准化的 </p>
+<ul>
+<li>HTTP_300_MULTIPLE_CHOICES</li>
+<li>HTTP_301_MOVED_PERMANENTLY</li>
+<li>HTTP_302_FOUND</li>
+<li>HTTP_303_SEE_OTHER</li>
+<li>HTTP_304_NOT_MODIFIED</li>
+<li>HTTP_305_USE_PROXY</li>
+<li>HTTP_306_RESERVED</li>
+<li>HTTP_307_TEMPORARY_REDIRECT</li>
+</ul>
+<p>默认状态码是302，这是表示’找到’页面。</p>
+<p>在以下示例中，redirect()函数用于在登录尝试失败时再次显示登录页面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, redirect, url_for, render_template, request</span><br><span class="line"># Initialize the Flask application</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&apos;log_in.html&apos;)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/login&apos;,methods = [&apos;POST&apos;, &apos;GET&apos;])</span><br><span class="line">def login():</span><br><span class="line">    if request.method == &apos;POST&apos; and</span><br><span class="line">        request.form[&apos;username&apos;] == &apos;admin&apos; :</span><br><span class="line">        return redirect(url_for(&apos;success&apos;))</span><br><span class="line">    return redirect(url_for(&apos;index&apos;))</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/success&apos;)</span><br><span class="line">def success():</span><br><span class="line">    return &apos;logged in successfully&apos;</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug = True)</span><br></pre></td></tr></table></figure></p>
+<p>Flask类具有带有错误代码的abort()函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flask.abort(code)</span><br></pre></td></tr></table></figure></p>
+<p>code参数使用以下值之一 </p>
+<ul>
+<li>400 - 对于错误的请求</li>
+<li>401 - 用于未经身份验证</li>
+<li>403 - 禁止404 - 未找到</li>
+<li>406 - 不可接受</li>
+<li>415 - 用于不支持的媒体类型</li>
+<li>429 - 请求过多</li>
+</ul>
+<p>这里对上面的代码中的login()函数进行一些细微的修改。 如果要显示“Unauthourized”页面，而不是重新显示登录页面，请将其替换为中止(401)的调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, redirect, url_for, render_template, request, abort</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def index():</span><br><span class="line">   return render_template(&apos;log_in.html&apos;)</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/login&apos;,methods = [&apos;POST&apos;, &apos;GET&apos;])</span><br><span class="line">def login():</span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        if request.form[&apos;username&apos;] == &apos;admin&apos; :</span><br><span class="line">            return redirect(url_for(&apos;success&apos;))</span><br><span class="line">        else:</span><br><span class="line">            abort(401)</span><br><span class="line">    else:</span><br><span class="line">        return redirect(url_for(&apos;index&apos;))</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/success&apos;)</span><br><span class="line">def success():</span><br><span class="line">    return &apos;logged in successfully&apos;</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug = True)</span><br></pre></td></tr></table></figure>
 
           
         
@@ -2220,7 +2213,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2268,7 +2261,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">183</span>
+                  <span class="site-state-item-count">203</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2279,7 +2272,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2290,7 +2283,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

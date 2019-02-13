@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/echo命令/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/高阶函数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/23/echo命令/" itemprop="url">echo命令</a></h1>
+                <a class="post-title-link" href="/2019/01/25/高阶函数/" itemprop="url">高阶函数</a></h1>
         
 
         <div class="post-meta">
@@ -320,584 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:38:43+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  438 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>echo命令用于在shell中打印shell变量的值，或者直接输出指定的字符串。linux的echo命令，在shell编程中极为常用, 在终端下打印变量value的时候也是常常用到的，因此有必要了解下echo的用法echo命令的功能是在显示器上显示一段文字，一般起到一个提示的作用。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>echo(选项)(参数)</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><p>-e：激活转义字符。</p>
-<p>使用-e选项时，若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：</p>
-<ul>
-<li>\a 发出警告声；</li>
-<li>\b 删除前一个字符；</li>
-<li>\c 最后不加上换行符号；</li>
-<li>\f 换行但光标仍旧停留在原来的位置；</li>
-<li>\n 换行且光标移至行首；</li>
-<li>\r 光标移至行首，但不换行；</li>
-<li>\t 插入tab；</li>
-<li>\v 与\f相同；</li>
-<li>\ 插入\字符；</li>
-<li>\nnn 插入nnn（八进制）所代表的ASCII字符；</li>
-</ul>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>变量：指定要打印的变量。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>用echo命令打印带有色彩的文字：</p>
-<h2 id="文字色："><a href="#文字色：" class="headerlink" title="文字色："></a>文字色：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\e[1;31mThis is red text\e[0m&quot;</span><br><span class="line">This is red text</span><br></pre></td></tr></table></figure>
-<ul>
-<li>\e[1;31m 将颜色设置为红色</li>
-<li>\e[0m 将颜色重新置回</li>
-</ul>
-<p>颜色码：重置=0，黑色=30，红色=31，绿色=32，黄色=33，蓝色=34，洋红=35，青色=36，白色=37</p>
-<h2 id="背景色"><a href="#背景色" class="headerlink" title="背景色"></a>背景色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\e[1;42mGreed Background\e[0m&quot;</span><br><span class="line">Greed Background</span><br></pre></td></tr></table></figure>
-<p>颜色码：重置=0，黑色=40，红色=41，绿色=42，黄色=43，蓝色=44，洋红=45，青色=46，白色=47</p>
-<h2 id="文字闪动"><a href="#文字闪动" class="headerlink" title="文字闪动"></a>文字闪动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\033[37;31;5mMySQL Server Stop...\033[39;49;0m&quot;</span><br></pre></td></tr></table></figure>
-<p>红色数字处还有其他数字参数：0 关闭所有属性、1 设置高亮度（加粗）、4 下划线、5 闪烁、7 反显、8 消隐</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/grep命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/grep命令/" itemprop="url">grep命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:38:05+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.9k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/23/grep命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/mv命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/mv命令/" itemprop="url">mv命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:37:11+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  698 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>mv命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。source表示源文件或目录，target表示目标文件或目录。如果将一个文件移到一个已经存在的目标文件中，则目标文件的内容将被覆盖。</p>
-<p>mv命令可以用来将源文件移至一个目标文件中，或将一组文件移至一个目标目录中。源文件被移至目标文件有两种不同的结果：</p>
-<ol>
-<li>如果目标文件是到某一目录文件的路径，源文件会被移到此目录下，且文件名不变。</li>
-<li>如果目标文件不是目录文件，则源文件名（只能有一个）会变为此目标文件名，并覆盖己存在的同名文件。如果源文件和目标文件在同一个目录下，mv的作用就是改文件名。当目标文件是目录文件时，源文件或目录参数可以有多个，则所有的源文件都会被移至目标文件中。所有移到该目录下的文件都将保留以前的文件名。</li>
-</ol>
-<p>注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv(选项)(参数)</span><br></pre></td></tr></table></figure>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--backup=&lt;备份模式&gt;：若需覆盖文件，则覆盖前先行备份；</span><br><span class="line">-b：当文件存在时，覆盖前，为其创建一个备份；</span><br><span class="line">-f：若目标文件或目录与现有的文件或目录重复，则直接覆盖现有的文件或目录；</span><br><span class="line">-i：交互式操作，覆盖前先行询问用户，如果源文件与目标文件或目标目录中的文件同名，则询问用户是否覆盖目标文件。用户输入”y”，表示将覆盖目标文件；输入”n”，表示取消对源文件的移动。这样可以避免误将文件覆盖。</span><br><span class="line">--strip-trailing-slashes：删除源文件中的斜杠“/”；</span><br><span class="line">-S&lt;后缀&gt;：为备份文件指定后缀，而不使用默认的后缀；</span><br><span class="line">--target-directory=&lt;目录&gt;：指定源文件要移动到目标目录；</span><br><span class="line">-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><ul>
-<li>源文件：源文件列表。</li>
-<li>目标文件：如果“目标文件”是文件名则在移动文件的同时，将其改名为“目标文件”；如果“目标文件”是目录名则将源文件移动到“目标文件”下。</li>
-</ul>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>将文件ex3改名为new1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv ex3 new1</span><br></pre></td></tr></table></figure></p>
-<p>将目录/usr/men中的所有文件移到当前目录（用.表示）中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /usr/men/* .</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：常用操作（二）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/python：常用操作（二）/" itemprop="url">python：常用操作（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:36:20+08:00">
-                2019-01-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
               </time>
             
 
@@ -950,7 +374,786 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  898 字
+                  720 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>高阶函数英文叫Higher-order function。什么是高阶函数？我们以实际代码为例子，一步一步深入概念。</p>
+<h1 id="变量可以指向函数"><a href="#变量可以指向函数" class="headerlink" title="变量可以指向函数"></a>变量可以指向函数</h1><p>以Python内置的求绝对值的函数abs()为例，调用该函数用以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
+<p>但是，如果只写abs呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs</span><br><span class="line">&lt;built-in function abs&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可见，abs(-10)是函数调用，而abs是函数本身。</p>
+<p>要获得函数调用结果，我们可以把结果赋值给变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = abs(-10)</span><br><span class="line">&gt;&gt;&gt; x</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
+<p>但是，如果把函数本身赋值给变量呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = abs</span><br><span class="line">&gt;&gt;&gt; f</span><br><span class="line">&lt;built-in function abs&gt;</span><br></pre></td></tr></table></figure></p>
+<p>结论：函数本身也可以赋值给变量，即：变量可以指向函数。</p>
+<p>如果一个变量指向了一个函数，那么，可否通过该变量来调用这个函数？用代码验证一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = abs</span><br><span class="line">&gt;&gt;&gt; f(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
+<p>成功！说明变量f现在已经指向了abs函数本身。直接调用abs()函数和调用变量f()完全相同。</p>
+<h1 id="函数名也是变量"><a href="#函数名也是变量" class="headerlink" title="函数名也是变量"></a>函数名也是变量</h1><p>那么函数名是什么呢？函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变量，它指向一个可以计算绝对值的函数！</p>
+<p>如果把abs指向其他对象，会有什么情况发生？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs = 10</span><br><span class="line">&gt;&gt;&gt; abs(-10)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">TypeError: &apos;int&apos; object is not callable</span><br></pre></td></tr></table></figure></p>
+<p>把abs指向10后，就无法通过abs(-10)调用该函数了！因为abs这个变量已经不指向求绝对值函数而是指向一个整数10！</p>
+<p>当然实际代码绝对不能这么写，这里是为了说明函数名也是变量。要恢复abs函数，请重启Python交互环境。</p>
+<p>注：由于abs函数实际上是定义在import builtins模块中的，所以要让修改abs变量的指向在其它模块也生效，要用import builtins; builtins.abs = 10。</p>
+<h1 id="传入函数"><a href="#传入函数" class="headerlink" title="传入函数"></a>传入函数</h1><p>既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。</p>
+<p>一个最简单的高阶函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def add(x, y, f):</span><br><span class="line">    return f(x) + f(y)</span><br></pre></td></tr></table></figure></p>
+<p>当我们调用add(-5, 6, abs)时，参数x，y和f分别接收-5，6和abs，根据函数定义，我们可以推导计算过程为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = -5</span><br><span class="line">y = 6</span><br><span class="line">f = abs</span><br><span class="line">f(x) + f(y) ==&gt; abs(-5) + abs(6) ==&gt; 11</span><br><span class="line">return 11</span><br></pre></td></tr></table></figure></p>
+<p>编写高阶函数，就是让函数的参数能够接收别的函数。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/使用枚举类/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/使用枚举类/" itemprop="url">使用枚举类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  507 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>当我们需要定义常量时，一个办法是用大写变量通过整数来定义，例如月份：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JAN = 1</span><br><span class="line">FEB = 2</span><br><span class="line">MAR = 3</span><br><span class="line">...</span><br><span class="line">NOV = 11</span><br><span class="line">DEC = 12</span><br></pre></td></tr></table></figure></p>
+<p>好处是简单，缺点是类型是int，并且仍然是变量。</p>
+<p>更好的方法是为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Enum</span><br><span class="line"></span><br><span class="line">Month = Enum(&apos;Month&apos;, (&apos;Jan&apos;, &apos;Feb&apos;, &apos;Mar&apos;, &apos;Apr&apos;, &apos;May&apos;, &apos;Jun&apos;, &apos;Jul&apos;, &apos;Aug&apos;, &apos;Sep&apos;, &apos;Oct&apos;, &apos;Nov&apos;, &apos;Dec&apos;))</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就获得了Month类型的枚举类，可以直接使用Month.Jan来引用一个常量，或者枚举它的所有成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for name, member in Month.__members__.items():</span><br><span class="line">    print(name, &apos;=&gt;&apos;, member, &apos;,&apos;, member.value)</span><br></pre></td></tr></table></figure></p>
+<p>value属性则是自动赋给成员的int常量，默认从1开始计数。</p>
+<p>如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from enum import Enum, unique</span><br><span class="line"></span><br><span class="line">@unique</span><br><span class="line">class Weekday(Enum):</span><br><span class="line">    Sun = 0 # Sun的value被设定为0</span><br><span class="line">    Mon = 1</span><br><span class="line">    Tue = 2</span><br><span class="line">    Wed = 3</span><br><span class="line">    Thu = 4</span><br><span class="line">    Fri = 5</span><br><span class="line">    Sat = 6</span><br></pre></td></tr></table></figure></p>
+<p>@unique装饰器可以帮助我们检查保证没有重复值。</p>
+<p>访问这些枚举类型可以有若干种方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; day1 = Weekday.Mon</span><br><span class="line">&gt;&gt;&gt; print(day1)</span><br><span class="line">Weekday.Mon</span><br><span class="line">&gt;&gt;&gt; print(Weekday.Tue)</span><br><span class="line">Weekday.Tue</span><br><span class="line">&gt;&gt;&gt; print(Weekday[&apos;Tue&apos;])</span><br><span class="line">Weekday.Tue</span><br><span class="line">&gt;&gt;&gt; print(Weekday.Tue.value)</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; print(day1 == Weekday.Mon)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; print(day1 == Weekday.Tue)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; print(Weekday(1))</span><br><span class="line">Weekday.Mon</span><br><span class="line">&gt;&gt;&gt; print(day1 == Weekday(1))</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; Weekday(7)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: 7 is not a valid Weekday</span><br><span class="line">&gt;&gt;&gt; for name, member in Weekday.__members__.items():</span><br><span class="line">...     print(name, &apos;=&gt;&apos;, member)</span><br><span class="line">...</span><br><span class="line">Sun =&gt; Weekday.Sun</span><br><span class="line">Mon =&gt; Weekday.Mon</span><br><span class="line">Tue =&gt; Weekday.Tue</span><br><span class="line">Wed =&gt; Weekday.Wed</span><br><span class="line">Thu =&gt; Weekday.Thu</span><br><span class="line">Fri =&gt; Weekday.Fri</span><br><span class="line">Sat =&gt; Weekday.Sat</span><br></pre></td></tr></table></figure></p>
+<p>可见，既可以用成员名称引用枚举常量，又可以直接根据value的值获得枚举常量。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Enum可以把一组相关常量定义在一个class中，且class不可变，而且成员可以直接比较。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/chardet包/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/chardet包/" itemprop="url">chardet包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  629 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>字符串编码一直是令人非常头疼的问题，尤其是我们在处理一些不规范的第三方网页的时候。虽然Python提供了Unicode表示的str和bytes两种数据类型，并且可以通过encode()和decode()方法转换，但是，在不知道编码的情况下，对bytes做decode()不好做。</p>
+<p>对于未知编码的bytes，要把它转换成str，需要先“猜测”编码。猜测的方式是先收集各种编码的特征字符，根据特征字符判断，就能有很大概率“猜对”。</p>
+<p>当然，我们肯定不能从头自己写这个检测编码的功能，这样做费时费力。chardet这个第三方库正好就派上了用场。用它来检测编码，简单易用。</p>
+<h1 id="安装chardet"><a href="#安装chardet" class="headerlink" title="安装chardet"></a>安装chardet</h1><p>如果安装了Anaconda，chardet就已经可用了。否则，需要在命令行下通过pip安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install chardet</span><br></pre></td></tr></table></figure></p>
+<p>如果遇到Permission denied安装失败，请加上sudo重试。</p>
+<p>#使用chardet<br>当我们拿到一个bytes时，就可以对其检测编码。用chardet检测编码，只需要一行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; chardet.detect(b&apos;Hello, world!&apos;)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;ascii&apos;, &apos;confidence&apos;: 1.0, &apos;language&apos;: &apos;&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>检测出的编码是ascii，注意到还有个confidence字段，表示检测的概率是1.0（即100%）。</p>
+<p>我们来试试检测GBK编码的中文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; data = &apos;离离原上草，一岁一枯荣&apos;.encode(&apos;gbk&apos;)</span><br><span class="line">&gt;&gt;&gt; chardet.detect(data)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;GB2312&apos;, &apos;confidence&apos;: 0.7407407407407407, &apos;language&apos;: &apos;Chinese&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>检测的编码是GB2312，注意到GBK是GB2312的超集，两者是同一种编码，检测正确的概率是74%，language字段指出的语言是’Chinese’。</p>
+<p>对UTF-8编码进行检测：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; data = &apos;离离原上草，一岁一枯荣&apos;.encode(&apos;utf-8&apos;)</span><br><span class="line">&gt;&gt;&gt; chardet.detect(data)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;utf-8&apos;, &apos;confidence&apos;: 0.99, &apos;language&apos;: &apos;&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们再试试对日文进行检测：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; data = &apos;最新の主要ニュース&apos;.encode(&apos;euc-jp&apos;)</span><br><span class="line">&gt;&gt;&gt; chardet.detect(data)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;EUC-JP&apos;, &apos;confidence&apos;: 0.99, &apos;language&apos;: &apos;Japanese&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可见，用chardet检测编码，使用简单。获取到编码后，再转换为str，就可以方便后续处理。</p>
+<p>chardet支持检测的编码列表请参考官方文档Supported encodings。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>使用chardet检测编码非常容易，chardet支持检测中文、日文、韩文等多种语言。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/使用list和tuple/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/使用list和tuple/" itemprop="url">使用list和tuple</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="list"><a href="#list" class="headerlink" title="list"></a>list</h1><p>Python内置的一种数据类型是列表：list。list是一种有序的集合，可以随时添加和删除其中的元素。</p>
+<p>比如，列出班里所有同学的名字，就可以用一个list表示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>变量classmates就是一个list。用len()函数可以获得list元素的个数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; len(classmates)</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<p>用索引来访问list中每一个位置的元素，记得索引是从0开始的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates[0]</span><br><span class="line">&apos;Michael&apos;</span><br><span class="line">&gt;&gt;&gt; classmates[1]</span><br><span class="line">&apos;Bob&apos;</span><br><span class="line">&gt;&gt;&gt; classmates[2]</span><br><span class="line">&apos;Tracy&apos;</span><br><span class="line">&gt;&gt;&gt; classmates[3]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">IndexError: list index out of range</span><br></pre></td></tr></table></figure></p>
+<p>当索引超出了范围时，Python会报一个IndexError错误，所以，要确保索引不要越界，记得最后一个元素的索引是len(classmates) - 1。</p>
+<p>如果要取最后一个元素，除了计算索引位置外，还可以用-1做索引，直接获取最后一个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates[-1]</span><br><span class="line">&apos;Tracy&apos;</span><br></pre></td></tr></table></figure></p>
+<p>以此类推，可以获取倒数第2个、倒数第3个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates[-2]</span><br><span class="line">&apos;Bob&apos;</span><br><span class="line">&gt;&gt;&gt; classmates[-3]</span><br><span class="line">&apos;Michael&apos;</span><br><span class="line">&gt;&gt;&gt; classmates[-4]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">IndexError: list index out of range</span><br></pre></td></tr></table></figure></p>
+<p>当然，倒数第4个就越界了。</p>
+<p>list是一个可变的有序表，所以，可以往list中追加元素到末尾：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates.append(&apos;Adam&apos;)</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;, &apos;Adam&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>也可以把元素插入到指定的位置，比如索引号为1的位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates.insert(1, &apos;Jack&apos;)</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Jack&apos;, &apos;Bob&apos;, &apos;Tracy&apos;, &apos;Adam&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>要删除list末尾的元素，用pop()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates.pop()</span><br><span class="line">&apos;Adam&apos;</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Jack&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>要删除指定位置的元素，用pop(i)方法，其中i是索引位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates.pop(1)</span><br><span class="line">&apos;Jack&apos;</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>要把某个元素替换成别的元素，可以直接赋值给对应的索引位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates[1] = &apos;Sarah&apos;</span><br><span class="line">&gt;&gt;&gt; classmates</span><br><span class="line">[&apos;Michael&apos;, &apos;Sarah&apos;, &apos;Tracy&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>list里面的元素的数据类型也可以不同，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L = [&apos;Apple&apos;, 123, True]</span><br></pre></td></tr></table></figure></p>
+<p>list元素也可以是另一个list，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = [&apos;python&apos;, &apos;java&apos;, [&apos;asp&apos;, &apos;php&apos;], &apos;scheme&apos;]</span><br><span class="line">&gt;&gt;&gt; len(s)</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
+<p>要注意s只有4个元素，其中s[2]又是一个list，如果拆开写就更容易理解了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; p = [&apos;asp&apos;, &apos;php&apos;]</span><br><span class="line">&gt;&gt;&gt; s = [&apos;python&apos;, &apos;java&apos;, p, &apos;scheme&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>要拿到’php’可以写p[1]或者s[2][1]，因此s可以看成是一个二维数组，类似的还有三维、四维……数组，不过很少用到。</p>
+<p>如果一个list中一个元素也没有，就是一个空的list，它的长度为0：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L = []</span><br><span class="line">&gt;&gt;&gt; len(L)</span><br><span class="line">0</span><br></pre></td></tr></table></figure></p>
+<h1 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h1><p>另一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改，比如同样是列出同学的名字：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; classmates = (&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>现在，classmates这个tuple不能变了，它也没有append()，insert()这样的方法。其他获取元素的方法和list是一样的，你可以正常地使用classmates[0]，classmates[-1]，但不能赋值成另外的元素。</p>
+<p>不可变的tuple有什么意义？因为tuple不可变，所以代码更安全。如果可能，能用tuple代替list就尽量用tuple。</p>
+<p>tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = (1, 2)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(1, 2)</span><br></pre></td></tr></table></figure></p>
+<p>如果要定义一个空的tuple，可以写成()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = ()</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">()</span><br></pre></td></tr></table></figure></p>
+<p>但是，要定义一个只有1个元素的tuple，如果你这么定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = (1)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<p>定义的不是tuple，是1这个数！这是因为括号()既可以表示tuple，又可以表示数学公式中的小括号，这就产生了歧义，因此，Python规定，这种情况下，按小括号进行计算，计算结果自然是1。</p>
+<p>所以，只有1个元素的tuple定义时必须加一个逗号,，来消除歧义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = (1,)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(1,)</span><br></pre></td></tr></table></figure></p>
+<p>Python在显示只有1个元素的tuple时，也会加一个逗号,，以免你误解成数学计算意义上的括号。</p>
+<h1 id="“可变的”tuple："><a href="#“可变的”tuple：" class="headerlink" title="“可变的”tuple："></a>“可变的”tuple：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = (&apos;a&apos;, &apos;b&apos;, [&apos;A&apos;, &apos;B&apos;])</span><br><span class="line">&gt;&gt;&gt; t[2][0] = &apos;X&apos;</span><br><span class="line">&gt;&gt;&gt; t[2][1] = &apos;Y&apos;</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">(&apos;a&apos;, &apos;b&apos;, [&apos;X&apos;, &apos;Y&apos;])</span><br></pre></td></tr></table></figure>
+<p>这个tuple定义的时候有3个元素，分别是’a’，’b’和一个list。不是说tuple一旦定义后就不可变了吗？怎么后来又变了？</p>
+<p>表面上看，tuple的元素确实变了，但其实变的不是tuple的元素，而是list的元素。tuple一开始指向的list并没有改成别的list，所以，tuple所谓的“不变”是说，tuple的每个元素，指向永远不变。即指向’a’，就不能改成指向’b’，指向一个list，就不能改成指向其他对象，但指向的这个list本身是可变的！</p>
+<p>理解了“指向不变”后，要创建一个内容也不变的tuple怎么做？那就必须保证tuple的每一个元素本身也不能变。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>list和tuple是Python内置的有序集合，一个可变，一个不可变。根据需要来选择使用它们。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/列表生成式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/列表生成式/" itemprop="url">列表生成式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  732 字
                 </span>
               
 
@@ -988,18 +1191,25 @@
 
       
         
-          <h1 id="1-python以表名作为变量"><a href="#1-python以表名作为变量" class="headerlink" title="1.python以表名作为变量"></a>1.python以表名作为变量</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor.execute(<span class="string">'select * from '</span> + tableName)</span><br></pre></td></tr></table></figure>
-<p>注意：from后面有空格，不然例如tableName为 test，组合后会变成 select * fromtest，会报错。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/23/python：常用操作（二）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式。</p>
+<p>举个例子，要生成list [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]可以用list(range(1, 11))：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(range(1, 11))</span><br><span class="line">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br></pre></td></tr></table></figure></p>
+<p>但如果要生成[1x1, 2x2, 3x3, …, 10x10]怎么做？方法一是循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L = []</span><br><span class="line">&gt;&gt;&gt; for x in range(1, 11):</span><br><span class="line">...    L.append(x * x)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; L</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure></p>
+<p>但是循环太繁琐，而列表生成式则可以用一行语句代替循环生成上面的list：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [x * x for x in range(1, 11)]</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure></p>
+<p>写列表生成式时，把要生成的元素x * x放到前面，后面跟for循环，就可以把list创建出来，十分有用，多写几次，很快就可以熟悉这种语法。</p>
+<p>for循环后面还可以加上if判断，这样我们就可以筛选出仅偶数的平方：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [x * x for x in range(1, 11) if x % 2 == 0]</span><br><span class="line">[4, 16, 36, 64, 100]</span><br></pre></td></tr></table></figure></p>
+<p>还可以使用两层循环，可以生成全排列：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [m + n for m in &apos;ABC&apos; for n in &apos;XYZ&apos;]</span><br><span class="line">[&apos;AX&apos;, &apos;AY&apos;, &apos;AZ&apos;, &apos;BX&apos;, &apos;BY&apos;, &apos;BZ&apos;, &apos;CX&apos;, &apos;CY&apos;, &apos;CZ&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>三层和三层以上的循环就很少用到了。</p>
+<p>运用列表生成式，可以写出非常简洁的代码。例如，列出当前目录下的所有文件和目录名，可以通过一行代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os # 导入os模块，模块的概念后面讲到</span><br><span class="line">&gt;&gt;&gt; [d for d in os.listdir(&apos;.&apos;)] # os.listdir可以列出文件和目录</span><br><span class="line">[&apos;.emacs.d&apos;, &apos;.ssh&apos;, &apos;.Trash&apos;, &apos;Adlm&apos;, &apos;Applications&apos;, &apos;Desktop&apos;, &apos;Documents&apos;, &apos;Downloads&apos;, &apos;Library&apos;, &apos;Movies&apos;, &apos;Music&apos;, &apos;Pictures&apos;, &apos;Public&apos;, &apos;VirtualBox VMs&apos;, &apos;Workspace&apos;, &apos;XCode&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>for循环其实可以同时使用两个甚至多个变量，比如dict的items()可以同时迭代key和value：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&apos;x&apos;: &apos;A&apos;, &apos;y&apos;: &apos;B&apos;, &apos;z&apos;: &apos;C&apos; &#125;</span><br><span class="line">&gt;&gt;&gt; for k, v in d.items():</span><br><span class="line">...     print(k, &apos;=&apos;, v)</span><br><span class="line">...</span><br><span class="line">y = B</span><br><span class="line">x = A</span><br><span class="line">z = C</span><br></pre></td></tr></table></figure></p>
+<p>因此，列表生成式也可以使用两个变量来生成list：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&apos;x&apos;: &apos;A&apos;, &apos;y&apos;: &apos;B&apos;, &apos;z&apos;: &apos;C&apos; &#125;</span><br><span class="line">&gt;&gt;&gt; [k + &apos;=&apos; + v for k, v in d.items()]</span><br><span class="line">[&apos;y=B&apos;, &apos;x=A&apos;, &apos;z=C&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>最后把一个list中所有的字符串变成小写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L = [&apos;Hello&apos;, &apos;World&apos;, &apos;IBM&apos;, &apos;Apple&apos;]</span><br><span class="line">&gt;&gt;&gt; [s.lower() for s in L]</span><br><span class="line">[&apos;hello&apos;, &apos;world&apos;, &apos;ibm&apos;, &apos;apple&apos;]</span><br></pre></td></tr></table></figure></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>运用列表生成式，可以快速生成list，可以通过一个list推导出另一个list，而代码却十分简洁。</p>
+
+          
         
       
-    </p></div>
+    </div>
     
     
     
@@ -1047,7 +1257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/mysql：sql按照某个字段排序，并且另一个字段为NULL或者空字符串或固定字符串排后面/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/使用@property/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1066,7 +1276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/23/mysql：sql按照某个字段排序，并且另一个字段为NULL或者空字符串或固定字符串排后面/" itemprop="url">mysql：sql按照某个字段排序，并且另一个字段为NULL或者空字符串或固定字符串排后面</a></h1>
+                <a class="post-title-link" href="/2019/01/25/使用@property/" itemprop="url">使用@property</a></h1>
         
 
         <div class="post-meta">
@@ -1078,8 +1288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:34:51+08:00">
-                2019-01-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
               </time>
             
 
@@ -1101,8 +1311,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1132,7 +1342,622 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  136 字
+                  734 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = Student()</span><br><span class="line">s.score = 9999</span><br></pre></td></tr></table></figure></p>
+<p>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def get_score(self):</span><br><span class="line">         return self._score</span><br><span class="line"></span><br><span class="line">    def set_score(self, value):</span><br><span class="line">        if not isinstance(value, int):</span><br><span class="line">            raise ValueError(&apos;score must be an integer!&apos;)</span><br><span class="line">        if value &lt; 0 or value &gt; 100:</span><br><span class="line">            raise ValueError(&apos;score must between 0 ~ 100!&apos;)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
+<p>现在，对任意的Student实例进行操作，就不能随心所欲地设置score了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.set_score(60) # ok!</span><br><span class="line">&gt;&gt;&gt; s.get_score()</span><br><span class="line">60</span><br><span class="line">&gt;&gt;&gt; s.set_score(9999)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between 0 ~ 100!</span><br></pre></td></tr></table></figure></p>
+<p>但是，上面的调用方法又略显复杂，没有直接用属性这么直接简单。</p>
+<p>有没有既能检查参数，又可以用类似属性这样简单的方式来访问类的变量呢？对于追求完美的Python程序员来说，这是必须要做到的！</p>
+<p>还记得装饰器（decorator）可以给函数动态加上功能吗？对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def score(self):</span><br><span class="line">        return self._score</span><br><span class="line"></span><br><span class="line">    @score.setter</span><br><span class="line">    def score(self, value):</span><br><span class="line">        if not isinstance(value, int):</span><br><span class="line">            raise ValueError(&apos;score must be an integer!&apos;)</span><br><span class="line">        if value &lt; 0 or value &gt; 100:</span><br><span class="line">            raise ValueError(&apos;score must between 0 ~ 100!&apos;)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
+<p>@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.score = 60 # OK，实际转化为s.set_score(60)</span><br><span class="line">&gt;&gt;&gt; s.score # OK，实际转化为s.get_score()</span><br><span class="line">60</span><br><span class="line">&gt;&gt;&gt; s.score = 9999</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between 0 ~ 100!</span><br></pre></td></tr></table></figure></p>
+<p>注意到这个神奇的@property，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</p>
+<p>还可以定义只读属性，只定义getter方法，不定义setter方法就是一个只读属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def birth(self):</span><br><span class="line">        return self._birth</span><br><span class="line"></span><br><span class="line">    @birth.setter</span><br><span class="line">    def birth(self, value):</span><br><span class="line">        self._birth = value</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def age(self):</span><br><span class="line">        return 2015 - self._birth</span><br></pre></td></tr></table></figure></p>
+<p>上面的birth是可读写属性，而age就是一个只读属性，因为age可以根据birth和当前时间计算出来。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>@property广泛应用在类的定义中，可以让调用者写出简短的代码，同时保证对参数进行必要的检查，这样，程序运行时就减少了出错的可能性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/psutil包 运维工作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/psutil包 运维工作/" itemprop="url">psutil包 运维工作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>用Python来编写脚本简化日常的运维工作是Python的一个重要用途。在Linux下，有许多系统命令可以让我们时刻监控系统运行的状态，如ps，top，free等等。要获取这些系统信息，Python可以通过subprocess模块调用并获取结果。但这样做显得很麻烦，尤其是要写很多解析代码。</p>
+<p>在Python中获取系统信息的另一个好办法是使用psutil这个第三方模块。顾名思义，psutil = process and system utilities，它不仅可以通过一两行代码实现系统监控，还可以跨平台使用，支持Linux／UNIX／OSX／Windows等，是系统管理员和运维小伙伴不可或缺的必备模块。</p>
+<h1 id="安装psutil"><a href="#安装psutil" class="headerlink" title="安装psutil"></a>安装psutil</h1><p>如果安装了Anaconda，psutil就已经可用了。否则，需要在命令行下通过pip安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install psutil</span><br></pre></td></tr></table></figure></p>
+<p>如果遇到Permission denied安装失败，请加上sudo重试。</p>
+<h1 id="获取CPU信息"><a href="#获取CPU信息" class="headerlink" title="获取CPU信息"></a>获取CPU信息</h1><p>我们先来获取CPU的信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import psutil</span><br><span class="line">&gt;&gt;&gt; psutil.cpu_count() # CPU逻辑数量</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; psutil.cpu_count(logical=False) # CPU物理核心</span><br><span class="line">2</span><br><span class="line"># 2说明是双核超线程, 4则是4核非超线程</span><br></pre></td></tr></table></figure></p>
+<h1 id="统计CPU的用户／系统／空闲时间："><a href="#统计CPU的用户／系统／空闲时间：" class="headerlink" title="统计CPU的用户／系统／空闲时间："></a>统计CPU的用户／系统／空闲时间：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.cpu_times()</span><br><span class="line">scputimes(user=10963.31, nice=0.0, system=5138.67, idle=356102.45)</span><br></pre></td></tr></table></figure>
+<p>再实现类似top命令的CPU使用率，每秒刷新一次，累计10次：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for x in range(10):</span><br><span class="line">...     psutil.cpu_percent(interval=1, percpu=True)</span><br><span class="line">... </span><br><span class="line">[14.0, 4.0, 4.0, 4.0]</span><br><span class="line">[12.0, 3.0, 4.0, 3.0]</span><br><span class="line">[8.0, 4.0, 3.0, 4.0]</span><br><span class="line">[12.0, 3.0, 3.0, 3.0]</span><br><span class="line">[18.8, 5.1, 5.9, 5.0]</span><br><span class="line">[10.9, 5.0, 4.0, 3.0]</span><br><span class="line">[12.0, 5.0, 4.0, 5.0]</span><br><span class="line">[15.0, 5.0, 4.0, 4.0]</span><br><span class="line">[19.0, 5.0, 5.0, 4.0]</span><br><span class="line">[9.0, 3.0, 2.0, 3.0]</span><br></pre></td></tr></table></figure></p>
+<h1 id="获取内存信息"><a href="#获取内存信息" class="headerlink" title="获取内存信息"></a>获取内存信息</h1><p>使用psutil获取物理内存和交换内存信息，分别使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.virtual_memory()</span><br><span class="line">svmem(total=8589934592, available=2866520064, percent=66.6, used=7201386496, free=216178688, active=3342192640, inactive=2650341376, wired=1208852480)</span><br><span class="line">&gt;&gt;&gt; psutil.swap_memory()</span><br><span class="line">sswap(total=1073741824, used=150732800, free=923009024, percent=14.0, sin=10705981440, sout=40353792)</span><br></pre></td></tr></table></figure></p>
+<p>返回的是字节为单位的整数，可以看到，总内存大小是8589934592 = 8 GB，已用7201386496 = 6.7 GB，使用了66.6%。</p>
+<p>而交换区大小是1073741824 = 1 GB。</p>
+<h1 id="获取磁盘信息"><a href="#获取磁盘信息" class="headerlink" title="获取磁盘信息"></a>获取磁盘信息</h1><p>可以通过psutil获取磁盘分区、磁盘使用率和磁盘IO信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.disk_partitions() # 磁盘分区信息</span><br><span class="line">[sdiskpart(device=&apos;/dev/disk1&apos;, mountpoint=&apos;/&apos;, fstype=&apos;hfs&apos;, opts=&apos;rw,local,rootfs,dovolfs,journaled,multilabel&apos;)]</span><br><span class="line">&gt;&gt;&gt; psutil.disk_usage(&apos;/&apos;) # 磁盘使用情况</span><br><span class="line">sdiskusage(total=998982549504, used=390880133120, free=607840272384, percent=39.1)</span><br><span class="line">&gt;&gt;&gt; psutil.disk_io_counters() # 磁盘IO</span><br><span class="line">sdiskio(read_count=988513, write_count=274457, read_bytes=14856830464, write_bytes=17509420032, read_time=2228966, write_time=1618405)</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，磁盘’/‘的总容量是998982549504 = 930 GB，使用了39.1%。文件格式是HFS，opts中包含rw表示可读写，journaled表示支持日志。</p>
+<h1 id="获取网络信息"><a href="#获取网络信息" class="headerlink" title="获取网络信息"></a>获取网络信息</h1><p>psutil可以获取网络接口和网络连接信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.net_io_counters() # 获取网络读写字节／包的个数</span><br><span class="line">snetio(bytes_sent=3885744870, bytes_recv=10357676702, packets_sent=10613069, packets_recv=10423357, errin=0, errout=0, dropin=0, dropout=0)</span><br><span class="line">&gt;&gt;&gt; psutil.net_if_addrs() # 获取网络接口信息</span><br><span class="line">&#123;</span><br><span class="line">  &apos;lo0&apos;: [snic(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&apos;127.0.0.1&apos;, netmask=&apos;255.0.0.0&apos;), ...],</span><br><span class="line">  &apos;en1&apos;: [snic(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&apos;10.0.1.80&apos;, netmask=&apos;255.255.255.0&apos;), ...],</span><br><span class="line">  &apos;en0&apos;: [...],</span><br><span class="line">  &apos;en2&apos;: [...],</span><br><span class="line">  &apos;bridge0&apos;: [...]</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt; psutil.net_if_stats() # 获取网络接口状态</span><br><span class="line">&#123;</span><br><span class="line">  &apos;lo0&apos;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: 0&gt;, speed=0, mtu=16384),</span><br><span class="line">  &apos;en0&apos;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: 0&gt;, speed=0, mtu=1500),</span><br><span class="line">  &apos;en1&apos;: snicstats(...),</span><br><span class="line">  &apos;en2&apos;: snicstats(...),</span><br><span class="line">  &apos;bridge0&apos;: snicstats(...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要获取当前网络连接信息，使用net_connections()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.net_connections()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">PermissionError: [Errno 1] Operation not permitted</span><br><span class="line"></span><br><span class="line">During handling of the above exception, another exception occurred:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">psutil.AccessDenied: psutil.AccessDenied (pid=3847)</span><br></pre></td></tr></table></figure></p>
+<p>你可能会得到一个AccessDenied错误，原因是psutil获取信息也是要走系统接口，而获取网络连接信息需要root权限，这种情况下，可以退出Python交互环境，用sudo重新启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python3</span><br><span class="line">Password: ******</span><br><span class="line">Python 3.6.3 ... on darwin</span><br><span class="line">Type &quot;help&quot;, ... for more information.</span><br><span class="line">&gt;&gt;&gt; import psutil</span><br><span class="line">&gt;&gt;&gt; psutil.net_connections()</span><br><span class="line">[</span><br><span class="line">    sconn(fd=83, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::127.0.0.1&apos;, port=62911), raddr=addr(ip=&apos;::127.0.0.1&apos;, port=3306), status=&apos;ESTABLISHED&apos;, pid=3725),</span><br><span class="line">    sconn(fd=84, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::127.0.0.1&apos;, port=62905), raddr=addr(ip=&apos;::127.0.0.1&apos;, port=3306), status=&apos;ESTABLISHED&apos;, pid=3725),</span><br><span class="line">    sconn(fd=93, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::&apos;, port=8080), raddr=(), status=&apos;LISTEN&apos;, pid=3725),</span><br><span class="line">    sconn(fd=103, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, laddr=addr(ip=&apos;::127.0.0.1&apos;, port=62918), raddr=addr(ip=&apos;::127.0.0.1&apos;, port=3306), status=&apos;ESTABLISHED&apos;, pid=3725),</span><br><span class="line">    sconn(fd=105, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, ..., pid=3725),</span><br><span class="line">    sconn(fd=106, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, ..., pid=3725),</span><br><span class="line">    sconn(fd=107, family=&lt;AddressFamily.AF_INET6: 30&gt;, type=1, ..., pid=3725),</span><br><span class="line">    ...</span><br><span class="line">    sconn(fd=27, family=&lt;AddressFamily.AF_INET: 2&gt;, type=2, ..., pid=1)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h1 id="获取进程信息"><a href="#获取进程信息" class="headerlink" title="获取进程信息"></a>获取进程信息</h1><p>通过psutil可以获取到所有进程的详细信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; psutil.pids() # 所有进程ID</span><br><span class="line">[3865, 3864, 3863, 3856, 3855, 3853, 3776, ..., 45, 44, 1, 0]</span><br><span class="line">&gt;&gt;&gt; p = psutil.Process(3776) # 获取指定进程ID=3776，其实就是当前Python交互环境</span><br><span class="line">&gt;&gt;&gt; p.name() # 进程名称</span><br><span class="line">&apos;python3.6&apos;</span><br><span class="line">&gt;&gt;&gt; p.exe() # 进程exe路径</span><br><span class="line">&apos;/Users/michael/anaconda3/bin/python3.6&apos;</span><br><span class="line">&gt;&gt;&gt; p.cwd() # 进程工作目录</span><br><span class="line">&apos;/Users/michael&apos;</span><br><span class="line">&gt;&gt;&gt; p.cmdline() # 进程启动的命令行</span><br><span class="line">[&apos;python3&apos;]</span><br><span class="line">&gt;&gt;&gt; p.ppid() # 父进程ID</span><br><span class="line">3765</span><br><span class="line">&gt;&gt;&gt; p.parent() # 父进程</span><br><span class="line">&lt;psutil.Process(pid=3765, name=&apos;bash&apos;) at 4503144040&gt;</span><br><span class="line">&gt;&gt;&gt; p.children() # 子进程列表</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt; p.status() # 进程状态</span><br><span class="line">&apos;running&apos;</span><br><span class="line">&gt;&gt;&gt; p.username() # 进程用户名</span><br><span class="line">&apos;michael&apos;</span><br><span class="line">&gt;&gt;&gt; p.create_time() # 进程创建时间</span><br><span class="line">1511052731.120333</span><br><span class="line">&gt;&gt;&gt; p.terminal() # 进程终端</span><br><span class="line">&apos;/dev/ttys002&apos;</span><br><span class="line">&gt;&gt;&gt; p.cpu_times() # 进程使用的CPU时间</span><br><span class="line">pcputimes(user=0.081150144, system=0.053269812, children_user=0.0, children_system=0.0)</span><br><span class="line">&gt;&gt;&gt; p.memory_info() # 进程使用的内存</span><br><span class="line">pmem(rss=8310784, vms=2481725440, pfaults=3207, pageins=18)</span><br><span class="line">&gt;&gt;&gt; p.open_files() # 进程打开的文件</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt; p.connections() # 进程相关网络连接</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt; p.num_threads() # 进程的线程数量</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; p.threads() # 所有线程信息</span><br><span class="line">[pthread(id=1, user_time=0.090318, system_time=0.062736)]</span><br><span class="line">&gt;&gt;&gt; p.environ() # 进程环境变量</span><br><span class="line">&#123;&apos;SHELL&apos;: &apos;/bin/bash&apos;, &apos;PATH&apos;: &apos;/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:...&apos;, &apos;PWD&apos;: &apos;/Users/michael&apos;, &apos;LANG&apos;: &apos;zh_CN.UTF-8&apos;, ...&#125;</span><br><span class="line">&gt;&gt;&gt; p.terminate() # 结束进程</span><br><span class="line">Terminated: 15 &lt;-- 自己把自己结束了</span><br></pre></td></tr></table></figure></p>
+<p>和获取网络连接类似，获取一个root用户的进程需要root权限，启动Python交互环境或者.py文件时，需要sudo权限。</p>
+<p>psutil还提供了一个test()函数，可以模拟出ps命令的效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python3</span><br><span class="line">Password: ******</span><br><span class="line">Python 3.6.3 ... on darwin</span><br><span class="line">Type &quot;help&quot;, ... for more information.</span><br><span class="line">&gt;&gt;&gt; import psutil</span><br><span class="line">&gt;&gt;&gt; psutil.test()</span><br><span class="line">USER         PID %MEM     VSZ     RSS TTY           START    TIME  COMMAND</span><br><span class="line">root           0 24.0 74270628 2016380 ?             Nov18   40:51  kernel_task</span><br><span class="line">root           1  0.1 2494140    9484 ?             Nov18   01:39  launchd</span><br><span class="line">root          44  0.4 2519872   36404 ?             Nov18   02:02  UserEventAgent</span><br><span class="line">root          45    ? 2474032    1516 ?             Nov18   00:14  syslogd</span><br><span class="line">root          47  0.1 2504768    8912 ?             Nov18   00:03  kextd</span><br><span class="line">root          48  0.1 2505544    4720 ?             Nov18   00:19  fseventsd</span><br><span class="line">_appleeven    52  0.1 2499748    5024 ?             Nov18   00:00  appleeventsd</span><br><span class="line">root          53  0.1 2500592    6132 ?             Nov18   00:02  configd</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>psutil使得Python程序获取系统信息变得易如反掌。</p>
+<p>psutil还可以获取用户信息、Windows服务等很多有用的系统信息，具体请参考psutil的官网：<a href="https://github.com/giampaolo/psutil" target="_blank" rel="noopener">https://github.com/giampaolo/psutil</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/定制类/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/定制类/" itemprop="url">定制类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>看到类似<strong>slots</strong>这种形如<strong>xxx</strong>的变量或者函数名就要注意，这些在Python中是有特殊用途的。</p>
+<p><strong>slots</strong>我们已经知道怎么用了，<strong>len</strong>()方法我们也知道是为了能让class作用于len()函数。</p>
+<p>除此之外，Python的class中还有许多这样有特殊用途的函数，可以帮助我们定制类。</p>
+<h1 id="str"><a href="#str" class="headerlink" title="str"></a><strong>str</strong></h1><p>我们先定义一个Student类，打印一个实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     def __init__(self, name):</span><br><span class="line">...         self.name = name</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; print(Student(&apos;Michael&apos;))</span><br><span class="line">&lt;__main__.Student object at 0x109afb190&gt;</span><br></pre></td></tr></table></figure></p>
+<p>打印出一堆&lt;<strong>main</strong>.Student object at 0x109afb190&gt;，不好看。</p>
+<p>怎么才能打印得好看呢？只需要定义好<strong>str</strong>()方法，返回一个好看的字符串就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     def __init__(self, name):</span><br><span class="line">...         self.name = name</span><br><span class="line">...     def __str__(self):</span><br><span class="line">...         return &apos;Student object (name: %s)&apos; % self.name</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; print(Student(&apos;Michael&apos;))</span><br><span class="line">Student object (name: Michael)</span><br></pre></td></tr></table></figure></p>
+<p>这样打印出来的实例，不但好看，而且容易看出实例内部重要的数据。</p>
+<p>但是细心的朋友会发现直接敲变量不用print，打印出来的实例还是不好看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student(&apos;Michael&apos;)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&lt;__main__.Student object at 0x109afb310&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这是因为直接显示变量调用的不是<strong>str</strong>()，而是<strong>repr</strong>()，两者的区别是<strong>str</strong>()返回用户看到的字符串，而<strong>repr</strong>()返回程序开发者看到的字符串，也就是说，<strong>repr</strong>()是为调试服务的。</p>
+<p>解决办法是再定义一个<strong>repr</strong>()。但是通常<strong>str</strong>()和<strong>repr</strong>()代码都是一样的，所以，有个偷懒的写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line">    def __str__(self):</span><br><span class="line">        return &apos;Student object (name=%s)&apos; % self.name</span><br><span class="line">    __repr__ = __str__</span><br></pre></td></tr></table></figure></p>
+<h1 id="iter"><a href="#iter" class="headerlink" title="iter"></a><strong>iter</strong></h1><p>如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个<strong>iter</strong>()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的<strong>next</strong>()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。</p>
+<p>我们以斐波那契数列为例，写一个Fib类，可以作用于for循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.a, self.b = 0, 1 # 初始化两个计数器a，b</span><br><span class="line"></span><br><span class="line">    def __iter__(self):</span><br><span class="line">        return self # 实例本身就是迭代对象，故返回自己</span><br><span class="line"></span><br><span class="line">    def __next__(self):</span><br><span class="line">        self.a, self.b = self.b, self.a + self.b # 计算下一个值</span><br><span class="line">        if self.a &gt; 100000: # 退出循环的条件</span><br><span class="line">            raise StopIteration()</span><br><span class="line">        return self.a # 返回下一个值</span><br></pre></td></tr></table></figure></p>
+<p>现在，试试把Fib实例作用于for循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for n in Fib():</span><br><span class="line">...     print(n)</span><br><span class="line">...</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">...</span><br><span class="line">46368</span><br><span class="line">75025</span><br></pre></td></tr></table></figure></p>
+<h1 id="getitem"><a href="#getitem" class="headerlink" title="getitem"></a><strong>getitem</strong></h1><p>Fib实例虽然能作用于for循环，看起来和list有点像，但是，把它当成list来使用还是不行，比如，取第5个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Fib()[5]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">TypeError: &apos;Fib&apos; object does not support indexing</span><br></pre></td></tr></table></figure></p>
+<p>要表现得像list那样按照下标取出元素，需要实现<strong>getitem</strong>()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    def __getitem__(self, n):</span><br><span class="line">        a, b = 1, 1</span><br><span class="line">        for x in range(n):</span><br><span class="line">            a, b = b, a + b</span><br><span class="line">        return a</span><br></pre></td></tr></table></figure></p>
+<p>现在，就可以按下标访问数列的任意一项了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = Fib()</span><br><span class="line">&gt;&gt;&gt; f[0]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; f[1]</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; f[2]</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; f[3]</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; f[10]</span><br><span class="line">89</span><br><span class="line">&gt;&gt;&gt; f[100]</span><br><span class="line">573147844013817084101</span><br></pre></td></tr></table></figure></p>
+<p>但是list有个神奇的切片方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(range(100))[5:10]</span><br><span class="line">[5, 6, 7, 8, 9]</span><br></pre></td></tr></table></figure></p>
+<p>对于Fib却报错。原因是<strong>getitem</strong>()传入的参数可能是一个int，也可能是一个切片对象slice，所以要做判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    def __getitem__(self, n):</span><br><span class="line">        if isinstance(n, int): # n是索引</span><br><span class="line">            a, b = 1, 1</span><br><span class="line">            for x in range(n):</span><br><span class="line">                a, b = b, a + b</span><br><span class="line">            return a</span><br><span class="line">        if isinstance(n, slice): # n是切片</span><br><span class="line">            start = n.start</span><br><span class="line">            stop = n.stop</span><br><span class="line">            if start is None:</span><br><span class="line">                start = 0</span><br><span class="line">            a, b = 1, 1</span><br><span class="line">            L = []</span><br><span class="line">            for x in range(stop):</span><br><span class="line">                if x &gt;= start:</span><br><span class="line">                    L.append(a)</span><br><span class="line">                a, b = b, a + b</span><br><span class="line">            return L</span><br></pre></td></tr></table></figure></p>
+<p>现在试试Fib的切片：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = Fib()</span><br><span class="line">&gt;&gt;&gt; f[0:5]</span><br><span class="line">[1, 1, 2, 3, 5]</span><br><span class="line">&gt;&gt;&gt; f[:10]</span><br><span class="line">[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span><br></pre></td></tr></table></figure></p>
+<p>但是没有对step参数作处理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f[:10:2]</span><br><span class="line">[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</span><br></pre></td></tr></table></figure></p>
+<p>也没有对负数作处理，所以，要正确实现一个<strong>getitem</strong>()还是有很多工作要做的。</p>
+<p>此外，如果把对象看成dict，<strong>getitem</strong>()的参数也可能是一个可以作key的object，例如str。</p>
+<p>与之对应的是<strong>setitem</strong>()方法，把对象视作list或dict来对集合赋值。最后，还有一个<strong>delitem</strong>()方法，用于删除某个元素。</p>
+<p>总之，通过上面的方法，我们自己定义的类表现得和Python自带的list、tuple、dict没什么区别，这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口。</p>
+<h1 id="getattr"><a href="#getattr" class="headerlink" title="getattr"></a><strong>getattr</strong></h1><p>正常情况下，当我们调用类的方法或属性时，如果不存在，就会报错。比如定义Student类：</p>
+<p>class Student(object):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def __init__(self):</span><br><span class="line">    self.name = &apos;Michael&apos;</span><br></pre></td></tr></table></figure></p>
+<p>调用name属性，没问题，但是，调用不存在的score属性，就有问题了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; print(s.name)</span><br><span class="line">Michael</span><br><span class="line">&gt;&gt;&gt; print(s.score)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">AttributeError: &apos;Student&apos; object has no attribute &apos;score&apos;</span><br></pre></td></tr></table></figure></p>
+<p>错误信息很清楚地告诉我们，没有找到score这个attribute。</p>
+<p>要避免这个错误，除了可以加上一个score属性外，Python还有另一个机制，那就是写一个<strong>getattr</strong>()方法，动态返回一个属性。修改如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.name = &apos;Michael&apos;</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, attr):</span><br><span class="line">        if attr==&apos;score&apos;:</span><br><span class="line">            return 99</span><br></pre></td></tr></table></figure></p>
+<p>当调用不存在的属性时，比如score，Python解释器会试图调用<strong>getattr</strong>(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.name</span><br><span class="line">&apos;Michael&apos;</span><br><span class="line">&gt;&gt;&gt; s.score</span><br><span class="line">99</span><br></pre></td></tr></table></figure></p>
+<p>返回函数也是完全可以的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, attr):</span><br><span class="line">        if attr==&apos;age&apos;:</span><br><span class="line">            return lambda: 25</span><br></pre></td></tr></table></figure></p>
+<p>只是调用方式要变为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s.age()</span><br><span class="line">25</span><br></pre></td></tr></table></figure></p>
+<p>注意，只有在没有找到属性的情况下，才调用<strong>getattr</strong>，已有的属性，比如name，不会在<strong>getattr</strong>中查找。</p>
+<p>此外，注意到任意调用如s.abc都会返回None，这是因为我们定义的<strong>getattr</strong>默认返回就是None。要让class只响应特定的几个属性，我们就要按照约定，抛出AttributeError的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, attr):</span><br><span class="line">        if attr==&apos;age&apos;:</span><br><span class="line">            return lambda: 25</span><br><span class="line">        raise AttributeError(&apos;\&apos;Student\&apos; object has no attribute \&apos;%s\&apos;&apos; % attr)</span><br></pre></td></tr></table></figure></p>
+<p>这实际上可以把一个类的所有属性和方法调用全部动态化处理了，不需要任何特殊手段。</p>
+<p>这种完全动态调用的特性有什么实际作用呢？作用就是，可以针对完全动态的情况作调用。</p>
+<p>举个例子：</p>
+<p>现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：</p>
+<p><a href="http://api.server/user/friends" target="_blank" rel="noopener">http://api.server/user/friends</a></p>
+<p><a href="http://api.server/user/timeline/list" target="_blank" rel="noopener">http://api.server/user/timeline/list</a></p>
+<p>如果要写SDK，给每个URL对应的API都写一个方法，那得累死，而且，API一旦改动，SDK也要改。</p>
+<p>利用完全动态的<strong>getattr</strong>，我们可以写出一个链式调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Chain(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, path=&apos;&apos;):</span><br><span class="line">        self._path = path</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, path):</span><br><span class="line">        return Chain(&apos;%s/%s&apos; % (self._path, path))</span><br><span class="line"></span><br><span class="line">    def __str__(self):</span><br><span class="line">        return self._path</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br></pre></td></tr></table></figure></p>
+<p>试试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Chain().status.user.timeline.list</span><br><span class="line">&apos;/status/user/timeline/list&apos;</span><br></pre></td></tr></table></figure></p>
+<p>这样，无论API怎么变，SDK都可以根据URL实现完全动态的调用，而且，不随API的增加而改变！</p>
+<p>还有些REST API会把参数放到URL中，比如GitHub的API：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /users/:user/repos</span><br></pre></td></tr></table></figure></p>
+<p>调用时，需要把:user替换为实际用户名。如果我们能写出这样的链式调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chain().users(&apos;michael&apos;).repos</span><br></pre></td></tr></table></figure></p>
+<p>就可以非常方便地调用API了。有兴趣的童鞋可以试试写出来。</p>
+<h1 id="call"><a href="#call" class="headerlink" title="call"></a><strong>call</strong></h1><p>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。</p>
+<p>任何类，只需要定义一个<strong>call</strong>()方法，就可以直接对实例进行调用。请看示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    def __call__(self):</span><br><span class="line">        print(&apos;My name is %s.&apos; % self.name)</span><br></pre></td></tr></table></figure></p>
+<p>调用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student(&apos;Michael&apos;)</span><br><span class="line">&gt;&gt;&gt; s() # self参数不要传入</span><br><span class="line">My name is Michael.</span><br></pre></td></tr></table></figure></p>
+<p><strong>call</strong>()还可以定义参数。对实例进行直接调用就好比对一个函数进行调用一样，所以你完全可以把对象看成函数，把函数看成对象，因为这两者之间本来就没啥根本的区别。</p>
+<p>如果你把对象看成函数，那么函数本身其实也可以在运行期动态创建出来，因为类的实例都是运行期创建出来的，这么一来，我们就模糊了对象和函数的界限。</p>
+<p>那么，怎么判断一个变量是对象还是函数呢？其实，更多的时候，我们需要判断一个对象是否能被调用，能被调用的对象就是一个Callable对象，比如函数和我们上面定义的带有<strong>call</strong>()的类实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; callable(Student())</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; callable(max)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; callable([1, 2, 3])</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; callable(None)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; callable(&apos;str&apos;)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>通过callable()函数，我们就可以判断一个对象是否是“可调用”对象。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Python的class允许定义许多定制方法，可以让我们非常方便地生成特定的类。</p>
+<p>本节介绍的是最常用的几个定制方法，还有很多可定制的方法，请参考Python的官方文档。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/实例属性和类属性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/实例属性和类属性/" itemprop="url">实例属性和类属性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  492 字
                 </span>
               
 
@@ -1171,9 +1996,14 @@
       
         
           
-            <h1 id="1-按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面"><a href="#1-按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面" class="headerlink" title="1.按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面"></a>1.按照year从高到低排序，但是如果thumb为空，即使year很高也要排在有thumb的最低的year后面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TABLE order by thumb is null,year desc;</span><br></pre></td></tr></table></figure>
-<h1 id="2-按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面"><a href="#2-按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面" class="headerlink" title="2.按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面"></a>2.按照year从高到低排序，但是如果thumb为空字符串，即使year很高也要排在有thumb的最低的year后面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TABLE order by thumb =&apos;&apos;,year desc;</span><br></pre></td></tr></table></figure>
-<h1 id="1-按照year从高到低排序，但是如果thumb为固定字符串no-picture，即使year很高也要排在有thumb的最低的year后面"><a href="#1-按照year从高到低排序，但是如果thumb为固定字符串no-picture，即使year很高也要排在有thumb的最低的year后面" class="headerlink" title="1.按照year从高到低排序，但是如果thumb为固定字符串no picture，即使year很高也要排在有thumb的最低的year后面"></a>1.按照year从高到低排序，但是如果thumb为固定字符串no picture，即使year很高也要排在有thumb的最低的year后面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from TABLE order by thumb = &apos;no picture&apos;,year desc;</span><br></pre></td></tr></table></figure>
+            <p>由于Python是动态语言，根据类创建的实例可以任意绑定属性。</p>
+<p>给实例绑定属性的方法是通过实例变量，或者通过self变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">s = Student(&apos;Bob&apos;)</span><br><span class="line">s.score = 90</span><br></pre></td></tr></table></figure></p>
+<p>但是，如果Student类本身需要绑定一个属性呢？可以直接在class中定义属性，这种属性是类属性，归Student类所有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    name = &apos;Student&apos;</span><br></pre></td></tr></table></figure></p>
+<p>当我们定义了一个类属性后，这个属性虽然归类所有，但类的所有实例都可以访问到。来测试一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     name = &apos;Student&apos;</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; s = Student() # 创建实例s</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 打印name属性，因为实例并没有name属性，所以会继续查找class的name属性</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; print(Student.name) # 打印类的name属性</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; s.name = &apos;Michael&apos; # 给实例绑定name属性</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 由于实例属性优先级比类属性高，因此，它会屏蔽掉类的name属性</span><br><span class="line">Michael</span><br><span class="line">&gt;&gt;&gt; print(Student.name) # 但是类属性并未消失，用Student.name仍然可以访问</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; del s.name # 如果删除实例的name属性</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 再次调用s.name，由于实例的name属性没有找到，类的name属性就显示出来了</span><br><span class="line">Student</span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子可以看出，在编写程序的时候，千万不要对实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>实例属性属于各个实例所有，互不干扰；</p>
+<p>类属性属于类所有，所有实例共享一个属性；</p>
+<p>不要对实例属性和类属性使用相同的名字，否则将产生难以发现的错误。</p>
 
           
         
@@ -1226,7 +2056,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/mysql：字符串的百分比数据排序/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/迭代/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1245,7 +2075,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/23/mysql：字符串的百分比数据排序/" itemprop="url">mysql：字符串的百分比数据排序</a></h1>
+                <a class="post-title-link" href="/2019/01/25/迭代/" itemprop="url">迭代</a></h1>
         
 
         <div class="post-meta">
@@ -1257,8 +2087,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:33:56+08:00">
-                2019-01-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
               </time>
             
 
@@ -1280,8 +2110,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1311,7 +2141,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  199 字
+                  652 字
                 </span>
               
 
@@ -1327,7 +2157,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -1350,747 +2180,18 @@
       
         
           
-            <p>有一组数据需要按照百分比排序，但是例如23.52%是存为字符串的，而不是0.2352，如果直接排序是按照字母排序。</p>
-<h2 id="考虑先去掉百分号"><a href="#考虑先去掉百分号" class="headerlink" title="考虑先去掉百分号"></a>考虑先去掉百分号</h2><p>去掉百分号，即去掉最后一个字符，方法为<br>substring(columnName,1,length(colunName)-1)，这样去掉了最后一个字符，如果以他排序，则为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from Table order by substring(columnName,1,length(colunName)-1);</span><br></pre></td></tr></table></figure></p>
-<p>但是这样做依旧是按照字母排序，因为还是个字符串，所以需要转化为数字。</p>
-<h2 id="转化数字简单方法"><a href="#转化数字简单方法" class="headerlink" title="转化数字简单方法"></a>转化数字简单方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from Table order by columnName+0;</span><br></pre></td></tr></table></figure>
-<p>这样就将字段强转为数字类型了，所以如果是按照百分比的数字顺序排序，可以写为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from Table order by substring(columnName,1,length(columnName)-1)+0;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/C-使用OpenMP计算四邻域值/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/C-使用OpenMP计算四邻域值/" itemprop="url">C++使用OpenMP计算四邻域值</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:32:38+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目地址：<a href="https://github.com/snjl/c.openmp.git" target="_blank" rel="noopener">https://github.com/snjl/c.openmp.git</a></p>
-<p>开发环境：Clion或visual studio，vs需要在项目里开启openmp，具体可以搜索。</p>
-<p>时间统计使用omp_get_wtime，是omp包里的函数，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double start = omp_get_wtime();</span><br></pre></td></tr></table></figure></p>
-<p>如果使用time的函数，clock_t是记录cpu的滴答数的，并行时多个进程同时计算，cpu计时数成倍增加。</p>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>编写完整OpenMP程序：要求在程序中指定用4个线程执行；定义A、B数组，实现初始化整数数组A[1000][1000]，然后计算B[i][j]=（A[i-1][j]+A[i+1][j]+A[i][j-1]+A[i][j+1])/4（其中0&lt;i,j&lt;1000）。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/23/C-使用OpenMP计算四邻域值/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/mingw下载/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/mingw下载/" itemprop="url">mingw下载</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:31:46+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/mingw/" itemprop="url" rel="index">
-                    <span itemprop="name">mingw</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  26 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>sourceforge的网址：<br><a href="https://sourceforge.net/projects/mingw-w64/" target="_blank" rel="noopener">https://sourceforge.net/projects/mingw-w64/</a></p>
-<p>多个系统的下载链接：<br><a href="http://mingw-w64.org/doku.php/download" target="_blank" rel="noopener">http://mingw-w64.org/doku.php/download</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/String的equals方法源码/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/String的equals方法源码/" itemprop="url">String的equals方法源码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:29:30+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/源码/" itemprop="url" rel="index">
-                    <span itemprop="name">源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * Compares this string to the specified object.  The result is &#123;@code</span><br><span class="line">  * true&#125; if and only if the argument is not &#123;@code null&#125; and is a &#123;@code</span><br><span class="line">  * String&#125; object that represents the same sequence of characters as this</span><br><span class="line">  * object.</span><br><span class="line">  *</span><br><span class="line">  * @param  anObject</span><br><span class="line">  *         The object to compare this &#123;@code String&#125; against</span><br><span class="line">  *</span><br><span class="line">  * @return  &#123;@code true&#125; if the given object represents a &#123;@code String==&#125;==</span><br><span class="line">  *          equivalent to this string, &#123;@code false&#125; otherwise</span><br><span class="line">  *</span><br><span class="line">  * @see  #compareTo(String)</span><br><span class="line">  * @see  #equalsIgnoreCase(String)</span><br><span class="line">  */</span><br><span class="line"> public boolean equals(Object anObject) &#123;</span><br><span class="line">     if (this == anObject) &#123;</span><br><span class="line">         return true;</span><br><span class="line">     &#125;</span><br><span class="line">     if (anObject instanceof String) &#123;</span><br><span class="line">         String anotherString = (String)anObject;</span><br><span class="line">         int n = value.length;</span><br><span class="line">         if (n == anotherString.value.length) &#123;</span><br><span class="line">             char v1[] = value;</span><br><span class="line">             char v2[] = anotherString.value;</span><br><span class="line">             int i = 0;</span><br><span class="line">             while (n-- != 0) &#123;</span><br><span class="line">                 if (v1[i] != v2[i])</span><br><span class="line">                     return false;</span><br><span class="line">                 i++;</span><br><span class="line">             &#125;</span><br><span class="line">             return true;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     return false;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>如果是同一个对象，例如x.equals(x),啧在第一个判断时就会返回true。如果两个对象都是被new出来的，则内存地址会不一样，例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String a = new String(&quot;bcd&quot;);</span><br><span class="line">String b =new String(&quot;bcd&quot;);</span><br></pre></td></tr></table></figure></p>
-<p>a和b的内存地址是不一样的，使用==会得到false的结果，但是如果写成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String a = &quot;abc&quot;;</span><br><span class="line">String b = a;</span><br></pre></td></tr></table></figure></p>
-<p>则a和b的内存地址是一样的，直接用==也可以获得true。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String s1 = &quot;java&quot;;</span><br><span class="line">String s2 = &quot;java&quot;;</span><br><span class="line"></span><br><span class="line">System.out.println(s1==s2);            //true</span><br><span class="line">System.out.println(s1.equals(s2));    //true</span><br></pre></td></tr></table></figure></p>
-<p>如果String缓冲池内不存在与其指定值相同的String对象，那么此时虚拟机将为此创建新的String对象，并存放在String缓冲池内。</p>
-<p>如果String缓冲池内存在与其指定值相同的String对象，那么此时虚拟机将不为此创建新的String对象，而直接返回已存在的String对象的引用。</p>
-<p>所以，如果两行代码运行时间很接近，可能还留有缓存，两者可以直接用==并且返回true，但是一般不会这样去使用。</p>
-<p>重写equals条件：</p>
-<ul>
-<li>自反性：对于任何非空引用值 x，x.equals(x) 都应返回 true。</li>
-<li>对称性：对于任何非空引用值 x 和 y，当且仅当 y.equals(x) 返回 true 时，x.equals(y) 才应返回 true。</li>
-<li>传递性：对于任何非空引用值 x、y 和 z，如果 x.equals(y) 返回 true，并且 y.equals(z) 返回 true，那么 x.equals(z) 应返回 true。</li>
-<li>一致性：对于任何非空引用值 x 和 y，多次调用 x.equals(y) 始终返回 true 或始终返回 false，前提是对象上 equals 比较中所用的信息没有被修改。<br>对于任何非空引用值 x，x.equals(null) 都应返回 false。</li>
-<li>对于任何非空引用值 x，x.equals(null) 都应返回 false。 </li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/23/String的equals方法源码/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/springboot报错记录（二）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/springboot报错记录（二）/" itemprop="url">springboot报错记录（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:21:25+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  100 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-org-thymeleaf-exceptions-TemplateInputException-Error-resolving-template-“index”-template-might-not-exist-or-might-not-be-accessible-by-any-of-the-configured-Template-Resolvers-at-org-thymeleaf-TemplateRepository-getTemplate-TemplateRepository-java-246-thymeleaf-2-1-6-RELEASE-jar-2-1-6-RELEASE"><a href="#1-org-thymeleaf-exceptions-TemplateInputException-Error-resolving-template-“index”-template-might-not-exist-or-might-not-be-accessible-by-any-of-the-configured-Template-Resolvers-at-org-thymeleaf-TemplateRepository-getTemplate-TemplateRepository-java-246-thymeleaf-2-1-6-RELEASE-jar-2-1-6-RELEASE" class="headerlink" title="1. org.thymeleaf.exceptions.TemplateInputException: Error resolving template “index”, template might not exist or might not be accessible by any of the configured Template Resolvers at org.thymeleaf.TemplateRepository.getTemplate(TemplateRepository.java:246) ~[thymeleaf-2.1.6.RELEASE.jar:2.1.6.RELEASE]"></a>1. org.thymeleaf.exceptions.TemplateInputException: Error resolving template “index”, template might not exist or might not be accessible by any of the configured Template Resolvers at org.thymeleaf.TemplateRepository.getTemplate(TemplateRepository.java:246) ~[thymeleaf-2.1.6.RELEASE.jar:2.1.6.RELEASE]</h1><p>在你的controller层对应的方法返回html路径及名称时，在前面多加了一个/ 。</p>
-<p>例如return “/index”，正式这个/导致报错的，解决：去掉返回前面的/即可，例如return “/index”，改为”index”。</p>
+            <p>如果给定一个list或tuple，我们可以通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。</p>
+<p>在Python中，迭代是通过for … in来完成的，而很多语言比如C语言，迭代list是通过下标完成的，比如Java代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (i=0; i&lt;list.length; i++) &#123;</span><br><span class="line">    n = list[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，Python的for循环抽象程度要高于C的for循环，因为Python的for循环不仅可以用在list或tuple上，还可以作用在其他可迭代对象上。</p>
+<p>list这种数据类型虽然有下标，但很多其他数据类型是没有下标的，但是，只要是可迭代对象，无论有无下标，都可以迭代，比如dict就可以迭代：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 3&#125;</span><br><span class="line">&gt;&gt;&gt; for key in d:</span><br><span class="line">...     print(key)</span><br><span class="line">...</span><br><span class="line">a</span><br><span class="line">c</span><br><span class="line">b</span><br></pre></td></tr></table></figure></p>
+<p>因为dict的存储不是按照list的方式顺序排列，所以，迭代出的结果顺序很可能不一样。</p>
+<p>默认情况下，dict迭代的是key。如果要迭代value，可以用for value in d.values()，如果要同时迭代key和value，可以用for k, v in d.items()。</p>
+<p>由于字符串也是可迭代对象，因此，也可以作用于for循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for ch in &apos;ABC&apos;:</span><br><span class="line">...     print(ch)</span><br><span class="line">...</span><br><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br></pre></td></tr></table></figure></p>
+<p>所以，当我们使用for循环时，只要作用于一个可迭代对象，for循环就可以正常运行，而我们不太关心该对象究竟是list还是其他数据类型。</p>
+<p>那么，如何判断一个对象是可迭代对象呢？方法是通过collections模块的Iterable类型判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from collections import Iterable</span><br><span class="line">&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterable) # str是否可迭代</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance([1,2,3], Iterable) # list是否可迭代</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(123, Iterable) # 整数是否可迭代</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>最后一个小问题，如果要对list实现类似Java那样的下标循环怎么办？Python内置的enumerate函数可以把一个list变成索引-元素对，这样就可以在for循环中同时迭代索引和元素本身：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for i, value in enumerate([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]):</span><br><span class="line">...     print(i, value)</span><br><span class="line">...</span><br><span class="line">0 A</span><br><span class="line">1 B</span><br><span class="line">2 C</span><br></pre></td></tr></table></figure></p>
+<p>上面的for循环里，同时引用了两个变量，在Python里是很常见的，比如下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for x, y in [(1, 1), (2, 4), (3, 9)]:</span><br><span class="line">...     print(x, y)</span><br><span class="line">...</span><br><span class="line">1 1</span><br><span class="line">2 4</span><br><span class="line">3 9</span><br></pre></td></tr></table></figure></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>任何可迭代对象都可以作用于for循环，包括我们自定义的数据类型，只要符合迭代条件，就可以使用for循环。</p>
 
           
         
@@ -2134,7 +2235,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2182,7 +2283,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">183</span>
+                  <span class="site-state-item-count">203</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2193,7 +2294,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2204,7 +2305,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

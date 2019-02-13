@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/cat命令/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/文档测试/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/cat命令/" itemprop="url">cat命令</a></h1>
+                <a class="post-title-link" href="/2019/01/31/文档测试/" itemprop="url">文档测试</a></h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,197 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:44:43+08:00">
-                2019-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  798 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果你经常阅读Python的官方文档，可以看到很多文档都有示例代码。比如re模块就带了很多示例代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt; import re</span><br><span class="line">&gt;&gt;&gt; m = re.search(&apos;(?&lt;=abc)def&apos;, &apos;abcdef&apos;)</span><br><span class="line">&gt;&gt;&gt; m.group(0)</span><br><span class="line">&apos;def&apos;</span><br></pre></td></tr></table></figure></p>
+<p>可以把这些示例代码在Python的交互式环境下输入并执行，结果与文档中的示例代码显示的一致。</p>
+<p>这些代码与其他说明可以写在注释中，然后，由一些工具来自动生成文档。既然这些代码本身就可以粘贴出来直接运行，那么，可不可以自动执行写在注释中的这些代码呢？</p>
+<p>答案是肯定的。</p>
+<p>当我们编写注释时，如果写上这样的注释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def abs(n):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    Function to get absolute value of number.</span><br><span class="line"></span><br><span class="line">    Example:</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; abs(1)</span><br><span class="line">    1</span><br><span class="line">    &gt;&gt;&gt; abs(-1)</span><br><span class="line">    1</span><br><span class="line">    &gt;&gt;&gt; abs(0)</span><br><span class="line">    0</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    return n if n &gt;= 0 else (-n)</span><br></pre></td></tr></table></figure></p>
+<p>无疑更明确地告诉函数的调用者该函数的期望输入和输出。</p>
+<p>并且，Python内置的“文档测试”（doctest）模块可以直接提取注释中的代码并执行测试。</p>
+<p>doctest严格按照Python交互式命令行的输入和输出来判断测试结果是否正确。只有测试异常的时候，可以用…表示中间一大段烦人的输出。</p>
+<p>让我们用doctest来测试上次编写的Dict类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># mydict2.py</span><br><span class="line">class Dict(dict):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    Simple dict but also support access as x.y style.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; d1 = Dict()</span><br><span class="line">    &gt;&gt;&gt; d1[&apos;x&apos;] = 100</span><br><span class="line">    &gt;&gt;&gt; d1.x</span><br><span class="line">    100</span><br><span class="line">    &gt;&gt;&gt; d1.y = 200</span><br><span class="line">    &gt;&gt;&gt; d1[&apos;y&apos;]</span><br><span class="line">    200</span><br><span class="line">    &gt;&gt;&gt; d2 = Dict(a=1, b=2, c=&apos;3&apos;)</span><br><span class="line">    &gt;&gt;&gt; d2.c</span><br><span class="line">    &apos;3&apos;</span><br><span class="line">    &gt;&gt;&gt; d2[&apos;empty&apos;]</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">        ...</span><br><span class="line">    KeyError: &apos;empty&apos;</span><br><span class="line">    &gt;&gt;&gt; d2.empty</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">        ...</span><br><span class="line">    AttributeError: &apos;Dict&apos; object has no attribute &apos;empty&apos;</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    def __init__(self, **kw):</span><br><span class="line">        super(Dict, self).__init__(**kw)</span><br><span class="line"></span><br><span class="line">    def __getattr__(self, key):</span><br><span class="line">        try:</span><br><span class="line">            return self[key]</span><br><span class="line">        except KeyError:</span><br><span class="line">            raise AttributeError(r&quot;&apos;Dict&apos; object has no attribute &apos;%s&apos;&quot; % key)</span><br><span class="line"></span><br><span class="line">    def __setattr__(self, key, value):</span><br><span class="line">        self[key] = value</span><br><span class="line"></span><br><span class="line">if __name__==&apos;__main__&apos;:</span><br><span class="line">    import doctest</span><br><span class="line">    doctest.testmod()</span><br></pre></td></tr></table></figure></p>
+<p>运行python mydict2.py：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python mydict2.py</span><br></pre></td></tr></table></figure></p>
+<p>什么输出也没有。这说明我们编写的doctest运行都是正确的。如果程序有问题，比如把<strong>getattr</strong>()方法注释掉，再运行就会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python mydict2.py</span><br><span class="line">**********************************************************************</span><br><span class="line">File &quot;/Users/michael/Github/learn-python3/samples/debug/mydict2.py&quot;, line 10, in __main__.Dict</span><br><span class="line">Failed example:</span><br><span class="line">    d1.x</span><br><span class="line">Exception raised:</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">      ...</span><br><span class="line">    AttributeError: &apos;Dict&apos; object has no attribute &apos;x&apos;</span><br><span class="line">**********************************************************************</span><br><span class="line">File &quot;/Users/michael/Github/learn-python3/samples/debug/mydict2.py&quot;, line 16, in __main__.Dict</span><br><span class="line">Failed example:</span><br><span class="line">    d2.c</span><br><span class="line">Exception raised:</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">      ...</span><br><span class="line">    AttributeError: &apos;Dict&apos; object has no attribute &apos;c&apos;</span><br><span class="line">**********************************************************************</span><br><span class="line">1 items had failures:</span><br><span class="line">   2 of   9 in __main__.Dict</span><br><span class="line">***Test Failed*** 2 failures.</span><br></pre></td></tr></table></figure></p>
+<p>注意到最后3行代码。当模块正常导入时，doctest不会被执行。只有在命令行直接运行时，才执行doctest。所以，不必担心doctest会在非测试环境下执行。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>doctest非常有用，不但可以用来测试，还可以直接作为示例代码。通过某些文档生成工具，就可以自动把包含doctest的注释提取出来。用户看文档的时候，同时也看到了doctest。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/Ubuntu：关机、重启、注销等命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/Ubuntu：关机、重启、注销等命令/" itemprop="url">Ubuntu：关机、重启、注销等命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
               </time>
             
 
@@ -374,189 +563,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  318 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>cat命令连接文件并打印到标准输出设备上，cat经常用来显示文件的内容，类似于下的type命令。</p>
-<p>注意：当文件较大时，文本在屏幕上迅速闪过（滚屏），用户往往看不清所显示的内容。因此，一般用more等命令分屏显示。为了控制滚屏，可以按Ctrl+S键，停止滚屏；按Ctrl+Q键可以恢复滚屏。按Ctrl+C（中断）键可以终止该命令的执行，并且返回Shell提示符状态。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>cat(选项)(参数)</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-n或-number：有1开始对所有输出的行数编号；</span><br><span class="line">-b或--number-nonblank：和-n相似，只不过对于空白行不编号；</span><br><span class="line">-s或--squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行；</span><br><span class="line">-A：显示不可打印字符，行尾显示“$”；</span><br><span class="line">-e：等价于&quot;-vE&quot;选项；</span><br><span class="line">-t：等价于&quot;-vT&quot;选项；</span><br></pre></td></tr></table></figure>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>文件列表：指定要连接的文件列表。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>设ml和m2是当前目录下的两个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat m1 （在屏幕上显示文件ml的内容）</span><br><span class="line">cat m1 m2 （同时显示文件ml和m2的内容）</span><br><span class="line">cat m1 m2 &gt; file （将文件ml和m2合并后放入文件file中）</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/多重继承/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/多重继承/" itemprop="url">多重继承</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  661 字
+                  706 字
                 </span>
               
 
@@ -595,22 +602,27 @@
       
         
           
-            <p>继承是面向对象编程的一个重要的方式，因为通过继承，子类就可以扩展父类的功能。</p>
-<p>正确的做法是采用多重继承。首先，主要的类层次仍按照哺乳类和鸟类设计：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Animal(object):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># 大类:</span><br><span class="line">class Mammal(Animal):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class Bird(Animal):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># 各种动物:</span><br><span class="line">class Dog(Mammal):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class Bat(Mammal):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class Parrot(Bird):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class Ostrich(Bird):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>现在，我们要给动物再加上Runnable和Flyable的功能，只需要先定义好Runnable和Flyable的类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Runnable(object):</span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Running...&apos;)</span><br><span class="line"></span><br><span class="line">class Flyable(object):</span><br><span class="line">    def fly(self):</span><br><span class="line">        print(&apos;Flying...&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>对于需要Runnable功能的动物，就多继承一个Runnable，例如Dog：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Mammal, Runnable):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>对于需要Flyable功能的动物，就多继承一个Flyable，例如Bat：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Bat(Mammal, Flyable):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>通过多重继承，一个子类就可以同时获得多个父类的所有功能。</p>
-<h1 id="MixIn"><a href="#MixIn" class="headerlink" title="MixIn"></a>MixIn</h1><p>在设计类的继承关系时，通常，主线都是单一继承下来的，例如，Ostrich继承自Bird。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让Ostrich除了继承自Bird外，再同时继承Runnable。这种设计通常称之为MixIn。</p>
-<p>为了更好地看出继承关系，我们把Runnable和Flyable改为RunnableMixIn和FlyableMixIn。类似的，你还可以定义出肉食动物CarnivorousMixIn和植食动物HerbivoresMixIn，让某个动物同时拥有好几个MixIn：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。</p>
-<p>Python自带的很多库也使用了MixIn。举个例子，Python自带了TCPServer和UDPServer这两类网络服务，而要同时服务多个用户就必须使用多进程或多线程模型，这两种模型由ForkingMixIn和ThreadingMixIn提供。通过组合，我们就可以创造出合适的服务来。</p>
-<p>比如，编写一个多进程模式的TCP服务，定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class MyTCPServer(TCPServer, ForkingMixIn):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>编写一个多线程模式的UDP服务，定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class MyUDPServer(UDPServer, ThreadingMixIn):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>如果你打算搞一个更先进的协程模型，可以编写一个CoroutineMixIn：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class MyTCPServer(TCPServer, CoroutineMixIn):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>由于Python允许使用多重继承，因此，MixIn就是一种常见的设计。</p>
-<p>只允许单一继承的语言（如Java）不能使用MixIn的设计。</p>
+            <h1 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h1><p>shutdown命令用来系统关机命令。shutdown指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown(选项)(参数)</span><br></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-c：当执行“shutdown -h 11:50”指令时，只要按+键就可以中断关机的指令；</span><br><span class="line">-f：重新启动时不执行fsck；</span><br><span class="line">-F：重新启动时执行fsck；</span><br><span class="line">-h：将系统关机；</span><br><span class="line">-k：只是送出信息给所有用户，但不会实际关机；</span><br><span class="line">-n：不调用init程序进行关机，而由shutdown自己进行；</span><br><span class="line">-r：shutdown之后重新启动；</span><br><span class="line">-t&lt;秒数&gt;：送出警告信息和删除信息之间要延迟多少秒。</span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li>[时间]：设置多久时间后执行shutdown指令；</li>
+<li>[警告信息]：要传送给所有登入用户的信息。<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2>指定现在立即关机：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>指定5分钟后关机，同时送出警告信息给登入用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown +5 &quot;System will shutdown after 5 minutes&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="其他实例"><a href="#其他实例" class="headerlink" title="其他实例"></a>其他实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now 现在立即关机</span><br><span class="line"></span><br><span class="line">shutdown -r now 现在立即重启</span><br><span class="line"></span><br><span class="line">shutdown -r +3 三分钟后重启</span><br><span class="line"></span><br><span class="line">shutdown -h +3 “The System will shutdown after 3 minutes” 提示使用者将在三分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown -r 20:23 在20：23时将重启计算机</span><br><span class="line"></span><br><span class="line">shutdown -r 20:23 &amp; 可以将在20：23时重启的任务放到后台去，用户可以继续操作终端</span><br></pre></td></tr></table></figure>
+<h1 id="reboot"><a href="#reboot" class="headerlink" title="reboot"></a>reboot</h1><p>reboot命令用来重新启动正在运行的Linux操作系统。</p>
+<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot(选项)</span><br></pre></td></tr></table></figure>
+<h2 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d：重新开机时不把数据写入记录文件/var/tmp/wtmp。本参数具有“-n”参数效果；</span><br><span class="line">-f：强制重新开机，不调用shutdown指令的功能；</span><br><span class="line">-i：在重开机之前，先关闭所有网络界面；</span><br><span class="line">-n：重开机之前不检查是否有未结束的程序；</span><br><span class="line">-w：仅做测试，并不真正将系统重新开机，只会把重开机的数据写入/var/log目录下的wtmp记录文件。</span><br></pre></td></tr></table></figure>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot        //重开机。</span><br><span class="line">reboot -w     //做个重开机的模拟（只有纪录并不会真的重开机）。</span><br></pre></td></tr></table></figure>
+<h1 id="logout"><a href="#logout" class="headerlink" title="logout"></a>logout</h1><p>logout命令用于退出当前登录的Shell，logout指令让用户退出系统，其功能和login指令相互对应。</p>
+<h1 id="login"><a href="#login" class="headerlink" title="login"></a>login</h1><p>login命令用于给出登录界面，可用于重新登录或者切换用户身份，也可通过它的功能随时更换登入身份。在Slackware发行版中 ，您可在命令后面附加欲登入的用户名称，它会直接询问密码，等待用户输入。当/etc/nologin文件存在时，系统只root帐号登入系统，其他用户一律不准登入。</p>
+<h2 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login(选项)(参数)</span><br></pre></td></tr></table></figure>
+<h2 id="选项-2"><a href="#选项-2" class="headerlink" title="选项"></a>选项</h2><ul>
+<li>-p：告诉login指令不销毁环境变量；</li>
+<li>-h：指定远程服务器的主机名。<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名：指定登录使用的用户名。</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -663,7 +675,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/迭代器/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/无界面selenium/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -682,7 +694,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/迭代器/" itemprop="url">迭代器</a></h1>
+                <a class="post-title-link" href="/2019/01/31/无界面selenium/" itemprop="url">无界面selenium</a></h1>
         
 
         <div class="post-meta">
@@ -694,8 +706,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
               </time>
             
 
@@ -717,8 +729,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
                   </a>
                 </span>
 
@@ -748,7 +760,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  683 字
+                  502 字
                 </span>
               
 
@@ -787,24 +799,20 @@
       
         
           
-            <p>我们已经知道，可以直接作用于for循环的数据类型有以下几种：</p>
-<p>一类是集合数据类型，如list、tuple、dict、set、str等；</p>
-<p>一类是generator，包括生成器和带yield的generator function。</p>
-<p>这些可以直接作用于for循环的对象统称为可迭代对象：Iterable。</p>
-<p>可以使用isinstance()判断一个对象是否是Iterable对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from collections import Iterable</span><br><span class="line">&gt;&gt;&gt; isinstance([], Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(&#123;&#125;, Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance((x for x in range(10)), Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(100, Iterable)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
-<p>而生成器不但可以作用于for循环，还可以被next()函数不断调用并返回下一个值，直到最后抛出StopIteration错误表示无法继续返回下一个值了。</p>
-<p>可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator。</p>
-<p>可以使用isinstance()判断一个对象是否是Iterator对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from collections import Iterator</span><br><span class="line">&gt;&gt;&gt; isinstance((x for x in range(10)), Iterator)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance([], Iterator)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; isinstance(&#123;&#125;, Iterator)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; isinstance(&apos;abc&apos;, Iterator)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
-<p>生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。</p>
-<p>把list、dict、str等Iterable变成Iterator可以使用iter()函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(iter([]), Iterator)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(iter(&apos;abc&apos;), Iterator)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>你可能会问，为什么list、dict、str等数据类型不是Iterator？</p>
-<p>这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。</p>
-<p>Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>凡是可作用于for循环的对象都是Iterable类型；</p>
-<p>凡是可作用于next()函数的对象都是Iterator类型，它们表示一个惰性计算的序列；</p>
-<p>集合数据类型如list、dict、str等是Iterable但不是Iterator，不过可以通过iter()函数获得一个Iterator对象。</p>
-<p>Python的for循环本质上就是通过不断调用next()函数实现的，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for x in [1, 2, 3, 4, 5]:</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>实际上完全等价于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 首先获得Iterator对象:</span><br><span class="line">it = iter([1, 2, 3, 4, 5])</span><br><span class="line"># 循环:</span><br><span class="line">while True:</span><br><span class="line">    try:</span><br><span class="line">        # 获得下一个值:</span><br><span class="line">        x = next(it)</span><br><span class="line">    except StopIteration:</span><br><span class="line">        # 遇到StopIteration就退出循环</span><br><span class="line">        break</span><br></pre></td></tr></table></figure></p>
+            <p>selenium中文文档：<a href="https://selenium-python-zh.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">https://selenium-python-zh.readthedocs.io/en/latest/index.html</a></p>
+<p>使用selenium，安装好对应版本的chromedriver和chrome，然后将driver放入项目，用 driver = webdriver.Chrome()启动。</p>
+<p>selenium刷新：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">driver.refresh()</span><br><span class="line"><span class="comment"># 或调用js</span></span><br><span class="line">driver.execute_script(<span class="string">"location.reload()"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>请求头配置参考：<a href="https://blog.csdn.net/u013440574/article/details/81911954" target="_blank" rel="noopener">https://blog.csdn.net/u013440574/article/details/81911954</a></p>
+<p>仅添加普通请求头：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">opt = webdriver.ChromeOptions()</span><br><span class="line">   opt.set_headless()</span><br><span class="line">   opt.add_argument(</span><br><span class="line">       <span class="string">'user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.6726.400 QQBrowser/10.2.2265.400'</span>)</span><br><span class="line"></span><br><span class="line">   driver = webdriver.Chrome(options=opt)</span><br></pre></td></tr></table></figure></p>
+<p>这里使用opt作为chromedriver的参数，添加user-agent信息，然后调用webdriver.Chrome，并传入opt。</p>
+<p><strong>注：这里使用的是无窗口界面的chrome selenium爬虫，所以可以设置，如果使用有界面的，则不必设置，因为带界面必定带请求头和各种信息。</strong></p>
+<p>Selenium不再推荐使用PhantomJS，会报如下警告<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserWarning: Selenium support for PhantomJS has been deprecated, please use headless versions of Chrome or Firefox instead</span><br><span class="line"> warnings.warn(&apos;Selenium support for PhantomJS has been deprecated, please use headless &apos;</span><br></pre></td></tr></table></figure></p>
+<p>于是从PhantomJS转移到Chrome，使用headless versions of Chrome时，首先要安装Chrome，然后下载chromedriver，再把chromedriver的地址配置到系统环境变量path中，方便调用。如果不把chromedriver的地址配置到系统环境变量的话，也可以在使用时指定chromedriver的地址。</p>
+<p>注意Chrome和chromedriver有版本对应的要求，系统中安装了某一版本的chrome要使用对应版本的chromedriver，其实下载最新版本的Chrome和chromedriver就行了，一般都是对应的。</p>
+<p>Chrome下载地址：<a href="https://chrome.en.softonic.com/" target="_blank" rel="noopener">https://chrome.en.softonic.com/</a></p>
+<p>chromedriver下载地址：<a href="http://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/chromedriver/</a></p>
+<h1 id="报错：-0917-002914-533-ERROR-gpu-process-transport-factory-cc-1007-Lost-UI-shared-context"><a href="#报错：-0917-002914-533-ERROR-gpu-process-transport-factory-cc-1007-Lost-UI-shared-context" class="headerlink" title="报错：[0917/002914.533:ERROR:gpu_process_transport_factory.cc(1007)] Lost UI shared context."></a>报错：[0917/002914.533:ERROR:gpu_process_transport_factory.cc(1007)] Lost UI shared context.</h1><p>原因是在windows系统中Chrome无头模式下，其中的SwiftShader软件会触发断言失败，但实际上不影响程序执行，可以忽略该错误。</p>
+<p>可以设置chromedriver的日志级别，只有大于设置级别的日志还会输出，该配置参数为：log-level：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">opt.add_argument(<span class="string">'log-level=3'</span>)</span><br><span class="line"><span class="comment"># INFO = 0, </span></span><br><span class="line"><span class="comment"># WARNING = 1, </span></span><br><span class="line"><span class="comment"># LOG_ERROR = 2, </span></span><br><span class="line"><span class="comment"># LOG_FATAL = 3</span></span><br><span class="line"><span class="comment"># default is 0</span></span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -857,7 +865,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/使用@property/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/python IO编程/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -876,7 +884,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/使用@property/" itemprop="url">使用@property</a></h1>
+                <a class="post-title-link" href="/2019/01/31/python IO编程/" itemprop="url">python IO编程</a></h1>
         
 
         <div class="post-meta">
@@ -888,8 +896,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
               </time>
             
 
@@ -942,7 +950,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  734 字
+                  934 字
                 </span>
               
 
@@ -981,17 +989,17 @@
       
         
           
-            <p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = Student()</span><br><span class="line">s.score = 9999</span><br></pre></td></tr></table></figure></p>
-<p>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def get_score(self):</span><br><span class="line">         return self._score</span><br><span class="line"></span><br><span class="line">    def set_score(self, value):</span><br><span class="line">        if not isinstance(value, int):</span><br><span class="line">            raise ValueError(&apos;score must be an integer!&apos;)</span><br><span class="line">        if value &lt; 0 or value &gt; 100:</span><br><span class="line">            raise ValueError(&apos;score must between 0 ~ 100!&apos;)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
-<p>现在，对任意的Student实例进行操作，就不能随心所欲地设置score了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.set_score(60) # ok!</span><br><span class="line">&gt;&gt;&gt; s.get_score()</span><br><span class="line">60</span><br><span class="line">&gt;&gt;&gt; s.set_score(9999)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between 0 ~ 100!</span><br></pre></td></tr></table></figure></p>
-<p>但是，上面的调用方法又略显复杂，没有直接用属性这么直接简单。</p>
-<p>有没有既能检查参数，又可以用类似属性这样简单的方式来访问类的变量呢？对于追求完美的Python程序员来说，这是必须要做到的！</p>
-<p>还记得装饰器（decorator）可以给函数动态加上功能吗？对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def score(self):</span><br><span class="line">        return self._score</span><br><span class="line"></span><br><span class="line">    @score.setter</span><br><span class="line">    def score(self, value):</span><br><span class="line">        if not isinstance(value, int):</span><br><span class="line">            raise ValueError(&apos;score must be an integer!&apos;)</span><br><span class="line">        if value &lt; 0 or value &gt; 100:</span><br><span class="line">            raise ValueError(&apos;score must between 0 ~ 100!&apos;)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
-<p>@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Student()</span><br><span class="line">&gt;&gt;&gt; s.score = 60 # OK，实际转化为s.set_score(60)</span><br><span class="line">&gt;&gt;&gt; s.score # OK，实际转化为s.get_score()</span><br><span class="line">60</span><br><span class="line">&gt;&gt;&gt; s.score = 9999</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between 0 ~ 100!</span><br></pre></td></tr></table></figure></p>
-<p>注意到这个神奇的@property，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</p>
-<p>还可以定义只读属性，只定义getter方法，不定义setter方法就是一个只读属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def birth(self):</span><br><span class="line">        return self._birth</span><br><span class="line"></span><br><span class="line">    @birth.setter</span><br><span class="line">    def birth(self, value):</span><br><span class="line">        self._birth = value</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def age(self):</span><br><span class="line">        return 2015 - self._birth</span><br></pre></td></tr></table></figure></p>
-<p>上面的birth是可读写属性，而age就是一个只读属性，因为age可以根据birth和当前时间计算出来。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>@property广泛应用在类的定义中，可以让调用者写出简短的代码，同时保证对参数进行必要的检查，这样，程序运行时就减少了出错的可能性。</p>
+            <p>IO在计算机中指Input/Output，也就是输入和输出。由于程序和运行时数据是在内存中驻留，由CPU这个超快的计算核心来执行，涉及到数据交换的地方，通常是磁盘、网络等，就需要IO接口。</p>
+<p>比如你打开浏览器，访问新浪首页，浏览器这个程序就需要通过网络IO获取新浪的网页。浏览器首先会发送数据给新浪服务器，告诉它我想要首页的HTML，这个动作是往外发数据，叫Output，随后新浪服务器把网页发过来，这个动作是从外面接收数据，叫Input。所以，通常，程序完成IO操作会有Input和Output两个数据流。当然也有只用一个的情况，比如，从磁盘读取文件到内存，就只有Input操作，反过来，把数据写到磁盘文件里，就只是一个Output操作。</p>
+<p>IO编程中，Stream（流）是一个很重要的概念，可以把流想象成一个水管，数据就是水管里的水，但是只能单向流动。Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存流到外面去。对于浏览网页来说，浏览器和新浪服务器之间至少需要建立两根水管，才可以既能发数据，又能收数据。</p>
+<p>由于CPU和内存的速度远远高于外设的速度，所以，在IO编程中，就存在速度严重不匹配的问题。举个例子来说，比如要把100M的数据写入磁盘，CPU输出100M的数据只需要0.01秒，可是磁盘要接收这100M数据可能需要10秒，怎么办呢？有两种办法：</p>
+<p>第一种是CPU等着，也就是程序暂停执行后续代码，等100M的数据在10秒后写入磁盘，再接着往下执行，这种模式称为同步IO；</p>
+<p>另一种方法是CPU不等待，只是告诉磁盘，“您老慢慢写，不着急，我接着干别的事去了”，于是，后续代码可以立刻接着执行，这种模式称为异步IO。</p>
+<p>同步和异步的区别就在于是否等待IO执行的结果。好比你去麦当劳点餐，你说“来个汉堡”，服务员告诉你，对不起，汉堡要现做，需要等5分钟，于是你站在收银台前面等了5分钟，拿到汉堡再去逛商场，这是同步IO。</p>
+<p>你说“来个汉堡”，服务员告诉你，汉堡需要等5分钟，你可以先去逛商场，等做好了，我们再通知你，这样你可以立刻去干别的事情（逛商场），这是异步IO。</p>
+<p>很明显，使用异步IO来编写程序性能会远远高于同步IO，但是异步IO的缺点是编程模型复杂。想想看，你得知道什么时候通知你“汉堡做好了”，而通知你的方法也各不相同。如果是服务员跑过来找到你，这是回调模式，如果服务员发短信通知你，你就得不停地检查手机，这是轮询模式。总之，异步IO的复杂度远远高于同步IO。</p>
+<p>操作IO的能力都是由操作系统提供的，每一种编程语言都会把操作系统提供的低级C接口封装起来方便使用，Python也不例外。我们后面会详细讨论Python的IO编程接口。</p>
+<p>注意，本章的IO编程都是同步模式，异步IO由于复杂度太高，后续涉及到服务器端程序开发时我们再讨论。</p>
 
           
         
@@ -1044,7 +1052,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/获取对象信息/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/requests库的get和post方法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1063,7 +1071,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/获取对象信息/" itemprop="url">获取对象信息</a></h1>
+                <a class="post-title-link" href="/2019/01/31/requests库的get和post方法/" itemprop="url">requests库的get和post方法</a></h1>
         
 
         <div class="post-meta">
@@ -1075,8 +1083,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
               </time>
             
 
@@ -1129,808 +1137,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？</p>
-<h1 id="使用type"><a href="#使用type" class="headerlink" title="使用type()"></a>使用type()</h1><p>首先，我们来判断对象类型，使用type()函数：</p>
-<p>基本类型都可以用type()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(123)</span><br><span class="line">&lt;class &apos;int&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(&apos;str&apos;)</span><br><span class="line">&lt;class &apos;str&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(None)</span><br><span class="line">&lt;type(None) &apos;NoneType&apos;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>如果一个变量指向函数或者类，也可以用type()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(abs)</span><br><span class="line">&lt;class &apos;builtin_function_or_method&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(a)</span><br><span class="line">&lt;class &apos;__main__.Animal&apos;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>但是type()函数返回的是什么类型呢？它返回对应的Class类型。如果我们要在if语句中判断，就需要比较两个变量的type类型是否相同：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(123)==type(456)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(123)==int</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==type(&apos;123&apos;)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==str</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==type(123)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
-<p>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import types</span><br><span class="line">&gt;&gt;&gt; def fn():</span><br><span class="line">...     pass</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; type(fn)==types.FunctionType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(abs)==types.BuiltinFunctionType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(lambda x: x)==types.LambdaType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type((x for x in range(10)))==types.GeneratorType</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<h1 id="使用isinstance"><a href="#使用isinstance" class="headerlink" title="使用isinstance()"></a>使用isinstance()</h1><p>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。</p>
-<p>我们回顾上次的例子，如果继承关系是：</p>
-<p>object -&gt; Animal -&gt; Dog -&gt; Husky<br>那么，isinstance()就可以告诉我们，一个对象是否是某种类型。先创建3种类型的对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = Animal()</span><br><span class="line">&gt;&gt;&gt; d = Dog()</span><br><span class="line">&gt;&gt;&gt; h = Husky()</span><br></pre></td></tr></table></figure></p>
-<p>然后，判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Husky)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>没有问题，因为h变量指向的就是Husky对象。</p>
-<p>再判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Dog)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>h虽然自身是Husky类型，但由于Husky是从Dog继承下来的，所以，h也还是Dog类型。换句话说，isinstance()判断的是一个对象是否是该类型本身，或者位于该类型的父继承链上。</p>
-<p>因此，我们可以确信，h还是Animal类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>同理，实际类型是Dog的d也是Animal类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(d, Dog) and isinstance(d, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>但是，d不是Husky类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(d, Husky)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
-<p>能用type()判断的基本类型也可以用isinstance()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(&apos;a&apos;, str)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(123, int)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(b&apos;a&apos;, bytes)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p>并且还可以判断一个变量是否是某些类型中的一种，比如下面的代码就可以判断是否是list或者tuple：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance([1, 2, 3], (list, tuple))</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance((1, 2, 3), (list, tuple))</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：总是优先使用isinstance()判断类型，可以将指定类型及其子类“一网打尽”。</strong></p>
-<h1 id="使用dir"><a href="#使用dir" class="headerlink" title="使用dir()"></a>使用dir()</h1><p>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list，比如，获得一个str对象的所有属性和方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dir(&apos;ABC&apos;)</span><br><span class="line">[&apos;__add__&apos;, &apos;__class__&apos;,..., &apos;__subclasshook__&apos;, &apos;capitalize&apos;, &apos;casefold&apos;,..., &apos;zfill&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>类似<strong>xxx</strong>的属性和方法在Python中都是有特殊用途的，比如<strong>len</strong>方法返回长度。在Python中，如果你调用len()函数试图获取一个对象的长度，实际上，在len()函数内部，它自动去调用该对象的<strong>len</strong>()方法，所以，下面的代码是等价的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; len(&apos;ABC&apos;)</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; &apos;ABC&apos;.__len__()</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
-<p>我们自己写的类，如果也想用len(myObj)的话，就自己写一个<strong>len</strong>()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class MyDog(object):</span><br><span class="line">...     def __len__(self):</span><br><span class="line">...         return 100</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; dog = MyDog()</span><br><span class="line">&gt;&gt;&gt; len(dog)</span><br><span class="line">100</span><br></pre></td></tr></table></figure></p>
-<p>剩下的都是普通属性或方法，比如lower()返回小写的字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;ABC&apos;.lower()</span><br><span class="line">&apos;abc&apos;</span><br></pre></td></tr></table></figure></p>
-<p>仅仅把属性和方法列出来是不够的，配合getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class MyObject(object):</span><br><span class="line">...     def __init__(self):</span><br><span class="line">...         self.x = 9</span><br><span class="line">...     def power(self):</span><br><span class="line">...         return self.x * self.x</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; obj = MyObject()</span><br></pre></td></tr></table></figure></p>
-<p>紧接着，可以测试该对象的属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;x&apos;) # 有属性&apos;x&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; obj.x</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;y&apos;) # 有属性&apos;y&apos;吗？</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; setattr(obj, &apos;y&apos;, 19) # 设置一个属性&apos;y&apos;</span><br><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;y&apos;) # 有属性&apos;y&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; getattr(obj, &apos;y&apos;) # 获取属性&apos;y&apos;</span><br><span class="line">19</span><br><span class="line">&gt;&gt;&gt; obj.y # 获取属性&apos;y&apos;</span><br><span class="line">19</span><br></pre></td></tr></table></figure></p>
-<p>如果试图获取不存在的属性，会抛出AttributeError的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(obj, &apos;z&apos;) # 获取属性&apos;z&apos;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">AttributeError: &apos;MyObject&apos; object has no attribute &apos;z&apos;</span><br></pre></td></tr></table></figure></p>
-<p>可以传入一个default参数，如果属性不存在，就返回默认值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(obj, &apos;z&apos;, 404) # 获取属性&apos;z&apos;，如果不存在，返回默认值404</span><br><span class="line">404</span><br></pre></td></tr></table></figure></p>
-<p>也可以获得对象的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;power&apos;) # 有属性&apos;power&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; getattr(obj, &apos;power&apos;) # 获取属性&apos;power&apos;</span><br><span class="line">&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; fn = getattr(obj, &apos;power&apos;) # 获取属性&apos;power&apos;并赋值到变量fn</span><br><span class="line">&gt;&gt;&gt; fn # fn指向obj.power</span><br><span class="line">&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; fn() # 调用fn()与调用obj.power()是一样的</span><br><span class="line">81</span><br></pre></td></tr></table></figure></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>通过内置的一系列函数，我们可以对任意一个Python对象进行剖析，拿到其内部的数据。要注意的是，只有在不知道对象信息的时候，我们才会去获取对象信息。如果可以直接写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum = obj.x + obj.y</span><br></pre></td></tr></table></figure></p>
-<p>就不要写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum = getattr(obj, &apos;x&apos;) + getattr(obj, &apos;y&apos;)</span><br></pre></td></tr></table></figure></p>
-<p>一个正确的用法的例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def readImage(fp):</span><br><span class="line">    if hasattr(fp, &apos;read&apos;):</span><br><span class="line">        return readData(fp)</span><br><span class="line">    return None</span><br></pre></td></tr></table></figure></p>
-<p>假设我们希望从文件流fp中读取图像，我们首先要判断该fp对象是否存在read方法，如果存在，则该对象是一个流，如果不存在，则无法读取。hasattr()就派上了用场。</p>
-<p>请注意，在Python这类动态语言中，根据鸭子类型，有read()方法，不代表该fp对象就是一个文件流，它也可能是网络流，也可能是内存中的一个字节流，但只要read()方法返回的是有效的图像数据，就不影响读取图像的功能。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/chardet包/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/chardet包/" itemprop="url">chardet包</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  629 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>字符串编码一直是令人非常头疼的问题，尤其是我们在处理一些不规范的第三方网页的时候。虽然Python提供了Unicode表示的str和bytes两种数据类型，并且可以通过encode()和decode()方法转换，但是，在不知道编码的情况下，对bytes做decode()不好做。</p>
-<p>对于未知编码的bytes，要把它转换成str，需要先“猜测”编码。猜测的方式是先收集各种编码的特征字符，根据特征字符判断，就能有很大概率“猜对”。</p>
-<p>当然，我们肯定不能从头自己写这个检测编码的功能，这样做费时费力。chardet这个第三方库正好就派上了用场。用它来检测编码，简单易用。</p>
-<h1 id="安装chardet"><a href="#安装chardet" class="headerlink" title="安装chardet"></a>安装chardet</h1><p>如果安装了Anaconda，chardet就已经可用了。否则，需要在命令行下通过pip安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install chardet</span><br></pre></td></tr></table></figure></p>
-<p>如果遇到Permission denied安装失败，请加上sudo重试。</p>
-<p>#使用chardet<br>当我们拿到一个bytes时，就可以对其检测编码。用chardet检测编码，只需要一行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; chardet.detect(b&apos;Hello, world!&apos;)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;ascii&apos;, &apos;confidence&apos;: 1.0, &apos;language&apos;: &apos;&apos;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>检测出的编码是ascii，注意到还有个confidence字段，表示检测的概率是1.0（即100%）。</p>
-<p>我们来试试检测GBK编码的中文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; data = &apos;离离原上草，一岁一枯荣&apos;.encode(&apos;gbk&apos;)</span><br><span class="line">&gt;&gt;&gt; chardet.detect(data)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;GB2312&apos;, &apos;confidence&apos;: 0.7407407407407407, &apos;language&apos;: &apos;Chinese&apos;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>检测的编码是GB2312，注意到GBK是GB2312的超集，两者是同一种编码，检测正确的概率是74%，language字段指出的语言是’Chinese’。</p>
-<p>对UTF-8编码进行检测：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; data = &apos;离离原上草，一岁一枯荣&apos;.encode(&apos;utf-8&apos;)</span><br><span class="line">&gt;&gt;&gt; chardet.detect(data)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;utf-8&apos;, &apos;confidence&apos;: 0.99, &apos;language&apos;: &apos;&apos;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们再试试对日文进行检测：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; data = &apos;最新の主要ニュース&apos;.encode(&apos;euc-jp&apos;)</span><br><span class="line">&gt;&gt;&gt; chardet.detect(data)</span><br><span class="line">&#123;&apos;encoding&apos;: &apos;EUC-JP&apos;, &apos;confidence&apos;: 0.99, &apos;language&apos;: &apos;Japanese&apos;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可见，用chardet检测编码，使用简单。获取到编码后，再转换为str，就可以方便后续处理。</p>
-<p>chardet支持检测的编码列表请参考官方文档Supported encodings。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>使用chardet检测编码非常容易，chardet支持检测中文、日文、韩文等多种语言。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/高阶函数/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/高阶函数/" itemprop="url">高阶函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  720 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>高阶函数英文叫Higher-order function。什么是高阶函数？我们以实际代码为例子，一步一步深入概念。</p>
-<h1 id="变量可以指向函数"><a href="#变量可以指向函数" class="headerlink" title="变量可以指向函数"></a>变量可以指向函数</h1><p>以Python内置的求绝对值的函数abs()为例，调用该函数用以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
-<p>但是，如果只写abs呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs</span><br><span class="line">&lt;built-in function abs&gt;</span><br></pre></td></tr></table></figure></p>
-<p>可见，abs(-10)是函数调用，而abs是函数本身。</p>
-<p>要获得函数调用结果，我们可以把结果赋值给变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = abs(-10)</span><br><span class="line">&gt;&gt;&gt; x</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
-<p>但是，如果把函数本身赋值给变量呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = abs</span><br><span class="line">&gt;&gt;&gt; f</span><br><span class="line">&lt;built-in function abs&gt;</span><br></pre></td></tr></table></figure></p>
-<p>结论：函数本身也可以赋值给变量，即：变量可以指向函数。</p>
-<p>如果一个变量指向了一个函数，那么，可否通过该变量来调用这个函数？用代码验证一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = abs</span><br><span class="line">&gt;&gt;&gt; f(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
-<p>成功！说明变量f现在已经指向了abs函数本身。直接调用abs()函数和调用变量f()完全相同。</p>
-<h1 id="函数名也是变量"><a href="#函数名也是变量" class="headerlink" title="函数名也是变量"></a>函数名也是变量</h1><p>那么函数名是什么呢？函数名其实就是指向函数的变量！对于abs()这个函数，完全可以把函数名abs看成变量，它指向一个可以计算绝对值的函数！</p>
-<p>如果把abs指向其他对象，会有什么情况发生？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; abs = 10</span><br><span class="line">&gt;&gt;&gt; abs(-10)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">TypeError: &apos;int&apos; object is not callable</span><br></pre></td></tr></table></figure></p>
-<p>把abs指向10后，就无法通过abs(-10)调用该函数了！因为abs这个变量已经不指向求绝对值函数而是指向一个整数10！</p>
-<p>当然实际代码绝对不能这么写，这里是为了说明函数名也是变量。要恢复abs函数，请重启Python交互环境。</p>
-<p>注：由于abs函数实际上是定义在import builtins模块中的，所以要让修改abs变量的指向在其它模块也生效，要用import builtins; builtins.abs = 10。</p>
-<h1 id="传入函数"><a href="#传入函数" class="headerlink" title="传入函数"></a>传入函数</h1><p>既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。</p>
-<p>一个最简单的高阶函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def add(x, y, f):</span><br><span class="line">    return f(x) + f(y)</span><br></pre></td></tr></table></figure></p>
-<p>当我们调用add(-5, 6, abs)时，参数x，y和f分别接收-5，6和abs，根据函数定义，我们可以推导计算过程为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = -5</span><br><span class="line">y = 6</span><br><span class="line">f = abs</span><br><span class="line">f(x) + f(y) ==&gt; abs(-5) + abs(6) ==&gt; 11</span><br><span class="line">return 11</span><br></pre></td></tr></table></figure></p>
-<p>编写高阶函数，就是让函数的参数能够接收别的函数。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/生成器/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/生成器/" itemprop="url">生成器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.7k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间都白白浪费了。</p>
-<p>所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器：generator。</p>
-<p>要创建一个generator，有很多种方法。第一种方法很简单，只要把一个列表生成式的[]改成()，就创建了一个generator：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L = [x * x for x in range(10)]</span><br><span class="line">&gt;&gt;&gt; L</span><br><span class="line">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br><span class="line">&gt;&gt;&gt; g = (x * x for x in range(10))</span><br><span class="line">&gt;&gt;&gt; g</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at 0x1022ef630&gt;</span><br></pre></td></tr></table></figure></p>
-<p>创建L和g的区别仅在于最外层的[]和()，L是一个list，而g是一个generator。</p>
-<p>我们可以直接打印出list的每一个元素，但我们怎么打印出generator的每一个元素呢？</p>
-<p>如果要一个一个打印出来，可以通过next()函数获得generator的下一个返回值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">16</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">25</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">36</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">49</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">64</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">81</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
-<p>我们讲过，generator保存的是算法，每次调用next(g)，就计算出g的下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误。</p>
-<p>当然，上面这种不断调用next(g)实在是太变态了，正确的方法是使用for循环，因为generator也是可迭代对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = (x * x for x in range(10))</span><br><span class="line">&gt;&gt;&gt; for n in g:</span><br><span class="line">...     print(n)</span><br><span class="line">... </span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">4</span><br><span class="line">9</span><br><span class="line">16</span><br><span class="line">25</span><br><span class="line">36</span><br><span class="line">49</span><br><span class="line">64</span><br><span class="line">81</span><br></pre></td></tr></table></figure></p>
-<p>所以，我们创建了一个generator后，基本上永远不会调用next()，而是通过for循环来迭代它，并且不需要关心StopIteration的错误。</p>
-<p>generator非常强大。如果推算的算法比较复杂，用类似列表生成式的for循环无法实现的时候，还可以用函数来实现。</p>
-<p>比如，著名的斐波拉契数列（Fibonacci），除第一个和第二个数外，任意一个数都可由前两个数相加得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1, 1, 2, 3, 5, 8, 13, 21, 34, ...</span><br></pre></td></tr></table></figure></p>
-<p>斐波拉契数列用列表生成式写不出来，但是，用函数把它打印出来却很容易：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b = 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        print(b)</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + 1</span><br><span class="line">    return &apos;done&apos;</span><br></pre></td></tr></table></figure></p>
-<p>注意，赋值语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = b, a + b</span><br></pre></td></tr></table></figure></p>
-<p>相当于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = (b, a + b) # t是一个tuple</span><br><span class="line">a = t[0]</span><br><span class="line">b = t[1]</span><br></pre></td></tr></table></figure></p>
-<p>但不必显式写出临时变量t就可以赋值。</p>
-<p>上面的函数可以输出斐波那契数列的前N个数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; fib(6)</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">8</span><br><span class="line">&apos;done&apos;</span><br></pre></td></tr></table></figure></p>
-<p>仔细观察，可以看出，fib函数实际上是定义了斐波拉契数列的推算规则，可以从第一个元素开始，推算出后续任意的元素，这种逻辑其实非常类似generator。</p>
-<p>也就是说，上面的函数和generator仅一步之遥。要把fib函数变成generator，只需要把print(b)改为yield b就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b = 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        yield b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + 1</span><br><span class="line">    return &apos;done&apos;</span><br></pre></td></tr></table></figure></p>
-<p>这就是定义generator的另一种方法。如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = fib(6)</span><br><span class="line">&gt;&gt;&gt; f</span><br><span class="line">&lt;generator object fib at 0x104feaaa0&gt;</span><br></pre></td></tr></table></figure></p>
-<p>这里，最难理解的就是generator和函数的执行流程不一样。函数是顺序执行，遇到return语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。</p>
-<p>举个简单的例子，定义一个generator，依次返回数字1，3，5：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def odd():</span><br><span class="line">    print(&apos;step 1&apos;)</span><br><span class="line">    yield 1</span><br><span class="line">    print(&apos;step 2&apos;)</span><br><span class="line">    yield(3)</span><br><span class="line">    print(&apos;step 3&apos;)</span><br><span class="line">    yield(5)</span><br></pre></td></tr></table></figure></p>
-<p>调用该generator时，首先要生成一个generator对象，然后用next()函数不断获得下一个返回值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; o = odd()</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">step 1</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">step 2</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">step 3</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
-<p>可以看到，odd不是普通函数，而是generator，在执行过程中，遇到yield就中断，下次又继续执行。执行3次yield后，已经没有yield可以执行了，所以，第4次调用next(o)就报错。</p>
-<p>回到fib的例子，我们在循环过程中不断调用yield，就会不断中断。当然要给循环设置一个条件来退出循环，不然就会产生一个无限数列出来。</p>
-<p>同样的，把函数改成generator后，我们基本上从来不会用next()来获取下一个返回值，而是直接使用for循环来迭代：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for n in fib(6):</span><br><span class="line">...     print(n)</span><br><span class="line">...</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">8</span><br></pre></td></tr></table></figure></p>
-<p>但是用for循环调用generator时，发现拿不到generator的return语句的返回值。如果想要拿到返回值，必须捕获StopIteration错误，返回值包含在StopIteration的value中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = fib(6)</span><br><span class="line">&gt;&gt;&gt; while True:</span><br><span class="line">...     try:</span><br><span class="line">...         x = next(g)</span><br><span class="line">...         print(&apos;g:&apos;, x)</span><br><span class="line">...     except StopIteration as e:</span><br><span class="line">...         print(&apos;Generator return value:&apos;, e.value)</span><br><span class="line">...         break</span><br><span class="line">...</span><br><span class="line">g: 1</span><br><span class="line">g: 1</span><br><span class="line">g: 2</span><br><span class="line">g: 3</span><br><span class="line">g: 5</span><br><span class="line">g: 8</span><br><span class="line">Generator return value: done</span><br></pre></td></tr></table></figure></p>
-<p>关于如何捕获错误，后面的错误处理还会详细讲解。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>generator是非常强大的工具，在Python中，可以简单地把列表生成式改成generator，也可以通过函数实现复杂逻辑的generator。</p>
-<p>要理解generator的工作原理，它是在for循环的过程中不断计算出下一个元素，并在适当的条件结束for循环。对于函数改成的generator来说，遇到return语句或者执行到函数体最后一行语句，就是结束generator的指令，for循环随之结束。</p>
-<p>请注意区分普通函数和generator函数，普通函数调用直接返回结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = abs(6)</span><br><span class="line">&gt;&gt;&gt; r</span><br><span class="line">6</span><br></pre></td></tr></table></figure></p>
-<p>generator函数的“调用”实际返回一个generator对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = fib(6)</span><br><span class="line">&gt;&gt;&gt; g</span><br><span class="line">&lt;generator object fib at 0x1022ef948&gt;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/dict和set/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/25/dict和set/" itemprop="url">dict和set</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.1k 字
+                  1.5k 字
                 </span>
               
 
@@ -1969,48 +1176,33 @@
       
         
           
-            <h1 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h1><p>Python内置了字典：dict的支持，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。</p>
-<p>举个例子，假设要根据同学的名字查找对应的成绩，如果用list实现，需要两个list：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</span><br><span class="line">scores = [95, 75, 85]</span><br></pre></td></tr></table></figure></p>
-<p>给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从scores取出对应的成绩，list越长，耗时越长。</p>
-<p>如果用dict实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用Python写一个dict如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = &#123;&apos;Michael&apos;: 95, &apos;Bob&apos;: 75, &apos;Tracy&apos;: 85&#125;</span><br><span class="line">&gt;&gt;&gt; d[&apos;Michael&apos;]</span><br><span class="line">95</span><br></pre></td></tr></table></figure></p>
-<p>为什么dict查找速度这么快？因为dict的实现原理和查字典是一样的。假设字典包含了1万个汉字，我们要查某一个字，一个办法是把字典从第一页往后翻，直到找到我们想要的字为止，这种方法就是在list中查找元素的方法，list越大，查找越慢。</p>
-<p>第二种方法是先在字典的索引表里（比如部首表）查这个字对应的页码，然后直接翻到该页，找到这个字。无论找哪个字，这种查找速度都非常快，不会随着字典大小的增加而变慢。</p>
-<p>dict就是第二种实现方式，给定一个名字，比如’Michael’，dict在内部就可以直接计算出Michael对应的存放成绩的“页码”，也就是95这个数字存放的内存地址，直接取出来，所以速度非常快。</p>
-<p>你可以猜到，这种key-value存储方式，在放进去的时候，必须根据key算出value的存放位置，这样，取的时候才能根据key直接拿到value。</p>
-<p>把数据放入dict的方法，除了初始化时指定外，还可以通过key放入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d[&apos;Adam&apos;] = 67</span><br><span class="line">&gt;&gt;&gt; d[&apos;Adam&apos;]</span><br><span class="line">67</span><br></pre></td></tr></table></figure></p>
-<p>由于一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;] = 90</span><br><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;]</span><br><span class="line">90</span><br><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;] = 88</span><br><span class="line">&gt;&gt;&gt; d[&apos;Jack&apos;]</span><br><span class="line">88</span><br></pre></td></tr></table></figure></p>
-<p>如果key不存在，dict就会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d[&apos;Thomas&apos;]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">KeyError: &apos;Thomas&apos;</span><br></pre></td></tr></table></figure></p>
-<p>要避免key不存在的错误，有两种办法，一是通过in判断key是否存在：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;Thomas&apos; in d</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
-<p>二是通过dict提供的get()方法，如果key不存在，可以返回None，或者自己指定的value：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d.get(&apos;Thomas&apos;)</span><br><span class="line">&gt;&gt;&gt; d.get(&apos;Thomas&apos;, -1)</span><br><span class="line">-1</span><br></pre></td></tr></table></figure></p>
-<p>注意：返回None的时候Python的交互环境不显示结果。</p>
-<p>要删除一个key，用pop(key)方法，对应的value也会从dict中删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d.pop(&apos;Bob&apos;)</span><br><span class="line">75</span><br><span class="line">&gt;&gt;&gt; d</span><br><span class="line">&#123;&apos;Michael&apos;: 95, &apos;Tracy&apos;: 85&#125;</span><br></pre></td></tr></table></figure></p>
-<p>请务必注意，dict内部存放的顺序和key放入的顺序是没有关系的。</p>
-<p>和list比较，dict有以下几个特点：</p>
-<p>查找和插入的速度极快，不会随着key的增加而变慢；<br>需要占用大量的内存，内存浪费多。<br>而list相反：</p>
-<p>查找和插入的时间随着元素的增加而增加；<br>占用空间小，浪费内存很少。<br>所以，dict是用空间来换取时间的一种方法。</p>
-<p>dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是不可变对象。</p>
-<p>这是因为dict根据key来计算value的存储位置，如果每次计算相同的key得出的结果不同，那dict内部就完全混乱了。这个通过key计算位置的算法称为哈希算法（Hash）。</p>
-<p>要保证hash的正确性，作为key的对象就不能变。在Python中，字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; key = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; d[key] = &apos;a list&apos;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">TypeError: unhashable type: &apos;list&apos;</span><br></pre></td></tr></table></figure></p>
-<h1 id="set"><a href="#set" class="headerlink" title="set"></a>set</h1><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
-<p>要创建一个set，需要提供一个list作为输入集合：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br></pre></td></tr></table></figure></p>
-<p>注意，传入的参数[1, 2, 3]是一个list，而显示的{1, 2, 3}只是告诉你这个set内部有1，2，3这3个元素，显示的顺序也不表示set是有序的。。</p>
-<p>重复元素在set中自动被过滤：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = set([1, 1, 2, 2, 3, 3])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过add(key)方法可以添加元素到set中，可以重复添加，但不会有效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s.add(4)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3, 4&#125;</span><br><span class="line">&gt;&gt;&gt; s.add(4)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3, 4&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过remove(key)方法可以删除元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s.remove(4)</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3&#125;</span><br></pre></td></tr></table></figure></p>
-<p>set可以看成数学意义上的无序和无重复元素的集合，因此，两个set可以做数学意义上的交集、并集等操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s1 = set([1, 2, 3])</span><br><span class="line">&gt;&gt;&gt; s2 = set([2, 3, 4])</span><br><span class="line">&gt;&gt;&gt; s1 &amp; s2</span><br><span class="line">&#123;2, 3&#125;</span><br><span class="line">&gt;&gt;&gt; s1 | s2</span><br><span class="line">&#123;1, 2, 3, 4&#125;</span><br></pre></td></tr></table></figure></p>
-<p>set和dict的唯一区别仅在于没有存储对应的value，但是，set的原理和dict一样，所以，同样不可以放入可变对象，因为无法判断两个可变对象是否相等，也就无法保证set内部“不会有重复元素”。试试把list放入set，看看是否会报错。</p>
-<h1 id="再议不可变对象"><a href="#再议不可变对象" class="headerlink" title="再议不可变对象"></a>再议不可变对象</h1><p>上面我们讲了，str是不变对象，而list是可变对象。</p>
-<p>对于可变对象，比如list，对list进行操作，list内部的内容是会变化的，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = [&apos;c&apos;, &apos;b&apos;, &apos;a&apos;]</span><br><span class="line">&gt;&gt;&gt; a.sort()</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>而对于不可变对象，比如str，对str进行操作呢：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = &apos;abc&apos;</span><br><span class="line">&gt;&gt;&gt; a.replace(&apos;a&apos;, &apos;A&apos;)</span><br><span class="line">&apos;Abc&apos;</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">&apos;abc&apos;</span><br></pre></td></tr></table></figure></p>
-<p>虽然字符串有个replace()方法，也确实变出了’Abc’，但变量a最后仍是’abc’，应该怎么理解呢？</p>
-<p>我们先把代码改成下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = &apos;abc&apos;</span><br><span class="line">&gt;&gt;&gt; b = a.replace(&apos;a&apos;, &apos;A&apos;)</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">&apos;Abc&apos;</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">&apos;abc&apos;</span><br></pre></td></tr></table></figure></p>
-<p>要始终牢记的是，a是变量，而’abc’才是字符串对象！有些时候，我们经常说，对象a的内容是’abc’，但其实是指，a本身是一个变量，它指向的对象的内容才是’abc’：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">a--&gt;abc</span><br></pre></td></tr></table></figure>
-<p>当我们调用a.replace(‘a’, ‘A’)时，实际上调用方法replace是作用在字符串对象’abc’上的，而这个方法虽然名字叫replace，但却没有改变字符串’abc’的内容。相反，replace方法创建了一个新字符串’Abc’并返回，如果我们用变量b指向该新字符串，就容易理解了，变量a仍指向原有的字符串’abc’，但变量b却指向新字符串’Abc’了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">a--&gt;abc</span><br><span class="line">b--&gt;Abc</span><br></pre></td></tr></table></figure>
-<p>所以，对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容。相反，这些方法会创建新的对象并返回，这样，就保证了不可变对象本身永远是不可变的。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>使用key-value存储结构的dict在Python中非常有用，选择不可变对象作为key很重要，最常用的key是字符串。</p>
-<p>tuple虽然是不变对象，但试试把(1, 2, 3)和(1, [2, 3])放入dict或set中，并解释结果。</p>
+            <h1 id="获取网页的方式"><a href="#获取网页的方式" class="headerlink" title="获取网页的方式"></a>获取网页的方式</h1><p>其实在加载网页的时候, 有几种类型, 而这几种类型就是你打开网页的关键. 最重要的类型 (method) 就是 get 和 post (当然还有其他的, 比如 head, delete)。</p>
+<p>以下分析两个重要的类型的重要特点。</p>
+<h2 id="post"><a href="#post" class="headerlink" title="post"></a>post</h2><ul>
+<li>账号登录</li>
+<li>搜索内容</li>
+<li>上传图片</li>
+<li>上传文件</li>
+<li>往服务器传数据等<h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2></li>
+<li>正常打开网页</li>
+<li>不往服务器传数据<br>这样看来, 很多网页使用 get 就可以了, 而 post, 我们则是给服务器发送个性化请求, 比如将你的账号密码传给服务器, 让它给你返回一个含有你个人信息的 HTML.</li>
+</ul>
+<p>从主动和被动的角度来说, post 中文是发送, 比较主动, 你控制了服务器返回的内容. 而 get 中文是取得, 是被动的, 你没有发送给服务器个性化的信息, 它不会根据你个性化的信息返回不一样的 HTML.</p>
+<h1 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h1><p>get请求的参数一般是在网址后面加入?parameter1=xxx&amp;parameter2=xxxx，使用?传递参数，用&amp;并列参数。</p>
+<p>使用requests的包直接请求baidu，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&quot;http://www.baidu.com&quot;)</span><br><span class="line">&gt;&gt;&gt; r.text</span><br><span class="line">&apos;&lt;!DOCTYPE html&gt;\r\n&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;ç\x99¾åº¦ä¸\x80ä</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>r.text得到的是unicode编码数据，可能会出现乱码，可以使用r.encoding = ‘utf8’强制转换后再提取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.encoding=&apos;utf8&apos;</span><br><span class="line">&gt;&gt;&gt; r.text</span><br><span class="line">&apos;&lt;!DOCTYPE html&gt;\r\n&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;百度一下，你就知道&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：注意：response.content得到的是二进制数据，而response.text得到的是Unicode编码数据，一般content用于获取图片、视频等，text用于获取文字类数据。</strong></p>
+<p>访问<a href="http://httpbin/get" target="_blank" rel="noopener">http://httpbin/get</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;&#125;,</span><br><span class="line">  &quot;headers&quot;: &#123;</span><br><span class="line">    &quot;Accept&quot;: &quot;*/*&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;python-requests/2.18.4&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;,</span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/get&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果带参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get?a=2&amp;c=3&amp;w=&apos;)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;</span><br><span class="line">    &quot;a&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;c&quot;: &quot;3&quot;,</span><br><span class="line">    &quot;w&quot;: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p>可以看到他获取到了参数并且输出了。</p>
+<p>也可以使用另一种写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get&apos;,params=parameter)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;</span><br><span class="line">    &quot;a&quot;: &quot;23&quot;,</span><br><span class="line">    &quot;b&quot;: &quot;32&quot;,</span><br><span class="line">    &quot;c&quot;: &quot;string&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;headers&quot;: &#123;</span><br><span class="line">    &quot;Accept&quot;: &quot;*/*&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;python-requests/2.18.4&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;,</span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/get?a=23&amp;b=32&amp;c=string&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以直接使用json方法转化成json（与使用json的loads效果一样）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.json</span><br><span class="line">&lt;bound method Response.json of &lt;Response [200]&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; r.json()</span><br><span class="line">&#123;&apos;args&apos;: &#123;&apos;a&apos;: &apos;23&apos;, &apos;b&apos;: &apos;32&apos;, &apos;c&apos;: &apos;string&apos;&#125;, &apos;headers&apos;: &#123;&apos;Accept&apos;: &apos;*/*&apos;, &apos;Accept-Encoding&apos;: &apos;gzip, deflate&apos;, &apos;Connection&apos;: &apos;close&apos;, &apos;Host&apos;: &apos;httpbin.org&apos;, &apos;User-Agent&apos;: &apos;python-requests/2.18.4&apos;&#125;, &apos;origin&apos;: &apos;115.153.174.11&apos;, &apos;url&apos;: &apos;http://httpbin.org/get?a=23&amp;b=32&amp;c=string&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有一些网页不使用headers无法访问，例如知乎，使用headers：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; headers = &#123;&apos;User-agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.5221.400 QQBrowser/10.0.1125.400&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; r = requests.get(&quot;http://www.zhihu.com&quot;)</span><br><span class="line">&gt;&gt;&gt; print(r)</span><br><span class="line">&lt;Response [400]&gt;</span><br><span class="line">&gt;&gt;&gt; r = requests.get(&quot;http://www.zhihu.com&quot;,headers=headers)</span><br><span class="line">&gt;&gt;&gt; r</span><br><span class="line">&lt;Response [200]&gt;</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以通过r.headers看到请求头信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.headers</span><br><span class="line">&#123;&apos;Date&apos;: &apos;Tue, 29 Jan 2019 09:05:50 GMT&apos;, &apos;Content-Type&apos;: &apos;text/html; charset=utf-8&apos;, &apos;Transfer-Encoding&apos;: &apos;chunked&apos;, &apos;Connection&apos;: &apos;keep-alive&apos;, &apos;Vary&apos;: &apos;Accept-Encoding&apos;, &apos;Content-Security-Policy&apos;: &quot;default-src * blob:; img-src * data: blob:; connect-src * wss: blob:; frame-src &apos;self&apos; *.zhihu.com weixin: *.vzuu.com getpocket.com note.youdao.com safari-extension://com.evernote.safari.clipper-Q79WDW8YH9 zhihujs: captcha.guard.qcloud.com; script-src &apos;self&apos; blob: *.zhihu.com res.wx.qq.com &apos;unsafe-eval&apos; unpkg.zhimg.com unicom.zhimg.com captcha.gtimg.com captcha.guard.qcloud.com pagead2.googlesyndication.com i.hao61.net &apos;nonce-a0691bfd-cf49-40b4-8ad7-37d552f59c50&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos; *.zhihu.com unicom.zhimg.com captcha.gtimg.com&quot;, &apos;X-Frame-Options&apos;: &apos;SAMEORIGIN&apos;, &apos;Strict-Transport-Security&apos;: &apos;max-age=15552000; includeSubDomains&apos;, &apos;Surrogate-Control&apos;: &apos;no-store&apos;, &apos;Cache-Control&apos;: &apos;no-store, no-cache, must-revalidate, proxy-revalidate&apos;, &apos;Pragma&apos;: &apos;no-cache&apos;, &apos;Expires&apos;: &apos;0&apos;, &apos;X-Content-Type-Options&apos;: &apos;nosniff&apos;, &apos;X-XSS-Protection&apos;: &apos;1; mode=block&apos;, &apos;Content-Encoding&apos;: &apos;gzip&apos;, &apos;Server&apos;: &apos;ZWS&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="post方法"><a href="#post方法" class="headerlink" title="post方法"></a>post方法</h1><p>最简单的依然是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&quot;http://httpbin.org/post&quot;)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;&#125;,</span><br><span class="line">  &quot;data&quot;: &quot;&quot;,</span><br><span class="line">  &quot;files&quot;: &#123;&#125;,</span><br><span class="line">  &quot;form&quot;: &#123;&#125;,</span><br><span class="line">  &quot;headers&quot;: &#123;</span><br><span class="line">    &quot;Accept&quot;: &quot;*/*&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Content-Length&quot;: &quot;0&quot;,</span><br><span class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;python-requests/2.18.4&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;json&quot;: null,</span><br><span class="line">  &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;,</span><br><span class="line">  &quot;url&quot;: &quot;http://httpbin.org/post&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>传入参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&quot;http://httpbin.org/post&quot;,params=parameter)</span><br><span class="line">&gt;&gt;&gt; print(r.text)</span><br><span class="line">&#123;</span><br><span class="line">  &quot;args&quot;: &#123;</span><br><span class="line">    &quot;a&quot;: &quot;23&quot;,</span><br><span class="line">    &quot;b&quot;: &quot;32&quot;,</span><br><span class="line">    &quot;c&quot;: &quot;string&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">···</span><br></pre></td></tr></table></figure></p>
+<p>使用headers和get方法一样。</p>
 
           
         
@@ -2063,7 +1255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/实例属性和类属性/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/错误处理/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -2082,7 +1274,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/25/实例属性和类属性/" itemprop="url">实例属性和类属性</a></h1>
+                <a class="post-title-link" href="/2019/01/31/错误处理/" itemprop="url">错误处理</a></h1>
         
 
         <div class="post-meta">
@@ -2094,8 +1286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
-                2019-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
               </time>
             
 
@@ -2148,7 +1340,239 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  492 字
+                  2.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在程序运行的过程中，如果发生了错误，可以事先约定返回一个错误代码，这样，就可以知道是否有错，以及出错的原因。在操作系统提供的调用中，返回错误码非常常见。比如打开文件的函数open()，成功时返回文件描述符（就是一个整数），出错时返回-1。</p>
+<p>用错误码来表示是否出错十分不便，因为函数本身应该返回的正常结果和错误码混在一起，造成调用者必须用大量的代码来判断是否出错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def foo():</span><br><span class="line">    r = some_function()</span><br><span class="line">    if r==(-1):</span><br><span class="line">        return (-1)</span><br><span class="line">    # do something</span><br><span class="line">    return r</span><br><span class="line"></span><br><span class="line">def bar():</span><br><span class="line">    r = foo()</span><br><span class="line">    if r==(-1):</span><br><span class="line">        print(&apos;Error&apos;)</span><br><span class="line">    else:</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure></p>
+<p>一旦出错，还要一级一级上报，直到某个函数可以处理该错误（比如，给用户输出一个错误信息）。</p>
+<p>所以高级语言通常都内置了一套try…except…finally…的错误处理机制，Python也不例外。</p>
+<h1 id="try"><a href="#try" class="headerlink" title="try"></a>try</h1><p>让我们用一个例子来看看try的机制：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&apos;try...&apos;)</span><br><span class="line">    r = 10 / 0</span><br><span class="line">    print(&apos;result:&apos;, r)</span><br><span class="line">except ZeroDivisionError as e:</span><br><span class="line">    print(&apos;except:&apos;, e)</span><br><span class="line">finally:</span><br><span class="line">    print(&apos;finally...&apos;)</span><br><span class="line">print(&apos;END&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>当我们认为某些代码可能会出错时，就可以用try来运行这段代码，如果执行出错，则后续代码不会继续执行，而是直接跳转至错误处理代码，即except语句块，执行完except后，如果有finally语句块，则执行finally语句块，至此，执行完毕。</p>
+<p>上面的代码在计算10 / 0时会产生一个除法运算错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try...</span><br><span class="line">except: division by zero</span><br><span class="line">finally...</span><br><span class="line">END</span><br></pre></td></tr></table></figure></p>
+<p>从输出可以看到，当错误发生时，后续语句print(‘result:’, r)不会被执行，except由于捕获到ZeroDivisionError，因此被执行。最后，finally语句被执行。然后，程序继续按照流程往下走。</p>
+<p>如果把除数0改成2，则执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try...</span><br><span class="line">result: 5</span><br><span class="line">finally...</span><br><span class="line">END</span><br></pre></td></tr></table></figure></p>
+<p>由于没有错误发生，所以except语句块不会被执行，但是finally如果有，则一定会被执行（可以没有finally语句）。</p>
+<p>你还可以猜测，错误应该有很多种类，如果发生了不同类型的错误，应该由不同的except语句块处理。没错，可以有多个except来捕获不同类型的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&apos;try...&apos;)</span><br><span class="line">    r = 10 / int(&apos;a&apos;)</span><br><span class="line">    print(&apos;result:&apos;, r)</span><br><span class="line">except ValueError as e:</span><br><span class="line">    print(&apos;ValueError:&apos;, e)</span><br><span class="line">except ZeroDivisionError as e:</span><br><span class="line">    print(&apos;ZeroDivisionError:&apos;, e)</span><br><span class="line">finally:</span><br><span class="line">    print(&apos;finally...&apos;)</span><br><span class="line">print(&apos;END&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>int()函数可能会抛出ValueError，所以我们用一个except捕获ValueError，用另一个except捕获ZeroDivisionError。</p>
+<p>此外，如果没有错误发生，可以在except语句块后面加一个else，当没有错误发生时，会自动执行else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&apos;try...&apos;)</span><br><span class="line">    r = 10 / int(&apos;2&apos;)</span><br><span class="line">    print(&apos;result:&apos;, r)</span><br><span class="line">except ValueError as e:</span><br><span class="line">    print(&apos;ValueError:&apos;, e)</span><br><span class="line">except ZeroDivisionError as e:</span><br><span class="line">    print(&apos;ZeroDivisionError:&apos;, e)</span><br><span class="line">else:</span><br><span class="line">    print(&apos;no error!&apos;)</span><br><span class="line">finally:</span><br><span class="line">    print(&apos;finally...&apos;)</span><br><span class="line">print(&apos;END&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>Python的错误其实也是class，所有的错误类型都继承自BaseException，所以在使用except时需要注意的是，它不但捕获该类型的错误，还把其子类也“一网打尽”。比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    foo()</span><br><span class="line">except ValueError as e:</span><br><span class="line">    print(&apos;ValueError&apos;)</span><br><span class="line">except UnicodeError as e:</span><br><span class="line">    print(&apos;UnicodeError&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>第二个except永远也捕获不到UnicodeError，因为UnicodeError是ValueError的子类，如果有，也被第一个except给捕获了。</p>
+<p>Python所有的错误都是从BaseException类派生的，常见的错误类型和继承关系看这里：</p>
+<p><a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy" target="_blank" rel="noopener">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></p>
+<p>使用try…except捕获错误还有一个巨大的好处，就是可以跨越多层调用，比如函数main()调用foo()，foo()调用bar()，结果bar()出错了，这时，只要main()捕获到了，就可以处理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def foo(s):</span><br><span class="line">    return 10 / int(s)</span><br><span class="line"></span><br><span class="line">def bar(s):</span><br><span class="line">    return foo(s) * 2</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    try:</span><br><span class="line">        bar(&apos;0&apos;)</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(&apos;Error:&apos;, e)</span><br><span class="line">    finally:</span><br><span class="line">        print(&apos;finally...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>也就是说，不需要在每个可能出错的地方去捕获错误，只要在合适的层次去捕获错误就可以了。这样一来，就大大减少了写try…except…finally的麻烦。</p>
+<h1 id="调用栈"><a href="#调用栈" class="headerlink" title="调用栈"></a>调用栈</h1><p>如果错误没有被捕获，它就会一直往上抛，最后被Python解释器捕获，打印一个错误信息，然后程序退出。来看看err.py：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># err.py:</span><br><span class="line">def foo(s):</span><br><span class="line">    return 10 / int(s)</span><br><span class="line"></span><br><span class="line">def bar(s):</span><br><span class="line">    return foo(s) * 2</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    bar(&apos;0&apos;)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure></p>
+<p>执行，结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ python3 err.py</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;err.py&quot;, line 11, in &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File &quot;err.py&quot;, line 9, in main</span><br><span class="line">    bar(&apos;0&apos;)</span><br><span class="line">  File &quot;err.py&quot;, line 6, in bar</span><br><span class="line">    return foo(s) * 2</span><br><span class="line">  File &quot;err.py&quot;, line 3, in foo</span><br><span class="line">    return 10 / int(s)</span><br><span class="line">ZeroDivisionError: division by zero</span><br></pre></td></tr></table></figure></p>
+<p>出错并不可怕，可怕的是不知道哪里出错了。解读错误信息是定位错误的关键。我们从上往下可以看到整个错误的调用函数链：</p>
+<p>错误信息第1行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br></pre></td></tr></table></figure></p>
+<p>告诉我们这是错误的跟踪信息。</p>
+<p>第2~3行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File &quot;err.py&quot;, line 11, in &lt;module&gt;</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure></p>
+<p>调用main()出错了，在代码文件err.py的第11行代码，但原因是第9行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File &quot;err.py&quot;, line 9, in main</span><br><span class="line">  bar(&apos;0&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>调用bar(‘0’)出错了，在代码文件err.py的第9行代码，但原因是第6行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File &quot;err.py&quot;, line 6, in bar</span><br><span class="line">  return foo(s) * 2</span><br></pre></td></tr></table></figure></p>
+<p>原因是return foo(s) * 2这个语句出错了，但这还不是最终原因，继续往下看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File &quot;err.py&quot;, line 3, in foo</span><br><span class="line">  return 10 / int(s)</span><br></pre></td></tr></table></figure></p>
+<p>原因是return 10 / int(s)这个语句出错了，这是错误产生的源头，因为下面打印了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZeroDivisionError: integer division or modulo by zero</span><br></pre></td></tr></table></figure></p>
+<p>根据错误类型ZeroDivisionError，我们判断，int(s)本身并没有出错，但是int(s)返回0，在计算10 / 0时出错，至此，找到错误源头。</p>
+<p> <strong>出错的时候，一定要分析错误的调用栈信息，才能定位错误的位置。*</strong></p>
+<h1 id="记录错误"><a href="#记录错误" class="headerlink" title="记录错误"></a>记录错误</h1><p>如果不捕获错误，自然可以让Python解释器来打印出错误堆栈，但程序也被结束了。既然我们能捕获错误，就可以把错误堆栈打印出来，然后分析错误原因，同时，让程序继续执行下去。</p>
+<p>Python内置的logging模块可以非常容易地记录错误信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># err_logging.py</span><br><span class="line"></span><br><span class="line">import logging</span><br><span class="line"></span><br><span class="line">def foo(s):</span><br><span class="line">    return 10 / int(s)</span><br><span class="line"></span><br><span class="line">def bar(s):</span><br><span class="line">    return foo(s) * 2</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    try:</span><br><span class="line">        bar(&apos;0&apos;)</span><br><span class="line">    except Exception as e:</span><br><span class="line">        logging.exception(e)</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line">print(&apos;END&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>同样是出错，但程序打印完错误信息后会继续执行，并正常退出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python3 err_logging.py</span><br><span class="line">ERROR:root:division by zero</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;err_logging.py&quot;, line 13, in main</span><br><span class="line">    bar(&apos;0&apos;)</span><br><span class="line">  File &quot;err_logging.py&quot;, line 9, in bar</span><br><span class="line">    return foo(s) * 2</span><br><span class="line">  File &quot;err_logging.py&quot;, line 6, in foo</span><br><span class="line">    return 10 / int(s)</span><br><span class="line">ZeroDivisionError: division by zero</span><br><span class="line">END</span><br></pre></td></tr></table></figure></p>
+<p>通过配置，logging还可以把错误记录到日志文件里，方便事后排查。</p>
+<h1 id="抛出错误"><a href="#抛出错误" class="headerlink" title="抛出错误"></a>抛出错误</h1><p>因为错误是class，捕获一个错误就是捕获到该class的一个实例。因此，错误并不是凭空产生的，而是有意创建并抛出的。Python的内置函数会抛出很多类型的错误，我们自己编写的函数也可以抛出错误。</p>
+<p>如果要抛出错误，首先根据需要，可以定义一个错误的class，选择好继承关系，然后，用raise语句抛出一个错误的实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># err_raise.py</span><br><span class="line">class FooError(ValueError):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">def foo(s):</span><br><span class="line">    n = int(s)</span><br><span class="line">    if n==0:</span><br><span class="line">        raise FooError(&apos;invalid value: %s&apos; % s)</span><br><span class="line">    return 10 / n</span><br><span class="line"></span><br><span class="line">foo(&apos;0&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>执行，可以最后跟踪到我们自己定义的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ python3 err_raise.py </span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;err_throw.py&quot;, line 11, in &lt;module&gt;</span><br><span class="line">    foo(&apos;0&apos;)</span><br><span class="line">  File &quot;err_throw.py&quot;, line 8, in foo</span><br><span class="line">    raise FooError(&apos;invalid value: %s&apos; % s)</span><br><span class="line">__main__.FooError: invalid value: 0</span><br></pre></td></tr></table></figure></p>
+<p>只有在必要的时候才定义我们自己的错误类型。如果可以选择Python已有的内置的错误类型（比如ValueError，TypeError），尽量使用Python内置的错误类型。</p>
+<p>最后，我们来看另一种错误处理的方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># err_reraise.py</span><br><span class="line"></span><br><span class="line">def foo(s):</span><br><span class="line">    n = int(s)</span><br><span class="line">    if n==0:</span><br><span class="line">        raise ValueError(&apos;invalid value: %s&apos; % s)</span><br><span class="line">    return 10 / n</span><br><span class="line"></span><br><span class="line">def bar():</span><br><span class="line">    try:</span><br><span class="line">        foo(&apos;0&apos;)</span><br><span class="line">    except ValueError as e:</span><br><span class="line">        print(&apos;ValueError!&apos;)</span><br><span class="line">        raise</span><br><span class="line"></span><br><span class="line">bar()</span><br></pre></td></tr></table></figure></p>
+<p>在bar()函数中，我们明明已经捕获了错误，但是，打印一个ValueError!后，又把错误通过raise语句抛出去了，这不有病么？</p>
+<p>其实这种错误处理方式不但没病，而且相当常见。捕获错误目的只是记录一下，便于后续追踪。但是，由于当前函数不知道应该怎么处理该错误，所以，最恰当的方式是继续往上抛，让顶层调用者去处理。好比一个员工处理不了一个问题时，就把问题抛给他的老板，如果他的老板也处理不了，就一直往上抛，最终会抛给CEO去处理。</p>
+<p>raise语句如果不带参数，就会把当前错误原样抛出。此外，在except中raise一个Error，还可以把一种类型的错误转化成另一种类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">try:</span><br><span class="line">    10 / 0</span><br><span class="line">except ZeroDivisionError:</span><br><span class="line">    raise ValueError(&apos;input error!&apos;)</span><br></pre></td></tr></table></figure></p>
+<h6 id="只要是合理的转换逻辑就可以，但是，决不应该把一个IOError转换成毫不相干的ValueError。"><a href="#只要是合理的转换逻辑就可以，但是，决不应该把一个IOError转换成毫不相干的ValueError。" class="headerlink" title="只要是合理的转换逻辑就可以，但是，决不应该把一个IOError转换成毫不相干的ValueError。"></a>只要是合理的转换逻辑就可以，但是，决不应该把一个IOError转换成毫不相干的ValueError。</h6><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Python内置的try…except…finally用来处理错误十分方便。出错时，会分析错误信息并定位错误发生的代码位置才是最关键的。</p>
+<p>程序也可以主动抛出错误，让调用者来处理相应的错误。但是，应该在文档中写清楚可能会抛出哪些错误，以及错误产生的原因。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy pycharm调试/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/scrapy pycharm调试/" itemprop="url">scrapy pycharm调试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  188 字
                 </span>
               
 
@@ -2187,16 +1611,645 @@
       
         
           
-            <p>由于Python是动态语言，根据类创建的实例可以任意绑定属性。</p>
-<p>给实例绑定属性的方法是通过实例变量，或者通过self变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">s = Student(&apos;Bob&apos;)</span><br><span class="line">s.score = 90</span><br></pre></td></tr></table></figure></p>
-<p>但是，如果Student类本身需要绑定一个属性呢？可以直接在class中定义属性，这种属性是类属性，归Student类所有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line">    name = &apos;Student&apos;</span><br></pre></td></tr></table></figure></p>
-<p>当我们定义了一个类属性后，这个属性虽然归类所有，但类的所有实例都可以访问到。来测试一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Student(object):</span><br><span class="line">...     name = &apos;Student&apos;</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; s = Student() # 创建实例s</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 打印name属性，因为实例并没有name属性，所以会继续查找class的name属性</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; print(Student.name) # 打印类的name属性</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; s.name = &apos;Michael&apos; # 给实例绑定name属性</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 由于实例属性优先级比类属性高，因此，它会屏蔽掉类的name属性</span><br><span class="line">Michael</span><br><span class="line">&gt;&gt;&gt; print(Student.name) # 但是类属性并未消失，用Student.name仍然可以访问</span><br><span class="line">Student</span><br><span class="line">&gt;&gt;&gt; del s.name # 如果删除实例的name属性</span><br><span class="line">&gt;&gt;&gt; print(s.name) # 再次调用s.name，由于实例的name属性没有找到，类的name属性就显示出来了</span><br><span class="line">Student</span><br></pre></td></tr></table></figure></p>
-<p>从上面的例子可以看出，在编写程序的时候，千万不要对实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>实例属性属于各个实例所有，互不干扰；</p>
-<p>类属性属于类所有，所有实例共享一个属性；</p>
-<p>不要对实例属性和类属性使用相同的名字，否则将产生难以发现的错误。</p>
+            <p>1.参考网站<br><a href="https://blog.csdn.net/heyifei88/article/details/53197797" target="_blank" rel="noopener">https://blog.csdn.net/heyifei88/article/details/53197797</a></p>
+<p>2.另一种方式（更好一些）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line"></span><br><span class="line"># 获取当前文件所在目录</span><br><span class="line">current_dir = os.path.dirname(os.path.abspath(__file__))  # 当前文件的绝对路径，然后再找他的父级目录</span><br><span class="line">sys.path.append(current_dir)  # 将当前路径加入到path中</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;爬虫名&apos;,&apos;参数&apos;])</span><br></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">from scrapy.cmdline import execute</span><br><span class="line"></span><br><span class="line"># 获取当前文件所在目录</span><br><span class="line">current_dir = os.path.dirname(os.path.abspath(__file__))  # 当前文件的绝对路径，然后再找他的父级目录</span><br><span class="line">sys.path.append(current_dir)  # 将当前路径加入到path中</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;quotes&apos;, &apos;-o quotes1.jl&apos;])</span><br></pre></td></tr></table></figure></p>
+<p>也可以不带参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">execute([&apos;scrapy&apos;, &apos;crawl&apos;, &apos;quotes&apos;])</span><br></pre></td></tr></table></figure></p>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy架构/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/scrapy架构/" itemprop="url">scrapy架构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://www.runoob.com/wp-content/uploads/2018/10/8c591d54457bb033812a2b0364011e9c_articlex.png" alt="image"></p>
+<h2 id="Scrapy-Engine-引擎"><a href="#Scrapy-Engine-引擎" class="headerlink" title="Scrapy Engine(引擎)"></a>Scrapy Engine(引擎)</h2><p>负责Spider、ItemPipeline、Downloader、Scheduler中间的通讯，信号、数据传递等。</p>
+<h2 id="Scheduler-调度器"><a href="#Scheduler-调度器" class="headerlink" title="Scheduler(调度器)"></a>Scheduler(调度器)</h2><p>它负责接受引擎发送过来的Request请求，并按照一定的方式进行整理排列，入队，当引擎需要时，交还给引擎。初始的爬取URL和后续在页面中获取的待爬取的URL将放入调度器中，等待爬取。同时调度器会自动去除重复的URL（如果特定的URL不需要去重也可以通过设置实现，如post请求的URL）</p>
+<h2 id="Downloader（下载器）"><a href="#Downloader（下载器）" class="headerlink" title="Downloader（下载器）"></a>Downloader（下载器）</h2><p>负责下载Scrapy Engine(引擎)发送的所有Requests请求，并将其获取到的Responses交还给Scrapy Engine(引擎)，由引擎交给Spider来处理，</p>
+<h2 id="Spider（爬虫）"><a href="#Spider（爬虫）" class="headerlink" title="Spider（爬虫）"></a>Spider（爬虫）</h2><p>它负责处理所有Responses,从中分析提取数据，获取Item字段需要的数据，并将需要跟进的URL提交给引擎，再次进入Scheduler(调度器).</p>
+<h2 id="Item-Pipeline-管道"><a href="#Item-Pipeline-管道" class="headerlink" title="Item Pipeline(管道)"></a>Item Pipeline(管道)</h2><p>它负责处理Spider中获取到的Item，并进行进行后期处理（详细分析、过滤、存储等）的地方。</p>
+<h2 id="Downloader-Middlewares（下载中间件）"><a href="#Downloader-Middlewares（下载中间件）" class="headerlink" title="Downloader Middlewares（下载中间件）"></a>Downloader Middlewares（下载中间件）</h2><p>你可以当作是一个可以自定义扩展下载功能的组件。</p>
+<h2 id="Spider-Middlewares（Spider中间件）"><a href="#Spider-Middlewares（Spider中间件）" class="headerlink" title="Spider Middlewares（Spider中间件）"></a>Spider Middlewares（Spider中间件）</h2><p>可以理解为是一个可以自定扩展和操作引擎和Spider中间通信的功能组件（比如进入Spider的Responses;和从Spider出去的Requests）</p>
+<h1 id="运作流程"><a href="#运作流程" class="headerlink" title="运作流程"></a>运作流程</h1><ol>
+<li><p>引擎打开一个网站(open a domain)，找到处理该网站的Spider并向该spider请求第一个要爬取的URL(s)。</p>
+</li>
+<li><p>引擎从Spider中获取到第一个要爬取的URL并在调度器(Scheduler)以Request调度。</p>
+</li>
+<li><p>引擎向调度器请求下一个要爬取的URL。</p>
+</li>
+<li><p>调度器返回下一个要爬取的URL给引擎，引擎将URL通过下载中间件(请求(request)方向)转发给下载器(Downloader)。</p>
+</li>
+<li><p>一旦页面下载完毕，下载器生成一个该页面的Response，并将其通过下载中间件(返回(response)方向)发送给引擎。</p>
+</li>
+<li><p>引擎从下载器中接收到Response并通过Spider中间件(输入方向)发送给Spider处理。</p>
+</li>
+<li><p>Spider处理Response并返回爬取到的Item及(跟进的)新的Request给引擎。</p>
+</li>
+<li><p>引擎将(Spider返回的)爬取到的Item给Item Pipeline，将(Spider返回的)Request给调度器。</p>
+</li>
+</ol>
+<p>9.(从第二步)重复直到调度器中没有更多地request，引擎关闭该网站。</p>
+<h2 id="通俗解释"><a href="#通俗解释" class="headerlink" title="通俗解释"></a>通俗解释</h2><ol>
+<li>引擎：Hi！Spider, 你要处理哪一个网站？</li>
+<li>Spider：老大要我处理xxxx网页。</li>
+<li>引擎：你把第一个需要处理的URL给我吧。</li>
+<li>Spider：给你，第一个URL是xxxxxxx</li>
+<li>引擎：Hi！调度器，我这有request请求你帮我排序入队一下。</li>
+<li>调度器：好的，正在处理你等一下。</li>
+<li>引擎：Hi！调度器，把你处理好的request请求给我。</li>
+<li>调度器：给你，这是我处理好的request</li>
+<li>引擎：Hi！下载器，你按照老大的下载中间件的设置帮我下载一下这个request请求</li>
+<li>下载器：好的！给你，这是下载好的东西。（如果失败：sorry，这个request下载失败了。然后引擎告诉调度器，这个request下载失败了，你记录一下，我们待会儿再下载）</li>
+<li>引擎：Hi！Spider，这是下载好的东西，并且已经按照老大的下载中间件处理过了，你自己处理一下（注意！这儿responses默认是交给def parse()这个函数处理的）</li>
+<li>Spider：（处理完毕数据之后对于需要跟进的URL），Hi！引擎，我这里有两个结果，这个是我需要跟进的URL，还有这个是我获取到的Item数据。</li>
+<li>引擎：Hi ！管道 我这儿有个item你帮我处理一下！调度器！这是需要跟进URL你帮我处理下。然后从第四步开始循环，直到获取完老大需要全部信息。</li>
+<li>管道调度器：好的，现在就做！</li>
+</ol>
+<p><strong>注意！只有当调度器中不存在任何request了，整个程序才会停止，（也就是说，对于下载失败的URL，Scrapy也会重新下载。）</strong></p>
+<h1 id="Spider类"><a href="#Spider类" class="headerlink" title="Spider类"></a>Spider类</h1><p>Spider是用户编写用于从单个网站(或者一些网站)爬取数据的类。</p>
+<p>其包含了一个用于下载的初始URL，如何跟进网页中的链接以及如何分析页面中的内容， 提取生成 item 的方法。</p>
+<p>为了创建一个Spider，您必须继承 scrapy.Spider 类， 且定义以下三个属性:</p>
+<ul>
+<li>name: 用于区别Spider。 该名字必须是唯一的，不可以为不同的Spider设定相同的名字。</li>
+<li>start_urls: 包含了Spider在启动时进行爬取的url列表。 因此，第一个被获取到的页面将是其中之一。 后续的URL则从初始的URL获取到的数据中提取。</li>
+<li>parse() 是spider的一个方法。 被调用时，每个初始URL完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(response data)，提取数据(生成item)以及生成需要进一步处理的URL的 Request 对象。</li>
+</ul>
+<h1 id="制作Scrapy爬虫步骤"><a href="#制作Scrapy爬虫步骤" class="headerlink" title="制作Scrapy爬虫步骤"></a>制作Scrapy爬虫步骤</h1><ol>
+<li>新建项目 (scrapy startproject xxx)：新建一个新的爬虫项目</li>
+<li>明确目标 （编写items.py）：明确你想要抓取的目标<br>3.制作爬虫 （spiders/xxspider.py）：制作爬虫开始爬取网页</li>
+<li>存储内容 （pipelines.py）：设计管道存储爬取内容</li>
+</ol>
+<h1 id="新建项目目录"><a href="#新建项目目录" class="headerlink" title="新建项目目录"></a>新建项目目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject mySpider</span><br></pre></td></tr></table></figure>
+<p>目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mySpider/</span><br><span class="line">    scrapy.cfg</span><br><span class="line">    mySpider/</span><br><span class="line">        __init__.py</span><br><span class="line">        items.py</span><br><span class="line">        pipelines.py</span><br><span class="line">        settings.py</span><br><span class="line">        spiders/</span><br><span class="line">            __init__.py</span><br><span class="line">            ...</span><br></pre></td></tr></table></figure></p>
+<p>其中：</p>
+<ul>
+<li>scrapy.cfg: 项目的配置文件。</li>
+<li>mySpider/: 项目的Python模块，将会从这里引用代码。</li>
+<li>mySpider/items.py: 项目的目标文件。</li>
+<li>mySpider/pipelines.py: 项目的管道文件。</li>
+<li>mySpider/settings.py: 项目的设置文件。</li>
+<li>mySpider/spiders/: 存储爬虫代码目录。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/Ubuntu18.04 安装Mysql时未让输入密码/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/Ubuntu18.04 安装Mysql时未让输入密码/" itemprop="url">Ubuntu18.04安装Mysql时未让输入密码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  222 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在ubuntu18.04中使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install mysql-server</span><br></pre></td></tr></table></figure></p>
+<p>安装数据库时，在安装过程中，并没有像ubuntu16中提示输入root用户的密码，所以无法登录。</p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>mysql5.7暂时不支持ubuntu18.04，所以需要安装mysql8.0，需要引入mysql的deb。</p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>下载 <a href="https://dev.mysql.com/downloads/repo/apt/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/repo/apt/</a> 中的deb包。<br>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i deb_name</span><br></pre></td></tr></table></figure></p>
+<p>根据需求选择配置。</p>
+<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update </span><br><span class="line">apt install mysql-server</span><br></pre></td></tr></table></figure></p>
+<p>此时的安装过程就会提示输入root密码，安装完成后普通用户也能直接登录。</p>
+<p><strong>注：mysql8.0很多配置方面与mysql5.7不一样，所以可能需要先使用ubuntu16.04安装好mysql后更新到18.04，或者不更新，或者等mysql5.7支持18.04版本后再安装。或者使用docker。。。 </strong></p>
+<h1 id="mysql8-0使用原先配置产生的问题（已发现）"><a href="#mysql8-0使用原先配置产生的问题（已发现）" class="headerlink" title="mysql8.0使用原先配置产生的问题（已发现）"></a>mysql8.0使用原先配置产生的问题（已发现）</h1><p>设置mysqld的sql_mode的时候会出现bug，无法设置。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/31/scrapy项目测试/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/scrapy项目测试/" itemprop="url">scrapy项目测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T14:26:13+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>项目地址：<a href="https://github.com/snjl/python.spider.scrapy_test.git" target="_blank" rel="noopener">https://github.com/snjl/python.spider.scrapy_test.git</a></p>
+<h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><p>在开始爬取之前，必须创建一个新的Scrapy项目。进入自定义的项目目录中，运行下列命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject tutorial</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/31/scrapy项目测试/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2238,7 +2291,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2286,7 +2339,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">183</span>
+                  <span class="site-state-item-count">203</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2297,7 +2350,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2308,7 +2361,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

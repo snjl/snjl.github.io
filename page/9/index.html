@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/docker安装/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/requests包/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/07/docker安装/" itemprop="url">docker安装</a></h1>
+                <a class="post-title-link" href="/2019/01/25/requests包/" itemprop="url">requests包</a></h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:42:13+08:00">
-                2019-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
               </time>
             
 
@@ -343,8 +343,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  98 字
+                  1.1k 字
                 </span>
               
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -413,23 +413,24 @@
       
         
           
-            <h1 id="Ubuntu安装"><a href="#Ubuntu安装" class="headerlink" title="Ubuntu安装"></a>Ubuntu安装</h1><p>获取最新版本的 Docker 安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure></p>
-<p>输入当前用户的密码后，就会下载脚本并且安装Docker及依赖包。</p>
-<p>启动docker 后台服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker start</span><br></pre></td></tr></table></figure></p>
-<p>测试运行hello-world<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure></p>
-<h1 id="Centos安装"><a href="#Centos安装" class="headerlink" title="Centos安装"></a>Centos安装</h1><ol>
-<li><p>确保 yum 包更新到最新</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>docker启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker start</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure></li>
-</ol>
+            <h1 id="安装requests"><a href="#安装requests" class="headerlink" title="安装requests"></a>安装requests</h1><p>如果安装了Anaconda，requests就已经可用了。否则，需要在命令行下通过pip安装：</p>
+<p>$ pip install requests<br>如果遇到Permission denied安装失败，请加上sudo重试。</p>
+<h1 id="使用requests"><a href="#使用requests" class="headerlink" title="使用requests"></a>使用requests</h1><p>要通过GET访问一个页面，只需要几行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import requests</span><br><span class="line">&gt;&gt;&gt; r = requests.get(&apos;https://www.douban.com/&apos;) # 豆瓣首页</span><br><span class="line">&gt;&gt;&gt; r.status_code</span><br><span class="line">200</span><br><span class="line">&gt;&gt;&gt; r.text</span><br><span class="line">r.text</span><br><span class="line">&apos;&lt;!DOCTYPE HTML&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;meta name=&quot;description&quot; content=&quot;提供图书、电影、音乐唱片的推荐、评论和...&apos;</span><br><span class="line">对于带参数的URL，传入一个dict作为params参数：</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; r = requests.get(&apos;https://www.douban.com/search&apos;, params=&#123;&apos;q&apos;: &apos;python&apos;, &apos;cat&apos;: &apos;1001&apos;&#125;)</span><br><span class="line">&gt;&gt;&gt; r.url # 实际请求的URL</span><br><span class="line">&apos;https://www.douban.com/search?q=python&amp;cat=1001&apos;</span><br></pre></td></tr></table></figure></p>
+<p>requests自动检测编码，可以使用encoding属性查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.encoding</span><br><span class="line">&apos;utf-8&apos;</span><br></pre></td></tr></table></figure></p>
+<p>无论响应是文本还是二进制内容，我们都可以用content属性获得bytes对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.content</span><br><span class="line">b&apos;&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;\n...&apos;</span><br></pre></td></tr></table></figure></p>
+<p>requests的方便之处还在于，对于特定类型的响应，例如JSON，可以直接获取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&amp;format=json&apos;)</span><br><span class="line">&gt;&gt;&gt; r.json()</span><br><span class="line">&#123;&apos;query&apos;: &#123;&apos;count&apos;: 1, &apos;created&apos;: &apos;2017-11-17T07:14:12Z&apos;, ...</span><br></pre></td></tr></table></figure></p>
+<p>需要传入HTTP Header时，我们传入一个dict作为headers参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(&apos;https://www.douban.com/&apos;, headers=&#123;&apos;User-Agent&apos;: &apos;Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit&apos;&#125;)</span><br><span class="line">&gt;&gt;&gt; r.text</span><br><span class="line">&apos;&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;meta charset=&quot;UTF-8&quot;&gt;\n &lt;title&gt;豆瓣(手机版)&lt;/title&gt;...&apos;</span><br></pre></td></tr></table></figure></p>
+<p>要发送POST请求，只需要把get()方法变成post()，然后传入data参数作为POST请求的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.post(&apos;https://accounts.douban.com/login&apos;, data=&#123;&apos;form_email&apos;: &apos;abc@example.com&apos;, &apos;form_password&apos;: &apos;123456&apos;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>requests默认使用application/x-www-form-urlencoded对POST数据编码。如果要传递JSON数据，可以直接传入json参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">params = &#123;&apos;key&apos;: &apos;value&apos;&#125;</span><br><span class="line">r = requests.post(url, json=params) # 内部自动序列化为JSON</span><br></pre></td></tr></table></figure></p>
+<p>类似的，上传文件需要更复杂的编码格式，但是requests把它简化成files参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; upload_files = &#123;&apos;file&apos;: open(&apos;report.xls&apos;, &apos;rb&apos;)&#125;</span><br><span class="line">&gt;&gt;&gt; r = requests.post(url, files=upload_files)</span><br></pre></td></tr></table></figure></p>
+<p>在读取文件时，注意务必使用’rb’即二进制模式读取，这样获取的bytes长度才是文件的长度。</p>
+<p>把post()方法替换为put()，delete()等，就可以以PUT或DELETE方式请求资源。</p>
+<p>除了能轻松获取响应内容外，requests对获取HTTP响应的其他信息也非常简单。例如，获取响应头：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.headers</span><br><span class="line">&#123;Content-Type&apos;: &apos;text/html; charset=utf-8&apos;, &apos;Transfer-Encoding&apos;: &apos;chunked&apos;, &apos;Content-Encoding&apos;: &apos;gzip&apos;, ...&#125;</span><br><span class="line">&gt;&gt;&gt; r.headers[&apos;Content-Type&apos;]</span><br><span class="line">&apos;text/html; charset=utf-8&apos;</span><br></pre></td></tr></table></figure></p>
+<p>requests对Cookie做了特殊处理，使得我们不必解析Cookie就可以轻松获取指定的Cookie：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r.cookies[&apos;ts&apos;]</span><br><span class="line">&apos;example_cookie_12345&apos;</span><br></pre></td></tr></table></figure></p>
+<p>要在请求中传入Cookie，只需准备一个dict传入cookies参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; cs = &#123;&apos;token&apos;: &apos;12345&apos;, &apos;status&apos;: &apos;working&apos;&#125;</span><br><span class="line">&gt;&gt;&gt; r = requests.get(url, cookies=cs)</span><br></pre></td></tr></table></figure></p>
+<p>最后，要指定超时，传入以秒为单位的timeout参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = requests.get(url, timeout=2.5) # 2.5秒后超时</span><br></pre></td></tr></table></figure></p>
+<h1 id="requests包的异常处理"><a href="#requests包的异常处理" class="headerlink" title="requests包的异常处理"></a>requests包的异常处理</h1><p>可以使用raise_for_status()来获取所有错误，并且在except语句中使用 requests.RequestException来得到错误原因：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def get_bs_obj(link):</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(link, headers=headers, timeout=10)</span><br><span class="line">        response.raise_for_status()</span><br><span class="line">        bs_obj = bs(response.text)</span><br><span class="line">        return bs_obj</span><br><span class="line">    except requests.RequestException as e:</span><br><span class="line">        print(e)</span><br><span class="line">        return None</span><br></pre></td></tr></table></figure></p>
+<p>例如会产生报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTPConnectionPool(host=&apos;synthezise.christuniversity.in&apos;, port=80): Max retries exceeded with url: / (Caused by NewConnectionError(&apos;&lt;urllib3.connection.HTTPConnection object at 0x0000021B9CB8A0F0&gt;: Failed to establish a new connection: [Errno 11001] getaddrinfo failed&apos;,))</span><br><span class="line"></span><br><span class="line">HTTPConnectionPool(host=&apos;icu2018cls.umk.edu.my&apos;, port=80): Max retries exceeded with url: / (Caused by NewConnectionError(&apos;&lt;urllib3.connection.HTTPConnection object at 0x0000021B9CB8ACF8&gt;: Failed to establish a new connection: [Errno 11001] getaddrinfo failed&apos;,))</span><br><span class="line"></span><br><span class="line">HTTPSConnectionPool(host=&apos;icsah.eu&apos;, port=443): Max retries exceeded with url: /events (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(-1, &apos;Unexpected EOF&apos;)&quot;,),))</span><br><span class="line"></span><br><span class="line">HTTPSConnectionPool(host=&apos;icsah.eu&apos;, port=443): Max retries exceeded with url: /events (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(-1, &apos;Unexpected EOF&apos;)&quot;,),))</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -482,7 +483,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/留言板系统/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/获取对象信息/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -501,7 +502,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/07/留言板系统/" itemprop="url">留言板系统</a></h1>
+                <a class="post-title-link" href="/2019/01/25/获取对象信息/" itemprop="url">获取对象信息</a></h1>
         
 
         <div class="post-meta">
@@ -513,8 +514,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:41:29+08:00">
-                2019-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
               </time>
             
 
@@ -536,368 +537,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  21 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>需要登录的留言板系统。</p>
-<p>项目地址：<a href="https://github.com/snjl/springboot.happyNewYear.git" target="_blank" rel="noopener">https://github.com/snjl/springboot.happyNewYear.git</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/mkdir命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/07/mkdir命令/" itemprop="url">mkdir命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:41:01+08:00">
-                2019-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  326 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>linux mkdir 命令用来创建指定的名称的目录，要求创建目录的用户在当前目录中具有写权限，并且指定的目录名不能是当前目录中已有的目录。</p>
-<h1 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir [选项] 目录...</span><br></pre></td></tr></table></figure>
-<h1 id="命令功能"><a href="#命令功能" class="headerlink" title="命令功能"></a>命令功能</h1><p>通过 mkdir 命令可以实现在指定位置创建以 DirName(指定的文件名)命名的文件夹或目录。要创建文件夹或目录的用户必须对所创建的文件夹的父文件夹具有写权限。并且，所创建的文件夹(目录)不能与其父目录(即父文件夹)中的文件名重名，即同一个目录下不能有同名的(区分大小写)。 </p>
-<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-m, --mode=模式，设定权限&lt;模式&gt; (类似 chmod)，而不是 rwxrwxrwx 减 umask</span><br><span class="line"></span><br><span class="line"> -p, --parents  可以是一个路径名称。此时若路径中的某些目录尚不存在,加上此选项后,系统将自动建立好那些尚不存在的目录,即一次可以建立多个目录; </span><br><span class="line"></span><br><span class="line"> -v, --verbose  每次创建新目录都显示信息</span><br><span class="line"></span><br><span class="line">     --help   显示此帮助信息并退出</span><br><span class="line"></span><br><span class="line">     --version  输出版本信息并退出</span><br></pre></td></tr></table></figure>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p test2/test22</span><br></pre></td></tr></table></figure>
-<p>创建一个文件夹test2，里面有一个子文件夹test22。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/vi命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/07/vi命令/" itemprop="url">vi命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:40:21+08:00">
-                2019-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -943,7 +584,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -965,15 +606,42 @@
 
       
         
-          <h1 id="1-常用"><a href="#1-常用" class="headerlink" title="1. 常用"></a>1. 常用</h1><p>删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x        删除当前光标下的字符</span><br><span class="line">dw       删除光标之后的单词剩余部分。</span><br><span class="line">d$       删除光标之后的该行剩余部分。</span><br><span class="line">dd       删除当前行。</span><br><span class="line"></span><br><span class="line">c        功能和d相同，区别在于完成删除操作后进入INSERT MODE</span><br><span class="line">cc       也是删除当前行，然后进入INSERT MODE</span><br></pre></td></tr></table></figure></p>
-<p>移动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gg       到页首</span><br><span class="line">G        到页末</span><br><span class="line">0        到行首</span><br><span class="line">$        到行尾</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/07/vi命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？</p>
+<h1 id="使用type"><a href="#使用type" class="headerlink" title="使用type()"></a>使用type()</h1><p>首先，我们来判断对象类型，使用type()函数：</p>
+<p>基本类型都可以用type()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(123)</span><br><span class="line">&lt;class &apos;int&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(&apos;str&apos;)</span><br><span class="line">&lt;class &apos;str&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(None)</span><br><span class="line">&lt;type(None) &apos;NoneType&apos;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果一个变量指向函数或者类，也可以用type()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(abs)</span><br><span class="line">&lt;class &apos;builtin_function_or_method&apos;&gt;</span><br><span class="line">&gt;&gt;&gt; type(a)</span><br><span class="line">&lt;class &apos;__main__.Animal&apos;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>但是type()函数返回的是什么类型呢？它返回对应的Class类型。如果我们要在if语句中判断，就需要比较两个变量的type类型是否相同：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(123)==type(456)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(123)==int</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==type(&apos;123&apos;)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==str</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(&apos;abc&apos;)==type(123)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import types</span><br><span class="line">&gt;&gt;&gt; def fn():</span><br><span class="line">...     pass</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; type(fn)==types.FunctionType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(abs)==types.BuiltinFunctionType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type(lambda x: x)==types.LambdaType</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; type((x for x in range(10)))==types.GeneratorType</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用isinstance"><a href="#使用isinstance" class="headerlink" title="使用isinstance()"></a>使用isinstance()</h1><p>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。</p>
+<p>我们回顾上次的例子，如果继承关系是：</p>
+<p>object -&gt; Animal -&gt; Dog -&gt; Husky<br>那么，isinstance()就可以告诉我们，一个对象是否是某种类型。先创建3种类型的对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = Animal()</span><br><span class="line">&gt;&gt;&gt; d = Dog()</span><br><span class="line">&gt;&gt;&gt; h = Husky()</span><br></pre></td></tr></table></figure></p>
+<p>然后，判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Husky)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>没有问题，因为h变量指向的就是Husky对象。</p>
+<p>再判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Dog)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>h虽然自身是Husky类型，但由于Husky是从Dog继承下来的，所以，h也还是Dog类型。换句话说，isinstance()判断的是一个对象是否是该类型本身，或者位于该类型的父继承链上。</p>
+<p>因此，我们可以确信，h还是Animal类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(h, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>同理，实际类型是Dog的d也是Animal类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(d, Dog) and isinstance(d, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>但是，d不是Husky类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(d, Husky)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>能用type()判断的基本类型也可以用isinstance()判断：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(&apos;a&apos;, str)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(123, int)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(b&apos;a&apos;, bytes)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>并且还可以判断一个变量是否是某些类型中的一种，比如下面的代码就可以判断是否是list或者tuple：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance([1, 2, 3], (list, tuple))</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance((1, 2, 3), (list, tuple))</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：总是优先使用isinstance()判断类型，可以将指定类型及其子类“一网打尽”。</strong></p>
+<h1 id="使用dir"><a href="#使用dir" class="headerlink" title="使用dir()"></a>使用dir()</h1><p>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list，比如，获得一个str对象的所有属性和方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dir(&apos;ABC&apos;)</span><br><span class="line">[&apos;__add__&apos;, &apos;__class__&apos;,..., &apos;__subclasshook__&apos;, &apos;capitalize&apos;, &apos;casefold&apos;,..., &apos;zfill&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>类似<strong>xxx</strong>的属性和方法在Python中都是有特殊用途的，比如<strong>len</strong>方法返回长度。在Python中，如果你调用len()函数试图获取一个对象的长度，实际上，在len()函数内部，它自动去调用该对象的<strong>len</strong>()方法，所以，下面的代码是等价的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; len(&apos;ABC&apos;)</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; &apos;ABC&apos;.__len__()</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<p>我们自己写的类，如果也想用len(myObj)的话，就自己写一个<strong>len</strong>()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class MyDog(object):</span><br><span class="line">...     def __len__(self):</span><br><span class="line">...         return 100</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; dog = MyDog()</span><br><span class="line">&gt;&gt;&gt; len(dog)</span><br><span class="line">100</span><br></pre></td></tr></table></figure></p>
+<p>剩下的都是普通属性或方法，比如lower()返回小写的字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;ABC&apos;.lower()</span><br><span class="line">&apos;abc&apos;</span><br></pre></td></tr></table></figure></p>
+<p>仅仅把属性和方法列出来是不够的，配合getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class MyObject(object):</span><br><span class="line">...     def __init__(self):</span><br><span class="line">...         self.x = 9</span><br><span class="line">...     def power(self):</span><br><span class="line">...         return self.x * self.x</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; obj = MyObject()</span><br></pre></td></tr></table></figure></p>
+<p>紧接着，可以测试该对象的属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;x&apos;) # 有属性&apos;x&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; obj.x</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;y&apos;) # 有属性&apos;y&apos;吗？</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; setattr(obj, &apos;y&apos;, 19) # 设置一个属性&apos;y&apos;</span><br><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;y&apos;) # 有属性&apos;y&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; getattr(obj, &apos;y&apos;) # 获取属性&apos;y&apos;</span><br><span class="line">19</span><br><span class="line">&gt;&gt;&gt; obj.y # 获取属性&apos;y&apos;</span><br><span class="line">19</span><br></pre></td></tr></table></figure></p>
+<p>如果试图获取不存在的属性，会抛出AttributeError的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(obj, &apos;z&apos;) # 获取属性&apos;z&apos;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">AttributeError: &apos;MyObject&apos; object has no attribute &apos;z&apos;</span><br></pre></td></tr></table></figure></p>
+<p>可以传入一个default参数，如果属性不存在，就返回默认值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(obj, &apos;z&apos;, 404) # 获取属性&apos;z&apos;，如果不存在，返回默认值404</span><br><span class="line">404</span><br></pre></td></tr></table></figure></p>
+<p>也可以获得对象的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; hasattr(obj, &apos;power&apos;) # 有属性&apos;power&apos;吗？</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; getattr(obj, &apos;power&apos;) # 获取属性&apos;power&apos;</span><br><span class="line">&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; fn = getattr(obj, &apos;power&apos;) # 获取属性&apos;power&apos;并赋值到变量fn</span><br><span class="line">&gt;&gt;&gt; fn # fn指向obj.power</span><br><span class="line">&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; fn() # 调用fn()与调用obj.power()是一样的</span><br><span class="line">81</span><br></pre></td></tr></table></figure></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>通过内置的一系列函数，我们可以对任意一个Python对象进行剖析，拿到其内部的数据。要注意的是，只有在不知道对象信息的时候，我们才会去获取对象信息。如果可以直接写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum = obj.x + obj.y</span><br></pre></td></tr></table></figure></p>
+<p>就不要写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum = getattr(obj, &apos;x&apos;) + getattr(obj, &apos;y&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>一个正确的用法的例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def readImage(fp):</span><br><span class="line">    if hasattr(fp, &apos;read&apos;):</span><br><span class="line">        return readData(fp)</span><br><span class="line">    return None</span><br></pre></td></tr></table></figure></p>
+<p>假设我们希望从文件流fp中读取图像，我们首先要判断该fp对象是否存在read方法，如果存在，则该对象是一个流，如果不存在，则无法读取。hasattr()就派上了用场。</p>
+<p>请注意，在Python这类动态语言中，根据鸭子类型，有read()方法，不代表该fp对象就是一个文件流，它也可能是网络流，也可能是内存中的一个字节流，但只要read()方法返回的是有效的图像数据，就不影响读取图像的功能。</p>
+
+          
         
       
     </div>
@@ -1024,7 +692,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/docker：-安装-python/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/25/生成器/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1043,7 +711,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/07/docker：-安装-python/" itemprop="url">docker： 安装 python</a></h1>
+                <a class="post-title-link" href="/2019/01/25/生成器/" itemprop="url">生成器</a></h1>
         
 
         <div class="post-meta">
@@ -1055,8 +723,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:37:41+08:00">
-                2019-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:18:45+08:00">
+                2019-01-25
               </time>
             
 
@@ -1078,8 +746,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1109,7 +777,214 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  842 字
+                  1.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间都白白浪费了。</p>
+<p>所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器：generator。</p>
+<p>要创建一个generator，有很多种方法。第一种方法很简单，只要把一个列表生成式的[]改成()，就创建了一个generator：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; L = [x * x for x in range(10)]</span><br><span class="line">&gt;&gt;&gt; L</span><br><span class="line">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br><span class="line">&gt;&gt;&gt; g = (x * x for x in range(10))</span><br><span class="line">&gt;&gt;&gt; g</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at 0x1022ef630&gt;</span><br></pre></td></tr></table></figure></p>
+<p>创建L和g的区别仅在于最外层的[]和()，L是一个list，而g是一个generator。</p>
+<p>我们可以直接打印出list的每一个元素，但我们怎么打印出generator的每一个元素呢？</p>
+<p>如果要一个一个打印出来，可以通过next()函数获得generator的下一个返回值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">16</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">25</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">36</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">49</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">64</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">81</span><br><span class="line">&gt;&gt;&gt; next(g)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
+<p>我们讲过，generator保存的是算法，每次调用next(g)，就计算出g的下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误。</p>
+<p>当然，上面这种不断调用next(g)实在是太变态了，正确的方法是使用for循环，因为generator也是可迭代对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = (x * x for x in range(10))</span><br><span class="line">&gt;&gt;&gt; for n in g:</span><br><span class="line">...     print(n)</span><br><span class="line">... </span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">4</span><br><span class="line">9</span><br><span class="line">16</span><br><span class="line">25</span><br><span class="line">36</span><br><span class="line">49</span><br><span class="line">64</span><br><span class="line">81</span><br></pre></td></tr></table></figure></p>
+<p>所以，我们创建了一个generator后，基本上永远不会调用next()，而是通过for循环来迭代它，并且不需要关心StopIteration的错误。</p>
+<p>generator非常强大。如果推算的算法比较复杂，用类似列表生成式的for循环无法实现的时候，还可以用函数来实现。</p>
+<p>比如，著名的斐波拉契数列（Fibonacci），除第一个和第二个数外，任意一个数都可由前两个数相加得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1, 1, 2, 3, 5, 8, 13, 21, 34, ...</span><br></pre></td></tr></table></figure></p>
+<p>斐波拉契数列用列表生成式写不出来，但是，用函数把它打印出来却很容易：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b = 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        print(b)</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + 1</span><br><span class="line">    return &apos;done&apos;</span><br></pre></td></tr></table></figure></p>
+<p>注意，赋值语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = b, a + b</span><br></pre></td></tr></table></figure></p>
+<p>相当于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = (b, a + b) # t是一个tuple</span><br><span class="line">a = t[0]</span><br><span class="line">b = t[1]</span><br></pre></td></tr></table></figure></p>
+<p>但不必显式写出临时变量t就可以赋值。</p>
+<p>上面的函数可以输出斐波那契数列的前N个数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; fib(6)</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">8</span><br><span class="line">&apos;done&apos;</span><br></pre></td></tr></table></figure></p>
+<p>仔细观察，可以看出，fib函数实际上是定义了斐波拉契数列的推算规则，可以从第一个元素开始，推算出后续任意的元素，这种逻辑其实非常类似generator。</p>
+<p>也就是说，上面的函数和generator仅一步之遥。要把fib函数变成generator，只需要把print(b)改为yield b就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b = 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        yield b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + 1</span><br><span class="line">    return &apos;done&apos;</span><br></pre></td></tr></table></figure></p>
+<p>这就是定义generator的另一种方法。如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = fib(6)</span><br><span class="line">&gt;&gt;&gt; f</span><br><span class="line">&lt;generator object fib at 0x104feaaa0&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这里，最难理解的就是generator和函数的执行流程不一样。函数是顺序执行，遇到return语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。</p>
+<p>举个简单的例子，定义一个generator，依次返回数字1，3，5：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def odd():</span><br><span class="line">    print(&apos;step 1&apos;)</span><br><span class="line">    yield 1</span><br><span class="line">    print(&apos;step 2&apos;)</span><br><span class="line">    yield(3)</span><br><span class="line">    print(&apos;step 3&apos;)</span><br><span class="line">    yield(5)</span><br></pre></td></tr></table></figure></p>
+<p>调用该generator时，首先要生成一个generator对象，然后用next()函数不断获得下一个返回值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; o = odd()</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">step 1</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">step 2</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">step 3</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; next(o)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，odd不是普通函数，而是generator，在执行过程中，遇到yield就中断，下次又继续执行。执行3次yield后，已经没有yield可以执行了，所以，第4次调用next(o)就报错。</p>
+<p>回到fib的例子，我们在循环过程中不断调用yield，就会不断中断。当然要给循环设置一个条件来退出循环，不然就会产生一个无限数列出来。</p>
+<p>同样的，把函数改成generator后，我们基本上从来不会用next()来获取下一个返回值，而是直接使用for循环来迭代：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for n in fib(6):</span><br><span class="line">...     print(n)</span><br><span class="line">...</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">8</span><br></pre></td></tr></table></figure></p>
+<p>但是用for循环调用generator时，发现拿不到generator的return语句的返回值。如果想要拿到返回值，必须捕获StopIteration错误，返回值包含在StopIteration的value中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = fib(6)</span><br><span class="line">&gt;&gt;&gt; while True:</span><br><span class="line">...     try:</span><br><span class="line">...         x = next(g)</span><br><span class="line">...         print(&apos;g:&apos;, x)</span><br><span class="line">...     except StopIteration as e:</span><br><span class="line">...         print(&apos;Generator return value:&apos;, e.value)</span><br><span class="line">...         break</span><br><span class="line">...</span><br><span class="line">g: 1</span><br><span class="line">g: 1</span><br><span class="line">g: 2</span><br><span class="line">g: 3</span><br><span class="line">g: 5</span><br><span class="line">g: 8</span><br><span class="line">Generator return value: done</span><br></pre></td></tr></table></figure></p>
+<p>关于如何捕获错误，后面的错误处理还会详细讲解。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>generator是非常强大的工具，在Python中，可以简单地把列表生成式改成generator，也可以通过函数实现复杂逻辑的generator。</p>
+<p>要理解generator的工作原理，它是在for循环的过程中不断计算出下一个元素，并在适当的条件结束for循环。对于函数改成的generator来说，遇到return语句或者执行到函数体最后一行语句，就是结束generator的指令，for循环随之结束。</p>
+<p>请注意区分普通函数和generator函数，普通函数调用直接返回结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = abs(6)</span><br><span class="line">&gt;&gt;&gt; r</span><br><span class="line">6</span><br></pre></td></tr></table></figure></p>
+<p>generator函数的“调用”实际返回一个generator对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = fib(6)</span><br><span class="line">&gt;&gt;&gt; g</span><br><span class="line">&lt;generator object fib at 0x1022ef948&gt;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：发送邮件-封装版/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/python：发送邮件-封装版/" itemprop="url">python：发送邮件-封装版</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:44:05+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  856 字
                 </span>
               
 
@@ -1147,11 +1022,191 @@
 
       
         
-          <h1 id="方法一、docker-pull-python-3-6"><a href="#方法一、docker-pull-python-3-6" class="headerlink" title="方法一、docker pull python:3.6"></a>方法一、docker pull python:3.6</h1><p>查找Docker Hub上的python镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~/python$ docker search python</span><br><span class="line">NAME                           DESCRIPTION                        STARS     OFFICIAL   AUTOMATED</span><br><span class="line">python                         Python is an interpreted,...       982       [OK]       </span><br><span class="line">kaggle/python                  Docker image for Python...         33                   [OK]</span><br><span class="line">azukiapp/python                Docker image to run Python ...     3                    [OK]</span><br><span class="line">vimagick/python                mini python                                  2          [OK]</span><br><span class="line">tsuru/python                   Image for the Python ...           2                    [OK]</span><br><span class="line">pandada8/alpine-python         An alpine based python image                 1          [OK]</span><br><span class="line">1science/python                Python Docker images based on ...  1                    [OK]</span><br><span class="line">lucidfrontier45/python-uwsgi   Python with uWSGI                  1                    [OK]</span><br><span class="line">orbweb/python                  Python image                       1                    [OK]</span><br><span class="line">pathwar/python                 Python template for Pathwar levels 1                    [OK]</span><br><span class="line">rounds/10m-python              Python, setuptools and pip.        0                    [OK]</span><br><span class="line">ruimashita/python              ubuntu 14.04 python                0                    [OK]</span><br><span class="line">tnanba/python                  Python on CentOS-7 image.          0                    [OK]</span><br></pre></td></tr></table></figure></p>
-<p>这里我们拉取官方的镜像,标签为3.6<br>
+          
+            <p>项目地址：<a href="https://github.com/snjl/python.email2.git" target="_blank" rel="noopener">https://github.com/snjl/python.email2.git</a></p>
+<p>功能：封装了信息，发送者，接收者，每次默认从发送者中随机抽一个发送信息给所有接收者，分为三种发送方式，1是简单信息发送send_easy_email，2是带一个附件发送send_file，3是带多个附件发送send_files。</p>
+<p>每次使用需要初始化Email的用户信息和接收者，然后可以通过修改类的信息来修改邮件内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line">from email.header import Header</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.mime.multipart import MIMEMultipart</span><br><span class="line"></span><br><span class="line">from email.utils import parseaddr, formataddr</span><br><span class="line">import random</span><br><span class="line">import smtplib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Email(object):</span><br><span class="line">    # 获取多个发送者信息，每个发送者以tuple(email_address,password,smtp_server,port)存储，</span><br><span class="line">    # 每次发送邮件会随机从里面选择一个邮箱发送</span><br><span class="line">    __senders = list()</span><br><span class="line">    # 传入多个接收address</span><br><span class="line">    __send_to_addresses = list()</span><br><span class="line">    # 传入信息</span><br><span class="line">    __message = &quot;默认信息&quot;</span><br><span class="line">    # 封面显示标题</span><br><span class="line">    __message_title = &quot;默认标题&quot;</span><br><span class="line">    # 显示发件人</span><br><span class="line">    __message_sender_name = &quot;发送者&quot;</span><br><span class="line"></span><br><span class="line">    # 获取senders的用户信息</span><br><span class="line">    def get_senders(self):</span><br><span class="line">        return self.__senders</span><br><span class="line"></span><br><span class="line">    def get_send_to_addresses(self):</span><br><span class="line">        return self.__send_to_addresses</span><br><span class="line"></span><br><span class="line">    def set_senders(self, senders):</span><br><span class="line">        self.__senders = senders</span><br><span class="line"></span><br><span class="line">    def set_send_to_addresses(self, send_to_addresses):</span><br><span class="line">        self.__send_to_addresses = send_to_addresses</span><br><span class="line"></span><br><span class="line">    def get_range_sender_info(self):</span><br><span class="line">        return random.choice(self.__senders)</span><br><span class="line"></span><br><span class="line">    # 发送简单信息，不带附件</span><br><span class="line">    def send_easy_email(self):</span><br><span class="line">        # 格式化内容</span><br><span class="line">        def _format_addr(s):</span><br><span class="line">            name, addr = parseaddr(s)</span><br><span class="line">            return formataddr((Header(name, &apos;utf-8&apos;).encode(), addr))</span><br><span class="line"></span><br><span class="line">        sender = self.get_range_sender_info()</span><br><span class="line"></span><br><span class="line">        sender_address = sender[0]</span><br><span class="line">        sender_password = sender[1]</span><br><span class="line">        smtp_server = sender[2]</span><br><span class="line">        smtp_port = sender[3]</span><br><span class="line">        message = MIMEText(self.__message, &apos;plain&apos;, &apos;utf-8&apos;)</span><br><span class="line">        # 显示发件人名和发件地址</span><br><span class="line">        message[&apos;From&apos;] = _format_addr(self.__message_sender_name + &apos;&lt;%s&gt;&apos; % sender_address)</span><br><span class="line">        # 标题</span><br><span class="line">        message[&apos;Subject&apos;] = Header(self.__message_title, &apos;utf-8&apos;).encode()</span><br><span class="line"></span><br><span class="line">        server = smtplib.SMTP_SSL(smtp_server, smtp_port)</span><br><span class="line">        server.set_debuglevel(1)</span><br><span class="line">        # 登录</span><br><span class="line">        server.login(sender_address, sender_password)</span><br><span class="line">        # 邮件发送</span><br><span class="line">        server.sendmail(sender_address, self.__send_to_addresses, message.as_string())</span><br><span class="line">        server.quit()</span><br><span class="line"></span><br><span class="line">    # 发送一个附件，传入文件名，文件必须在该目录</span><br><span class="line">    def send_file(self, file_name):</span><br><span class="line">        def _format_addr(s):</span><br><span class="line">            name, addr = parseaddr(s)</span><br><span class="line">            return formataddr((Header(name, &apos;utf-8&apos;).encode(), addr))</span><br><span class="line"></span><br><span class="line">        sender = self.get_range_sender_info()</span><br><span class="line"></span><br><span class="line">        sender_address = sender[0]</span><br><span class="line">        sender_password = sender[1]</span><br><span class="line">        smtp_server = sender[2]</span><br><span class="line">        smtp_port = sender[3]</span><br><span class="line"></span><br><span class="line">        message = MIMEMultipart()</span><br><span class="line"></span><br><span class="line">        message.attach(MIMEText(self.__message, &apos;plain&apos;, &apos;utf-8&apos;))</span><br><span class="line">        # 显示发件人名和发件地址</span><br><span class="line">        message[&apos;From&apos;] = _format_addr(self.__message_sender_name + &apos;&lt;%s&gt;&apos; % sender_address)</span><br><span class="line">        # 标题</span><br><span class="line">        message[&apos;Subject&apos;] = Header(self.__message_title, &apos;utf-8&apos;).encode()</span><br><span class="line">        # 传入附件名</span><br><span class="line">        attach = MIMEText(open(file_name, &apos;rb&apos;).read(), &apos;base64&apos;, &apos;utf-8&apos;)</span><br><span class="line">        attach[&quot;Content-Type&quot;] = &apos;application/octet-stream&apos;</span><br><span class="line">        attach[&quot;Content-Disposition&quot;] = &apos;attachment; filename=&quot;&apos; + file_name + &apos;&quot;&apos;</span><br><span class="line">        message.attach(attach)</span><br><span class="line"></span><br><span class="line">        server = smtplib.SMTP_SSL(smtp_server, smtp_port)</span><br><span class="line">        server.set_debuglevel(1)</span><br><span class="line">        # 登录</span><br><span class="line">        server.login(sender_address, sender_password)</span><br><span class="line">        # 邮件发送</span><br><span class="line">        server.sendmail(sender_address, self.__send_to_addresses, message.as_string())</span><br><span class="line">        server.quit()</span><br><span class="line"></span><br><span class="line">    # 发送多个附件，传入文件的名字列表，文件必须在该目录</span><br><span class="line">    def send_files(self, file_names):</span><br><span class="line">        def _format_addr(s):</span><br><span class="line">            name, addr = parseaddr(s)</span><br><span class="line">            return formataddr((Header(name, &apos;utf-8&apos;).encode(), addr))</span><br><span class="line"></span><br><span class="line">        sender = self.get_range_sender_info()</span><br><span class="line"></span><br><span class="line">        sender_address = sender[0]</span><br><span class="line">        sender_password = sender[1]</span><br><span class="line">        smtp_server = sender[2]</span><br><span class="line">        smtp_port = sender[3]</span><br><span class="line"></span><br><span class="line">        message = MIMEMultipart()</span><br><span class="line"></span><br><span class="line">        message.attach(MIMEText(self.__message, &apos;plain&apos;, &apos;utf-8&apos;))</span><br><span class="line">        # 显示发件人名和发件地址</span><br><span class="line">        message[&apos;From&apos;] = _format_addr(self.__message_sender_name + &apos;&lt;%s&gt;&apos; % sender_address)</span><br><span class="line">        # 标题</span><br><span class="line">        message[&apos;Subject&apos;] = Header(self.__message_title, &apos;utf-8&apos;).encode()</span><br><span class="line"></span><br><span class="line">        for file_name in file_names:</span><br><span class="line">            attach = MIMEText(open(file_name, &apos;rb&apos;).read(), &apos;base64&apos;, &apos;utf-8&apos;)</span><br><span class="line">            attach[&quot;Content-Type&quot;] = &apos;application/octet-stream&apos;</span><br><span class="line">            attach[&quot;Content-Disposition&quot;] = &apos;attachment; filename=&quot;&apos; + file_name + &apos;&quot;&apos;</span><br><span class="line">            message.attach(attach)</span><br><span class="line"></span><br><span class="line">        server = smtplib.SMTP_SSL(smtp_server, smtp_port)</span><br><span class="line">        server.set_debuglevel(1)</span><br><span class="line">        # 登录</span><br><span class="line">        server.login(sender_address, sender_password)</span><br><span class="line">        # 邮件发送</span><br><span class="line">        server.sendmail(sender_address, self.__send_to_addresses, message.as_string())</span><br><span class="line">        server.quit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    email_tool = Email()</span><br><span class="line">    # 可以从数据库中获取</span><br><span class="line">    senders = [(&apos;&apos;, &apos;&apos;, &apos;&apos;, 465), ]</span><br><span class="line">    # 从数据库中获取需要发送的列表，但是获取后就保存在内存中，如果新添加，通过某个接口刷新获取或者从重启服务</span><br><span class="line">    email_tool.set_send_to_addresses([&apos;&apos;, &apos;&apos;])</span><br><span class="line"></span><br><span class="line">    email_tool.set_senders(senders)</span><br><span class="line">    email_tool.send_files([&apos;test.txt&apos;, &apos;test2.txt&apos;])</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：发送邮件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/python：发送邮件/" itemprop="url">python：发送邮件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:43:10+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>项目地址：<a href="https://github.com/snjl/python.email1.git" target="_blank" rel="noopener">https://github.com/snjl/python.email1.git</a></p>
+<h1 id="Python3-SMTP发送邮件"><a href="#Python3-SMTP发送邮件" class="headerlink" title="Python3 SMTP发送邮件"></a>Python3 SMTP发送邮件</h1><p>SMTP（Simple Mail Transfer Protocol）即简单邮件传输协议,它是一组用于由源地址到目的地址传送邮件的规则，由它来控制信件的中转方式。</p>
+<p>python的smtplib提供了一种很方便的途径发送电子邮件。它对smtp协议进行了简单的封装。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/01/07/docker：-安装-python/#more" rel="contents">
+            <a class="btn" href="/2019/01/23/python：发送邮件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1206,7 +1261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/docker：常用删除命令/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/Ubuntu：tomcat安装和部署/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1225,7 +1280,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/07/docker：常用删除命令/" itemprop="url">docker：常用删除命令</a></h1>
+                <a class="post-title-link" href="/2019/01/23/Ubuntu：tomcat安装和部署/" itemprop="url">Ubuntu：tomcat安装和部署</a></h1>
         
 
         <div class="post-meta">
@@ -1237,8 +1292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:36:36+08:00">
-                2019-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:42:23+08:00">
+                2019-01-23
               </time>
             
 
@@ -1291,7 +1346,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  192 字
+                  243 字
                 </span>
               
 
@@ -1330,18 +1385,19 @@
       
         
           
-            <h1 id="删除一个或多个container"><a href="#删除一个或多个container" class="headerlink" title="删除一个或多个container"></a>删除一个或多个container</h1><h2 id="删除一个container"><a href="#删除一个container" class="headerlink" title="删除一个container"></a>删除一个container</h2><p>查看container ID：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure></p>
-<p>删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm container_name/ID</span><br></pre></td></tr></table></figure></p>
-<p>使用name或者id删除。</p>
-<h2 id="删除多个container"><a href="#删除多个container" class="headerlink" title="删除多个container"></a>删除多个container</h2><p>同时运行了hello-world两次，若要一次性删除hello-world的container，使用命令查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps –a –f ancestor=hello-world</span><br><span class="line">或</span><br><span class="line">docker ps –s –filter=”ancestor=hello-world”</span><br></pre></td></tr></table></figure></p>
-<p>删除这两个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm $( docker ps -a -f  ancestor=hello-world )</span><br></pre></td></tr></table></figure></p>
-<p>所以，删除所有的container,命令格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm  $( docker ps -a -q )</span><br></pre></td></tr></table></figure></p>
-<h1 id="删除一个或多个image"><a href="#删除一个或多个image" class="headerlink" title="删除一个或多个image"></a>删除一个或多个image</h1><p>删除image前需要stop 所有的container<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop $(docker  ps  -a -q)</span><br></pre></td></tr></table></figure></p>
-<p>查看所有的image<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure></p>
-<p>删除一个 hello-world image ,命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi image_name/ID</span><br></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi c54a2cc56</span><br></pre></td></tr></table></figure></p>
-<p>若要删除所有的image, 使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure></p>
-<p>有时image删不掉，可以强制删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker rmi imagename </span><br><span class="line">或</span><br><span class="line">docker rmi -f imagename</span><br></pre></td></tr></table></figure></p>
+            <p>两种方式，一种是apt直接安装，一种是tar解压安装。</p>
+<p>使用apt的方法简单，但是服务部署位置和日志位置，甚至配置的位置都是不一样的，分别在/var/lib/tomcat8,/var/log/tomcat8,/etc/tomcat8，所以如果有需要自动创建log文件夹的，不适配这种方式，更适用于解压版。</p>
+<h1 id="apt安装tomcat8"><a href="#apt安装tomcat8" class="headerlink" title="apt安装tomcat8"></a>apt安装tomcat8</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install tomcat8</span><br></pre></td></tr></table></figure>
+<p>会自动安装和配置。</p>
+<h1 id="tomcat服务启动关闭重启"><a href="#tomcat服务启动关闭重启" class="headerlink" title="tomcat服务启动关闭重启"></a>tomcat服务启动关闭重启</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service tomcat8 start</span><br><span class="line">service tomcat8 stop</span><br><span class="line">service tomcat8 restart</span><br></pre></td></tr></table></figure>
+<h1 id="tomcat服务部署位置"><a href="#tomcat服务部署位置" class="headerlink" title="tomcat服务部署位置"></a>tomcat服务部署位置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/lib/tomcat8/webapps</span><br></pre></td></tr></table></figure>
+<h1 id="tomcat日志位置"><a href="#tomcat日志位置" class="headerlink" title="tomcat日志位置"></a>tomcat日志位置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/log/tomcat8</span><br></pre></td></tr></table></figure>
+<p>一般是catalina.out。</p>
+<h1 id="tomcat配置位置"><a href="#tomcat配置位置" class="headerlink" title="tomcat配置位置"></a>tomcat配置位置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/tomcat8/</span><br></pre></td></tr></table></figure>
+<h1 id="tar解压安装"><a href="#tar解压安装" class="headerlink" title="tar解压安装"></a>tar解压安装</h1><p>例如安装tomcat8，先下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-tomcat-8.5.37.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>进入bin目录，启动和停止<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./startup.sh</span><br><span class="line">./shutdown.sh</span><br></pre></td></tr></table></figure></p>
+<p>项目文件放在webapps文件夹里即可，启动后访问localhost:8080显示tomcat的欢迎界面即完成。</p>
 
           
         
@@ -1394,7 +1450,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/Ubuntu：显卡驱动安装/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/docker：run参数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1413,7 +1469,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/07/Ubuntu：显卡驱动安装/" itemprop="url">Ubuntu：显卡驱动安装</a></h1>
+                <a class="post-title-link" href="/2019/01/23/docker：run参数/" itemprop="url">docker：run参数</a></h1>
         
 
         <div class="post-meta">
@@ -1425,8 +1481,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:36:04+08:00">
-                2019-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:41:40+08:00">
+                2019-01-23
               </time>
             
 
@@ -1448,8 +1504,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -1479,7 +1535,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  326 字
+                  962 字
                 </span>
               
 
@@ -1495,7 +1551,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -1518,16 +1574,13 @@
       
         
           
-            <p>Ubuntu18.04安装显卡驱动命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure></p>
-<p>16.04及以下（ppa源安装驱动）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers/ppa  </span><br><span class="line">sudo apt-get update  </span><br><span class="line">sudo apt-get install nvidia-410 #此处要根据上面查询到的版本适当更改</span><br><span class="line">sudo apt-get install mesa-common-dev  </span><br><span class="line">sudo apt-get install freeglut3-dev</span><br></pre></td></tr></table></figure></p>
-<p>如果报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo: add-apt-repository: command not found</span><br></pre></td></tr></table></figure></p>
-<p>实际上add-apt-repository是由python-software-properties这个工具包提供的，所以安装一下python-software-properties：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br></pre></td></tr></table></figure></p>
-<p>有可能解决完这一步就OK了，但是也不一定，这个不一定让我也遇上了，执行sudo add-apt-repository ppa:jonathonf/vim，发现还是提示sudo: add-apt-repository: command not found，那么再安装一下software-properties-common：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br></pre></td></tr></table></figure></p>
-<p>这下应该就可以了，执行sudo add-apt-repository ppa:jonathonf/vim就没问题了。</p>
-<p>重启之后在终端内输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi  #若出现电脑GPU列表，即安装成功</span><br></pre></td></tr></table></figure>
-<p>如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Mon Jan  7 18:14:59 2019</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 410.78       Driver Version: 410.78       CUDA Version: 10.0     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce GTX 105...  Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| 24%   23C    P8    N/A /  75W |     43MiB /  4040MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|    0      1332      G   /usr/lib/xorg/Xorg                            41MiB |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure></p>
-<p>显卡卸载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br></pre></td></tr></table></figure></p>
+            <p>在run的时候，给docker分配cpu0、1，分配4G内存，并且共享/home文件夹生成docker的容器，使用-it可以直接进入命令行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --cpuset-cpus 0-1 -it -m 4096M -v /home:/home ubuntu:18.04</span><br></pre></td></tr></table></figure></p>
+<p>参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">-d, --detach=false         指定容器运行于前台还是后台，默认为false     </span><br><span class="line">-i, --interactive=false   打开STDIN，用于控制台交互    </span><br><span class="line">-t, --tty=false            分配tty设备，该可以支持终端登录，默认为false    </span><br><span class="line">-u, --user=&quot;&quot;              指定容器的用户    </span><br><span class="line">-a, --attach=[]            登录容器（必须是以docker run -d启动的容器）  </span><br><span class="line">-w, --workdir=&quot;&quot;           指定容器的工作目录   </span><br><span class="line">-c, --cpu-shares=0        设置容器CPU权重，在CPU共享场景使用    </span><br><span class="line">-e, --env=[]               指定环境变量，容器中可以使用该环境变量    </span><br><span class="line">-m, --memory=&quot;&quot;            指定容器的内存上限    </span><br><span class="line">-P, --publish-all=false    指定容器暴露的端口    </span><br><span class="line">-p, --publish=[]           指定容器暴露的端口   </span><br><span class="line">-h, --hostname=&quot;&quot;          指定容器的主机名    </span><br><span class="line">-v, --volume=[]            给容器挂载存储卷，挂载到容器的某个目录    </span><br><span class="line">--volumes-from=[]          给容器挂载其他容器上的卷，挂载到容器的某个目录  </span><br><span class="line">--cap-add=[]               添加权限，权限清单详见：http://linux.die.net/man/7/capabilities    </span><br><span class="line">--cap-drop=[]              删除权限，权限清单详见：http://linux.die.net/man/7/capabilities    </span><br><span class="line">--cidfile=&quot;&quot;               运行容器后，在指定文件中写入容器PID值，一种典型的监控系统用法    </span><br><span class="line">--cpuset=&quot;&quot;                设置容器可以使用哪些CPU，此参数可以用来容器独占CPU    </span><br><span class="line">--device=[]                添加主机设备给容器，相当于设备直通    </span><br><span class="line">--dns=[]                   指定容器的dns服务器    </span><br><span class="line">--dns-search=[]            指定容器的dns搜索域名，写入到容器的/etc/resolv.conf文件    </span><br><span class="line">--entrypoint=&quot;&quot;            覆盖image的入口点    </span><br><span class="line">--env-file=[]              指定环境变量文件，文件格式为每行一个环境变量    </span><br><span class="line">--expose=[]                指定容器暴露的端口，即修改镜像的暴露端口    </span><br><span class="line">--link=[]                  指定容器间的关联，使用其他容器的IP、env等信息    </span><br><span class="line">--lxc-conf=[]              指定容器的配置文件，只有在指定--exec-driver=lxc时使用    </span><br><span class="line">--name=&quot;&quot;                  指定容器名字，后续可以通过名字进行容器管理，links特性需要使用名字    </span><br><span class="line">--net=&quot;bridge&quot;             容器网络设置:  </span><br><span class="line">                              bridge 使用docker daemon指定的网桥       </span><br><span class="line">                              host    //容器使用主机的网络    </span><br><span class="line">                              container:NAME_or_ID  &gt;//使用其他容器的网路，共享IP和PORT等网络资源    </span><br><span class="line">                              none 容器使用自己的网络（类似--net=bridge），但是不进行配置   </span><br><span class="line">--privileged=false         指定容器是否为特权容器，特权容器拥有所有的capabilities    </span><br><span class="line">--restart=&quot;no&quot;             指定容器停止后的重启策略:  </span><br><span class="line">                              no：容器退出时不重启    </span><br><span class="line">                              on-failure：容器故障退出（返回值非零）时重启   </span><br><span class="line">                              always：容器退出时总是重启    </span><br><span class="line">--rm=false                 指定容器停止后自动删除容器(不支持以docker run -d启动的容器)    </span><br><span class="line">--sig-proxy=true           设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理</span><br></pre></td></tr></table></figure></p>
+<p>使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mynginx -d nginx:latest</span><br></pre></td></tr></table></figure></p>
+<p>使用镜像nginx:latest以后台模式启动一个容器,并将容器的80端口映射到主机随机端口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -P -d nginx:latest</span><br></pre></td></tr></table></figure></p>
+<p>使用镜像 nginx:latest，以后台模式启动一个容器,将容器的 80 端口映射到主机的 80 端口,主机的目录 /data 映射到容器的 /data。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 -v /data:/data -d nginx:latest</span><br></pre></td></tr></table></figure></p>
+<p>绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 127.0.0.1:80:8080/tcp ubuntu bash</span><br></pre></td></tr></table></figure></p>
+<p>使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~$ docker run -it nginx:latest /bin/bash</span><br><span class="line">root@b8573233d675:/#</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1580,7 +1633,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/服务器查看GPU等信息/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：继承和多态/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1599,7 +1652,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/07/服务器查看GPU等信息/" itemprop="url">服务器查看GPU等信息</a></h1>
+                <a class="post-title-link" href="/2019/01/23/python：继承和多态/" itemprop="url">python：继承和多态</a></h1>
         
 
         <div class="post-meta">
@@ -1611,8 +1664,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:35:18+08:00">
-                2019-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:40:51+08:00">
+                2019-01-23
               </time>
             
 
@@ -1634,8 +1687,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1665,7 +1718,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  543 字
+                  1.6k 字
                 </span>
               
 
@@ -1681,190 +1734,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>lspci，顾名思义，就是显示所有的pci设备信息。pci是一种总线，而通过pci总线连接的设备就是pci设备了。如今，我们常用的设备很多都是采用pci总线了，如：网卡、存储。</p>
-<p>如果没有lspci命令，安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install pciutils</span><br></pre></td></tr></table></figure></p>
-<p>查看gpu：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci  | grep -i vga</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/07/服务器查看GPU等信息/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/ubuntu和centos安装python3-6/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="snjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="snjl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/07/ubuntu和centos安装python3-6/" itemprop="url">ubuntu和centos安装python3.6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:34:25+08:00">
-                2019-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  200 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -1887,17 +1757,47 @@
       
         
           
-            <h1 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h1><p>配置好epel源和ius源</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Centos 6</span><br><span class="line">yum install https://centos6.iuscommunity.org/ius-release.rpm -y</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo</span><br><span class="line"></span><br><span class="line"># Centos 7</span><br><span class="line">yum install https://centos7.iuscommunity.org/ius-release.rpm -y</span><br></pre></td></tr></table></figure>
-<p>安装Python3.6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install python36u -y</span><br><span class="line"></span><br><span class="line"># 创建软链接</span><br><span class="line">ln -s /usr/bin/python3.6 /bin/python3</span><br></pre></td></tr></table></figure></p>
-<p>安装pip3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install python36u-pip -y</span><br><span class="line"></span><br><span class="line"># 创建软链接</span><br><span class="line">ln -s /usr/bin/pip3.6 /bin/pip3</span><br><span class="line"></span><br><span class="line"># 升级pip</span><br><span class="line">pip3 install --upgrade pip</span><br></pre></td></tr></table></figure></p>
-<h1 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h1><p>配置软件仓库，因为python 3.6 新版没有发布到ubuntu的正式仓库中，咱们通过第3方仓库来做。在命令行中输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:jonathonf/python-3.6</span><br></pre></td></tr></table></figure>
-<p>检查系统软件包并安装 python 3.6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install python3.6</span><br></pre></td></tr></table></figure></p>
-<p>创建软链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/bin/pip3.6 /bin/pip3</span><br></pre></td></tr></table></figure></p>
-<p>安装pip3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python3-pip</span><br></pre></td></tr></table></figure></p>
-<p>使用apt-get install pip装的是pip2。</p>
-<p>升级pip<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install --upgrade pip</span><br></pre></td></tr></table></figure></p>
+            <p>在OOP程序设计中，当我们定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）。</p>
+<p>比如，我们已经编写了一个名为Animal的class，有一个run()方法可以直接打印：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Animal(object):</span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Animal is running...&apos;)</span><br></pre></td></tr></table></figure>
+<p>当我们需要编写Dog和Cat类时，就可以直接从Animal类继承：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Animal):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class Cat(Animal):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<p>对于Dog来说，Animal就是它的父类，对于Animal来说，Dog就是它的子类。Cat和Dog类似。</p>
+<p>继承有什么好处？最大的好处是子类获得了父类的全部功能。由于Animial实现了run()方法，因此，Dog和Cat作为它的子类，什么事也没干，就自动拥有了run()方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dog = Dog()</span><br><span class="line">dog.run()</span><br><span class="line"></span><br><span class="line">cat = Cat()</span><br><span class="line">cat.run()</span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal is running...</span><br><span class="line">Animal is running...</span><br></pre></td></tr></table></figure></p>
+<p>当然，也可以对子类增加一些方法，比如Dog类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Animal):</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Dog is running...&apos;)</span><br><span class="line"></span><br><span class="line">    def eat(self):</span><br><span class="line">        print(&apos;Eating meat...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>继承的第二个好处需要我们对代码做一点改进。你看到了，无论是Dog还是Cat，它们run()的时候，显示的都是Animal is running…，符合逻辑的做法是分别显示Dog is running…和Cat is running…，因此，对Dog和Cat类改进如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Dog(Animal):</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Dog is running...&apos;)</span><br><span class="line"></span><br><span class="line">class Cat(Animal):</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Cat is running...&apos;)</span><br></pre></td></tr></table></figure>
+<p>再次运行，结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dog is running...</span><br><span class="line">Cat is running...</span><br></pre></td></tr></table></figure>
+<p>当子类和父类都存在相同的run()方法时，我们说，子类的run()覆盖了父类的run()，在代码运行的时候，总是会调用子类的run()。这样，我们就获得了继承的另一个好处：多态。</p>
+<p>要理解什么是多态，我们首先要对数据类型再作一点说明。当我们定义一个class的时候，我们实际上就定义了一种数据类型。我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = list() # a是list类型</span><br><span class="line">b = Animal() # b是Animal类型</span><br><span class="line">c = Dog() # c是Dog类型</span><br></pre></td></tr></table></figure></p>
+<p>判断一个变量是否是某个类型可以用isinstance()判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(a, list)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(b, Animal)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(c, Dog)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<p>看来a、b、c确实对应着list、Animal、Dog这3种类型。</p>
+<p>但是等等，试试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(c, Animal)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<p>看来c不仅仅是Dog，c还是Animal！</p>
+<p>不过仔细想想，这是有道理的，因为Dog是从Animal继承下来的，当我们创建了一个Dog的实例c时，我们认为c的数据类型是Dog没错，但c同时也是Animal也没错，Dog本来就是Animal的一种！</p>
+<p>所以，在继承关系中，如果一个实例的数据类型是某个子类，那它的数据类型也可以被看做是父类。但是，反过来就不行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b = Animal()</span><br><span class="line">&gt;&gt;&gt; isinstance(b, Dog)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>Dog可以看成Animal，但Animal不可以看成Dog。</p>
+<p>要理解多态的好处，我们还需要再编写一个函数，这个函数接受一个Animal类型的变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def run_twice(animal):</span><br><span class="line">    animal.run()</span><br><span class="line">    animal.run()</span><br></pre></td></tr></table></figure></p>
+<p>当我们传入Animal的实例时，run_twice()就打印出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Animal())</span><br><span class="line">Animal is running...</span><br><span class="line">Animal is running...</span><br></pre></td></tr></table></figure></p>
+<p>当我们传入Dog的实例时，run_twice()就打印出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Dog())</span><br><span class="line">Dog is running...</span><br><span class="line">Dog is running...</span><br></pre></td></tr></table></figure></p>
+<p>当我们传入Cat的实例时，run_twice()就打印出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Cat())</span><br><span class="line">Cat is running...</span><br><span class="line">Cat is running...</span><br></pre></td></tr></table></figure></p>
+<p>看上去没啥意思，但是仔细想想，现在，如果我们再定义一个Tortoise类型，也从Animal派生：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Tortoise(Animal):</span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Tortoise is running slowly...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>当我们调用run_twice()时，传入Tortoise的实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Tortoise())</span><br><span class="line">Tortoise is running slowly...</span><br><span class="line">Tortoise is running slowly...</span><br></pre></td></tr></table></figure></p>
+<p>你会发现，新增一个Animal的子类，不必对run_twice()做任何修改，实际上，任何依赖Animal作为参数的函数或者方法都可以不加修改地正常运行，原因就在于多态。</p>
+<p>多态的好处就是，当我们需要传入Dog、Cat、Tortoise……时，我们只需要接收Animal类型就可以了，因为Dog、Cat、Tortoise……都是Animal类型，然后，按照Animal类型进行操作即可。由于Animal类型有run()方法，因此，传入的任意类型，只要是Animal类或者子类，就会自动调用实际类型的run()方法，这就是多态的意思：</p>
+<p>对于一个变量，我们只需要知道它是Animal类型，无需确切地知道它的子类型，就可以放心地调用run()方法，而具体调用的run()方法是作用在Animal、Dog、Cat还是Tortoise对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种Animal的子类时，只要确保run()方法编写正确，不用管原来的代码是如何调用的。这就是著名的“开闭”原则：</p>
+<p>对扩展开放：允许新增Animal子类；</p>
+<p>对修改封闭：不需要修改依赖Animal类型的run_twice()等函数。</p>
+<h1 id="静态语言-vs-动态语言"><a href="#静态语言-vs-动态语言" class="headerlink" title="静态语言 vs 动态语言"></a>静态语言 vs 动态语言</h1><p>对于静态语言（例如Java）来说，如果需要传入Animal类型，则传入的对象必须是Animal类型或者它的子类，否则，将无法调用run()方法。</p>
+<p>对于Python这样的动态语言来说，则不一定需要传入Animal类型。我们只需要保证传入的对象有一个run()方法就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Timer(object):</span><br><span class="line">    def run(self):</span><br><span class="line">        print(&apos;Start...&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。</p>
+<p>Python的“file-like object“就是一种鸭子类型。对真正的文件对象，它有一个read()方法，返回其内容。但是，许多对象，只要有read()方法，都被视为“file-like object“。许多函数接收的参数就是“file-like object“，你不一定要传入真正的文件对象，完全可以传入任何实现了read()方法的对象。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。</p>
+<p>动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。</p>
 
           
         
@@ -1950,7 +1850,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/07/docker：安装Ubuntu16-04原始镜像并调用gpu/">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/python：对xlsx文件和csv文件的读写/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="snjl">
@@ -1969,7 +1869,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/07/docker：安装Ubuntu16-04原始镜像并调用gpu/" itemprop="url">docker：安装Ubuntu16.04原始镜像并调用gpu</a></h1>
+                <a class="post-title-link" href="/2019/01/23/python：对xlsx文件和csv文件的读写/" itemprop="url">python：对xlsx文件和csv文件的读写</a></h1>
         
 
         <div class="post-meta">
@@ -1981,8 +1881,189 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T23:33:49+08:00">
-                2019-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:39:51+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  733 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>项目地址：<a href="https://github.com/snjl/python.csvandxlsx.git" target="_blank" rel="noopener">https://github.com/snjl/python.csvandxlsx.git</a></p>
+<h1 id="xlsx"><a href="#xlsx" class="headerlink" title="xlsx"></a>xlsx</h1><p>写入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from openpyxl import Workbook</span><br><span class="line">from openpyxl.utils import get_column_letter</span><br><span class="line"></span><br><span class="line"># 在内存中创建一个workbook对象，而且会至少创建一个 worksheet</span><br><span class="line">wb = Workbook()</span><br><span class="line"></span><br><span class="line">#获取当前活跃的worksheet,默认就是第一个worksheet</span><br><span class="line">ws = wb.active</span><br><span class="line"></span><br><span class="line">#设置单元格的值，A1等于6(测试可知openpyxl的行和列编号从1开始计算)，B1等于7</span><br><span class="line">ws.cell(row=1, column=1).value = 6</span><br><span class="line"></span><br><span class="line">#从第2行开始，写入9行10列数据，值为对应的列序号A、B、C、D...</span><br><span class="line">for row in range(2,11):</span><br><span class="line">    for col in range (1,11):</span><br><span class="line">        ws.cell(row=row, column=col).value = get_column_letter(col)</span><br><span class="line"></span><br><span class="line">#可以使用append插入一行数据</span><br><span class="line">ws.append([&quot;我&quot;,&quot;你&quot;,&quot;她&quot;])</span><br><span class="line"></span><br><span class="line">#保存</span><br><span class="line">wb.save(filename=&quot;a.xlsx&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>读取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from openpyxl import load_workbook</span><br><span class="line"></span><br><span class="line">#打开一个workbook</span><br><span class="line">wb = load_workbook(filename=&quot;a.xlsx&quot;)</span><br><span class="line"></span><br><span class="line">#获取当前活跃的worksheet,默认就是第一个worksheet</span><br><span class="line">#ws = wb.active</span><br><span class="line"></span><br><span class="line">#当然也可以使用下面的方法</span><br><span class="line"></span><br><span class="line">#获取所有表格(worksheet)的名字</span><br><span class="line">sheets = wb.get_sheet_names()</span><br><span class="line">#第一个表格的名称</span><br><span class="line">sheet_first = sheets[0]</span><br><span class="line">#获取特定的worksheet</span><br><span class="line">ws = wb.get_sheet_by_name(sheet_first)</span><br><span class="line"></span><br><span class="line">#获取表格所有行和列，两者都是可迭代的</span><br><span class="line">rows = ws.rows</span><br><span class="line">columns = ws.columns</span><br><span class="line"></span><br><span class="line">#迭代所有的行</span><br><span class="line">for row in rows:</span><br><span class="line">    line = [col.value for col in row]</span><br><span class="line">    print(line)</span><br><span class="line"></span><br><span class="line">#通过坐标读取值</span><br><span class="line">#print(ws.cell(&apos;A1&apos;).value)    # A表示列,1表示行print ws.cell(row=1, column=1).value</span><br><span class="line">print(ws[&apos;A1&apos;].value)</span><br></pre></td></tr></table></figure></p>
+<h1 id="csv写入"><a href="#csv写入" class="headerlink" title="csv写入"></a>csv写入</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def save_csv(file_name, headers, rows):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    将表头和数据写入新生成的文件中</span><br><span class="line">    :param file_name: 生成文件名，例如xxx.csv</span><br><span class="line">    :param headers:文件第一行的表头元素，list存储</span><br><span class="line">    :param rows:文件数据，每一行为一个list</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 保存格式必须以.csv，不然加上.csv</span><br><span class="line">    if file_name.endwith(&quot;.csv&quot;) is not True:</span><br><span class="line">        file_name += &apos;.csv&apos;</span><br><span class="line">    with open(file_name, &apos;a&apos;, encoding=&apos;utf8&apos;, errors=&apos;ignore&apos;, newline=&apos;&apos;) as f:</span><br><span class="line">        f_csv = csv.writer(f)</span><br><span class="line">        f_csv.writerow(headers)</span><br><span class="line">        f_csv.writerows(rows)</span><br></pre></td></tr></table></figure>
+<h1 id="csv、xlsx写入内容封装"><a href="#csv、xlsx写入内容封装" class="headerlink" title="csv、xlsx写入内容封装"></a>csv、xlsx写入内容封装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">from openpyxl import Workbook</span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_excel(file_name, headers, rows):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    将表头和数据写入新生成的excel文件中，生成*.xlsx文件</span><br><span class="line">    :param file_name:文件名</span><br><span class="line">    :param headers:文件第一行的表头元素，list存储</span><br><span class="line">    :param rows:文件数据，每一行为一个list</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 在内存中创建一个workbook对象，而且会至少创建一个 worksheet</span><br><span class="line">    wb = Workbook()</span><br><span class="line">    # 获取当前活跃的worksheet,默认就是第一个worksheet</span><br><span class="line">    ws = wb.active</span><br><span class="line">    ws.append(headers)</span><br><span class="line">    for row in rows:</span><br><span class="line">        ws.append(row)</span><br><span class="line">    # 保存格式必须以.xlsx结尾，不然加上.xlsx</span><br><span class="line">    if file_name.endswith(&quot;.xlsx&quot;) is not True:</span><br><span class="line">        file_name += &apos;.xlsx&apos;</span><br><span class="line">    wb.save(filename=file_name)</span><br><span class="line">    wb.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def save_csv(file_name, headers, rows):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    将表头和数据写入新生成的文件中</span><br><span class="line">    :param file_name: 生成文件名，例如xxx.csv</span><br><span class="line">    :param headers:文件第一行的表头元素，list存储</span><br><span class="line">    :param rows:文件数据，每一行为一个list</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 保存格式必须以.csv，不然加上.csv</span><br><span class="line">    if file_name.endwith(&quot;.csv&quot;) is not True:</span><br><span class="line">        file_name += &apos;.csv&apos;</span><br><span class="line">    with open(file_name, &apos;a&apos;, encoding=&apos;utf8&apos;, errors=&apos;ignore&apos;, newline=&apos;&apos;) as f:</span><br><span class="line">        f_csv = csv.writer(f)</span><br><span class="line">        f_csv.writerow(headers)</span><br><span class="line">        f_csv.writerows(rows)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://snjl.github.io/2019/01/23/frp内网穿透配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="snjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="snjl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/frp内网穿透配置/" itemprop="url">frp内网穿透配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:39:09+08:00">
+                2019-01-23
               </time>
             
 
@@ -2035,7 +2116,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  172 字
+                  427 字
                 </span>
               
 
@@ -2074,14 +2155,25 @@
       
         
           
-            <p>安装Ubuntu16.04原始镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull ubuntu:16.04</span><br></pre></td></tr></table></figure></p>
-<p>Linux下无法使用add-apt-repository命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt install software-properties-common </span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p>
-<p>镜像生成容器命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --privileged=true ubuntu:16.04</span><br></pre></td></tr></table></figure></p>
-<p>privileged 参数功能，设置为true的时候，让docker的root拥有真正root的权限，可以调用宿主机硬件等，甚至可以让你在docker中使用docker，使用这个就可以使用显卡驱动等。</p>
-<p>进入docker的container命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it 799 /bin/bash</span><br></pre></td></tr></table></figure></p>
-<p>其中799为containerID的前几个字符。</p>
-<p>在宿主机上安装了nvidia驱动后，在docker上也安装，就可以在docker中使用命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></p>
-<p>查看gpu情况了。</p>
+            <p>参考：<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">https://github.com/fatedier/frp/blob/master/README_zh.md</a></p>
+<p>frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp 协议，为 http 和 https 应用协议提供了额外的能力，且尝试性支持了点对点穿透。</p>
+<p>下载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.23.1/frp_0.23.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf frp_0.23.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>根据对应的操作系统及架构，从 Release 页面下载最新版本的程序。</p>
+<p>将 frps 及 frps.ini 放到具有公网 IP 的机器上。</p>
+<p>将 frpc 及 frpc.ini 放到处于内网环境的机器上。</p>
+<p>不需要的可以用rm -rf frpc<em>或rm -rf frps</em>删除。</p>
+<h1 id="通过-ssh-访问公司内网机器"><a href="#通过-ssh-访问公司内网机器" class="headerlink" title="通过 ssh 访问公司内网机器"></a>通过 ssh 访问公司内网机器</h1><p>修改 frps.ini 文件，这里使用了最简化的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># frps.ini</span><br><span class="line">[common]</span><br><span class="line">bind_port = 7000</span><br></pre></td></tr></table></figure>
+<p>ps:如果需要部署多台内网服务器，则可能需要复制一个frps.ini为frps1.ini&lt;bind_port设置为7001（有时候不需要，玄学）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp frps.ini frps1.ini</span><br></pre></td></tr></table></figure></p>
+<p>启动frps：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.ini</span><br></pre></td></tr></table></figure></p>
+<p>内网端配置，修改 frpc.ini 文件，假设 frps 所在服务器的公网 IP 为 x.x.x.x；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># frpc.ini</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br></pre></td></tr></table></figure></p>
+<p>启动 frpc：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure></p>
+<p>通过 ssh 访问内网机器，假设用户名为 test：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -oPort=6000 test@x.x.x.x</span><br></pre></td></tr></table></figure></p>
+<p>有多台服务器，例如第二台，可以将frpc.ini写成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># frpc.ini</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh2]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6001</span><br></pre></td></tr></table></figure></p>
+<p>注意server_port可能要改7001，remote_port要改成不冲突原6000的端口，项目名要改为ssh2或者其他。</p>
+<h1 id="杀frp进程"><a href="#杀frp进程" class="headerlink" title="杀frp进程"></a>杀frp进程</h1><p>使用htop可以看到frp的进程，可以使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 frp</span><br></pre></td></tr></table></figure></p>
+<p>杀掉所有frp的进程。</p>
 
           
         
@@ -2125,7 +2217,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2173,7 +2265,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">183</span>
+                  <span class="site-state-item-count">203</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2184,7 +2276,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2195,7 +2287,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
